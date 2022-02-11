@@ -1,12 +1,10 @@
 import { StyleSheet } from "react-native";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 export const styles = StyleSheet.create({
 	container: {
 		flex: 0.8,
 		alignItems: "center",
 		justifyContent: "center",
-		marginTop: getStatusBarHeight(),
 	},
 	img: {
 		width: 220,

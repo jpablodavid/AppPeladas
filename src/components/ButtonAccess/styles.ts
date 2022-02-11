@@ -5,29 +5,29 @@ const { shadow, textButton} = theme.colors;
 
 export const styles = StyleSheet.create({
 	container: {
-		height: 144,
+		width: "100%",
+		height: 80,
 		flexDirection: "row",
-		marginHorizontal: 24,
-		alignItems: "center",
-		justifyContent: 'space-between'
+		marginTop: 8,
+		justifyContent: 'space-around',
 	},
 	textsContainer: {
-		alignItems: "baseline",
+		width: "70%"
 	},
 	title: {
-		fontSize: 26,
+		fontSize: 24,
 		color: textButton,
 		fontFamily: theme.fonts.title700,
 		textShadowColor: shadow,
 		letterSpacing: 1,
 	},
 	text: {
-		fontSize: 16,
+		fontSize: 14,
 		fontFamily: theme.fonts.text500,
 	},
-	img: {
-		width: 50,
-		height: 50,
-		backgroundColor: 'blue'
-	},
+	icon:{
+		alignItems:'center',
+		justifyContent: 'center',
+
+	}
 });

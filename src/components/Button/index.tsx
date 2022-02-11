@@ -11,7 +11,7 @@ type Props = RectButtonProps &{
 export const Button = ({ text, ...rest }: Props) => {
 
 	return (
-		<RectButton style={styles.button}>
+		<RectButton {...rest} style={styles.button}>
 			<Text style={styles.text}>{text}</Text>
 		</RectButton>
 	);

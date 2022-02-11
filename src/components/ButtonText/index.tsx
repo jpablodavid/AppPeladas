@@ -1,17 +1,13 @@
-import React from "react";
-import { RectButton, RectButtonProps } from "react-native-gesture-handler";
-import { Text } from "react-native";
+import React, { ReactNode } from "react";
+import {
+	BorderlessButton,
+	BorderlessButtonProps,
+} from "react-native-gesture-handler";
 
-import { styles } from "./styles";
-
-type Props = RectButtonProps & {
-	text: string;
+type Props = BorderlessButtonProps & {
+	children: ReactNode;
 };
 
-export const ButtonText = ({ text, ...rest }: Props) => {
-	return (
-		<RectButton>
-			<Text style={styles.text}>{text}</Text>
-		</RectButton>
-	);
+export const ButtonText = ({ children, ...rest }: Props) => {
+	return <BorderlessButton {...rest}>{children}</BorderlessButton>;
 };

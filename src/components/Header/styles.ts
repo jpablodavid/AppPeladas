@@ -4,9 +4,11 @@ import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
 	container: {
-		height: 50,
-		marginTop: getStatusBarHeight(),
-		borderBottomWidth: 1,
+		height: 80,
+		paddingTop: getStatusBarHeight(),
+		borderBottomLeftRadius: 25,
+		backgroundColor: theme.colors.background10,
+		elevation: 5,
 	},
 	content: {
 		flex: 1,
@@ -15,9 +17,9 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 		marginHorizontal: 16,
 	},
-	name: {
+	title: {
 		fontSize: 26,
 		fontFamily: theme.fonts.text900,
-		textTransform: "uppercase",	
+		textTransform: "uppercase",
 	},
 });

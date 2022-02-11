@@ -12,7 +12,7 @@ type Props = RectButtonProps & {
 
 export const ButtonGoogle = ({ text, ...rest }: Props) => {
 	return (
-		<RectButton style={styles.button}>
+		<RectButton {...rest} style={styles.button}>
 			<View style={styles.imgContainer}>
 				<Image source={GoogleImg} />
 			</View>

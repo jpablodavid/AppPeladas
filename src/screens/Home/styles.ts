@@ -10,36 +10,37 @@ export const styles = StyleSheet.create({
 	avatarContainer: {
 		flex: 1,
 		flexDirection: "row",
-		marginHorizontal: 16,
-		marginTop: 8
+		justifyContent: 'space-around',
+		marginVertical: 16
 	},
 	textAvatar: {
-		flex: 1,
 		fontSize: 20,
 		fontFamily: title700,
 	},
 	camisaContainer: {
-		height: 70,
+		height: 50,
 		alignItems: 'center',
 	},
 	camisa:{
 		fontSize: 36,
 		fontFamily: theme.fonts.text900,
 	},
-	scoutContainer: {
-		flexDirection: "row",
+	column: {
+		justifyContent: "space-between",
+		marginBottom: 80
+	},
+	columnAvatar:{
 		justifyContent: "space-around",
-		marginBottom: 16
+		marginBottom: -50
 	},
 	buttonsContainer: {
-		height: 290,
 	},
 	line: {
-		height: 2,
+		height: 1,
 		backgroundColor: theme.colors.line,
 	},
 	jogoContainer: {
-		height: 80,
+		height: 60,
 		alignItems: "center",
 		justifyContent: "center",
 		borderWidth: 3,

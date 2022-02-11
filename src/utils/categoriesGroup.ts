@@ -1,9 +1,9 @@
-import DiretoriaSvg from "../assets/diretoria.svg"
-import InfoSvg from "../assets/info.svg";
-import LocalizacaoSvg from "../assets/localizacao.svg";
-import AtletasSvg from "../assets/atletas.svg";
-import GaleriaSvg from "../assets/galeria.svg";
-import CalendarioSvg from "../assets/calendario.svg";
+import DiretoriaSvg from "../assets/duel.svg"
+import InfoSvg from "../assets/fun.svg";
+import LocalizacaoSvg from "../assets/discord.svg";
+import AtletasSvg from "../assets/player.svg";
+import GaleriaSvg from "../assets/ranked.svg";
+import CalendarioSvg from "../assets/training.svg";
 
 export const categoriesGroup = [
 	{ id: "1", title: "Diretoria", icon: DiretoriaSvg },

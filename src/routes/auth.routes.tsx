@@ -1,22 +1,30 @@
 import React from "react";
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import { SignIn } from "../screens/SignIn";
 import { SignUp } from "../screens/SignUp";
+import { CreateAccount } from "../screens/CreateAccount";
+import { Home } from "../screens/Home";
 
-const { Navigator, Screen } = createNativeStackNavigator();
+
+const Stack = createStackNavigator();
 
 export const AuthRoutes = () => {
 	return (
-		<Navigator
+		<Stack.Navigator
 			initialRouteName="SignIn"
 			screenOptions={{
 				headerShown: false,
+				cardStyle: {
+					backgroundColor: "transparent",
+				},
 			}}
 		>
-			<Screen name="SignIn" component={SignIn} />
-			<Screen name="SignUp" component={SignUp} />
-		</Navigator>
+			<Stack.Screen name="SignIn" component={SignIn} />
+			<Stack.Screen name="SignUp" component={SignUp} />
+			<Stack.Screen name="CreateAccount" component={CreateAccount} />
+			<Stack.Screen name="Home" component={Home} />
+		</Stack.Navigator>
 	);
 };

@@ -1,16 +1,16 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Image } from "react-native";
+import { Image } from "react-native";
+import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 
 type Props = {
 	urlImage: string;
-}
+};
 
-export const Avatar = ({urlImage} : Props) => {
-	return (
-		<View style={styles.container}>
-			<Image style={styles.foto} source={{uri: urlImage}} />
-		</View>
-	);
+export const Avatar = ({ urlImage }: Props) => {
+	const { primary100, secondary } = theme.colors;
+
+	return <Image style={styles.oval} source={{ uri: urlImage }} />;
 };

@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
-
-import { Logo } from "../../components/Logo";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
+
+import { Logo } from "../../components/Logo";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { ButtonGoogle } from "../../components/ButtonGoogle";
 import { ButtonText } from "../../components/ButtonText";
-
+import { theme } from "../../global/styles/theme";
 
 export const SignIn = () => {
+
+	const { primary100} = theme.colors;
+
 	const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
 
 	const navigation = useNavigation();
 
 	function handleSignUp() {
-		navigation.navigate("SingUp");
+		navigation.navigate("SignUp");
 	}
 
 	return (
@@ -32,13 +36,21 @@ export const SignIn = () => {
 				</Text>
 			</View>
 			<View style={styles.inputContainer}>
-				<Input placeholderText={"email@email.com"} />
+				<Input
+					icon={<MaterialIcons name="email" size={24} color={primary100} />}
+					placeholderText={"email@email.com"}
+				/>
 			</View>
 			<View style={styles.inputContainer}>
-				<Input placeholderText={"senha"} />
+				<Input
+					icon={<MaterialIcons name="lock" size={24} color={primary100} />}
+					placeholderText={"senha"}
+				/>
 			</View>
 			<View style={styles.forgetContainer}>
-				<Text style={styles.forgetText}>esqueceu a senha?</Text>
+				<ButtonText onPress={handleSignUp}>
+					<Text style={styles.forgetText}>Esqueceu sua Senha?</Text>
+				</ButtonText>
 			</View>
 			<Button text={"Login"} />
 			<View style={styles.lineOrContainer}>
@@ -49,10 +61,9 @@ export const SignIn = () => {
 			<ButtonGoogle text={"fazer login com Google"} />
 			<View style={styles.cadastrarContainer}>
 				<Text style={styles.cadastrarText}>Ainda não possui uma conta?</Text>
-				<ButtonText
-					text={" Cadastre-se"}
-					onPress={handleSignUp}
-				/>
+				<ButtonText onPress={handleSignUp}>
+					<Text style={styles.buttonText}>Cadastrar-se</Text>
+				</ButtonText>
 			</View>
 		</View>
 	);

@@ -51,8 +51,8 @@ export const styles = StyleSheet.create({
 	},
 	line: {
 		width: 100,
-		borderWidth: .7,
-		borderColor: primary100,
+		height: 0.7,
+		backgroundColor: primary100,
 	},
 	cadastrarContainer: {
 		flexDirection: "row",
@@ -64,5 +64,11 @@ export const styles = StyleSheet.create({
 		fontSize: 15,
 		fontFamily: title500,
 		color: primary100,
+	},
+	buttonText: {
+		fontSize: 18,
+		color: theme.colors.primary100,
+		fontFamily: theme.fonts.title700,
+		marginLeft: 3,
 	},
 });

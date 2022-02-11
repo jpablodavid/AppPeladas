@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { styles } from "./styles";
@@ -7,8 +7,12 @@ import { theme } from "../../global/styles/theme";
 
 import { Scout } from "../../components/Scout";
 import { Header } from "../../components/Header";
+import { Menu } from "../../components/Menu";
 import { Avatar } from "../../components/Avatar";
 import { ButtonAccess } from "../../components/ButtonAccess";
+
+import GroupSvg from "../../assets/duel.svg";
+import PerfilSvg from "../../assets/fun.svg";
 
 type Props = {
 	position: string;
@@ -22,38 +26,44 @@ export const Home = ({ position, camisa }: Props) => {
 
 	return (
 		<View style={styles.container}>
-			<Header name={"pablo"} />
+			<Header menu={<Menu />} title={"pablo"} />
 			<View style={styles.avatarContainer}>
-				<Text style={styles.textAvatar}>{position}</Text>
-				<Avatar urlImage="https://github.com/jpablodavid/" />
-				<View style={styles.camisaContainer}>
-					<Text style={styles.textAvatar}>Camisa</Text>
-					<Text style={styles.camisa}>{camisa}</Text>
+				<View style={styles.column}>
+					<Text style={styles.textAvatar}>{position}</Text>
+					<Scout text={"Partidas"} number={"8"} />
 				</View>
-			</View>
-			<View style={styles.scoutContainer}>
-				<Scout text={"Partidas"} number={"8"} />
-				<Scout text={"Perna de pau"} number={"0"} />
-				<Scout text={"Gols"} number={"12"} />
+				<View style={styles.columnAvatar}>
+					<Avatar urlImage="https://github.com/jpablodavid.png" />
+					<Scout text={"Partidas"} number={"8"} />
+				</View>
+				<View style={styles.column}>
+					<View style={styles.camisaContainer}>
+						<Text style={styles.textAvatar}>Camisa</Text>
+						<Text style={styles.camisa}>{camisa}</Text>
+					</View>
+					<Scout text={"Partidas"} number={"8"} />
+				</View>
 			</View>
 			<LinearGradient
 				style={styles.buttonsContainer}
 				colors={[primary100, secondary]}
 			>
 				<ButtonAccess
-					title={"titleBt"}
-					text={"textBt"}
-					image={"http://github.com/jpablodavid"}
+					title={"Grupo"}
+					text={
+						"Forme seu grupo, inicie uma partida, cadastre jogadores e der suas notas"
+					}
+					icon={GroupSvg}
 				/>
 				<View style={styles.line}></View>
 				<ButtonAccess
-					title={"titleBt"}
-					text={"textBt"}
-					image={"../../assets/iconGoogle.png"}
+					title={"Perfil"}
+					text={"Veja suas conquistas, gols, score, partidas"}
+					icon={PerfilSvg}
 				/>
 			</LinearGradient>
 			<View style={styles.jogoContainer}>
-				{temJogo ? <Text> Tem jogo</Text> :<Text>Nenhum jogo</Text>}
+				{temJogo ? <Text> Tem jogo</Text> : <Text>Nenhum jogo</Text>}
 			</View>
 		</View>
 	);
