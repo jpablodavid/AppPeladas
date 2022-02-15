@@ -19,9 +19,10 @@ export const AccountGroup = ({ title }: Props) => {
 		categoryId === category ? setCategory("") : setCategory(categoryId);
 	}
 
+
 	return (
 		<CategoriesBackground>
-			<Header title={title} />
+			<Header menu={false} title={title} />
 			<CategorySelect
 				data={categoriesAccounting}
 				categorySelected={category}

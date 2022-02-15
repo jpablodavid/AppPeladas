@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
+import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
-	oval: {
-		width: 100,
-		height: 90,
-		borderRadius: 70,
-		borderWidth: 5,
-		borderColor: "#dc9",
-		transform: [{ scaleY: 2 }],
+	container: {
+		width: 125,
+		height: 135,
+		borderRadius: 25,
+		borderWidth: 2,
+		borderColor: theme.colors.primary50
 	},
 });

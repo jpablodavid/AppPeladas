@@ -6,8 +6,10 @@ export const styles = StyleSheet.create({
 		flex: 1,
 	},
 	content: {
-		height: 360,
+		height: 420,
 		backgroundColor: theme.colors.background10,
 		borderTopLeftRadius: 25,
+		paddingHorizontal: 16,
+		paddingTop: 4,
 	},
 });

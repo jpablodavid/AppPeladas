@@ -11,10 +11,10 @@ type Props = {
 export const Scout = ({ text, number }: Props) => {
 	return (
 		<View style={styles.container}>
+			<Text style={styles.text}>{text}</Text>
 			<View style={styles.stroke}>
 				<Text style={styles.number}>{number}</Text>
 			</View>
-			<Text style={styles.text}>{text}</Text>
 		</View>
 	);
 };

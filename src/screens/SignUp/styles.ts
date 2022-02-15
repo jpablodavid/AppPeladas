@@ -8,10 +8,12 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginHorizontal: 40,
+		marginTop: 60,
 	},
 	textContainer: {
 		alignItems: "flex-start",
-		marginVertical: 32,
+		marginTop: 64,
+		marginBottom: 32
 	},
 	title: {
 		fontSize: 24,

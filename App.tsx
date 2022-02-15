@@ -3,7 +3,7 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import AppLoading from "expo-app-loading";
 
-import { View } from 'react-native';
+import { View } from "react-native";
 
 import { useFonts } from "expo-font";
 import {
@@ -31,6 +31,10 @@ import { Input } from "./src/components/Input";
 import { MaterialIcons } from "@expo/vector-icons";
 import { theme } from "./src/global/styles/theme";
 import { CreateGroup } from "./src/screens/CreateGroup";
+import { ListStaff } from "./src/components/ListStaff";
+import { ListAthletes } from "./src/components/ListAthletes";
+import { ListInfo } from "./src/components/ListInfo";
+import { HomeTest } from "./src/screens/Home";
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -45,14 +49,17 @@ export default function App() {
 		return <AppLoading />;
 	}
 	return (
-		<Background>
+		<>
 			<StatusBar style="light" backgroundColor="transparent" translucent />
 			{/* <AcessGroup title={"Nome do grupo"} /> */}
-			{/* <Home position='Zagueiro' camisa='6' /> */}
 
 			{/* <AccountGroup title={"Contabilidade"} /> */}
-			{/* <Routes/> */}
-			<CreateGroup />
-		</Background>
+			<Routes />
+			{/* <CreateGroup /> */}
+			{/* <ListStaff /> */}
+			{/* <ListAthletes/> */}
+			{/* <ListInfo data={info}/> */}
+			{/* <Home position={"Zagueiro"} camisa={"10"} /> */}
+		</>
 	);
 }

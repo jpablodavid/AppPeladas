@@ -7,6 +7,8 @@ import { SignUp } from "../screens/SignUp";
 import { CreateAccount } from "../screens/CreateAccount";
 import { Home } from "../screens/Home";
 
+import { theme } from "../global/styles/theme";
+import { AcessGroup } from "../screens/AcessGroup";
 
 const Stack = createStackNavigator();
 
@@ -17,7 +19,7 @@ export const AuthRoutes = () => {
 			screenOptions={{
 				headerShown: false,
 				cardStyle: {
-					backgroundColor: "transparent",
+					backgroundColor: theme.colors.background10,
 				},
 			}}
 		>
@@ -25,6 +27,7 @@ export const AuthRoutes = () => {
 			<Stack.Screen name="SignUp" component={SignUp} />
 			<Stack.Screen name="CreateAccount" component={CreateAccount} />
 			<Stack.Screen name="Home" component={Home} />
+			<Stack.Screen name="AcessGroup" component={AcessGroup} />
 		</Stack.Navigator>
 	);
 };

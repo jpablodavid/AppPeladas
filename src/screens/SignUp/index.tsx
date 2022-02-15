@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -32,44 +32,44 @@ export const SignUp = () => {
 	}
 
 	return (
-		<View style={styles.container}>
-			<Logo />
-			<View style={styles.textContainer}>
-				<Text style={styles.title}>Criar Conta no PeladasApp</Text>
-			</View>
-			<View style={styles.inputContainer}>
-				<Input
-					icon={<MaterialIcons name="email" size={24} color={primary100} />}
-					placeholderText={"email@email.com"}
-				/>
-			</View>
-			<View style={styles.inputContainer}>
-				<Input
-					icon={<MaterialIcons name="lock" size={24} color={primary100} />}
-					placeholderText={"senha"}
-				/>
-			</View>
-			<View style={styles.inputLastContainer}>
-				<Input
-					icon={<MaterialIcons name="lock" size={24} color={primary100} />}
-					placeholderText={"confirmar senha"}
-				/>
-			</View>
-			<Button text={"Cadastrar"} onPress={handleRegister}/>
-			<View style={styles.lineOrContainer}>
-				<View style={styles.line} />
-				<Text style={styles.or}>OU</Text>
-				<View style={styles.line} />
-			</View>
-			<ButtonGoogle text={"Cadastrar com Google"} />
-			<View style={styles.loginContainer}>
-				<Text style={styles.loginText}>Já possui uma conta?</Text>
-				<ButtonText onPress={handleSignIn} >
-					<Text style={styles.buttonText}>
-						Faça Login
-					</Text>
-				</ButtonText>
-			</View>
-		</View>
+		<KeyboardAvoidingView style={styles.container}>
+			<ScrollView showsVerticalScrollIndicator={false}>
+				<Logo />
+				<View style={styles.textContainer}>
+					<Text style={styles.title}>Criar Conta no PeladasApp</Text>
+				</View>
+				<View style={styles.inputContainer}>
+					<Input
+						icon={<MaterialIcons name="email" size={24} color={primary100} />}
+						placeholderText={"email@email.com"}
+					/>
+				</View>
+				<View style={styles.inputContainer}>
+					<Input
+						icon={<MaterialIcons name="lock" size={24} color={primary100} />}
+						placeholderText={"senha"}
+					/>
+				</View>
+				<View style={styles.inputLastContainer}>
+					<Input
+						icon={<MaterialIcons name="lock" size={24} color={primary100} />}
+						placeholderText={"confirmar senha"}
+					/>
+				</View>
+				<Button text={"Cadastrar"} onPress={handleRegister} />
+				<View style={styles.lineOrContainer}>
+					<View style={styles.line} />
+					<Text style={styles.or}>OU</Text>
+					<View style={styles.line} />
+				</View>
+				<ButtonGoogle text={"Cadastrar com Google"} />
+				<View style={styles.loginContainer}>
+					<Text style={styles.loginText}>Já possui uma conta?</Text>
+					<ButtonText onPress={handleSignIn}>
+						<Text style={styles.buttonText}>Faça Login</Text>
+					</ButtonText>
+				</View>
+			</ScrollView>
+		</KeyboardAvoidingView>
 	);
 };
