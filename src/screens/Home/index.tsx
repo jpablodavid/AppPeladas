@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { RouteProp } from "@react-navigation/native";
 
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
@@ -10,28 +11,47 @@ import { Scout } from "../../components/Scout";
 import { Header } from "../../components/Header";
 import { Avatar } from "../../components/Avatar";
 import { ButtonAccess } from "../../components/ButtonAccess";
-
 import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { ProgressBar } from "../../components/ProgressBar";
+import { ModalNoGroup } from "../../components/ModalNoGroup";
 
 import GroupSvg from "../../assets/duel.svg";
 import PerfilSvg from "../../assets/fun.svg";
 
 type Props = {
-	position: string;
-	camisa: string;
+	route: RouteProp<{ params: { position: string; camisa: string } }, "params">;
 };
 
-
-export const Home = ({ position, camisa }: Props) => {
+export const Home = ({ route }: Props) => {
 	const { primary100, secondary } = theme.colors;
 
 	let temJogo = false;
+	let isGroup = true;
+
+	const [openModal, setOpenModal] = useState(false);
 
 	const navigation = useNavigation();
 
+	function handleCloseModal() {
+		setOpenModal(false);
+	}
+
+	function handleAcessPerfil() {
+		navigation.navigate("Perfil");
+	}
+
 	function handleAcessGroup() {
-		navigation.navigate("AcessGroup");
+		isGroup ? navigation.navigate("AcessGroup") : setOpenModal(true);
+	}
+
+	function handleEntrarGrupo() {
+		navigation.navigate("SignIn");
+		setOpenModal(false);
+	}
+
+	function handleCriarGrupo() {
+		setOpenModal(false);
+		navigation.navigate("SignUp");
 	}
 
 	return (
@@ -42,10 +62,10 @@ export const Home = ({ position, camisa }: Props) => {
 					<Avatar urlImage="https://github.com/jpablodavid.png" />
 					<View style={styles.infoBody}>
 						<View style={styles.info}>
-							<Text style={styles.textPosition}>{position}</Text>
+							<Text style={styles.textPosition}>{route.params.position}</Text>
 							<View style={styles.camisa}>
 								<FontAwesome5 name="tshirt" size={50} color="black" />
-								<Text style={styles.textCamisa}>{camisa}</Text>
+								<Text style={styles.textCamisa}>{route.params.camisa}</Text>
 							</View>
 						</View>
 
@@ -69,13 +89,19 @@ export const Home = ({ position, camisa }: Props) => {
 						title={"Perfil"}
 						text={"Veja suas conquistas, gols, score, partidas"}
 						icon={PerfilSvg}
-						onPress={handleAcessGroup}
+						onPress={handleAcessPerfil}
 					/>
 					<View style={styles.jogoContainer}>
-						{temJogo ? <Text> Tem jogo</Text> : <Text>Nenhum jogo</Text>}
+						{temJogo ? <Text> Tem jogo</Text> : <Text>Sem Partidas no momento</Text>}
 					</View>
 				</View>
 			</CategoriesBackground>
+			<ModalNoGroup
+				visible={openModal}
+				setOpenModal={handleCloseModal}
+				goToEntrar={handleEntrarGrupo}
+				goToCriar={handleCriarGrupo}
+			/>
 		</View>
 	);
 };

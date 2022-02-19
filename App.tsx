@@ -55,6 +55,7 @@ export default function App() {
 
 			{/* <AccountGroup title={"Contabilidade"} /> */}
 			<Routes />
+			{/* <Home position="zagueiro" camisa={'10'}/> */}
 			{/* <CreateGroup /> */}
 			{/* <ListStaff /> */}
 			{/* <ListAthletes/> */}

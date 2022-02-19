@@ -1,18 +1,22 @@
 import React from "react";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
-import { Text } from "react-native";
+import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
+import { Theme } from "@react-navigation/native";
 
-type Props = RectButtonProps &{
+type Props = TouchableOpacityProps & {
 	text: string;
+	cor?: Theme;
 };
 
-export const Button = ({ text, ...rest }: Props) => {
+export const Button = ({ cor, text, ...rest }: Props) => {
+	const { primary100 } = theme.colors;
 
 	return (
-		<RectButton {...rest} style={styles.button}>
+		<TouchableOpacity style={styles.button} {...rest}>
 			<Text style={styles.text}>{text}</Text>
-		</RectButton>
+		</TouchableOpacity>
 	);
 };

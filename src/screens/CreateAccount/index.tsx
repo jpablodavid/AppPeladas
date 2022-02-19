@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
@@ -7,11 +7,12 @@ import { Entypo } from "@expo/vector-icons";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { Logo } from "../../components/Logo";
-import { theme } from "../../global/styles/theme";
-
-import { styles } from "./styles";
-import { ScrollView } from "react-native-gesture-handler";
 import { ButtonText } from "../../components/ButtonText";
+
+import { theme } from "../../global/styles/theme";
+import { styles } from "./styles";
+
+
 
 export const CreateAccount = () => {
 	const { primary100 } = theme.colors;
@@ -26,7 +27,10 @@ export const CreateAccount = () => {
 	const navigation = useNavigation();
 
 	function handleCreateAccount() {
-		navigation.navigate("Home");
+		navigation.navigate("Home", {
+			position: 'Zagueiro',
+			camisa: '10'
+		});
 	}
 
 	function handleGoBack() {
@@ -106,7 +110,9 @@ export const CreateAccount = () => {
 							placeholderText={"Time do Corção"}
 						/>
 					</View>
-					<Button text={"Criar Conta"} onPress={handleCreateAccount} />
+					<View style={{ marginBottom: 32 }}>
+						<Button text={"Criar Conta"} onPress={handleCreateAccount} />
+					</View>
 				</ScrollView>
 			</KeyboardAvoidingView>
 		</>

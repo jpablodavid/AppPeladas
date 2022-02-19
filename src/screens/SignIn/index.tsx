@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
+import {
+	View,
+	Text,
+	Platform,
+	KeyboardAvoidingView,
+	ScrollView,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -25,8 +31,11 @@ export const SignIn = () => {
 	}
 
 	return (
-		<KeyboardAvoidingView style={styles.container}>
-			<ScrollView showsVerticalScrollIndicator={false} >
+		<KeyboardAvoidingView
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+			style={styles.container}
+		>
+			<ScrollView showsVerticalScrollIndicator={false}>
 				<Logo />
 
 				<View style={styles.textContainer}>
@@ -49,7 +58,7 @@ export const SignIn = () => {
 					/>
 				</View>
 				<View style={styles.forgetContainer}>
-					<ButtonText onPress={handleSignUp}>
+					<ButtonText onPress={()=> alert("Esqueceu a senha")}>
 						<Text style={styles.forgetText}>Esqueceu sua Senha?</Text>
 					</ButtonText>
 				</View>

@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
 	textContainer: {
 		alignItems: "flex-start",
 		marginTop: 64,
-		marginBottom: 32
+		marginBottom: 32,
 	},
 	title: {
 		fontSize: 24,
@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
-		marginTop: 32,
+		marginVertical: 32,
 	},
 	loginText: {
 		fontSize: 15,

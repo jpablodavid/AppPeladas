@@ -1,11 +1,11 @@
 import React from "react";
-import { RectButton, RectButtonProps } from "react-native-gesture-handler";
-import { View, Text } from "react-native";
+import { RectButton, RectButtonProps} from "react-native-gesture-handler";
+import { View, Text ,TouchableOpacity, TouchableOpacityProps} from "react-native";
 
 import { styles } from "./styles";
 import { SvgProps } from "react-native-svg";
 
-type Props = RectButtonProps & {
+type Props = TouchableOpacityProps & {
 	title: string;
 	text: string;
 	icon: React.FC<SvgProps>;
@@ -13,7 +13,7 @@ type Props = RectButtonProps & {
 
 export const ButtonAccess = ({ title, text, icon: Icon, ...rest }: Props) => {
 	return (
-		<RectButton {...rest} style={styles.container}>
+		<TouchableOpacity {...rest} style={styles.container}>
 			<View style={styles.textsContainer}>
 				<Text style={styles.title}>{title}</Text>
 				<Text style={styles.text}>{text}</Text>
@@ -21,6 +21,6 @@ export const ButtonAccess = ({ title, text, icon: Icon, ...rest }: Props) => {
 			<View style={styles.icon}>
 				<Icon width={48} height={48} />
 			</View>
-		</RectButton>
+		</TouchableOpacity>
 	);
 };

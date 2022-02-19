@@ -52,8 +52,7 @@ export const styles = StyleSheet.create({
 		height: 60,
 		alignItems: "center",
 		justifyContent: "center",
-		borderWidth: 3,
-		borderColor: "red",
-		backgroundColor: theme.colors.disable100,
+		backgroundColor: theme.colors.background100,
+		marginHorizontal: -16
 	},
 });

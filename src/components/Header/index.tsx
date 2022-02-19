@@ -5,16 +5,17 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { styles } from "./styles";
 
-import { BorderlessButton } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { theme } from "../../global/styles/theme";
+import { ButtonText } from "../ButtonText";
 
 type Props = {
 	title: string;
 	menu: boolean;
+	goBack?: () => void;
 };
 
-export const Header = ({ menu, title }: Props) => {
+export const Header = ({ menu, goBack, title }: Props) => {
 	const { background10, background100 } = theme.colors;
 
 	return (
@@ -24,23 +25,21 @@ export const Header = ({ menu, title }: Props) => {
 		>
 			<View style={styles.content}>
 				{menu ? (
-					<BorderlessButton>
+					<ButtonText onPress={() => alert("menu")}>
 						<MaterialCommunityIcons
 							name="menu"
 							size={40}
 							color={theme.colors.primary100}
-							onPress={() => alert("menu")}
 						/>
-					</BorderlessButton>
+					</ButtonText>
 				) : (
-					<BorderlessButton>
+					<ButtonText onPress={goBack}>
 						<Feather
 							name="arrow-left"
 							size={24}
 							color={theme.colors.primary100}
-							onPress={() => alert("back")}
 						/>
-					</BorderlessButton>
+					</ButtonText>
 				)}
 				<Text style={styles.title}>{title}</Text>
 			</View>

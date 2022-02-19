@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
-		marginTop: 32,
+		marginVertical: 32,
 	},
 	cadastrarText: {
 		fontSize: 15,

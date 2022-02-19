@@ -10,6 +10,7 @@ import { styles } from "./styles";
 import { ListStaff } from "../../components/ListStaff";
 import { ListAthletes } from "../../components/ListAthletes";
 import { ListInfo } from "../../components/ListInfo";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
 	title: string;
@@ -27,6 +28,12 @@ const info = {
 
 export const AcessGroup = ({ title }: Props) => {
 
+	const navigation = useNavigation();
+
+	function handleGoBack() {
+		navigation.goBack();
+	}
+
 	const [category, setCategory] = useState("");
 
 	function handleCategorySelect(categoryId: string) {
@@ -35,18 +42,19 @@ export const AcessGroup = ({ title }: Props) => {
 
 	return (
 		<View style={styles.container}>
-			<Header menu={false} title={title} />
+			<Header menu={false} goBack={handleGoBack} title={title} />
 			<CategoriesBackground>
-				<View style={{height: 16}}></View> 
+				<View style={{ height: 16 }}></View>
 				<CategorySelect
 					data={categoriesGroup}
 					categorySelected={category}
 					setCategory={handleCategorySelect}
 				/>
 				<View style={styles.content}>
-					{/* <ListStaff/> */}
-					{/* <ListAthletes/> */}
-					<ListInfo data={info} />
+					{/* if(category() === "1"){<ListStaff />}else if(category() === "2")
+					<ListStaff />
+					else if(category() === "3"){<ListAthletes />}
+					else{<ListInfo data={info} />} */}
 				</View>
 			</CategoriesBackground>
 		</View>
