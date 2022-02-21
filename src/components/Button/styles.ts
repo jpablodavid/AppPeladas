@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		borderRadius: 10,
-		backgroundColor: primary100,
 		shadowColor: shadow,
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.2,

@@ -10,5 +10,9 @@ type Props = TouchableOpacityProps & {
 };
 
 export const ButtonText = ({ children, ...rest }: Props) => {
-	return <TouchableOpacity {...rest}>{children}</TouchableOpacity>;
+	return (
+		<TouchableOpacity activeOpacity={0.6} {...rest}>
+			{children}
+		</TouchableOpacity>
+	);
 };

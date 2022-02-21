@@ -5,26 +5,25 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 16,
-		marginHorizontal: 16,
+		marginTop: 240,
 		backgroundColor: theme.colors.background10,
+		borderTopLeftRadius: 25
 	},
 	content: {
 		flex: 1,
-		alignItems: "center",
-		padding: 16,
+		padding: 32,
 	},
 	close: {
 		fontSize: 24,
 		fontFamily: theme.fonts.title700,
-		marginBottom: 32,
 	},
 	text: {
 		fontSize: 18,
 		fontFamily: theme.fonts.text500,
 		textAlign: "center",
-		margin: 32
+		marginVertical: 8
 	},
 	button: {
-		marginVertical: 40,
+		marginVertical: 32,
 	},
 });

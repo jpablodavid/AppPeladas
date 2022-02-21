@@ -8,20 +8,27 @@ export const styles = StyleSheet.create({
 		flex: 1,
 		marginHorizontal: 40,
 	},
+	goBack: {
+		marginLeft: 24,
+		marginTop: 24,
+	},
 	oval: {
-		width: 70,
-		height: 70,
+		width: 90,
+		height: 90,
 		borderRadius: 70,
 		borderWidth: 4,
-		borderColor: "red",
-		transform: [{ scaleX: 2 }],
+		borderColor: theme.colors.circuloXp,
 		alignItems: "center",
 		justifyContent: "center",
-		marginVertical: 16
+		marginVertical: 8,
 	},
 	imgGrupo: {
 		alignItems: "center",
 		justifyContent: "center",
+	},
+	textAdd: {
+		fontSize: 16,
+		fontFamily: title700,
 	},
 	textContainer: {
 		flexDirection: "row",

@@ -34,7 +34,7 @@ import { CreateGroup } from "./src/screens/CreateGroup";
 import { ListStaff } from "./src/components/ListStaff";
 import { ListAthletes } from "./src/components/ListAthletes";
 import { ListInfo } from "./src/components/ListInfo";
-import { HomeTest } from "./src/screens/Home";
+
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -52,7 +52,7 @@ export default function App() {
 		<>
 			<StatusBar style="light" backgroundColor="transparent" translucent />
 			{/* <AcessGroup title={"Nome do grupo"} /> */}
-
+			
 			{/* <AccountGroup title={"Contabilidade"} /> */}
 			<Routes />
 			{/* <Home position="zagueiro" camisa={'10'}/> */}

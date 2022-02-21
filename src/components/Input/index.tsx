@@ -1,6 +1,5 @@
 import React, { ReactNode, useState } from "react";
 import { TextInput, View } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { theme } from "../../global/styles/theme";
 

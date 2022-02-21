@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { View, Text, Modal, ModalProps } from "react-native";
 import { Button } from "../Button";
 import { ButtonText } from "../ButtonText";
@@ -31,17 +31,12 @@ export const ModalNoGroup = ({
 					<Text style={styles.text}>
 						Você ainda não possui um Grupo de Peladas
 					</Text>
-
-					<Button
-						style={styles.button}
-						text={"Entrar em um Grupo"}
-						onPress={goToEntrar}
-					/>
-					<Button
-						style={styles.button}
-						text={"Criar Grupo"}
-						onPress={goToCriar}
-					/>
+					<View style={styles.button}>
+						<Button text={"Entrar em um Grupo"} onPress={goToEntrar} />
+					</View>
+					<View style={styles.button}>
+						<Button color={true} text={"Criar Grupo"} onPress={goToCriar} />
+					</View>
 				</View>
 			</View>
 		</Modal>

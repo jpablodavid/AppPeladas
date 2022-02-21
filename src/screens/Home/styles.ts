@@ -33,7 +33,8 @@ export const styles = StyleSheet.create({
 		fontSize: 20,
 		fontFamily: theme.fonts.text900,
 		color: theme.colors.shadow,
-		marginRight: 28,
+		marginRight: 38,
+		marginLeft: -10,
 		paddingTop: 6,
 	},
 	scout: {
@@ -53,6 +54,11 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		backgroundColor: theme.colors.background100,
-		marginHorizontal: -16
+		marginHorizontal: -16,
+	},
+	textJogo: {
+		color: theme.colors.textButton,
+		fontSize: 18,
+		fontFamily: theme.fonts.title700
 	},
 });
