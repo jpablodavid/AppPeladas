@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { RouteProp } from "@react-navigation/native";
+
+import { FontAwesome5 } from "@expo/vector-icons";
+import GroupSvg from "../../assets/duel.svg";
+import PerfilSvg from "../../assets/fun.svg";
 
 import { Scout } from "../../components/Scout";
 import { Header } from "../../components/Header";
@@ -14,24 +17,23 @@ import { ModalNoGroup } from "../../components/ModalNoGroup";
 
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
-
-import GroupSvg from "../../assets/duel.svg";
-import PerfilSvg from "../../assets/fun.svg";
+import { useAuth } from "../../hooks/auth";
 
 type Props = {
 	route: RouteProp<{ params: { position: string; camisa: string } }, "params">;
 };
 
 export const Home = ({ route }: Props) => {
+	const navigation = useNavigation();
 	const { position, camisa } = route.params;
 	const { primary100, secondary } = theme.colors;
 
 	let temJogo = false;
 	let isGroup = false;
+    
+	const {user} = useAuth();// dados do usuario
 
 	const [openModal, setOpenModal] = useState(false);
-
-	const navigation = useNavigation();
 
 	function handleCloseModal() {
 		setOpenModal(false);
@@ -57,7 +59,7 @@ export const Home = ({ route }: Props) => {
 
 	return (
 		<View style={styles.container}>
-			<Header menu={true} title={"pablo"} />
+			<Header menu title={user.firstname} />
 			<CategoriesBackground>
 				<View style={styles.avatar}>
 					<Avatar urlImage="https://github.com/jpablodavid.png" />
@@ -77,6 +79,7 @@ export const Home = ({ route }: Props) => {
 						</View>
 					</View>
 				</View>
+
 				<View style={styles.content}>
 					<ButtonAccess
 						title={"Grupo"}

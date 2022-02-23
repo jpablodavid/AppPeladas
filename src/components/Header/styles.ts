@@ -5,10 +5,14 @@ import { theme } from "../../global/styles/theme";
 export const styles = StyleSheet.create({
 	container: {
 		height: 80,
-		paddingTop: getStatusBarHeight(),
 		borderBottomLeftRadius: 25,
 		backgroundColor: theme.colors.background10,
-		elevation: 5,
+		shadowColor: theme.colors.shadow,
+		shadowOffset: { width: 0, height: 1 },
+		shadowOpacity: 0.8,
+		shadowRadius: 2,
+		elevation: 3,
+		paddingTop: getStatusBarHeight(),
 	},
 	content: {
 		flex: 1,
@@ -18,9 +22,12 @@ export const styles = StyleSheet.create({
 		marginHorizontal: 16,
 	},
 	title: {
-		fontSize: 26,
-		fontFamily: theme.fonts.text900,
+		fontSize: 30,
+		fontFamily: theme.fonts.title700,
 		color: theme.colors.primary100,
 		textTransform: "uppercase",
+		textShadowColor: theme.colors.shadow,
+		textShadowOffset: { width: 1, height: -1 },
+		textShadowRadius: 1,
 	},
 });

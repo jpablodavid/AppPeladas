@@ -42,7 +42,7 @@ export const AcessGroup = ({ title }: Props) => {
 
 	return (
 		<View style={styles.container}>
-			<Header menu={false} goBack={handleGoBack} title={title} />
+			<Header goBack={handleGoBack} title={title} />
 			<CategoriesBackground>
 				<View style={{ height: 16 }}></View>
 				<CategorySelect

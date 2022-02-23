@@ -10,21 +10,31 @@ export const styles = StyleSheet.create({
 	},
 	goBack: {
 		marginLeft: 24,
-		marginTop: 24,
+		marginVertical: 24,
 	},
-	oval: {
-		width: 90,
-		height: 90,
-		borderRadius: 70,
-		borderWidth: 4,
-		borderColor: theme.colors.circuloXp,
+	imageContainer: {
+		width: 92,
+		height: 92,
+		borderRadius: 46,
 		alignItems: "center",
 		justifyContent: "center",
-		marginVertical: 8,
+		marginBottom: 8,
+	},
+	image: {
+		width: 86,
+		height: 86,
+		borderRadius: 43,
+		backgroundColor: theme.colors.background10,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	imgGrupo: {
 		alignItems: "center",
 		justifyContent: "center",
+	},
+	textInner:{
+		fontSize:24,
+		fontFamily: theme.fonts.text500
 	},
 	textAdd: {
 		fontSize: 16,
@@ -37,10 +47,10 @@ export const styles = StyleSheet.create({
 	},
 	text: {
 		fontFamily: title500,
-		fontSize: 18,
+		fontSize: 16,
 	},
 	title: {
-		fontSize: 20,
+		fontSize: 18,
 		fontFamily: title700,
 	},
 	inputContainer: {

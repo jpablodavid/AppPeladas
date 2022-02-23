@@ -19,6 +19,8 @@ export const styles = StyleSheet.create({
 		letterSpacing: 1,
 		color: textButton,
 		fontFamily: theme.fonts.title700,
-		textShadowColor: shadow,
+		textShadowColor: theme.colors.shadow,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
 	},
 });

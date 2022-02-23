@@ -2,10 +2,12 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
+	touchClose:{
+		height: 240,
+	},
 	container: {
-		flex: 1,
+		flex:1,
 		padding: 16,
-		marginTop: 240,
 		backgroundColor: theme.colors.background10,
 		borderTopLeftRadius: 25
 	},
@@ -18,8 +20,8 @@ export const styles = StyleSheet.create({
 		fontFamily: theme.fonts.title700,
 	},
 	text: {
-		fontSize: 18,
-		fontFamily: theme.fonts.text500,
+		fontSize: 20,
+		fontFamily: theme.fonts.title700,
 		textAlign: "center",
 		marginVertical: 8
 	},

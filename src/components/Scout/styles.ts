@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
 	container: {
 		alignItems: "center",
 		justifyContent: "center",
-		marginLeft:6
+		marginLeft: 6,
 	},
 	stroke: {
 		width: 50,
@@ -23,10 +23,16 @@ export const styles = StyleSheet.create({
 		textAlign: "center",
 		marginBottom: 4,
 		color: theme.colors.line,
+		textShadowColor: theme.colors.shadow,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
 	},
 	number: {
 		fontSize: 18,
 		fontFamily: theme.fonts.text900,
 		color: theme.colors.shadow,
+		textShadowColor: theme.colors.background100,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
 	},
 });

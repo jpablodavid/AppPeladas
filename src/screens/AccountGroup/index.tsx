@@ -30,7 +30,7 @@ export const AccountGroup = ({ title }: Props) => {
 
 	return (
 		<CategoriesBackground>
-			<Header menu={false} goBack={handleGoBack} title={title} />
+			<Header goBack={handleGoBack} title={title} />
 			<CategorySelect
 				data={categoriesAccounting}
 				categorySelected={category}

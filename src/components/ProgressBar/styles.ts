@@ -13,6 +13,9 @@ export const styles = StyleSheet.create({
 		textAlign: "center",
 		marginBottom: 4,
 		color: theme.colors.line,
+		textShadowColor: theme.colors.shadow,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
 	},
 	value: {
 		flexDirection: "row",
@@ -23,6 +26,9 @@ export const styles = StyleSheet.create({
 		fontFamily: theme.fonts.title700,
 		color: theme.colors.shadow,
 		marginRight: 2,
+		textShadowColor: theme.colors.background100,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
 	},
 	xp: {
 		fontSize: 10,

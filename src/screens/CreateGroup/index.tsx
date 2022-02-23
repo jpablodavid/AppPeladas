@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -9,12 +10,11 @@ import { Input } from "../../components/Input";
 import { ButtonText } from "../../components/ButtonText";
 
 import { theme } from "../../global/styles/theme";
-
 import { styles } from "./styles";
-import { ScrollView } from "react-native-gesture-handler";
+
 
 export const CreateGroup = () => {
-	const { primary100 } = theme.colors;
+	const { primary100, secondary } = theme.colors;
 
 	const [name, setName] = useState("");
 	const [date, setDate] = useState("");
@@ -38,14 +38,22 @@ export const CreateGroup = () => {
 			<ButtonText style={styles.goBack} onPress={handleGoback}>
 				<Entypo name="chevron-left" size={24} color="black" />
 			</ButtonText>
+
 			<KeyboardAvoidingView style={styles.container}>
 				<ScrollView showsVerticalScrollIndicator={false}>
 					<View style={styles.imgGrupo}>
-						<View style={styles.oval}>
-							<Text style={styles.title}>+</Text>
-						</View>
+						<LinearGradient
+							style={styles.imageContainer}
+							colors={[primary100, secondary]}
+						>
+							<View style={styles.image}>
+								<Text style={styles.textInner}>+</Text>
+							</View>
+						</LinearGradient>
+
 						<Text style={styles.textAdd}>Adicionar imagem</Text>
 					</View>
+
 					<View style={styles.textContainer}>
 						<Text style={styles.text}>
 							Preencha as Informações para criar seu
@@ -61,6 +69,7 @@ export const CreateGroup = () => {
 							placeholderText={"Nome do Grupo"}
 						/>
 					</View>
+
 					<View style={styles.inputContainer}>
 						<Input
 							icon={
@@ -73,6 +82,7 @@ export const CreateGroup = () => {
 							placeholderText={"Data de Criação "}
 						/>
 					</View>
+
 					<View style={styles.inputContainer}>
 						<Input
 							icon={
@@ -81,6 +91,7 @@ export const CreateGroup = () => {
 							placeholderText={"Apelido ou Nome na camisa"}
 						/>
 					</View>
+
 					<View style={styles.inputContainer}>
 						<Input
 							icon={
@@ -93,6 +104,7 @@ export const CreateGroup = () => {
 							placeholderText={"WhatsApp (Grupo de msg)"}
 						/>
 					</View>
+
 					<View style={styles.inputContainer}>
 						<Input
 							icon={
@@ -101,6 +113,7 @@ export const CreateGroup = () => {
 							placeholderText={"Local do Campo"}
 						/>
 					</View>
+
 					<View style={styles.inputLastContainer}>
 						<Input
 							icon={
@@ -109,7 +122,9 @@ export const CreateGroup = () => {
 							placeholderText={"Data e Hora da Pelada"}
 						/>
 					</View>
-					<Button text={"Criar Grupo"} onPress={handleGoHome} />
+					<View style={{ marginBottom: 16 }}>
+						<Button text={"Criar Grupo"} onPress={handleGoHome} />
+					</View>
 				</ScrollView>
 			</KeyboardAvoidingView>
 		</>

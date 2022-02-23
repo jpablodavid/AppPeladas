@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginHorizontal: 40,
-		marginTop: 60
+		marginTop: 60,
 	},
 	textContainer: {
 		alignItems: "flex-start",

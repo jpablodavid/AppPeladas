@@ -26,7 +26,9 @@ export const styles = StyleSheet.create({
 		fontSize: 16,
 		color: textButton,
 		fontFamily: theme.fonts.title700,
-		textShadowColor: shadow,
+		textShadowColor: theme.colors.shadow,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
 		letterSpacing: 1,
 	},
 });

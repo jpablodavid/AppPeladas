@@ -25,17 +25,23 @@ export const styles = StyleSheet.create({
 	},
 	textCamisa: {
 		position: "absolute",
-		color: theme.colors.shadow,
+		color: theme.colors.textButton,
 		fontSize: 26,
 		fontFamily: theme.fonts.title700,
+		textShadowColor: theme.colors.primary10,
+		textShadowOffset: { width: 1, height: -1 },
+		textShadowRadius: 1,
 	},
 	textPosition: {
 		fontSize: 20,
 		fontFamily: theme.fonts.text900,
-		color: theme.colors.shadow,
+		color: theme.colors.textButton,
 		marginRight: 38,
 		marginLeft: -10,
 		paddingTop: 6,
+		textShadowColor: theme.colors.shadow,
+		textShadowOffset: { width: 1, height: -1 },
+		textShadowRadius: 1,
 	},
 	scout: {
 		flexDirection: "row",
@@ -59,6 +65,6 @@ export const styles = StyleSheet.create({
 	textJogo: {
 		color: theme.colors.textButton,
 		fontSize: 18,
-		fontFamily: theme.fonts.title700
+		fontFamily: theme.fonts.title700,
 	},
 });

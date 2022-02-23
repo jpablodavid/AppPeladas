@@ -19,7 +19,7 @@ export const theme = {
 		line: "#C4C4C4",
 		input: "#C4C4C4",
 
-		shadow: "#c5c5c5",
+		shadow: "rgba(0, 0, 0, 0.5)",
 
 		textInput: "#737380",
 

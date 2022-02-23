@@ -8,10 +8,11 @@ import { styles } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { theme } from "../../global/styles/theme";
 import { ButtonText } from "../ButtonText";
+import { StatusBar } from "expo-status-bar";
 
 type Props = {
 	title: string;
-	menu: boolean;
+	menu?: boolean;
 	goBack?: () => void;
 };
 
@@ -21,7 +22,7 @@ export const Header = ({ menu, goBack, title }: Props) => {
 	return (
 		<LinearGradient
 			style={styles.container}
-			colors={[background100, background10]}
+			colors={[background10, background100]}
 		>
 			<View style={styles.content}>
 				{menu ? (
