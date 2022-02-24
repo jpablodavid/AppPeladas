@@ -6,6 +6,8 @@ import {
 	Platform,
 	KeyboardAvoidingView,
 	ScrollView,
+	Alert,
+	ActivityIndicator
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -23,7 +25,7 @@ import { useAuth } from "../../hooks/auth";
 export const SignIn = () => {
 	const navigation = useNavigation();
 
-	const { user } = useAuth();
+	const { loading, signIn, signInInst } = useAuth();
 
 	const { primary100 } = theme.colors;
 
@@ -32,6 +34,24 @@ export const SignIn = () => {
 
 	function handleSignUp() {
 		navigation.navigate("SignUp");
+	}
+
+	async function handleSignIn(){
+		try{
+			await signIn();
+			navigation.navigate("Home");
+		}catch (error){
+			Alert.alert(error);
+		}
+	}
+
+	async function handleInstagram(){
+		try {
+			await signInInst();
+			//navigation.navigate("Home");
+		} catch (error) {
+			Alert.alert(error);
+		}
 	}
 
 	return (
@@ -71,7 +91,7 @@ export const SignIn = () => {
 					</ButtonText>
 				</View>
 
-				<Button text={"Login"} />
+				<Button text={"Login"} onPress={handleInstagram}/>
 
 				<View style={styles.lineOrContainer}>
 					<View style={styles.line} />
@@ -81,7 +101,13 @@ export const SignIn = () => {
 					<View style={styles.line} />
 				</View>
 
-				<ButtonGoogle text={"fazer login com Google"} />
+				{loading ? <ActivityIndicator color={theme.colors.primary10}/>
+				:
+					<ButtonGoogle 
+						onPress={handleSignIn} 
+						text={"fazer login com Google"} 
+					/>
+				}
 
 				<View style={styles.cadastrarContainer}>
 					<Text style={styles.cadastrarText}>Ainda não possui uma conta?</Text>
