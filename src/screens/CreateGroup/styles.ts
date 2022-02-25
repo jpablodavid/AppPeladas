@@ -9,8 +9,8 @@ export const styles = StyleSheet.create({
 		marginHorizontal: 40,
 	},
 	goBack: {
-		marginLeft: 24,
-		marginVertical: 24,
+		margin: 24,
+		marginTop: 32,
 	},
 	imageContainer: {
 		width: 92,
@@ -32,9 +32,9 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	textInner:{
-		fontSize:24,
-		fontFamily: theme.fonts.text500
+	textInner: {
+		fontSize: 24,
+		fontFamily: theme.fonts.text500,
 	},
 	textAdd: {
 		fontSize: 16,

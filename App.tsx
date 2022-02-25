@@ -35,6 +35,7 @@ import { ListStaff } from "./src/components/ListStaff";
 import { ListAthletes } from "./src/components/ListAthletes";
 import { ListInfo } from "./src/components/ListInfo";
 import { AuthProvider } from "./src/hooks/auth";
+import { Profile } from "./src/screens/Profile";
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -53,9 +54,10 @@ export default function App() {
 			<StatusBar style="auto" backgroundColor="transparent" translucent /> 
 			{/* <AcessGroup title={"Nome do grupo"} /> */}
 			{/* <AccountGroup title={"Contabilidade"} /> */}
-			<AuthProvider>
+			{/* <AuthProvider>
 				<Routes />
-			</AuthProvider>
+			</AuthProvider> */}
+			<Profile/>
 			{/* <Home position="zagueiro" camisa={'10'}/> */}
 			{/* <CreateGroup /> */}
 			{/* <ListStaff /> */}

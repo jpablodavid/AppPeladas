@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+	View,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	KeyboardAvoidingView,
+	Platform,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -9,6 +16,7 @@ import { ButtonText } from "../../components/ButtonText";
 import { styles } from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
 import { Button } from "../../components/Button";
+import { theme } from "../../global/styles/theme";
 
 type Props = {
 	listGroup: string;
@@ -47,13 +55,17 @@ export const JoinGroup = ({ listGroup }: Props) => {
 					style={styles.input}
 					onChangeText={setNameGroup}
 					value={nameGroup}
-					inlineImageLeft="search_icon"
 				/>
-				<TouchableOpacity onPress={handleSearch}>
-					<Ionicons name="md-search-sharp" size={24} color="black" />
+				<TouchableOpacity style={{padding: 8}}onPress={handleSearch}>
+					<Ionicons name="md-search-sharp" size={24} color={theme.colors.primary100} />
 				</TouchableOpacity>
 			</View>
-			<ScrollView style={styles.list}>{listGroup}</ScrollView>
+			<KeyboardAvoidingView
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+			style={styles.container}
+			>
+				<ScrollView style={styles.list}>{listGroup}</ScrollView>
+			</KeyboardAvoidingView>
 			<View style={styles.button}>
 				<Button text={"Entrar no grupo"} onPress={handleConnectGroup} />
 			</View>

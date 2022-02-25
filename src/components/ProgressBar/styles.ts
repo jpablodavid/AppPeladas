@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
 		marginLeft: -8,
 	},
 	text: {
-		fontSize: 14,
 		fontFamily: theme.fonts.title700,
 		textAlign: "center",
 		marginBottom: 4,
@@ -22,7 +21,6 @@ export const styles = StyleSheet.create({
 		alignItems: "baseline",
 	},
 	number: {
-		fontSize: 20,
 		fontFamily: theme.fonts.title700,
 		color: theme.colors.shadow,
 		marginRight: 2,

@@ -12,10 +12,13 @@ import { ButtonGoogle } from "../../components/ButtonGoogle";
 import { ButtonText } from "../../components/ButtonText";
 import { Input } from "../../components/Input";
 import { Logo } from "../../components/Logo";
+import { useAuth } from "../../hooks/auth";
 
 
 export const SignUp = () => {
 	const { primary100 } = theme.colors;
+
+	const { loading, signInGoogle, signInInst } = useAuth();
 
 	const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
@@ -29,6 +32,16 @@ export const SignUp = () => {
 
 	function handleRegister() {
 		navigation.navigate("CreateAccount");
+	}
+
+	async function handleGoogle() {
+		try {
+			await signInGoogle();
+			navigation.navigate("CreateAccount");
+		} catch (error) {
+			console.log(JSON.stringify(error));
+		}
+		
 	}
 
 	return (
@@ -62,7 +75,7 @@ export const SignUp = () => {
 					<Text style={styles.or}>OU</Text>
 					<View style={styles.line} />
 				</View>
-				<ButtonGoogle text={"Cadastrar com Google"} />
+				<ButtonGoogle text={"Cadastrar com Google"} onPress={handleGoogle} />
 				<View style={styles.loginContainer}>
 					<Text style={styles.loginText}>Já possui uma conta?</Text>
 					<ButtonText onPress={handleSignIn}>

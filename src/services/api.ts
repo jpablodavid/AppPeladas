@@ -8,4 +8,5 @@ const apiInst = axios.create({
 	baseURL: "https://api.instagram.com",
 });
 
+
 export { apiGoogle, apiInst };

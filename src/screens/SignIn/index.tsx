@@ -25,7 +25,7 @@ import { useAuth } from "../../hooks/auth";
 export const SignIn = () => {
 	const navigation = useNavigation();
 
-	const { loading, signIn, signInInst } = useAuth();
+	const { loading, signInGoogle, signInInst } = useAuth();
 
 	const { primary100 } = theme.colors;
 
@@ -38,19 +38,17 @@ export const SignIn = () => {
 
 	async function handleSignIn(){
 		try{
-			await signIn();
-			navigation.navigate("Home");
+			await signInGoogle();
 		}catch (error){
-			Alert.alert(error);
+			console.log(JSON.stringify(error));
 		}
 	}
 
 	async function handleInstagram(){
 		try {
 			await signInInst();
-			//navigation.navigate("Home");
 		} catch (error) {
-			Alert.alert(error);
+			Alert.alert(JSON.stringify(error));
 		}
 	}
 
@@ -91,7 +89,7 @@ export const SignIn = () => {
 					</ButtonText>
 				</View>
 
-				<Button text={"Login"} onPress={handleInstagram}/>
+				<Button text={"Login"} />
 
 				<View style={styles.lineOrContainer}>
 					<View style={styles.line} />

@@ -23,15 +23,14 @@ type Props = {
 	route: RouteProp<{ params: { position: string; camisa: string } }, "params">;
 };
 
-export const Home = ({ route }: Props) => {
+export const Home = () => {
 	const navigation = useNavigation();
-	const { position, camisa } = route.params;
 	const { primary100, secondary } = theme.colors;
 
 	let temJogo = false;
 	let isGroup = false;
     
-	const {user} = useAuth();// dados do usuario
+	const {user} = useAuth();
 
 	const [openModal, setOpenModal] = useState(false);
 
@@ -59,16 +58,16 @@ export const Home = ({ route }: Props) => {
 
 	return (
 		<View style={styles.container}>
-			<Header menu title={user.firstname} />
+			<Header menu title={user.given_name} />
 			<CategoriesBackground>
 				<View style={styles.avatar}>
-					<Avatar urlImage="https://github.com/jpablodavid.png" />
+					<Avatar urlImage={user.picture} />
 					<View style={styles.infoBody}>
 						<View style={styles.info}>
-							<Text style={styles.textPosition}>{position}</Text>
+							<Text style={styles.textPosition}>{user.position}</Text>
 							<View style={styles.camisa}>
 								<FontAwesome5 name="tshirt" size={50} color="black" />
-								<Text style={styles.textCamisa}>{camisa}</Text>
+								<Text style={styles.textCamisa}>{user.camisa}</Text>
 							</View>
 						</View>
 

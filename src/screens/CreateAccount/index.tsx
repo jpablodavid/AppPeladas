@@ -27,10 +27,7 @@ export const CreateAccount = () => {
 	const navigation = useNavigation();
 
 	function handleCreateAccount() {
-		navigation.navigate("Home", {
-			position: 'Zagueiro',
-			camisa: '10'
-		});
+		navigation.navigate("Home");
 	}
 
 	function handleGoBack() {

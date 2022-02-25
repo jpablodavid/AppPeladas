@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
 	},
 	goBack: {
 		margin: 24,
+		marginTop: 32,
 	},
 	textContainer: {
 		alignItems: "center",
@@ -22,10 +23,8 @@ export const styles = StyleSheet.create({
 	inputContainer: {
 		flexDirection: "row",
 		alignItems: "center",
-		//justifyContent: "space-between",
 		height: 45,
 		borderRadius: 8,
-		padding: 8,
 		backgroundColor: theme.colors.disable100,
 		marginHorizontal: 24,
 		borderColor: theme.colors.disable10,
@@ -34,17 +33,17 @@ export const styles = StyleSheet.create({
 	input: {
 		flex: 1,
 		height: 45,
-		marginRight: 8,
-		borderRightWidth:1,
-		borderRightColor: theme.colors.background10
+		padding: 8,
+		borderRightWidth: 1,
+		borderRightColor: theme.colors.background10,
 	},
-	list:{
+	list: {
 		flex: 1,
 		borderWidth: 1,
-		borderColor: '#000',
-		margin: 24
+		borderColor: "#000",
+		margin: 24,
 	},
-	button:{
-		margin: 24
-	}
+	button: {
+		margin: 24,
+	},
 });

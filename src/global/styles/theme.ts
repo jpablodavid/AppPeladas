@@ -8,10 +8,14 @@ export const theme = {
 		textCard: "#EDE7CF",
 
 		primary100: "#0B5980",
+		primary75: "#0B598073",
+		primary25: "#0B598025",
 		primary50: "#006EA9",
 		primary10: "#1976D2",
 
 		secondary: "#DA272A",
+		secondary75: "#DA272A75",
+		secondary25: "#DA272A25",
 
 		disable10: "#ECECEC",
 		disable100: "#C1C1C1",

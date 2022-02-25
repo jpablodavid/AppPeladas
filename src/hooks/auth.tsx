@@ -19,14 +19,18 @@ import {
 	KEY_CLIENT,
 } from "../configs/google";
 
-import { apiInst, apiGoogle } from "../services/api";
+import { apiGoogle, apiInst } from "../services/api";
 
 type User = {
 	id: string;
-	firstname: string;
-	avatar: string;
+	name: string;
+	given_name: string;
+	family_name: string;
+	locale: string;
 	email: string;
-	token: string;
+	picture: string;
+	position: string;
+	camisa: string;
 };
 
 type Group = {};
@@ -34,7 +38,7 @@ type Group = {};
 type AuthContextData = {
 	user: User;
 	loading: boolean;
-	signIn: () => Promise<void>;
+	signInGoogle: () => Promise<void>;
 	signInInst: () => Promise<void>;
 };
 
@@ -46,6 +50,14 @@ type AuthorizationResponse = AuthSession.AuthSessionResult & {
 	type: string;
 	params: {
 		access_token: string;
+		code: string;
+	};
+};
+
+type AuthResponse = AuthSession.AuthSessionResult & {
+	type: string;
+	params: {
+		code: string;
 	};
 };
 
@@ -56,7 +68,53 @@ function AuthProvider({ children }: AuthProviderProps) {
 
 	const [loading, setLoading] = useState(false);
 
-	async function signIn() {
+	async function laodProfile(token: string) {
+		const response = await fetch(
+			`https://www.googleapis.com/oauth2/v2/userinfo?alt=json&access_token=${token}`
+		);
+
+		const userInfo = await response.json();
+
+		const user = {
+			id: userInfo.id,
+			name: userInfo.name,
+			given_name: userInfo.given_name,
+			family_name: userInfo.family_name,
+			locale: userInfo.locale,
+			email: userInfo.email,
+			picture: userInfo.picture,
+			position: "Meio-Campo",
+			camisa: "10",
+		};
+
+		setUser(user);
+	}
+
+	async function laodProfileInst() {
+		const token =
+			"IGQVJWOXhGY2pWa1JwNzU4UlhkUDdNb2YwZAmpaa0xEV0hVU1prZAlc4TWFXS1lETE5YWS12SE5LWmxPVHI0b1JQcFJoZADVVM3dWdzFpSlZAPNHpjdGNyaDVFalV6Q19waTdrTU9DSm9BM2dHVG9NQ1RqcwZDZD";
+		const response = await fetch(
+			`https://graph.instagram.com/me?fields=id,username&access_token=${token}`
+		);
+
+		const userInfo = await response.json();
+
+		const user = {
+			id: userInfo.id,
+			name: userInfo.username,
+			given_name: userInfo.username,
+			family_name: userInfo.username,
+			locale: "br",
+			email: `${userInfo.username}@gamil.com`,
+			picture: "https://github.com/jpablodavid.png",
+			position: "Meio-Campo",
+			camisa: "10",
+		};
+
+		setUser(user);
+	}
+
+	async function signInGoogle() {
 		try {
 			setLoading(true);
 
@@ -67,7 +125,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 			})) as AuthorizationResponse;
 
 			if (type === "success") {
-				alert("success");
+				await laodProfile(params.access_token);
 			}
 			setLoading(false);
 		} catch (error) {
@@ -79,11 +137,15 @@ function AuthProvider({ children }: AuthProviderProps) {
 		try {
 			setLoading(true);
 
-			const authUrl = `${apiInst.defaults.baseURL}/oauth/authorize?client_id=${APP_ID}&redirect_uri=${INST_REDIRECT_URI}&scope=${INST_SCOPE}&response_type=code`;
+			const authUrl = `${apiInst.defaults.baseURL}/oauth/authorize?client_id=${APP_ID}&redirect_uri=${INST_REDIRECT_URI}&scope=${INST_SCOPE}&response_type=${INST_RESPONSE_TYPE}`;
 
 			const { type, params } = (await AuthSession.startAsync({
 				authUrl,
 			})) as AuthorizationResponse;
+
+			if (type === "success") {
+				await laodProfileInst();
+			}
 
 			setLoading(false);
 		} catch (error) {
@@ -92,7 +154,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 	}
 
 	return (
-		<AuthContext.Provider value={{ user, loading, signIn, signInInst }}>
+		<AuthContext.Provider value={{ user, loading, signInGoogle, signInInst }}>
 			{children}
 		</AuthContext.Provider>
 	);
