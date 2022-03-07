@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { RouteProp } from "@react-navigation/native";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 import GroupSvg from "../../assets/duel.svg";
@@ -16,20 +15,14 @@ import { ProgressBar } from "../../components/ProgressBar";
 import { ModalNoGroup } from "../../components/ModalNoGroup";
 
 import { styles } from "./styles";
-import { theme } from "../../global/styles/theme";
 import { useAuth } from "../../hooks/auth";
-
-type Props = {
-	route: RouteProp<{ params: { position: string; camisa: string } }, "params">;
-};
 
 export const Home = () => {
 	const navigation = useNavigation();
-	const { primary100, secondary } = theme.colors;
 
 	let temJogo = false;
 	let isGroup = false;
-    
+
 	const {user} = useAuth();
 
 	const [openModal, setOpenModal] = useState(false);
@@ -38,8 +31,8 @@ export const Home = () => {
 		setOpenModal(false);
 	}
 
-	function handleAcessPerfil() {
-		navigation.navigate("Perfil");
+	function handleAcessProfile() {
+		navigation.navigate("Profile");
 	}
 
 	function handleAcessGroup() {
@@ -61,7 +54,7 @@ export const Home = () => {
 			<Header menu title={user.given_name} />
 			<CategoriesBackground>
 				<View style={styles.avatar}>
-					<Avatar urlImage={user.picture} />
+					<Avatar urlImage={user.avatar} />
 					<View style={styles.infoBody}>
 						<View style={styles.info}>
 							<Text style={styles.textPosition}>{user.position}</Text>
@@ -72,9 +65,9 @@ export const Home = () => {
 						</View>
 
 						<View style={styles.scout}>
-							<ProgressBar text={"Perna de Pau"} number={"19"} />
-							<Scout text={"Partidas"} number={"25"} />
-							<Scout text={"Gols"} number={"19"} />
+							<ProgressBar text={user.nivel} number={user.xp} inPerfil={false}/>
+							<Scout text={"Partidas"} number={user.partidas} />
+							<Scout text={"Gols"} number={user.camisa} />
 						</View>
 					</View>
 				</View>
@@ -92,7 +85,7 @@ export const Home = () => {
 						title={"Perfil"}
 						text={"Veja suas conquistas, gols, score, partidas"}
 						icon={PerfilSvg}
-						onPress={handleAcessPerfil}
+						onPress={handleAcessProfile}
 					/>
 					<View style={styles.jogoContainer}>
 						{temJogo ? (

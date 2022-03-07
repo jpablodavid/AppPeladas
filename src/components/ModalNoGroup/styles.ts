@@ -3,7 +3,7 @@ import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
 	touchClose:{
-		height: 240,
+		height: 260,
 	},
 	container: {
 		flex:1,

@@ -6,6 +6,7 @@ import {
 	ModalProps,
 	TouchableWithoutFeedback,
 } from "react-native";
+import { theme } from "../../global/styles/theme";
 import { Button } from "../Button";
 import { ButtonText } from "../ButtonText";
 
@@ -23,6 +24,8 @@ export const ModalNoGroup = ({
 	goToEntrar,
 	...rest
 }: Props) => {
+
+	const {primary100} = theme.colors;
 	function handlerExcluir() {
 		alert("Excluir");
 	}
@@ -46,7 +49,7 @@ export const ModalNoGroup = ({
 							<Button text={"Entrar em um Grupo"} onPress={goToEntrar} />
 						</View>
 						<View style={styles.button}>
-							<Button color={true} text={"Criar Grupo"} onPress={goToCriar} />
+							<Button color={primary100} text={"Criar Grupo"} onPress={goToCriar} />
 						</View>
 					</View>
 				</View>

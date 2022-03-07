@@ -15,10 +15,10 @@ import { ProgressBar } from "../../components/ProgressBar";
 
 
 export const Profile = () => {
-	//const navigation = useNavigation();
+	const navigation = useNavigation();
 
 	function handleGoback() {
-		//navigation.goBack();
+		navigation.goBack();
 	}
 
 

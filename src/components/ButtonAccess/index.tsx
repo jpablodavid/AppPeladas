@@ -1,5 +1,4 @@
 import React from "react";
-import { RectButton, RectButtonProps} from "react-native-gesture-handler";
 import { View, Text ,TouchableOpacity, TouchableOpacityProps} from "react-native";
 
 import { styles } from "./styles";
@@ -19,7 +18,7 @@ export const ButtonAccess = ({ title, text, icon: Icon, ...rest }: Props) => {
 				<Text style={styles.text}>{text}</Text>
 			</View>
 			<View style={styles.icon}>
-				<Icon width={48} height={48} />
+				<Icon width={48} height={48} /> 
 			</View>
 		</TouchableOpacity>
 	);

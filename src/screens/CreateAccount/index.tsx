@@ -9,13 +9,16 @@ import { Input } from "../../components/Input";
 import { Logo } from "../../components/Logo";
 import { ButtonText } from "../../components/ButtonText";
 
+import { useAuth } from "../../hooks/auth";
+
 import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 
 
-
 export const CreateAccount = () => {
 	const { primary100 } = theme.colors;
+
+	const { user , logado} = useAuth(); 
 
 	const [name, setName] = useState("");
 	const [date, setDate] = useState("");
@@ -27,7 +30,7 @@ export const CreateAccount = () => {
 	const navigation = useNavigation();
 
 	function handleCreateAccount() {
-		navigation.navigate("Home");
+		
 	}
 
 	function handleGoBack() {

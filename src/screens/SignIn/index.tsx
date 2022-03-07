@@ -17,7 +17,7 @@ import { theme } from "../../global/styles/theme";
 import { Logo } from "../../components/Logo";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
-import { ButtonGoogle } from "../../components/ButtonGoogle";
+import { ButtonFacebook } from "../../components/ButtonFacebook";
 import { ButtonText } from "../../components/ButtonText";
 
 import { useAuth } from "../../hooks/auth";
@@ -25,7 +25,7 @@ import { useAuth } from "../../hooks/auth";
 export const SignIn = () => {
 	const navigation = useNavigation();
 
-	const { loading, signInGoogle, signInInst } = useAuth();
+	const { loading } = useAuth();
 
 	const { primary100 } = theme.colors;
 
@@ -36,21 +36,14 @@ export const SignIn = () => {
 		navigation.navigate("SignUp");
 	}
 
-	async function handleSignIn(){
-		try{
-			await signInGoogle();
-		}catch (error){
-			console.log(JSON.stringify(error));
-		}
-	}
+	// async function handleSignIn(){
+	// 	try{
+	// 		await signInGoogle();
+	// 	}catch (error){
+	// 		console.log(JSON.stringify(error));
+	// 	}
+	// }
 
-	async function handleInstagram(){
-		try {
-			await signInInst();
-		} catch (error) {
-			Alert.alert(JSON.stringify(error));
-		}
-	}
 
 	return (
 		<KeyboardAvoidingView
@@ -73,6 +66,8 @@ export const SignIn = () => {
 					<Input
 						icon={<MaterialIcons name="email" size={24} color={primary100} />}
 						placeholderText={"email@email.com"}
+						onChangeText={(text) => setEmail(text)}
+						value={email}
 					/>
 				</View>
 
@@ -80,6 +75,8 @@ export const SignIn = () => {
 					<Input
 						icon={<MaterialIcons name="lock" size={24} color={primary100} />}
 						placeholderText={"senha"}
+						onChangeText={(text) => setSenha(text)}
+						value={senha}
 					/>
 				</View>
 
@@ -99,13 +96,14 @@ export const SignIn = () => {
 					<View style={styles.line} />
 				</View>
 
-				{loading ? <ActivityIndicator color={theme.colors.primary10}/>
-				:
-					<ButtonGoogle 
-						onPress={handleSignIn} 
-						text={"fazer login com Google"} 
+				{loading ? (
+					<ActivityIndicator color={theme.colors.primary10} />
+				) : (
+					<ButtonFacebook
+						onPress={() => alert("facebook")}
+						text={"fazer login com Facebook"}
 					/>
-				}
+				)}
 
 				<View style={styles.cadastrarContainer}>
 					<Text style={styles.cadastrarText}>Ainda não possui uma conta?</Text>

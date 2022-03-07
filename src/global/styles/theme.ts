@@ -7,6 +7,8 @@ export const theme = {
 
 		textCard: "#EDE7CF",
 
+		facebook: "#3b5998",
+
 		primary100: "#0B5980",
 		primary75: "#0B598073",
 		primary25: "#0B598025",

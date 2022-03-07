@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
-const { primary100, shadow, textButton } = theme.colors;
+const { shadow, textButton } = theme.colors;
 
 export const styles = StyleSheet.create({
 	button: {
