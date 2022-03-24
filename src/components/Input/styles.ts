@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
 	input: {
 		width: '100%',
 		marginLeft: 8,
+    fontSize: 16,
 		color: theme.colors.primary100,
 		fontFamily: theme.fonts.text500,
 	},

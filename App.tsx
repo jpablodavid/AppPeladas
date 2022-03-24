@@ -14,8 +14,6 @@ import {
 	Rajdhani_700Bold,
 } from "@expo-google-fonts/rajdhani";
 
-import { Background } from "./src/components/Background";
-
 import { Routes } from "./src/routes";
 
 import { AuthProvider } from "./src/hooks/auth";
@@ -35,7 +33,7 @@ export default function App() {
 	}
 	return (
 		<>
-			<StatusBar style="auto" backgroundColor="transparent" translucent /> 
+			<StatusBar style="auto" backgroundColor="transparent" translucent />
 			{/* <AcessGroup title={"Nome do grupo"} /> */}
 			{/* <AccountGroup title={"Contabilidade"} /> */}
 			<AuthProvider>

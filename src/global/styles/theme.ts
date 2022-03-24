@@ -27,7 +27,7 @@ export const theme = {
 
 		shadow: "rgba(0, 0, 0, 0.5)",
 
-		textInput: "#737380",
+		textInput: "#0B598025",
 
 		listName: "#DED9C6",
 		listOrdem: "#EDE7CF", // 50%

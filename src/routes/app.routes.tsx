@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { theme } from "../global/styles/theme";
@@ -8,13 +8,18 @@ import { CreateGroup } from "../screens/CreateGroup";
 import { Home } from "../screens/Home";
 import { JoinGroup } from "../screens/JoinGroup";
 import { Profile } from "../screens/Profile";
+import { CreateAccount } from "../screens/CreateAccount";
+import { useAuth } from "../hooks/auth";
 
-const Stack = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator();
 
 export const AppRoutes = () => {
+
+  const { user } = useAuth()
+
 	return (
-		<Stack.Navigator
-			initialRouteName="SignIn"
+		<Navigator
+			initialRouteName={user.position ? 'Home' : 'CreateAccount' }
 			screenOptions={{
 				headerShown: false,
 				cardStyle: {
@@ -22,16 +27,18 @@ export const AppRoutes = () => {
 				},
 			}}
 		>
-			<Stack.Screen name="Home" component={Home} />
+      <Screen name="Home" component={Home} />
 
-			<Stack.Screen name="CreateGroup" component={CreateGroup} />
+      <Screen name="CreateAccount" component={CreateAccount}/>
 
-			<Stack.Screen name="JoinGroup" component={JoinGroup} />
+			<Screen name="CreateGroup" component={CreateGroup} />
 
-			<Stack.Screen name="AcessGroup" component={AcessGroup} />
+			<Screen name="JoinGroup" component={JoinGroup} />
 
-			<Stack.Screen name="Profile" component={Profile} />
+			<Screen name="AcessGroup" component={AcessGroup} />
 
-		</Stack.Navigator>
+			<Screen name="Profile" component={Profile} />
+
+		</Navigator>
 	);
 };

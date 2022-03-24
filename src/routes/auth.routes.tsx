@@ -5,14 +5,13 @@ import { theme } from "../global/styles/theme";
 
 import { SignIn } from "../screens/SignIn";
 import { SignUp } from "../screens/SignUp";
-import { CreateAccount } from "../screens/CreateAccount";
 
-
-const Stack = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator();
 
 export const AuthRoutes = () => {
+
 	return (
-		<Stack.Navigator
+		<Navigator
 			initialRouteName="SignIn"
 			screenOptions={{
 				headerShown: false,
@@ -21,11 +20,10 @@ export const AuthRoutes = () => {
 				},
 			}}
 		>
-			<Stack.Screen name="SignIn" component={SignIn} />
+      <Screen name="SignIn" component={SignIn} />
 
-			<Stack.Screen name="SignUp" component={SignUp} />
+      <Screen name="SignUp" component={SignUp} />
 
-			<Stack.Screen name="CreateAccount" component={CreateAccount} />
-		</Stack.Navigator>
+		</Navigator>
 	);
 };

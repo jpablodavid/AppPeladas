@@ -8,11 +8,11 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginHorizontal: 40,
-		marginTop: 60,
+		marginTop: "20%",
 	},
 	textContainer: {
 		alignItems: "flex-start",
-		marginVertical: 32,
+		marginVertical: 36,
 	},
 	title: {
 		fontSize: 24,
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
 		fontFamily: title500,
 	},
 	inputContainer: {
-		marginBottom: 16,
+		marginBottom: 18,
 	},
 	forgetContainer: {
 		marginBottom: 32,
@@ -68,8 +68,8 @@ export const styles = StyleSheet.create({
 	},
 	buttonText: {
 		fontSize: 18,
-		color: theme.colors.primary100,
-		fontFamily: theme.fonts.title700,
+		color: primary100,
+		fontFamily: title700,
 		marginLeft: 3,
 	},
 });

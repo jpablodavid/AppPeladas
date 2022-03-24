@@ -17,7 +17,7 @@ export const Input = ({ icon, placeholderText, ...rest }: Props) => {
 			<TextInput
 				style={styles.input}
 				placeholder={placeholderText}
-				placeholderTextColor={theme.colors.primary100}
+				placeholderTextColor={theme.colors.disable100}
 				inlineImageLeft="search_icon"
 				{...rest}
 			/>

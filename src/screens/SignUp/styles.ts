@@ -5,10 +5,10 @@ const { primary100 } = theme.colors;
 const { title700, title500 } = theme.fonts;
 
 export const styles = StyleSheet.create({
-	container: {
+  container: {
 		flex: 1,
 		marginHorizontal: 40,
-		marginTop: 60,
+		marginTop: "20%",
 	},
 	textContainer: {
 		alignItems: "flex-start",
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
 		marginBottom: 16,
 	},
 	inputLastContainer: {
-		marginBottom: 32,
+		marginBottom: 40,
 	},
 	lineOrContainer: {
 		flexDirection: "row",

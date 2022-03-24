@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
 		elevation: 4,
 	},
 	text: {
-		fontSize: 16,
+		fontSize: 18,
 		letterSpacing: 1,
 		color: textButton,
 		fontFamily: theme.fonts.title700,

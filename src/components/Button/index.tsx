@@ -4,7 +4,6 @@ import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 
-
 type Props = TouchableOpacityProps & {
 	text: string;
 	color?: string;
