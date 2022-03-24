@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "681138680565",
+    "project_id": "peladas-d0a8f",
+    "storage_bucket": "peladas-d0a8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681138680565:android:bd106a3857db6ea5764bbc",
+        "android_client_info": {
+          "package_name": "com.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681138680565-6itktlgnoa34abe8pr61r37po57c9fo1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWpf8_eXSIi4l69hY5GBoygKNlUh3Ulj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681138680565-6itktlgnoa34abe8pr61r37po57c9fo1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
