@@ -8,15 +8,15 @@ import { styles } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { theme } from "../../global/styles/theme";
 import { ButtonText } from "../ButtonText";
-import { StatusBar } from "expo-status-bar";
 
 type Props = {
 	title: string;
 	menu?: boolean;
 	goBack?: () => void;
+  openMenu?: () => void;
 };
 
-export const Header = ({ menu, goBack, title }: Props) => {
+export const Header = ({ menu, goBack, openMenu, title }: Props) => {
 	const { background10, background100 } = theme.colors;
 
 	return (
@@ -26,7 +26,7 @@ export const Header = ({ menu, goBack, title }: Props) => {
 		>
 			<View style={styles.content}>
 				{menu ? (
-					<ButtonText onPress={() => alert("menu")}>
+					<ButtonText onPress={openMenu}>
 						<MaterialCommunityIcons
 							name="menu"
 							size={40}

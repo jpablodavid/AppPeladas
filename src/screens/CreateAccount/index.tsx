@@ -30,6 +30,7 @@ export const CreateAccount = () => {
   const [position, setPosition] = useState("");
   const [itemPosition, setItemPosition] = useState();
   const [team, setTeam] = useState("");
+  const [itemTeam, setItemTeam] = useState();
 
   const navigation = useNavigation();
 
@@ -40,13 +41,13 @@ export const CreateAccount = () => {
       alert("Por favor selecione sua posição e time");
     }
     else {
-      createUser(name, birthday, nickName, phone, position, team);
+      createUser(name,nickName, birthday, phone, position, team);
       navigation.navigate('Home');
     }
   }
 
   function handleGoBack() {
-    navigation.goBack();
+    navigation.navigate("SignUp");
   }
 
   return (
@@ -134,7 +135,7 @@ export const CreateAccount = () => {
               selectedValue={team}
               onValueChange={(itemValue, itemPosition) => {
                 setTeam(itemValue);
-                setItemPosition(itemPosition);
+                setItemTeam(itemPosition);
               }}
             />
           </View>

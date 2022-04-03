@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">App</string>
+    <string name="facebook_app_id">504193974457293</string>
+
+    <string name="facebook_app_id">504193974457293</string>
+    <string name="fb_login_protocol_scheme">App</string>
+    <string name="facebook_client_token">EAAHKj86ZB080BAPZCAwirw5AhGUukrtdxHy2yndkPaPrdBzIzUFHbr6WVmMhtv7T8Jn2lR4mCF8xogcclDc2pN2KZBYmiUsIYGaL4YqodZCn64wViDHJQi8e4MUEkTjBvFNdyeEH2lqx0dRiOVi2UCNWmcaZA7xS9VqcMtWbTHQiJyZAhhkxOh7ZB3K8z6OZC5jYLy780KA9OZBrz6LqYy9vmlbYuNlHGZBqpK4U0spWl9cQZDZD</string>
 </resources>

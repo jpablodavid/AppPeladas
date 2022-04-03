@@ -39,9 +39,11 @@ type AuthContextData = {
   loading: boolean;
   id: string | undefined;
   logIn: (email: string, password: string) => Promise<void>;
+  logOut: () => void;
   loginFacebookAndroid: () => Promise<void>;
   signUpWithEmailAndPassword: (email: string, password: string) => Promise<void>;
   signUpFacebookFirebaseWeb: () => Promise<void>;
+  signUpFacebookAndroid: () => Promise<void>;
   createUser: (name: string, birthday: string, nickName: string, phone: string, position: string, team: string) => Promise<void>;
   forgotPassword: (emailUser: string) => Promise<void>;
 };
@@ -62,20 +64,24 @@ export const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
 
+  const provider = new firebase.auth.FacebookAuthProvider();
+
   const [accessToken, setAccessToken] = useState();
 
   const [user, setUser] = useState<User>({} as User);
 
   const [id, setId] = useState<string | undefined>();
-  const [email, setEmail] =  useState<string | null | undefined>();
+  const [email, setEmail] = useState<string | null | undefined>();
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    /*  const subscriber = firebase.auth().onAuthStateChanged(setUser);
-
-      return subscriber; */
-
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user){
+        setLoading(true);
+        loadUser(user.uid);
+      }
+    });
   }, []);
 
   async function logIn(email: string, password: string) {
@@ -112,36 +118,34 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signUpWithEmailAndPassword(email: string, password: string) {
     setLoading(true);
-      await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then((value) => {
-          setId(value.user?.uid);
-          setEmail(email);
-        })
-        .catch((error) => {
-          if (error.code === "auth/weak-password") {
-            alert("senha precisa de 6 digitos");
-            return;
-          }
-          if (error.code === "auth/ivalid-email") {
-            alert("email invalido");
-            return;
-          } else {
-            alert(error.code);
-            return;
-          }
-        }).finally(() => setLoading(false));
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((value) => {
+        setId(value.user?.uid);
+        setEmail(email);
+      })
+      .catch((error) => {
+        if (error.code === "auth/weak-password") {
+          alert("senha precisa de 6 digitos");
+          return;
+        }
+        if (error.code === "auth/ivalid-email") {
+          alert("email invalido");
+          return;
+        } else {
+          alert(error.code);
+          return;
+        }
+      }).finally(() => setLoading(false));
   };
-
-  const provider = new firebase.auth.FacebookAuthProvider();
 
   const signUpFacebookFirebaseWeb = async () => {
     setLoading(true);
     try {
       await firebase
         .auth()
-        .signInWithPopup(provider)
+        .signInWithRedirect(provider)
         .then((value) => {
           const userFacebook = value.additionalUserInfo?.profile;
           setId(value.user?.uid);
@@ -168,12 +172,11 @@ function AuthProvider({ children }: AuthProviderProps) {
           setUser(userFirebase);
         })
         .catch((error) => {
-          alert(error)
-          alert('Você já possui um cadastro com essa conta do Facebook');
+          alert(error.message);
         })
     } catch {
       throw new Error('Não foi possível Cadastrar com o Facebook');
-    } finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -191,13 +194,67 @@ function AuthProvider({ children }: AuthProviderProps) {
         const response = await fetch(
           `https://graph.facebook.com/me?fields=id,name,picture.type(large),email&access_token=${token}`
         );
+        const credential = firebase.auth.FacebookAuthProvider.credential(token);
+        firebase.auth().signInWithCredential(credential).then(async user => {
+          console.log(user.user.uid);
+          await loadUser(user.user.uid);
+        }).catch(error => {
+          alert(error.message);
+        })
         const data = await response.json();
-        console.log(data);
-      }else {
+        //console.log(data);
+      } else {
         alert("deu ruim");
       }
     } catch ({ message }) {
       throw new Error(`Facebook Login Error: ${message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signUpFacebookAndroid = async () => {
+    setLoading(true);
+    try {
+      await Facebook.initializeAsync(APP_ID);
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync({
+        permissions: ["public_profile", "email"],
+      });
+      if (type === "success") {
+        alert("sucess")
+        const credential = firebase.auth.FacebookAuthProvider.credential(token);
+        await firebase.auth().signInWithCredential(credential).then((value) => {
+          const userFacebook = value.additionalUserInfo?.profile;
+          setId(value.user?.uid);
+          setAccessToken(value.credential?.accessToken);
+          let userFirebase = {
+            name: userFacebook?.name,
+            nick_name: userFacebook?.first_name,
+            birthday: userFacebook?.birthday,
+            email: userFacebook?.email,
+            phone: value.user?.phoneNumber,
+            avatar: userFacebook?.picture.data.URL,
+            position: "",
+            camisa: "0",
+            nivel: ['Perna de pau', "Café com Leite", "Boleiro", 'Craque'],
+            xp: "0",
+            partidas: "0",
+            gols: "0",
+            hattrick: "0",
+            grupo_id: null,
+            team: "",
+            adm: false,
+            stars: "0",
+          } as unknown as User;
+          setUser(userFirebase);
+        }).catch((error) => {
+          alert(error.message);
+        })
+      } else {
+        alert("deu ruim");
+      }
+    } catch {
+      throw new Error('Não foi possível Cadastrar com o Facebook');
     } finally {
       setLoading(false);
     }
@@ -265,6 +322,7 @@ function AuthProvider({ children }: AuthProviderProps) {
           setUser(userLoaded);
         };
       })
+      setLoading(false);
     /* await firebase
       .firestore()
       .collection("users")
@@ -316,7 +374,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ id, user, loading, logIn, loginFacebookAndroid, signUpWithEmailAndPassword, signUpFacebookFirebaseWeb, createUser, forgotPassword }}>
+    <AuthContext.Provider value={{ id, user, loading, logIn, logOut, loginFacebookAndroid, signUpWithEmailAndPassword, signUpFacebookFirebaseWeb,signUpFacebookAndroid, createUser, forgotPassword }}>
       {children}
     </AuthContext.Provider>
   );

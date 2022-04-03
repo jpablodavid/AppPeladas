@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { theme } from "../global/styles/theme";
@@ -27,6 +27,7 @@ export const AppRoutes = () => {
 				},
 			}}
 		>
+
       <Screen name="Home" component={Home} />
 
       <Screen name="CreateAccount" component={CreateAccount}/>

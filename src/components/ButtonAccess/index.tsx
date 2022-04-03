@@ -7,7 +7,7 @@ import { SvgProps } from "react-native-svg";
 type Props = TouchableOpacityProps & {
 	title: string;
 	text: string;
-	icon: React.FC<SvgProps>;
+	icon?: React.FC<SvgProps>;
 };
 
 export const ButtonAccess = ({ title, text, icon: Icon, ...rest }: Props) => {
@@ -18,7 +18,7 @@ export const ButtonAccess = ({ title, text, icon: Icon, ...rest }: Props) => {
 				<Text style={styles.text}>{text}</Text>
 			</View>
 			<View style={styles.icon}>
-				<Icon width={48} height={48} /> 
+				{/* <Icon width={48} height={48} /> */}
 			</View>
 		</TouchableOpacity>
 	);

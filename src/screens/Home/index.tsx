@@ -28,6 +28,10 @@ export const Home = () => {
 
   const [openModal, setOpenModal] = useState(false);
 
+  function handleOpenDrawer(){
+    navigation.openDrawer();
+  }
+
   function handleCloseModal() {
     setOpenModal(false);
   }
@@ -52,7 +56,7 @@ export const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Header menu title={user.nick_name} />
+      <Header menu openMenu={handleOpenDrawer} title={user.nick_name} />
       <CategoriesBackground>
         <View style={styles.avatar}>
           <Avatar urlImage={user.avatar} />
@@ -78,13 +82,13 @@ export const Home = () => {
             text={
               "Forme seu grupo, inicie uma partida, cadastre jogadores e der suas notas"
             }
-            icon={GroupSvg}
+            //icon={GroupSvg}
             onPress={handleAcessGroup}
           />
           <ButtonAccess
             title={"Perfil"}
             text={"Veja suas conquistas, gols, score, partidas"}
-            icon={PerfilSvg}
+            //icon={PerfilSvg}
             onPress={handleAcessProfile}
           />
           <View style={styles.jogoContainer}>

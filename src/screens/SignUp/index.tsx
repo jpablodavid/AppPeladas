@@ -34,6 +34,7 @@ export const SignUp = () => {
     loading,
     signUpWithEmailAndPassword,
     signUpFacebookFirebaseWeb,
+    signUpFacebookAndroid
   } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -47,7 +48,7 @@ export const SignUp = () => {
   }
 
   async function handleSignUpFacebook() {
-    await signUpFacebookFirebaseWeb();
+    await signUpFacebookAndroid();
   }
 
   async function signUp(){
@@ -110,7 +111,7 @@ export const SignUp = () => {
           <>
             <ButtonFacebook
               text={"Cadastrar com Facebook"}
-              onPress={handleSignUpFacebook}
+              onPress={() => alert('cadastrar com facebook')}
             />
             <View style={styles.loginContainer}>
               <Text style={styles.loginText}>Já possui uma conta?</Text>

@@ -38,7 +38,7 @@ export const SignIn = () => {
     navigation.navigate("SignUp");
   }
 
-  async function handleSignIn(){
+  async function handleSignIn() {
     if (email === '' || password === '') {
       alert("Por favor preencha os campos");
     } else {
@@ -50,8 +50,9 @@ export const SignIn = () => {
     }
   }
 
-  async function handleLoginFacebook(){
-    await loginFacebookAndroid();
+  async function handleLoginFacebook() {
+    loginFacebookAndroid();
+
   }
 
   function handleforgotPassword() {
@@ -121,7 +122,7 @@ export const SignIn = () => {
         ) : (
           <>
             <ButtonFacebook
-              onPress={handleLoginFacebook}
+              onPress={() => alert("login facebook")}
               text={"fazer login com Facebook"}
             />
             <View style={styles.cadastrarContainer}>
