@@ -1,13 +1,11 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
-const { primary100 } = theme.colors;
-const { title700, title500 } = theme.fonts;
+const { primary100, line, shadow, background10 } = theme.colors;
+const { text500, text900,title700} = theme.fonts;
 
 export const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	},
+
 	goBack: {
 		margin: 16,
 		marginTop: 32,
@@ -32,17 +30,17 @@ export const styles = StyleSheet.create({
 	},
 	camisa: {
 		fontSize: 40,
-		fontFamily: theme.fonts.text900,
-		color: theme.colors.line,
-		textShadowColor: theme.colors.shadow,
+		fontFamily: text900,
+		color: line,
+		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
 	},
 	position: {
 		fontSize: 28,
-		fontFamily: theme.fonts.text500,
-		color: theme.colors.line,
-		textShadowColor: theme.colors.shadow,
+		fontFamily: text500,
+		color: line,
+		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
 		marginBottom: 16,
@@ -63,22 +61,22 @@ export const styles = StyleSheet.create({
 	scout: {
 		flex: 1,
 		borderWidth: 1,
-		borderColor: theme.colors.primary100,
+		borderColor: primary100,
 		alignItems: "center",
 	},
 	name: {
 		width: "80%",
-		borderBottomColor: theme.colors.line,
+		borderBottomColor: line,
 		borderBottomWidth: 1,
 		marginBottom: 12,
 	},
 	textName: {
 		fontSize: 40,
-		fontFamily: theme.fonts.title700,
+		fontFamily: title700,
 		textTransform: "uppercase",
 		textAlign: "center",
-		color: theme.colors.background10,
-		textShadowColor: theme.colors.shadow,
+		color: background10,
+		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
 	},
@@ -88,17 +86,17 @@ export const styles = StyleSheet.create({
 	progress: {
 		flex: 1,
 		borderRightWidth: 1,
-		borderRightColor: theme.colors.line,
+		borderRightColor: line,
 	},
 	data: {
 		flex: 1,
 		paddingLeft: 16,
 	},
 	textData: {
-		fontSize: 30,
-		fontFamily: theme.fonts.text500,
-		color: theme.colors.background10,
-		textShadowColor: theme.colors.shadow,
+		fontSize: 24,
+		fontFamily: text500,
+		color: background10,
+		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
 	},

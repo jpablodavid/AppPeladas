@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   ActivityIndicator,
+  Keyboard,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -25,6 +26,7 @@ import { ButtonFacebook } from "../../components/ButtonFacebook";
 import { ButtonText } from "../../components/ButtonText";
 import { Input } from "../../components/Input";
 import { Logo } from "../../components/Logo";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 
 export const SignUp = () => {
@@ -51,7 +53,7 @@ export const SignUp = () => {
     await signUpFacebookAndroid();
   }
 
-  async function signUp(){
+  async function signUp() {
     if (email === "" || password === "" || confirm === "") {
       alert("Por favor preencha os campos");
     } else if (password !== confirm) {
@@ -62,66 +64,74 @@ export const SignUp = () => {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Logo />
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>Criar Conta no PeladasApp</Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <Input
-            icon={<MaterialIcons name="email" size={24} color={primary100} />}
-            placeholderText={"email@email.com"}
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Input
-            icon={<Entypo name="lock-open" size={24} color={primary100} />}
-            placeholderText={"senha"}
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-          />
-        </View>
-        <View style={styles.inputLastContainer}>
-          <Input
-            icon={<Entypo name="lock" size={24} color={primary100} />}
-            placeholderText={"confirmar senha"}
-            onChangeText={(text) => setConfirm(text)}
-            value={confirm}
-          />
-        </View>
-        {(email === "" && password === "") || loading ? (
-          <ButtonDisable text={"Cadastrar"} />
-        ) : (
-          <Button text={"Cadastrar"} onPress={signUp} />
-        )}
-        <View style={styles.lineOrContainer}>
-          <View style={styles.line} />
-          <Text style={styles.or}>OU</Text>
-          <View style={styles.line} />
-        </View>
-        {loading ? (
-          <ActivityIndicator size={36} color={theme.colors.primary10} />
-        ) : (
-          <>
-            <ButtonFacebook
-              text={"Cadastrar com Facebook"}
-              onPress={() => alert('cadastrar com facebook')}
+    <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "position"}
+          enabled
+        >
+          <View>
+            <Logo />
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>Criar Conta no PeladasApp</Text>
+          </View>
+          <View style={styles.inputContainer}>
+            <Input
+              icon="mail"
+              placeholder={"email@email.com"}
+              keyboardType="email-address"
+              autoCapitalize='none'
+              onChangeText={setEmail}
+              value={email}
             />
-            <View style={styles.loginContainer}>
-              <Text style={styles.loginText}>Já possui uma conta?</Text>
-              <ButtonText onPress={handleSignIn}>
-                <Text style={styles.buttonText}>Faça Login</Text>
-              </ButtonText>
-            </View>
-          </>
-        )}
-      </ScrollView>
-    </KeyboardAvoidingView>
+          </View>
+          <View style={styles.inputContainer}>
+            <Input
+              icon="lock"
+              placeholder="senha"
+              secureTextEntry
+              onChangeText={setPassword}
+              value={password}
+            />
+          </View>
+          <View style={styles.inputLastContainer}>
+            <Input
+              icon="lock"
+              placeholder="senha"
+              secureTextEntry
+              onChangeText={setConfirm}
+              value={confirm}
+            />
+          </View>
+          {(email === "" || password === "" || confirm === "") || loading ? (
+            <ButtonDisable text={"Cadastrar"} />
+          ) : (
+            <Button text={"Cadastrar"} onPress={signUp} />
+          )}
+          <View style={styles.lineOrContainer}>
+            <View style={styles.line} />
+            <Text style={styles.or}>OU</Text>
+            <View style={styles.line} />
+          </View>
+          {loading ? (
+            <ActivityIndicator size={36} color={theme.colors.primary10} />
+          ) : (
+            <>
+              <ButtonFacebook
+                text={"Cadastrar com Facebook"}
+                onPress={() => alert('cadastrar com facebook')}
+              />
+              <View style={styles.loginContainer}>
+                <Text style={styles.loginText}>Já possui uma conta?</Text>
+                <ButtonText onPress={handleSignIn}>
+                  <Text style={styles.buttonText}>Faça Login</Text>
+                </ButtonText>
+              </View>
+            </>
+          )}
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </View>
   );
 };

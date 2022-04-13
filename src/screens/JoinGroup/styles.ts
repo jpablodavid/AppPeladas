@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
-const { title500, title700} = theme.fonts;
+const { title500 } = theme.fonts;
 
 export const styles = StyleSheet.create({
 	container: {
@@ -17,8 +17,10 @@ export const styles = StyleSheet.create({
 	},
 	text: {
 		fontFamily: title500,
+    textAlign: "center",
 		fontSize: 18,
 		marginVertical: 8,
+    marginHorizontal: 16,
 	},
 	inputContainer: {
 		flexDirection: "row",
@@ -43,6 +45,16 @@ export const styles = StyleSheet.create({
 		borderColor: "#000",
 		margin: 24,
 	},
+  buttonList:{
+    backgroundColor: theme.colors.primary25,
+    padding: 4,
+    marginBottom: 8,
+  },
+  textList:{
+    fontSize: 24,
+    fontFamily: theme.fonts.title700,
+    textTransform: "uppercase"
+  },
 	button: {
 		margin: 24,
 	},

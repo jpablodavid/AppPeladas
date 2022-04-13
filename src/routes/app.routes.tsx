@@ -1,5 +1,5 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { theme } from "../global/styles/theme";
 
@@ -8,38 +8,37 @@ import { CreateGroup } from "../screens/CreateGroup";
 import { Home } from "../screens/Home";
 import { JoinGroup } from "../screens/JoinGroup";
 import { Profile } from "../screens/Profile";
-import { CreateAccount } from "../screens/CreateAccount";
+
 import { useAuth } from "../hooks/auth";
+import { CustomDrawer } from "../components/CustomDrawer";
+import { CreateAccount } from "../screens/CreateAccount";
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createDrawerNavigator();
 
-export const AppRoutes = () => {
+export const DrawerRoutes = () => {
 
-  const { user } = useAuth()
+  const { user } = useAuth();
 
-	return (
-		<Navigator
-			initialRouteName={user.position ? 'Home' : 'CreateAccount' }
-			screenOptions={{
-				headerShown: false,
-				cardStyle: {
-					backgroundColor: theme.colors.background10,
-				},
-			}}
-		>
-
+  return (
+    <Navigator
+    initialRouteName={!user.position ? 'Home' : 'CreateAccount' }
+    drawerContent={(props) => <CustomDrawer {...props}/>}
+    screenOptions={{
+      headerShown: false,
+    }}
+    >
       <Screen name="Home" component={Home} />
 
-      <Screen name="CreateAccount" component={CreateAccount}/>
+      <Screen name="CreateAccount" component={CreateAccount} />
 
-			<Screen name="CreateGroup" component={CreateGroup} />
+      <Screen name="CreateGroup" component={CreateGroup} />
 
-			<Screen name="JoinGroup" component={JoinGroup} />
+      <Screen name="JoinGroup" component={JoinGroup} />
 
-			<Screen name="AcessGroup" component={AcessGroup} />
+      <Screen name="AcessGroup" component={AcessGroup} />
 
-			<Screen name="Profile" component={Profile} />
+      <Screen name="Profile" component={Profile} />
 
-		</Navigator>
-	);
+    </Navigator>
+  );
 };

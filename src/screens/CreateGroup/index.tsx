@@ -1,132 +1,143 @@
-import React, { useState } from "react";
-import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
+import React from "react";
+import { View, Text, KeyboardAvoidingView, ScrollView, ActivityIndicator, Keyboard } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
+import { InputControl } from "../../components/InputControl";
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup'
 import { ButtonText } from "../../components/ButtonText";
 
 import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
+import { Background } from "../../components/Background";
+import { useAuth } from "../../hooks/auth";
+import { ButtonDisable } from "../../components/ButtonDisable";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
+const { primary100, secondary } = theme.colors;
 
-export const CreateGroup = () => {
-	const { primary100, secondary } = theme.colors;
+type FormData = {
+  name: string,
+  date: string,
+  day: string,
+  time: string,
+  location: string,
+};
 
-	const [name, setName] = useState("");
-	const [date, setDate] = useState("");
-	const [nickName, setNickName] = useState("");
-	const [phone, setPhone] = useState("");
-	const [position, setPosition] = useState("");
-	const [team, setTeam] = useState("");
+const schema = yup.object({
+  name: yup.string().required("Informe o nome do Grupo"),
+  date: yup.string()
+})
 
-	const navigation = useNavigation();
+export const CreateGroup = ({navigation}) => {
 
-	function handleGoHome() {
-		navigation.navigate("Home");
-	}
+  const { loading, createGroup } = useAuth();
 
-	function handleGoback() {
-		navigation.goBack();
-	}
+  const {control, handleSubmit, formState: { errors }} = useForm<FormData>({
+    resolver: yupResolver(schema)
+  });
 
-	return (
-		<>
-			<ButtonText style={styles.goBack} onPress={handleGoback}>
-				<Entypo name="chevron-left" size={24} color="black" />
-			</ButtonText>
+  function handleCreateGroup(data: FormData) {
+    createGroup(data.name, data.date, data.location, data.day, data.time)
+    navigation.navigate('AcessGroup');
+  }
 
-			<KeyboardAvoidingView style={styles.container}>
-				<ScrollView showsVerticalScrollIndicator={false}>
-					<View style={styles.imgGrupo}>
-						<LinearGradient
-							style={styles.imageContainer}
-							colors={[primary100, secondary]}
-						>
-							<View style={styles.image}>
-								<Text style={styles.textInner}>+</Text>
-							</View>
-						</LinearGradient>
+  function handleGoback() {
+    navigation.goBack();
+  }
 
-						<Text style={styles.textAdd}>Adicionar imagem</Text>
-					</View>
+  return (
+    <Background>
+      <ButtonText style={styles.goBack} onPress={handleGoback}>
+        <Entypo name="chevron-left" size={24} color="black" />
+      </ButtonText>
+      <View style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <KeyboardAvoidingView enabled>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={styles.imgGrupo}>
+                <LinearGradient
+                  style={styles.imageContainer}
+                  colors={[primary100, secondary]}
+                >
+                  <View style={styles.image}>
+                    <Text style={styles.textInner}>+</Text>
+                  </View>
+                </LinearGradient>
 
-					<View style={styles.textContainer}>
-						<Text style={styles.text}>
-							Preencha as Informações para criar seu
-							<Text style={styles.title}> Grupo de Peladas.</Text>
-						</Text>
-					</View>
+                <Text style={styles.textAdd}>Adicionar imagem</Text>
+              </View>
 
-					<View style={styles.inputContainer}>
-						<Input
-							icon={
-								<FontAwesome5 name="user-alt" size={24} color={primary100} />
-							}
-							placeholderText={"Nome do Grupo"}
-						/>
-					</View>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}>
+                  Preencha as Informações para criar seu
+                  <Text style={styles.title}> Grupo de Peladas.</Text>
+                </Text>
+              </View>
 
-					<View style={styles.inputContainer}>
-						<Input
-							icon={
-								<FontAwesome5
-									name="calendar-day"
-									size={24}
-									color={primary100}
-								/>
-							}
-							placeholderText={"Data de Criação "}
-						/>
-					</View>
+              <View style={styles.inputContainer}>
+                <InputControl
+                  name='name'
+                  icon="user"
+                  placeholder={"Nome do Grupo"}
+                  control={control}
+                  error={errors.name}
+                />
+              </View>
 
-					<View style={styles.inputContainer}>
-						<Input
-							icon={
-								<FontAwesome5 name="user-tie" size={24} color={primary100} />
-							}
-							placeholderText={"Apelido ou Nome na camisa"}
-						/>
-					</View>
+              <View style={styles.inputContainer}>
+                <InputControl
+                  name='date'
+                  icon="calendar"
+                  placeholder={"Data de Criação "}
+                  control={control}
+                  error={errors.name}
+                />
+              </View>
 
-					<View style={styles.inputContainer}>
-						<Input
-							icon={
-								<FontAwesome5
-									name="phone-square-alt"
-									size={24}
-									color={primary100}
-								/>
-							}
-							placeholderText={"WhatsApp (Grupo de msg)"}
-						/>
-					</View>
+              <View style={styles.inputContainer}>
+                <InputControl
+                  name='location'
+                  icon="heart"
+                  placeholder={"Local do Campo"}
+                  control={control}
+                  error={errors.name}
+                />
+              </View>
 
-					<View style={styles.inputContainer}>
-						<Input
-							icon={
-								<FontAwesome5 name="user-tag" size={24} color={primary100} />
-							}
-							placeholderText={"Local do Campo"}
-						/>
-					</View>
-
-					<View style={styles.inputLastContainer}>
-						<Input
-							icon={
-								<FontAwesome5 name="heartbeat" size={24} color={primary100} />
-							}
-							placeholderText={"Data e Hora da Pelada"}
-						/>
-					</View>
-					<View style={{ marginBottom: 16 }}>
-						<Button text={"Criar Grupo"} onPress={handleGoHome} />
-					</View>
-				</ScrollView>
-			</KeyboardAvoidingView>
-		</>
-	);
+              <View style={styles.inputContainer}>
+                <InputControl
+                  name='day'
+                  icon="heart"
+                  placeholder={"Dia Pelada"}
+                  control={control}
+                  error={errors.name}
+                />
+              </View>
+              <View style={styles.inputLastContainer}>
+                <InputControl
+                  name="time"
+                  icon="heart"
+                  placeholder={"Hora da Pelada"}
+                  control={control}
+                  error={errors.name}
+                />
+              </View>
+              <View style={{ marginBottom: 16 }}>
+                {
+                  loading ?
+                    (<ActivityIndicator size={36} color={theme.colors.primary10} />)
+                    :
+                    <Button text={"Criar Grupo"} /* onPress={handleSubmit(handleCreateGroup)} */ onPress={navigation.navigate('AcessGroup')} />
+                }
+              </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </View>
+    </Background >
+  );
 };

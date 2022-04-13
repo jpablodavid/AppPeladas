@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Text} from "react-native";
 
 import { Header } from "../../components/Header";
 import { CategoriesBackground } from "../../components/CategoriesBackground";
@@ -11,18 +11,11 @@ import { ListStaff } from "../../components/ListStaff";
 import { ListAthletes } from "../../components/ListAthletes";
 import { ListInfo } from "../../components/ListInfo";
 import { useNavigation } from "@react-navigation/native";
-
-const info = {
-	id: "1",
-	name: "Amendoeira",
-	dayWeek: "Sexta-Feira",
-	time: "08",
-	valorMensal: "50",
-	valorConvidado: "20",
-	local: "Rua: ivinheima, 368 - bento ribeiro campo do sapê",
-};
+import { useAuth } from "../../hooks/auth";
 
 export const AcessGroup = () => {
+
+  const { group } = useAuth();
 
 	const navigation = useNavigation();
 
@@ -31,26 +24,37 @@ export const AcessGroup = () => {
 	}
 
 	const [category, setCategory] = useState("");
+  const [disable, setDisable] = useState(false);
 
-	/* function handleCategorySelect(categoryId: string) {
-		categoryId === category ? setCategory("") : setCategory(categoryId);
-	} */
+	function handleCategorySelect(categoryId: string) {
+		categoryId === category ? setDisable(true) : (setCategory(categoryId), setDisable(false));
+	}
 
 	return (
 		<View style={styles.container}>
-			<Header goBack={handleGoBack} title={"Nome Group"} />
+			<Header goBack={handleGoBack} title={group.name} />
 			<CategoriesBackground>
 				<View style={{ height: 16 }}></View>
-				{/* <CategorySelect
+				<CategorySelect
 					data={categoriesGroup}
 					categorySelected={category}
 					setCategory={handleCategorySelect}
-				/> */}
+          disable={disable}
+				/>
 				<View style={styles.content}>
-					{/* if(category() === "1"){<ListStaff />}else if(category() === "2")
-					<ListStaff />
-					else if(category() === "3"){<ListAthletes />}
-					else{<ListInfo data={info} />} */}
+        {
+            category === "1" ? <ListStaff />
+            :
+              category === "2" ? <ListInfo data={group} />
+            :
+              category === "3" ? <View><Text>3</Text></View>
+            :
+              category === "4" ? <ListAthletes data={group}/>
+            :
+              category === "5" ? <ListAthletes data={group}/>
+            :
+              <View><Text>6</Text></View>
+          }
 				</View>
 			</CategoriesBackground>
 		</View>

@@ -7,12 +7,11 @@ import { styles } from "./styles";
 
 type Props = {
 	text: string;
-	number: string;
+	number: number;
 	inPerfil: boolean;
 };
 
 export const ProgressBar = ({ text, number, inPerfil }: Props) => {
-	const [value, setvalue] = useState(200);
 
 	return (
 		<View style={styles.container}>
@@ -20,7 +19,7 @@ export const ProgressBar = ({ text, number, inPerfil }: Props) => {
 				style={[
 					styles.text,
 					{
-						fontSize: inPerfil ? 18 : 14,
+						fontSize: inPerfil ? 20 : 14,
 						color: inPerfil ? theme.colors.background10 : theme.colors.line,
 					},
 				]}
@@ -30,7 +29,7 @@ export const ProgressBar = ({ text, number, inPerfil }: Props) => {
 			<AnimatedCircularProgress
 				size={inPerfil ? 100 : 68}
 				width={inPerfil ? 8 : 4}
-				fill={value / 8}
+				fill={number / 8}
 				tintColor={inPerfil ? theme.colors.primary50 : theme.colors.circuloXp}
 				backgroundColor={
 					inPerfil ? theme.colors.circuloXp : theme.colors.primary50
@@ -41,7 +40,7 @@ export const ProgressBar = ({ text, number, inPerfil }: Props) => {
 				{(fill) => (
 					<View style={styles.value}>
 						<Text style={[styles.number, { fontSize: inPerfil ? 32 : 20 }]}>
-							{value}
+							{number}
 						</Text>
 						<Text style={[styles.xp, { fontSize: inPerfil ? 12 : 10 }]}>
 							Xp

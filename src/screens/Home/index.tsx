@@ -28,7 +28,7 @@ export const Home = () => {
 
   const [openModal, setOpenModal] = useState(false);
 
-  function handleOpenDrawer(){
+  function handleOpenDrawer() {
     navigation.openDrawer();
   }
 
@@ -69,7 +69,7 @@ export const Home = () => {
               </View>
             </View>
             <View style={styles.scout}>
-              <ProgressBar text={"perna de pau"} number={user.xp} inPerfil={false} />
+              <ProgressBar text={user.nivel} number={Number(user.xp)} inPerfil={false} />
               <Scout text={"Partidas"} number={user.partidas} />
               <Scout text={"Gols"} number={user.gols} />
             </View>

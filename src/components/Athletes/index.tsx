@@ -1,21 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import { View, Text } from "react-native";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
+import { User } from "../../hooks/auth";
 
 import { styles } from "./styles";
 
-export type athletesProps = {
-	id: string;
-	userName: string;
-	number: string;
-};
-
 type Props = RectButtonProps & {
-	data: athletesProps;
+	data: User;
 };
 
 export const Athletes = ({ data }: Props) => {
-	const isAdm = true;
 
 	function handlerExcluir() {
 		alert("Excluir");
@@ -28,13 +22,13 @@ export const Athletes = ({ data }: Props) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.number}>
-				<Text style={styles.textNumber}>{data.number}</Text>
+				<Text style={styles.textNumber}>{data.camisa}</Text>
 			</View>
 			<View style={styles.name}>
 				<RectButton style={{flex: 1, marginRight: 8}}onPress={handlerDetailsAthletes}>
-					<Text style={styles.textName}>{data.userName}</Text>
+					<Text style={styles.textName}>{data.name}</Text>
 				</RectButton>
-				{isAdm && (
+				{data.adm && (
 					<RectButton style={styles.excludesButton} onPress={handlerExcluir}>
 						<Text style={styles.textButton}>X</Text>
 					</RectButton>

@@ -1,27 +1,29 @@
 import React from "react";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
-import { SvgProps } from "react-native-svg";
 import { View, Text } from "react-native";
 
 import { styles } from "./styles";
 
 type Props = TouchableOpacityProps & {
 	title: string;
-	//icon?: React.FC<SvgProps>;
 	checked?: boolean;
 };
 
-export const Category = ({
+export const ItemListGroup = ({
 	title,
-	//icon: Icon,
-	checked = false,
+	checked,
 	...rest
 }: Props) => {
 	return (
-		<TouchableOpacity {...rest} disabled={checked} style={styles.container}>
-			<View style={[styles.content, { opacity: checked ? 0.4 : 1 }]}>
-				{/* <Icon width={48} height={48} /> */}
+		<TouchableOpacity {...rest} activeOpacity={1} style={[styles.container,  { opacity: checked ? 0.4 : 1 } ]}>
+			<View style={styles.content}>
 				<Text style={styles.title}>{title}</Text>
+        {
+          checked ?
+            <View style={styles.boxChecked}></View>
+          :
+            <View></View>
+        }
 			</View>
 		</TouchableOpacity>
 	);

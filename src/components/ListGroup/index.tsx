@@ -1,36 +1,34 @@
 import React from "react";
 import { ScrollView } from "react-native";
+import { List } from "../../screens/JoinGroup";
 
 import { categoriesGroup } from "../../utils/categoriesGroup";
 
-import { Category } from "../Category";
+import { ItemListGroup } from "../ItemLIstGroup";
 
 import { styles } from "./styles";
 
 type Props = {
-	data: typeof categoriesGroup;
+	data: List[];
 	categorySelected: string;
 	setCategory: (categotyId: string) => void;
   disable: boolean;
 };
 
-export const CategorySelect = ({
+export const ListGroup = ({
 	data,
 	categorySelected,
 	setCategory,
 }: Props) => {
 	return (
 		<ScrollView
-			horizontal
-			style={styles.container}
-			showsHorizontalScrollIndicator={false}
-			contentContainerStyle={{ paddingRight: 40 }}
+			showsVerticalScrollIndicator={false}
+      style={styles.container}
 		>
 			{data.map((item) => (
-				<Category
+				<ItemListGroup
 					key={item.id}
-					title={item.title}
-					//icon={item.icon}
+					title={item.name}
 					checked={item.id === categorySelected}
 					onPress={() => setCategory(item.id)}
           />

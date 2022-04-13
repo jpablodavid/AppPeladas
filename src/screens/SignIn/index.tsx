@@ -5,12 +5,11 @@ import {
   View,
   Text,
   Platform,
+  Keyboard,
   KeyboardAvoidingView,
   ScrollView,
   ActivityIndicator
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from '@expo/vector-icons';
 
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
@@ -23,6 +22,7 @@ import { ButtonText } from "../../components/ButtonText";
 import { ButtonDisable } from "../../components/ButtonDisable";
 
 import { useAuth } from "../../hooks/auth";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export const SignIn = () => {
   const navigation = useNavigation();
@@ -64,77 +64,84 @@ export const SignIn = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Logo />
+    <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          enabled
+        >
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Logo />
 
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>Bem-Vindo ao PeladasApp</Text>
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>Bem-Vindo ao PeladasApp</Text>
 
-          <Text style={styles.text}>
-            Quer organizar suas peladas, participar como jogador, saber seu
-            scout e de seus amigos? Você veio ao lugar certo.
-          </Text>
-        </View>
+              <Text style={styles.text}>
+                Quer organizar suas peladas, participar como jogador, saber seu
+                scout e de seus amigos? Você veio ao lugar certo.
+              </Text>
+            </View>
 
-        <View style={styles.inputContainer}>
-          <Input
-            icon={<MaterialIcons name="email" size={24} color={primary100} />}
-            placeholderText={"email@email.com"}
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-          />
-        </View>
+            <View style={styles.inputContainer}>
+              <Input
+                icon="mail"
+                placeholder={"email@email.com"}
+                keyboardType="email-address"
+                autoCapitalize='none'
+                onChangeText={setEmail}
+                value={email}
+              />
+            </View>
 
-        <View style={styles.inputContainer}>
-          <Input
-            icon={<Entypo name="lock" size={24} color={primary100} />}
-            placeholderText={"senha"}
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-          />
-        </View>
+            <View style={styles.inputContainer}>
+              <Input
+                icon="lock"
+                placeholder="senha"
+                secureTextEntry
+                onChangeText={setPassword}
+                value={password}
+              />
+            </View>
 
-        <View style={styles.forgetContainer}>
-          <ButtonText onPress={handleforgotPassword}>
-            <Text style={styles.forgetText}>Esqueceu sua Senha?</Text>
-          </ButtonText>
-        </View>
-        {
-          (email === '' && password === '') || loading ? (<ButtonDisable text={"Login"} />)
-            : (<Button text={"Login"} onPress={handleSignIn} />)
-        }
-
-
-        <View style={styles.lineOrContainer}>
-          <View style={styles.line} />
-
-          <Text style={styles.or}>OU</Text>
-
-          <View style={styles.line} />
-        </View>
-
-        {loading ? (
-          <ActivityIndicator size={36} color={theme.colors.primary10} />
-        ) : (
-          <>
-            <ButtonFacebook
-              onPress={() => alert("login facebook")}
-              text={"fazer login com Facebook"}
-            />
-            <View style={styles.cadastrarContainer}>
-              <Text style={styles.cadastrarText}>Ainda não possui uma conta?</Text>
-
-              <ButtonText onPress={handleSignUp}>
-                <Text style={styles.buttonText}>Cadastrar-se</Text>
+            <View style={styles.forgetContainer}>
+              <ButtonText onPress={handleforgotPassword}>
+                <Text style={styles.forgetText}>Esqueceu sua Senha?</Text>
               </ButtonText>
             </View>
-          </>
-        )}
-      </ScrollView>
-    </KeyboardAvoidingView>
+            {
+              (email === '' && password === '') || loading ? (<ButtonDisable text={"Login"} />)
+                : (<Button text={"Login"} onPress={handleSignIn} />)
+            }
+
+
+            <View style={styles.lineOrContainer}>
+              <View style={styles.line} />
+
+              <Text style={styles.or}>OU</Text>
+
+              <View style={styles.line} />
+            </View>
+
+            {loading ? (
+              <ActivityIndicator size={36} color={theme.colors.primary10} />
+            ) : (
+              <>
+                <ButtonFacebook
+                  onPress={() => alert("login facebook")}
+                  text={"fazer login com Facebook"}
+                />
+                <View style={styles.cadastrarContainer}>
+                  <Text style={styles.cadastrarText}>Ainda não possui uma conta?</Text>
+
+                  <ButtonText onPress={handleSignUp}>
+                    <Text style={styles.buttonText}>Cadastrar-se</Text>
+                  </ButtonText>
+                </View>
+              </>
+            )}
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </View>
   );
 };

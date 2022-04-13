@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
 		fontFamily: theme.fonts.title700,
 		textAlign: "center",
 		marginBottom: 4,
+    marginRight: 8,
 		color: theme.colors.line,
 		textShadowColor: theme.colors.shadow,
 		textShadowOffset: { width: -1, height: 1 },

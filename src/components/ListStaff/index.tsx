@@ -1,14 +1,14 @@
 import React from "react";
 import { View } from "react-native";
+import { useAuth } from "../../hooks/auth";
 import { Staff } from "../Staff";
 
 import { styles } from "./styles";
 
-type Props = {
-	urlImage: string;
-};
-
 export const ListStaff = () => {
+
+  const { group } = useAuth();
+
 	const menbers = {
 		id: "1",
 		userName: "Pablo",
