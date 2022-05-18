@@ -31,12 +31,12 @@ export const Input = ({ icon, value, ...rest }: InputProps) => {
         <Feather
           name={icon}
           size={24}
-          color={(isFocused || isFilled) ? '#DC1637' : '#AEAEB3'}
+          color={(isFocused || isFilled) ? '#DC1637' :  theme.colors.primary100}
         />
       </View>
       <TextInput
         style={styles.input}
-        placeholderTextColor={theme.colors.disable100}
+        placeholderTextColor={theme.colors.primary100}
         inlineImageLeft="search_icon"
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}

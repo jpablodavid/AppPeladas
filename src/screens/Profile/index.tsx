@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
 	View,
@@ -14,41 +14,21 @@ import { theme } from "../../global/styles/theme";
 import { ProgressBar } from "../../components/ProgressBar";
 import { Background } from "../../components/Background";
 import { useAuth } from "../../hooks/auth";
+
+//funçoes importada
 import { nivelUser } from "../../global/Data/itens";
+import { siglaPosition } from "../../global/Data/itens";
 
 
 export const Profile = () => {
+
 	const navigation = useNavigation();
 
-  const{ user} = useAuth();
+  const { user } = useAuth();
 
 	function handleGoback() {
-		navigation.goBack();
+		navigation.navigate('Home');
 	}
-
-  function siglaPosition ( position: string ) {
-    if (position == "Zagueiro"){
-      return "ZG"
-    }else if(position == "Meio-Campo"){
-      return "MC"
-    }else if(position == "Atacante"){
-      return "ATC"
-    }else{
-      return "LAT"
-    }
-  }
-
-  function bandeira (time: string){
-    if (time == "Vasco"){
-      return "../../assets/vasco.png"
-    }else if(time == "Flamengo"){
-      return "../../assets/flamengo.png"
-    }else if(time == "Botafogo"){
-      return "../../assets/botafogo.png"
-    }else{
-      return "../../assets/fluminese.png"
-    }
-  }
 
 	return (
 		<Background>
@@ -72,9 +52,13 @@ export const Profile = () => {
 						<Text style={styles.position}>{siglaPosition(user.position)}</Text>
 						<Image
 							style={styles.bandeira}
-							source={require("../../assets/fluminense.png")}
+							source={require(`../../assets/${user.team}.png`)}
 						/>
 					</LinearGradient>
+          <Image
+            style={styles.avatar}
+            source={{uri: `${user.avatar}`}}
+          />
 				</LinearGradient>
 
 				<LinearGradient
@@ -86,7 +70,7 @@ export const Profile = () => {
 					]}
 				>
 					<View style={styles.name}>
-						<Text style={styles.textName}>{user.nick_name}</Text>
+						<Text style={styles.textName}>{user.nickName}</Text>
 					</View>
 					<View style={styles.info}>
 						<View style={styles.progress}>

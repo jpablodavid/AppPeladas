@@ -11,13 +11,18 @@ import { useAuth } from "../../hooks/auth";
 
 export const CustomDrawer = ({ navigation }) => {
 
-  const{ user, group , logOut} = useAuth();
+  const{ user, logOut} = useAuth();
+
+  function handleOut(){
+    logOut();
+    navigation.navigate('SignIn');
+  }
 
   return (
     <DrawerContentScrollView style={styles.container}>
       <View style={styles.menu}>
-        <Image style={styles.avatar} source={{ uri: "https://github.com/jpablodavid.png" }} />
-        <Text style={styles.title}>{user.nick_name}</Text>
+        <Image style={styles.avatar} source={{ uri: `${user.avatar}`}} />
+        <Text style={styles.title}>{user.nickName}</Text>
       </View>
       <View style={styles.content}>
         <View>
@@ -31,7 +36,7 @@ export const CustomDrawer = ({ navigation }) => {
 
         <View>
           {
-            group ?
+            user.grupo_id ?
               <ButtonDrawer  text={"AcessGroup"} onPress={() => navigation.navigate('AcessGroup')} />
             :
               <ButtonDrawer disable text={"AcessGroup"}  onPress={() => alert('Você não participa de nenhum grupo')}/>
@@ -48,7 +53,7 @@ export const CustomDrawer = ({ navigation }) => {
         </View>
 
         <View>
-          <ButtonDrawer text={"Sair"} onPress={logOut} />
+          <ButtonDrawer text={"Sair"} onPress={handleOut} />
         </View>
       </View>
     </DrawerContentScrollView >

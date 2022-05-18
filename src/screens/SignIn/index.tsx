@@ -29,8 +29,6 @@ export const SignIn = () => {
 
   const { logIn, loading, forgotPassword, loginFacebookAndroid } = useAuth();
 
-  const { primary100 } = theme.colors;
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -44,6 +42,7 @@ export const SignIn = () => {
     } else {
       try {
         await logIn(email, password);
+        navigation.navigate('Home');
       } catch {
         Alert.alert("Não foi possivel o login", 'Verifique e-mail e senha');
       }
@@ -64,15 +63,14 @@ export const SignIn = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          enabled
-        >
+      <View style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            enabled
+          >
           <ScrollView showsVerticalScrollIndicator={false}>
             <Logo />
-
             <View style={styles.textContainer}>
               <Text style={styles.title}>Bem-Vindo ao PeladasApp</Text>
 
@@ -112,8 +110,6 @@ export const SignIn = () => {
               (email === '' && password === '') || loading ? (<ButtonDisable text={"Login"} />)
                 : (<Button text={"Login"} onPress={handleSignIn} />)
             }
-
-
             <View style={styles.lineOrContainer}>
               <View style={styles.line} />
 
@@ -140,8 +136,8 @@ export const SignIn = () => {
               </>
             )}
           </ScrollView>
-        </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
-    </View>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </View>
   );
 };

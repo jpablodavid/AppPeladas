@@ -5,7 +5,8 @@ import { theme } from "../global/styles/theme";
 
 import { SignIn } from "../screens/SignIn";
 import { SignUp } from "../screens/SignUp";
-import { JoinGroup } from "../screens/JoinGroup";
+
+import { useAuth } from "../hooks/auth";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -13,7 +14,6 @@ export const AuthRoutes = () => {
 
   return (
     <Navigator
-      initialRouteName="SignIn"
       screenOptions={{
         headerShown: false,
         cardStyle: {
@@ -21,11 +21,10 @@ export const AuthRoutes = () => {
         },
       }}
     >
-      {/* <Screen name='JoinGroup' component={JoinGroup}/> */}
-
       <Screen name="SignIn" component={SignIn} />
 
       <Screen name="SignUp" component={SignUp} />
+
     </Navigator>
   );
 };

@@ -7,8 +7,9 @@ const { title700, title500 } = theme.fonts;
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		marginHorizontal: 40,
-		marginTop: "20%",
+		paddingHorizontal: 40,
+		paddingTop: "20%",
+    backgroundColor: theme.colors.background10,
 	},
 	textContainer: {
 		alignItems: "flex-start",

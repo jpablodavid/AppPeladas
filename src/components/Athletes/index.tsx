@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React  from "react";
 import { View, Text } from "react-native";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 import { User } from "../../hooks/auth";
@@ -26,7 +26,7 @@ export const Athletes = ({ data }: Props) => {
 			</View>
 			<View style={styles.name}>
 				<RectButton style={{flex: 1, marginRight: 8}}onPress={handlerDetailsAthletes}>
-					<Text style={styles.textName}>{data.name}</Text>
+					<Text style={styles.textName}>{data}</Text>
 				</RectButton>
 				{data.adm && (
 					<RectButton style={styles.excludesButton} onPress={handlerExcluir}>

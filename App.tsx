@@ -28,7 +28,7 @@ export default function App() {
     Rajdhani_700Bold,
   });
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded ) {
     return <View style={{ flex: 1, justifyContent: 'center' }}><ActivityIndicator /></View>;
   }
 
@@ -36,9 +36,10 @@ export default function App() {
     <Background>
       <StatusBar style="auto" backgroundColor="transparent" translucent />
 
-      <AuthProvider >
+      <AuthProvider>
         <Routes />
       </AuthProvider>
+
     </Background>
   );
 }

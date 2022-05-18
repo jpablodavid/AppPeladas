@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, KeyboardAvoidingView, ScrollView, ActivityIndicator, Keyboard } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/auth";
 
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -18,31 +17,30 @@ import { ButtonDisable } from "../../components/ButtonDisable";
 import { InputSelect } from "../../components/InputSelect";
 import { Background } from "../../components/Background";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
+import { useNavigation } from "@react-navigation/native";
 
 export const CreateAccount = () => {
-  const { primary100 } = theme.colors;
-
-  const { user, loading, createUser } = useAuth();
-
-  const [name, setName] = useState(user.name);
-  const [birthday, setBirthday] = useState(user.birthday);
-  const [nickName, setNickName] = useState(user.nick_name);
-  const [phone, setPhone] = useState(user.phone);
-  const [position, setPosition] = useState("");
-  const [itemPosition, setItemPosition] = useState();
-  const [team, setTeam] = useState("");
-  const [itemTeam, setItemTeam] = useState();
 
   const navigation = useNavigation();
 
+  const { primary100 } = theme.colors;
+
+  const { user, loading, createUser, email } = useAuth();
+
+  const [name, setName] = useState(user.name);
+  const [birthday, setBirthday] = useState(user.birthday);
+  const [nickName, setNickName] = useState(user.nickName);
+  const [phone, setPhone] = useState(user.phone);
+  const [position, setPosition] = useState("");
+  const [team, setTeam] = useState("");
+
+
   function handleCreateAccount() {
-    if (name === '' || birthday === '' || nickName === '' || phone === '' || position === "" || team === "") {
-      alert("Por favor preencha todos os campos");
-    } else if (itemPosition === 0) {
-      alert("Por favor selecione sua posição e time");
+    if (position === "" || team === "") {
+      alert("Por favor selecione seu time e posição");
     }
     else {
-      createUser(name, nickName, birthday, phone, position, team);
+      createUser(name, email, nickName, birthday, phone, position, team);
       navigation.navigate('Home');
     }
   }
@@ -56,8 +54,8 @@ export const CreateAccount = () => {
       <ButtonText style={styles.goBack} onPress={handleGoBack}>
         <Ionicons name="md-close" size={24} color="black" />
       </ButtonText>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView style={styles.container} enabled>
+
+        <KeyboardAvoidingView style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <Logo />
             <View style={styles.textContainer}>
@@ -116,7 +114,7 @@ export const CreateAccount = () => {
                 placeholder={"escolha seu time de coração"}
                 itens={teams}
                 selectedValue={team}
-                onValueChange={(itemValue) => {setTeam(String(itemValue))}}
+                onValueChange={(itemValue) => setTeam(String(itemValue))}
               />
             </View>
             <View style={{ marginBottom: 32 }}>
@@ -124,16 +122,15 @@ export const CreateAccount = () => {
                 loading ?
                   (<ActivityIndicator size={36} color={theme.colors.primary10} />)
                   :
-                  (name === '' || birthday === '' || nickName === '' || phone === '')
+                  (name === undefined || birthday === undefined || nickName === undefined || phone === undefined)
                     ?
                     <ButtonDisable text={"Criar Conta"} />
                     :
-                    <Button text={"Criar Conta"} onPress={handleCreateAccount} />
+                    <Button text={"Criar Conta"}  onPress={handleCreateAccount} />
               }
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
     </Background>
   );
 };

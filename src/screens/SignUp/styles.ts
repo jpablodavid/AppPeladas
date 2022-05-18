@@ -8,6 +8,8 @@ export const styles = StyleSheet.create({
   container: {
 		flex: 1,
 		paddingHorizontal: 40,
+		paddingTop: "20%",
+    backgroundColor: theme.colors.background10,
 	},
 	textContainer: {
 		alignItems: "flex-start",

@@ -17,14 +17,17 @@ import { ButtonAccess } from "../../components/ButtonAccess";
 import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { ProgressBar } from "../../components/ProgressBar";
 import { ModalNoGroup } from "../../components/ModalNoGroup";
+//função importada
+import { nivelUser } from "../../global/Data/itens";
 
 export const Home = () => {
   const navigation = useNavigation();
 
   let temJogo = false;
-  let isGroup = false;
 
-  const { user } = useAuth();
+  const { user, loadGroup } = useAuth();
+
+  loadGroup(user.grupo_id);
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -41,7 +44,7 @@ export const Home = () => {
   }
 
   function handleAcessGroup() {
-    isGroup ? navigation.navigate("AcessGroup") : setOpenModal(true);
+    user.grupo_id ? navigation.navigate("AcessGroup") : setOpenModal(true);
   }
 
   function handleJoinGroup() {
@@ -56,7 +59,7 @@ export const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Header menu openMenu={handleOpenDrawer} title={user.nick_name} />
+      <Header menu openMenu={handleOpenDrawer} title={user.nickName} />
       <CategoriesBackground>
         <View style={styles.avatar}>
           <Avatar urlImage={user.avatar} />
@@ -69,7 +72,7 @@ export const Home = () => {
               </View>
             </View>
             <View style={styles.scout}>
-              <ProgressBar text={user.nivel} number={Number(user.xp)} inPerfil={false} />
+              <ProgressBar text={nivelUser(user.xp)} number={Number(user.xp)} inPerfil={false} />
               <Scout text={"Partidas"} number={user.partidas} />
               <Scout text={"Gols"} number={user.gols} />
             </View>

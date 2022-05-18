@@ -6,7 +6,7 @@ import { Group, useAuth } from "../../hooks/auth";
 
 import { styles } from "./styles";
 
-export const ListInfo = () => {
+export const ListInfo = ({data}) => {
 
   const { group, user } = useAuth();
 

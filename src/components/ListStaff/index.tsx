@@ -9,9 +9,11 @@ export const ListStaff = () => {
 
   const { group } = useAuth();
 
+  const nome = group.staff[0]
+
 	const menbers = {
 		id: "1",
-		userName: "Pablo",
+		userName: nome,
 		avatar_url: "https://github.com/jpablodavid.png",
 		occupation: "Presidente",
 	};

@@ -52,6 +52,7 @@ export const styles = StyleSheet.create({
 		zIndex: 1,
 	},
 	avatar:{
+    margin: 16,
 		width: 200,
 		height: 200,
 		position: "relative",

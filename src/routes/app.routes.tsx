@@ -1,8 +1,6 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { theme } from "../global/styles/theme";
-
 import { AcessGroup } from "../screens/AcessGroup";
 import { CreateGroup } from "../screens/CreateGroup";
 import { Home } from "../screens/Home";
@@ -21,10 +19,11 @@ export const DrawerRoutes = () => {
 
   return (
     <Navigator
-    initialRouteName={!user.position ? 'Home' : 'CreateAccount' }
+    initialRouteName='Home'
     drawerContent={(props) => <CustomDrawer {...props}/>}
     screenOptions={{
       headerShown: false,
+      drawerType: "slide",
     }}
     >
       <Screen name="Home" component={Home} />

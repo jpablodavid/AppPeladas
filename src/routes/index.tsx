@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { AuthRoutes } from "./auth.routes";
@@ -7,12 +7,12 @@ import { DrawerRoutes } from "./app.routes";
 
 export const Routes = () => {
 
-  const { user, id } = useAuth();
+  const { user } = useAuth();
 
   return (
     <NavigationContainer>
       {
-        user.email || id ?
+        user.name ?
         <DrawerRoutes />
         :
         <AuthRoutes />

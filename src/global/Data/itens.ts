@@ -31,3 +31,15 @@ export function nivelUser(xp: string){
     return nivel[3]
   }
 }
+
+export function siglaPosition ( position: string ) {
+  if (position == "Zagueiro"){
+    return "ZG"
+  }else if(position == "Meio-Campo"){
+    return "MC"
+  }else if(position == "Atacante"){
+    return "ATC"
+  }else{
+    return "LAT"
+  }
+}

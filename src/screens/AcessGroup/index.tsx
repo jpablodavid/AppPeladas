@@ -13,6 +13,7 @@ import { ListInfo } from "../../components/ListInfo";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/auth";
 
+
 export const AcessGroup = () => {
 
   const { group } = useAuth();
@@ -43,7 +44,7 @@ export const AcessGroup = () => {
 				/>
 				<View style={styles.content}>
         {
-            category === "1" ? <ListStaff />
+            category === "1" ? <ListStaff data={group} />
             :
               category === "2" ? <ListInfo data={group} />
             :

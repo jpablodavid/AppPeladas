@@ -60,6 +60,7 @@ export const SignUp = () => {
       alert("Senhas precisam ser identicas");
     } else {
       await signUpWithEmailAndPassword(email, password);
+      navigation.navigate('CreateAccount');
     }
   }
 
@@ -67,69 +68,69 @@ export const SignUp = () => {
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "position"}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
           enabled
         >
-          <View>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Logo />
-          </View>
-          <View style={styles.textContainer}>
-            <Text style={styles.title}>Criar Conta no PeladasApp</Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <Input
-              icon="mail"
-              placeholder={"email@email.com"}
-              keyboardType="email-address"
-              autoCapitalize='none'
-              onChangeText={setEmail}
-              value={email}
-            />
-          </View>
-          <View style={styles.inputContainer}>
-            <Input
-              icon="lock"
-              placeholder="senha"
-              secureTextEntry
-              onChangeText={setPassword}
-              value={password}
-            />
-          </View>
-          <View style={styles.inputLastContainer}>
-            <Input
-              icon="lock"
-              placeholder="senha"
-              secureTextEntry
-              onChangeText={setConfirm}
-              value={confirm}
-            />
-          </View>
-          {(email === "" || password === "" || confirm === "") || loading ? (
-            <ButtonDisable text={"Cadastrar"} />
-          ) : (
-            <Button text={"Cadastrar"} onPress={signUp} />
-          )}
-          <View style={styles.lineOrContainer}>
-            <View style={styles.line} />
-            <Text style={styles.or}>OU</Text>
-            <View style={styles.line} />
-          </View>
-          {loading ? (
-            <ActivityIndicator size={36} color={theme.colors.primary10} />
-          ) : (
-            <>
-              <ButtonFacebook
-                text={"Cadastrar com Facebook"}
-                onPress={() => alert('cadastrar com facebook')}
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>Criar Conta no PeladasApp</Text>
+            </View>
+            <View style={styles.inputContainer}>
+              <Input
+                icon="mail"
+                placeholder={"email@email.com"}
+                keyboardType="email-address"
+                autoCapitalize='none'
+                onChangeText={setEmail}
+                value={email}
               />
-              <View style={styles.loginContainer}>
-                <Text style={styles.loginText}>Já possui uma conta?</Text>
-                <ButtonText onPress={handleSignIn}>
-                  <Text style={styles.buttonText}>Faça Login</Text>
-                </ButtonText>
-              </View>
-            </>
-          )}
+            </View>
+            <View style={styles.inputContainer}>
+              <Input
+                icon="lock"
+                placeholder="senha"
+                secureTextEntry
+                onChangeText={setPassword}
+                value={password}
+              />
+            </View>
+            <View style={styles.inputLastContainer}>
+              <Input
+                icon="lock"
+                placeholder="confirmar senha"
+                secureTextEntry
+                onChangeText={setConfirm}
+                value={confirm}
+              />
+            </View>
+            {(email === "" || password === "" || confirm === "") || loading ? (
+              <ButtonDisable text={"Cadastrar"} />
+            ) : (
+              <Button text={"Cadastrar"} onPress={signUp} />
+            )}
+            <View style={styles.lineOrContainer}>
+              <View style={styles.line} />
+              <Text style={styles.or}>OU</Text>
+              <View style={styles.line} />
+            </View>
+            {loading ? (
+              <ActivityIndicator size={36} color={theme.colors.primary10} />
+            ) : (
+              <>
+                <ButtonFacebook
+                  text={"Cadastrar com Facebook"}
+                  onPress={() => alert('cadastrar com facebook')}
+                />
+                <View style={styles.loginContainer}>
+                  <Text style={styles.loginText}>Já possui uma conta?</Text>
+                  <ButtonText onPress={handleSignIn}>
+                    <Text style={styles.buttonText}>Faça Login</Text>
+                  </ButtonText>
+                </View>
+              </>
+            )}
+          </ScrollView>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </View>
