@@ -5,6 +5,7 @@ import { theme } from "../global/styles/theme";
 
 import { SignIn } from "../screens/SignIn";
 import { SignUp } from "../screens/SignUp";
+import { CreateAccount } from "../screens/CreateAccount";
 
 import { useAuth } from "../hooks/auth";
 
@@ -14,6 +15,7 @@ export const AuthRoutes = () => {
 
   return (
     <Navigator
+      initialRouteName='SignIn'
       screenOptions={{
         headerShown: false,
         cardStyle: {
@@ -24,6 +26,8 @@ export const AuthRoutes = () => {
       <Screen name="SignIn" component={SignIn} />
 
       <Screen name="SignUp" component={SignUp} />
+
+      <Screen name="CreateAccount" component={CreateAccount} />
 
     </Navigator>
   );

@@ -30,27 +30,21 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 
 export const SignUp = () => {
-  const { primary100 } = theme.colors;
+
+  const navigation = useNavigation();
 
   const {
     loading,
     signUpWithEmailAndPassword,
-    signUpFacebookFirebaseWeb,
-    signUpFacebookAndroid
   } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
-  const navigation = useNavigation();
 
   function handleSignIn() {
     navigation.navigate("SignIn");
-  }
-
-  async function handleSignUpFacebook() {
-    await signUpFacebookAndroid();
   }
 
   async function signUp() {

@@ -25,9 +25,7 @@ export const Home = () => {
 
   let temJogo = false;
 
-  const { user, loadGroup } = useAuth();
-
-  loadGroup(user.grupo_id);
+  const { user } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
 

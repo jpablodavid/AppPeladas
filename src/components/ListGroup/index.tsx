@@ -2,8 +2,6 @@ import React from "react";
 import { ScrollView } from "react-native";
 import { List } from "../../screens/JoinGroup";
 
-import { categoriesGroup } from "../../utils/categoriesGroup";
-
 import { ItemListGroup } from "../ItemLIstGroup";
 
 import { styles } from "./styles";
@@ -20,6 +18,7 @@ export const ListGroup = ({
 	categorySelected,
 	setCategory,
 }: Props) => {
+
 	return (
 		<ScrollView
 			showsVerticalScrollIndicator={false}

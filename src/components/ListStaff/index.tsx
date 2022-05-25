@@ -1,29 +1,29 @@
 import React from "react";
 import { View } from "react-native";
-import { useAuth } from "../../hooks/auth";
+import { Group } from "../../hooks/auth";
 import { Staff } from "../Staff";
 
 import { styles } from "./styles";
 
-export const ListStaff = () => {
+type Props = {
+	data: Group;
+};
 
-  const { group } = useAuth();
-
-  const nome = group.staff[0]
+export const ListStaff = ({data}: Props) => {
 
 	const menbers = {
 		id: "1",
-		userName: nome,
+		userName: "nome",
 		avatar_url: "https://github.com/jpablodavid.png",
 		occupation: "Presidente",
 	};
 
 	return (
 		<View style={styles.container}>
-			<Staff data={menbers} />
-			<Staff data={menbers} />
-			<Staff data={menbers} />
-			<Staff data={menbers} />
+			<Staff data={data.presidente} />
+			<Staff data={data.vicePresidente} />
+			<Staff data={data.diretorFinanceiro} />
+			<Staff data={data.diretorEventos} />
 		</View>
 	);
 };

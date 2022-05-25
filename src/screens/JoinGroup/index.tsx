@@ -12,19 +12,17 @@ import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 import { db } from "../../configs/firebaseConfig";
-import { collection, getDocs , updateDoc, doc, deleteDoc} from "@firebase/firestore";
+import { collection, getDocs, getDoc , updateDoc, doc } from "@firebase/firestore";
 
 import { ButtonText } from "../../components/ButtonText";
 
 import { styles } from "./styles";
-import { ScrollView } from "react-native-gesture-handler";
 import { Button } from "../../components/Button";
 import { theme } from "../../global/styles/theme";
 import { Background } from "../../components/Background";
 
 import { useAuth } from "../../hooks/auth";
 import { ListGroup } from "../../components/ListGroup";
-import { Athletes } from "../../components/Athletes";
 
 export type List={
   name: string;
@@ -45,10 +43,6 @@ export const JoinGroup = () => {
 
   const [disable, setDisable] = useState(false);
 
-  const userCollectionRef = collection(db, 'users');
-
-  const groupCollectionRef = collection(db, 'groups');
-
 	function handleCategorySelect(categoryId: string) {
 		categoryId === idGroup ? setDisable(true) : (setIdGroup(categoryId), setDisable(false));
 	}
@@ -59,34 +53,51 @@ export const JoinGroup = () => {
 
   async function handleSearch() {
     let lista = [];
-    const data = await getDocs(groupCollectionRef);
-    data.docs.map((doc) => {
-      let item = {name: doc.data().name, id: doc.id};
-      if(item.name.includes(nameGroup) || item.name === nameGroup){
-        lista.push(item);
+    let nameBusca = nameGroup.replace(/ /g, "").toUpperCase();
+    try{
+      const querySnapshot = await getDocs(collection(db, "groups"));
+      querySnapshot.forEach((doc) => {
+        let name = doc.data().name.replace(/ /g, "").toUpperCase();
+        let item = {id: doc.id, name: doc.data().name };
+        if(name.includes(nameBusca) || name === nameBusca){
+          lista.push(item);
+        }
+      });
+      if(lista.length < 1){
+        lista.push({id: "", name: 'Grupo não existe' })
       }
-    });
+    }catch(error){
+      console.log(error);
+    }
     setList(lista)
   }
 
   async function handleConnectGroup() {
     try{
-      const groupDoc = doc(db, 'groups', idGroup);
-      const addUser = {athletes: [...athletes, id]}
-      await updateDoc(groupDoc.athletes, addUser)
-      /* await firebase.firestore().doc(`groups/${idGroup}`).get();
-      setListAthletes([...group.data().athletes, id]);
-      await firebase.firestore().collection('groups').doc(idGroup).update({
-        athletes: listAthletes
-      }) */
+      const docRef = doc(db, 'groups', idGroup);
+      const docSnap = await getDoc(docRef);
+      const athletes = docSnap.data().athletes;
+
+      if(athletes.includes(id)){
+        alert('Você já é membro deste Grupo')
+        return
+      }else{
+        athletes.push(id);
+
+        await updateDoc(docRef, {
+          athletes: athletes
+        });
+
+        await updateDoc(doc(db, "users", id), {grupo_id : idGroup})
+      }
+      alert("Você está no Grupo, Agora é so bater aquela pelada");
+      navigation.navigate('Home');
     }catch (error){
       console.log(error)
+    }finally{
+      const listaBranca = []
+      setList(listaBranca);
     }
-  }
-
-  async function deletar() {
-    const userDoc = doc(db, 'users', id);
-    await deleteDoc(userDoc);
   }
 
   return (

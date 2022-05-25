@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
-	container: {
+  container: {
 		flex: 1,
 		height: 80,
 		flexDirection: "row",
@@ -32,9 +32,17 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "space-between",
 		padding: 16,
+	},
+  exclude: {
+		height: 80,
+		flexDirection: "row",
+		backgroundColor: theme.colors.listName,
+		alignItems: "center",
+		justifyContent: "space-between",
+		padding: 16,
 		borderBottomEndRadius: 8,
 		borderTopEndRadius: 8,
-	},
+  },
 	textName: {
 		fontSize: 22,
 		fontFamily: theme.fonts.title700,

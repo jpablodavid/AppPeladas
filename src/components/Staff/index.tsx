@@ -9,6 +9,7 @@ import {
 
 import { styles } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
+import { useAuth } from "../../hooks/auth";
 
 export type StaffProps = {
 	id: string;
@@ -24,12 +25,14 @@ type Props = RectButtonProps & {
 export const Staff = ({ data }: Props) => {
 	const { primary100, secondary } = theme.colors;
 
+  const { addStaff, user} = useAuth()
+
 	const [textInput, setTextInput] = useState(data.userName);
 
 	const isAdm = true;
 
 	function handlerEdit() {
-		alert("editar");
+		addStaff(textInput, data.occupation, user.grupo_id);
 	}
 
 	return (

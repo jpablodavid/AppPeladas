@@ -28,8 +28,6 @@ export const DrawerRoutes = () => {
     >
       <Screen name="Home" component={Home} />
 
-      <Screen name="CreateAccount" component={CreateAccount} />
-
       <Screen name="CreateGroup" component={CreateGroup} />
 
       <Screen name="JoinGroup" component={JoinGroup} />

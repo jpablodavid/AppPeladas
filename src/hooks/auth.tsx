@@ -2,19 +2,16 @@ import React, { createContext, ReactNode, useContext, useState, useEffect } from
 import { Alert } from 'react-native';
 
 import { db, auth } from "../configs/firebaseConfig";
-import { doc, setDoc, collection, getDoc } from "@firebase/firestore";
+import { doc, setDoc, collection, getDoc, getDocs, addDoc, updateDoc,deleteField } from "@firebase/firestore";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
 
 import { nivel } from '../global/Data/itens';
-
-import * as Facebook from "expo-facebook";
-
-import { APP_ID } from "../configs/facebookConfigs"
 
 import * as AuthSession from "expo-auth-session";
 import { StaffProps } from "../components/Staff";
 
 export type User = {
+  id: string;
   name: string;
   nickName: string;
   birthday: string;
@@ -36,17 +33,22 @@ export type User = {
 
 export type Group = {
   name: string;
-  athletes: string[];
+  athletes: Array<string>;
   dateCreation: string;
   location: string;
   day: string;
   time: string;
   valorMensal: string;
   valorConvidado: string;
-  //staff: StaffProps[];
-  staff: string[];
+  presidente: StaffProps;
+  vicePresidente: StaffProps;
+  diretorEsportivo: StaffProps;
+  diretorFinanceiro: StaffProps;
+  diretorEventos: StaffProps;
   adm: string;
 };
+
+export type userGroup = string[];
 
 type AuthContextData = {
   user: User;
@@ -54,13 +56,13 @@ type AuthContextData = {
   loading: boolean;
   id: string | undefined;
   email: string;
+  excludeAthletes: (idGroup: string, idAthletes?: string) => Promise<void>;
+  loadAthletes: (athletes: string[]) => Promise<User[]>;
+  addStaff: (name: string, occupation: string, idGroup: string) => Promise<void>;
   loadGroup: (uid: string) => Promise<void>;
   logIn: (email: string, password: string) => Promise<void>;
-  logOut: () => void;
-  loginFacebookAndroid: () => Promise<void>;
   signUpWithEmailAndPassword: (email: string, password: string) => Promise<void>;
-  signUpFacebookFirebaseWeb: () => Promise<void>;
-  signUpFacebookAndroid: () => Promise<void>;
+  logOut: () => void;
   createUser: (name: string, email: string, nickName: string, birthday: string, phone: string, position: string, team: string) => Promise<void>;
   createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string) => Promise<void>;
   forgotPassword: (emailUser: string) => Promise<void>;
@@ -98,15 +100,14 @@ function AuthProvider({ children }: AuthProviderProps) {
     isAuth();
   }, []);
 
-  async function isAuth() {
-    setLoading(true);
+  function isAuth() {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setId(currentUser.uid);
         loadUser(currentUser.uid);
+        loadGroup("xFMvKV2P2P3kcrl8NFzC");
       }
     });
-    setLoading(false);
   }
 
   async function logIn(email: string, password: string) {
@@ -158,129 +159,10 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  async function signUpFacebookFirebaseWeb() {
-    setLoading(true);
-    try {
-      await firebase
-        .auth()
-        .signInWithRedirect(provider)
-        .then((value) => {
-          const userFacebook = value.additionalUserInfo?.profile;
-          setId(value.user?.uid);
-          setAccessToken(value.credential?.accessToken);
-          let userFirebase = {
-            name: userFacebook?.name,
-            nick_name: userFacebook?.first_name,
-            birthday: userFacebook?.birthday,
-            email: userFacebook?.email,
-            phone: value.user?.phoneNumber,
-            avatar: userFacebook?.picture.data.URL,
-            position: "",
-            camisa: "0",
-            nivel: ['Perna de pau', "Café com Leite", "Boleiro", 'Craque'],
-            xp: "0",
-            partidas: "0",
-            gols: "0",
-            hattrick: "0",
-            grupo_id: null,
-            team: "",
-            adm: false,
-            stars: "0",
-          } as unknown as User;
-          setUser(userFirebase);
-        })
-        .catch((error) => {
-          alert(error.message);
-        })
-    } catch {
-      throw new Error('Não foi possível Cadastrar com o Facebook');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  async function loginFacebookAndroid() {
-    try {
-      setLoading(true);
-      await Facebook.initializeAsync(APP_ID);
-      const { type, token } = await Facebook.logInWithReadPermissionsAsync({
-        permissions: ["public_profile", "email"],
-      });
-      if (type === "success") {
-        alert("sucess")
-        // Get the user's name using Facebook's Graph API
-        const response = await fetch(
-          `https://graph.facebook.com/me?fields=id,name,picture.type(large),email&access_token=${token}`
-        );
-        const credential = firebase.auth.FacebookAuthProvider.credential(token);
-        firebase.auth().signInWithCredential(credential).then(async user => {
-          console.log(user.user.uid);
-          await loadUser(user.user.uid);
-        }).catch(error => {
-          alert(error.message);
-        })
-        const data = await response.json();
-        //console.log(data);
-      } else {
-        alert("deu ruim");
-      }
-    } catch ({ message }) {
-      throw new Error(`Facebook Login Error: ${message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  async function signUpFacebookAndroid() {
-    setLoading(true);
-    try {
-      await Facebook.initializeAsync(APP_ID);
-      const { type, token } = await Facebook.logInWithReadPermissionsAsync({
-        permissions: ["public_profile", "email"],
-      });
-      if (type === "success") {
-        alert("sucess")
-        const credential = firebase.auth.FacebookAuthProvider.credential(token);
-        await firebase.auth().signInWithCredential(credential).then((value) => {
-          const userFacebook = value.additionalUserInfo?.profile;
-          setId(value.user?.uid);
-          setAccessToken(value.credential?.accessToken);
-          let userFirebase = {
-            name: userFacebook?.name,
-            nick_name: userFacebook?.first_name,
-            birthday: userFacebook?.birthday,
-            email: userFacebook?.email,
-            phone: value.user?.phoneNumber,
-            avatar: userFacebook?.picture.data.URL,
-            position: "",
-            camisa: "0",
-            nivel: ['Perna de pau', "Café com Leite", "Boleiro", 'Craque'],
-            xp: "0",
-            partidas: "0",
-            gols: "0",
-            hattrick: "0",
-            grupo_id: null,
-            team: "",
-            adm: false,
-            stars: "0",
-          } as unknown as User;
-          setUser(userFirebase);
-        }).catch((error) => {
-          alert(error.message);
-        })
-      } else {
-        alert("deu ruim");
-      }
-    } catch {
-      throw new Error('Não foi possível Cadastrar com o Facebook');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   async function createUser(name: string, email: string, nickName: string, birthday: string, phone: string, position: string, team: string) {
     setLoading(true);
     const userWrite = {
+      id: id,
       name: name,
       nickName: nickName,
       birthday: birthday,
@@ -313,7 +195,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   async function createGroup(nameGrupo: string, date: string, location: string, day: string, time: string) {
     setLoading(true);
     try {
-      const group = {
+      const groupWrite = {
         name: nameGrupo,
         athletes: [],
         dateCreation: date,
@@ -322,20 +204,43 @@ function AuthProvider({ children }: AuthProviderProps) {
         time: time,
         valorMensal: "",
         valorConvidado: "",
+        presidente: {
+          id: '',
+          userName: '',
+          avatar_url: '',
+          occupation: '',
+        },
+        vicePresidente: {
+          id: '',
+          userName: '',
+          avatar_url: '',
+          occupation: '',
+        },
+        diretorEsportivo: {
+          id: '',
+          userName: '',
+          avatar_url: '',
+          occupation: '',
+        },
+        diretorFinanceiro: {
+          id: '',
+          userName: '',
+          avatar_url: '',
+          occupation: '',
+        },
+        diretorEventos: {
+          id: '',
+          userName: '',
+          avatar_url: '',
+          occupation: '',
+        },
         adm: id,
       } as unknown as Group;
-      await addDoc(groupCollectionRef, {
-        name: nameGrupo,
-        athletes: [],
-        dateCreation: date,
-        location: location,
-        day: day,
-        time: time,
-        valorMensal: "",
-        valorConvidado: "",
-        adm: id,
-      })
-      setGroup(group);
+
+      const group = await addDoc(collection(db, 'groups'),{...groupWrite})
+      await updateDoc(doc(db, "users", id), {grupo_id : group.id, adm: true})
+
+      setGroup(groupWrite);
     } catch (error) {
       console.log(error)
       throw new Error('Não foi possível criar Grupo');
@@ -345,6 +250,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   };
 
   async function loadGroup(groupUid: string){
+    setLoading(true);
     const docRef = doc(db, 'groups', groupUid);
     const docSnap = await getDoc(docRef);
       const groupLoaded = {
@@ -356,10 +262,46 @@ function AuthProvider({ children }: AuthProviderProps) {
         time: docSnap.data()?.time,
         valorMensal: docSnap.data()?.valorMensal,
         valorConvidado: docSnap.data()?.valorConvidado,
-        staff: docSnap.data()?.staff,
+        presidente: docSnap.data()?.presidente,
+        vicePresidente: docSnap.data()?.presidente,
+        diretorEsportivo: docSnap.data()?.presidente,
+        diretorFinanceiro: docSnap.data()?.presidente,
+        diretorEventos: docSnap.data()?.presidente,
         adm: docSnap.data()?.adm,
-      }as unknown as Group;
-      setGroup(groupLoaded);
+      } as Group;
+    setGroup(groupLoaded);
+    setLoading(false);
+  }
+
+  // criar ou adicionar o staff no grupo
+  async function addStaff(name: string, occupation: string, idGroup: string){
+    let staff = {};
+    try{
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        if(doc.data().name === name){
+          staff = {
+            id: doc.data()?.id,
+            userName: doc.data()?.name,
+            avatar_url: doc.data()?.avatar,
+            occupation: occupation
+          } as StaffProps;
+        }
+      });
+      if(occupation === 'presidente'){
+        await updateDoc(doc(db, "groups", idGroup), {presidente: staff});
+      }else if(occupation === 'vicePresidente'){
+        await updateDoc(doc(db, "groups", idGroup), {vicePresidente: staff});
+      }else if(occupation === 'diretorFinanceiro'){
+        await updateDoc(doc(db, "groups", idGroup), {diretorFinanceiro: staff});
+      }else if(occupation === 'diretorEsportivo'){
+        await updateDoc(doc(db, "groups", idGroup), {diretorEsportivo: staff});
+      }else{
+        await updateDoc(doc(db, "groups", idGroup), {diretorEventos: staff});
+      }
+    }catch(error){
+      console.log(error);
+    }
   }
 
   async function loadUser(uid: string) {
@@ -367,6 +309,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     const docRef = doc(db, 'users', uid);
     const docSnap = await getDoc(docRef);
       const userLoaded = {
+        id: docSnap.data()?.id,
         name: docSnap.data()?.name,
         nickName: docSnap.data()?.nickName,
         email: docSnap.data()?.email,
@@ -384,10 +327,47 @@ function AuthProvider({ children }: AuthProviderProps) {
         team: docSnap.data()?.team,
         stars: docSnap.data()?.stars,
         adm: docSnap.data()?.adm,
-      } as unknown as User;
+      } as User;
       setUser(userLoaded);
     setLoading(false);
   };
+
+  // fazer o load dos atletas do grupo
+  async function loadAthletes(athletes: string[]){
+    let userGroup = [];
+    try{
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        if(athletes.includes(doc.id)){
+          userGroup.push(doc.data())
+        }
+      });
+    }catch(error){
+      console.log(error);
+    }
+    // ordenar o array pelo numero da camisa
+    userGroup.sort((a , b) => {
+      return parseInt(a.camisa) - parseInt(b.camisa)
+    });
+
+    return userGroup;
+  }
+
+  //excluir o atleta do grupo
+  async function excludeAthletes(idGroup: string, idAthletes: string){
+    try{
+      const docRef = doc(db, 'groups', idGroup);
+      const docSnap = await getDoc(docRef);
+      const athletes = docSnap.data().athletes;
+
+      const newAthletes = athletes.filter((item: string) => item !== idAthletes);
+      await updateDoc(docRef, {
+        athletes: newAthletes
+      });
+    }catch(error){
+      console.log(error)
+    }
+  }
 
   async function forgotPassword(emailUser: string) {
     setLoading(true);
@@ -410,7 +390,24 @@ function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ id, user, email, group, loading, loadGroup, logIn, logOut, loginFacebookAndroid, signUpWithEmailAndPassword, signUpFacebookFirebaseWeb, signUpFacebookAndroid, createUser, createGroup, forgotPassword }}>
+    <AuthContext.Provider
+      value={{
+        id,
+        user,
+        email,
+        loadAthletes,
+        excludeAthletes,
+        group,
+        loading,
+        loadGroup,
+        logIn,
+        logOut,
+        signUpWithEmailAndPassword,
+        addStaff,
+        createUser,
+        createGroup,
+        forgotPassword
+    }}>
       {children}
     </AuthContext.Provider>
   );
