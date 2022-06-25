@@ -42,7 +42,7 @@ export const Home = () => {
   }
 
   function handleAcessGroup() {
-    user.grupo_id ? navigation.navigate("AcessGroup") : setOpenModal(true);
+    user.grupo_id ? navigation.navigate("Group") : setOpenModal(true);
   }
 
   function handleJoinGroup() {

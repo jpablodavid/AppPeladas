@@ -6,10 +6,12 @@ import { CreateGroup } from "../screens/CreateGroup";
 import { Home } from "../screens/Home";
 import { JoinGroup } from "../screens/JoinGroup";
 import { Profile } from "../screens/Profile";
+import { MyAccount } from "../screens/MyAccount";
 
 import { useAuth } from "../hooks/auth";
 import { CustomDrawer } from "../components/CustomDrawer";
-import { CreateAccount } from "../screens/CreateAccount";
+import { Group } from "../screens/Group";
+import { Accounting } from "../screens/Accounting";
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -34,7 +36,13 @@ export const DrawerRoutes = () => {
 
       <Screen name="AcessGroup" component={AcessGroup} />
 
+      <Screen name="Group" component={Group} />
+
+      <Screen name="Accounting" component={Accounting} />
+
       <Screen name="Profile" component={Profile} />
+
+      <Screen name="MyAccount" component={MyAccount} />
 
     </Navigator>
   );

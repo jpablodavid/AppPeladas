@@ -27,7 +27,7 @@ import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 export const SignIn = () => {
   const navigation = useNavigation();
 
-  const { logIn, loading, forgotPassword, loginFacebookAndroid } = useAuth();
+  const { logIn, loading, forgotPassword } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,7 +50,6 @@ export const SignIn = () => {
   }
 
   async function handleLoginFacebook() {
-    loginFacebookAndroid();
 
   }
 

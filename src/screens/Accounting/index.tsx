@@ -15,7 +15,7 @@ import { useAuth } from "../../hooks/auth";
 import { Map } from "../../components/Map";
 
 
-export const AcessGroup = () => {
+export const Accounting = () => {
 
   const { group } = useAuth();
 

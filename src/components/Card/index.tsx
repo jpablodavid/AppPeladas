@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import {
 	View,
 	Text,
@@ -12,8 +11,6 @@ import { ButtonText } from "../../components/ButtonText";
 import { LinearGradient } from "expo-linear-gradient";
 import { theme } from "../../global/styles/theme";
 import { ProgressBar } from "../../components/ProgressBar";
-import { Background } from "../../components/Background";
-import { useAuth } from "../../hooks/auth";
 
 import { User } from '../../hooks/auth'
 
@@ -26,9 +23,8 @@ type Props = {
 };
 export const Card = ({data} : Props) => {
 
-	const navigation = useNavigation();
-
 	return (
+    <>
     <View style={styles.card}>
       <LinearGradient
         style={styles.perfil}
@@ -78,5 +74,56 @@ export const Card = ({data} : Props) => {
         </View>
       </LinearGradient>
     </View>
+    <View style={styles.icons}>
+    <ButtonText>
+      <Entypo
+        style={{ marginHorizontal: 18, marginBottom: 16 }}
+        name="attachment"
+        size={52}
+        color="black"
+      />
+    </ButtonText>
+    <ButtonText>
+      <Entypo
+        style={{ marginHorizontal: 18 }}
+        name="awareness-ribbon"
+        size={52}
+        color="black"
+      />
+    </ButtonText>
+    <ButtonText>
+      <Entypo
+        style={{ marginHorizontal: 18 }}
+        name="battery"
+        size={50}
+        color="black"
+      />
+    </ButtonText>
+    <ButtonText>
+      <Entypo
+        style={{ marginHorizontal: 18 }}
+        name="briefcase"
+        size={52}
+        color="black"
+      />
+    </ButtonText>
+    <ButtonText>
+      <Entypo
+        style={{ marginHorizontal: 18 }}
+        name="bucket"
+        size={52}
+        color="black"
+      />
+    </ButtonText>
+    <ButtonText>
+      <Entypo
+        style={{ marginHorizontal: 12 }}
+        name="bug"
+        size={52}
+        color="black"
+      />
+    </ButtonText>
+  </View>
+  </>
 	);
 };

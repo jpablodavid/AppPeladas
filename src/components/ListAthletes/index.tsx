@@ -11,9 +11,15 @@ type Props = {
 
 export const ListAthletes = ({data}) => {
 
+  const na
+
   const { loadAthletes, excludeAthletes } = useAuth();
 
   const [athletes, setAthletes ] = useState<User[]>();
+
+  function handleGoBack() {
+		navigation.goBack();
+	}
 
   async function recebe(){
     setAthletes(await loadAthletes(data.athletes));

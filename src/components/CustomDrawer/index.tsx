@@ -30,26 +30,31 @@ export const CustomDrawer = ({ navigation }) => {
         </View>
 
         <View>
-        <ButtonDrawer  text={"CreateGroup"} onPress={() => navigation.navigate('CreateGroup')} />
+        <ButtonDrawer  text={"Criar Grupo"} onPress={() => navigation.navigate('CreateGroup')} />
 
         </View>
 
         <View>
           {
             user.grupo_id ?
-              <ButtonDrawer  text={"AcessGroup"} onPress={() => navigation.navigate('AcessGroup')} />
+              <ButtonDrawer  text={"Acessar Grupo"} onPress={() => navigation.navigate('Group')} />
             :
               <ButtonDrawer disable text={"AcessGroup"}  onPress={() => alert('Você não participa de nenhum grupo')}/>
-            }
+          }
 
         </View>
 
         <View>
-          <ButtonDrawer  text={"JoinGroup"} onPress={() => navigation.navigate('JoinGroup')} />
-        </View>
+          {
+            !user.grupo_id ?
+            <ButtonDrawer  text={"JoinGroup"} onPress={() => navigation.navigate('JoinGroup')} />
+          :
+            <ButtonDrawer disable text={"JoinGroup"}  onPress={() => alert('Você já participa de um grupo')}/>
+          }
+          </View>
 
         <View>
-          <ButtonDrawer  text={"Profile"} onPress={() => navigation.navigate('Profile')} />
+          <ButtonDrawer  text={"Minha Conta"} onPress={() => navigation.navigate('MyAccount')} />
         </View>
 
         <View>

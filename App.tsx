@@ -17,6 +17,7 @@ import {
 import { AuthProvider } from "./src/hooks/auth";
 import { Routes } from "./src/routes";
 import { Background } from "./src/components/Background";
+import { Map } from "./src/components/Map";
 
 export default function App() {
 

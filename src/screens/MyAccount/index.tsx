@@ -9,7 +9,7 @@ import {
 import { useAuth } from "../../hooks/auth";
 
 import { FontAwesome5 } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
@@ -24,14 +24,20 @@ import { InputSelect } from "../../components/InputSelect";
 import { Background } from "../../components/Background";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native";
+import { Header } from "../../components/Header";
 
-export const CreateAccount = () => {
 
-  const navigation = useNavigation();
+export const MyAccount = () => {
+
+	const navigation = useNavigation();
 
   const { primary100 } = theme.colors;
 
   const { user, loading, createUser, email } = useAuth();
+
+	function handleGoback() {
+    navigation.goBack();
+	}
 
   const [name, setName] = useState(user.name);
   const [birthday, setBirthday] = useState(user.birthday);
@@ -40,43 +46,18 @@ export const CreateAccount = () => {
   const [position, setPosition] = useState("");
   const [team, setTeam] = useState("");
 
-
-  function handleCreateAccount() {
-    if (position === "" || team === "") {
-      alert("Por favor selecione seu time e posição");
-    }
-    else {
-      createUser(name, email, nickName, birthday, phone, position, team);
-      navigation.navigate('Home');
-    }
-  }
-
-  function handleGoBack() {
-    navigation.goBack();
-  }
-
-  return (
-    <Background>
-      <ButtonText style={styles.goBack} onPress={handleGoBack}>
-        <Ionicons name="md-close" size={24} color="black" />
-      </ButtonText>
-
-        <KeyboardAvoidingView style={styles.container}>
+	return (
+		<Background>
+	    <Header goBack={handleGoback} title={user.nickName} />
+      <KeyboardAvoidingView style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <Logo />
-            <View style={styles.textContainer}>
-              <Text style={styles.text}>
-                Você está a um passo de começar sua jornada como craque das
-                <Text style={styles.title}> Peladas.</Text>
-              </Text>
-            </View>
             <Text style={styles.informationText}>
-              Precisamos de algumas informações:
+              Meus Dados:
             </Text>
             <View style={styles.inputContainer}>
               <Input
                 icon='user'
-                placeholder="Nome completo"
+                placeholder={user.name}
                 onChangeText={setName}
                 value={name}
               />
@@ -84,7 +65,7 @@ export const CreateAccount = () => {
             <View style={styles.inputContainer}>
               <Input
                 icon="calendar"
-                placeholder={"Data de nascimento"}
+                placeholder={user.birthday}
                 onChangeText={setBirthday}
                 value={birthday}
               />
@@ -92,7 +73,7 @@ export const CreateAccount = () => {
             <View style={styles.inputContainer}>
               <Input
                 icon="user"
-                placeholder={"Apelido ou Nome na camisa"}
+                placeholder={user.nickName}
                 onChangeText={setNickName}
                 value={nickName}
               />
@@ -100,7 +81,7 @@ export const CreateAccount = () => {
             <View style={styles.inputContainer}>
               <Input
                 icon="phone"
-                placeholder={"Telefone"}
+                placeholder={user.phone}
                 onChangeText={setPhone}
                 value={phone}
               />
@@ -108,7 +89,7 @@ export const CreateAccount = () => {
             <View style={styles.inputContainer}>
               <InputSelect
                 icon={<FontAwesome5 name="user-tie" size={24} color={primary100} />}
-                placeholder={"escolha sua posição no time"}
+                placeholder={user.position}
                 itens={positions}
                 selectedValue={position}
                 onValueChange={(itemValue) => setPosition(String(itemValue))}
@@ -117,26 +98,16 @@ export const CreateAccount = () => {
             <View style={styles.inputLastContainer}>
               <InputSelect
                 icon={<FontAwesome5 name="user-tie" size={24} color={primary100} />}
-                placeholder={"escolha seu time de coração"}
+                placeholder={user.team}
                 itens={teams}
                 selectedValue={team}
                 onValueChange={(itemValue) => setTeam(String(itemValue))}
               />
             </View>
             <View style={{ marginBottom: 32 }}>
-              {
-                loading ?
-                  (<ActivityIndicator size={36} color={theme.colors.primary10} />)
-                  :
-                  (name === undefined || birthday === undefined || nickName === undefined || phone === undefined)
-                    ?
-                    <ButtonDisable text={"Criar Conta"} />
-                    :
-                    <Button text={"Criar Conta"}  onPress={handleCreateAccount} />
-              }
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
-    </Background>
-  );
+		</Background>
+	);
 };

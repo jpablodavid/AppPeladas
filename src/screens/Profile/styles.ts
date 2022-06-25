@@ -5,7 +5,6 @@ const { primary100, line, shadow, background10 } = theme.colors;
 const { text500, text900,title700} = theme.fonts;
 
 export const styles = StyleSheet.create({
-
 	goBack: {
 		margin: 16,
 		marginTop: 32,
