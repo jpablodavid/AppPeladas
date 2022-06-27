@@ -1,6 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
-import { theme } from "../../global/styles/theme";
+import { Image } from "react-native";
 
 import { styles } from "./styles";
 
@@ -9,7 +8,7 @@ type Props = {
 };
 
 export const Avatar = ({ urlImage }: Props) => {
-	const { primary100, secondary } = theme.colors;
 
 	return <Image style={styles.container} source={{ uri: urlImage }} />;
+
 };

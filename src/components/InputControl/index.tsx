@@ -26,7 +26,7 @@ export const InputControl = ({ error, control, name, ...rest }: Props) => {
         )}
       />
       {
-        error && <Text>{error.message}</Text>
+        error && <Text >{error.message}</Text>
       }
     </>
   );

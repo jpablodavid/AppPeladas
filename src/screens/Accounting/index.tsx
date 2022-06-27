@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { View, Text} from "react-native";
+import { View } from "react-native";
 
 import { Header } from "../../components/Header";
 import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { CategorySelect } from "../../components/CategorySelect";
-import { categoriesGroup } from "../../utils/categoriesGroup";
+import { categoriesAccounting } from "../../utils/categoriesAccounting";
 
-import { styles } from "./styles";
-import { ListStaff } from "../../components/ListStaff";
-import { ListAthletes } from "../../components/ListAthletes";
 import { ListInfo } from "../../components/ListInfo";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/auth";
 import { Map } from "../../components/Map";
+import { AccountingGroup } from "../../components/AccountingGroup";
 
+import { styles } from "./styles";
+
+const meses = [
+  'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho'
+]
 
 export const Accounting = () => {
 
@@ -38,22 +41,18 @@ export const Accounting = () => {
 			<CategoriesBackground>
 				<View style={{ height: 16 }}></View>
 				<CategorySelect
-					data={categoriesGroup}
+					data={categoriesAccounting}
 					categorySelected={category}
 					setCategory={handleCategorySelect}
           disable={disable}
 				/>
 				<View style={styles.content}>
           {
-            category === "1" ? <ListStaff data={group} />
+            category === "1" ? <AccountingGroup data={meses} />
             :
               category === "2" ? <ListInfo data={group} />
             :
-              category === "3" ? <Map data={group}/>
-            :
-              category === "4" ? <ListAthletes data={group}/>
-            :
-              (category === "5") && <ListAthletes data={group}/>
+              (category === "3") && <Map data={group}/>
           }
 				</View>
 			</CategoriesBackground>

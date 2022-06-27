@@ -4,25 +4,17 @@ import {
   Text,
   KeyboardAvoidingView,
   ScrollView,
-  ActivityIndicator,
   } from "react-native";
 import { useAuth } from "../../hooks/auth";
 
 import { FontAwesome5 } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-
 import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 import { positions, teams } from "../../global/Data/itens";
 
-import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
-import { Logo } from "../../components/Logo";
-import { ButtonText } from "../../components/ButtonText";
-import { ButtonDisable } from "../../components/ButtonDisable";
 import { InputSelect } from "../../components/InputSelect";
 import { Background } from "../../components/Background";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native";
 import { Header } from "../../components/Header";
 
@@ -48,7 +40,7 @@ export const MyAccount = () => {
 
 	return (
 		<Background>
-	    <Header goBack={handleGoback} title={user.nickName} />
+      <Header goBack={handleGoback} title={user.nickName} />
       <KeyboardAvoidingView style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={styles.informationText}>

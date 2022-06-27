@@ -1,10 +1,5 @@
 import React from "react";
-import {
-	View,
-	Modal,
-	ModalProps,
-	TouchableWithoutFeedback,
-} from "react-native";
+import { Modal,	ModalProps} from "react-native";
 
 import { User } from '../../hooks/auth'
 

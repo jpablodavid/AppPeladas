@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
-import { RectButton, RectButtonProps } from "react-native-gesture-handler";
-import { Group, useAuth } from "../../hooks/auth";
-//import { MyModal } from "../ModalNoGroup";
+import { RectButton } from "react-native-gesture-handler";
+import { useAuth } from "../../hooks/auth";
 
 import { styles } from "./styles";
 
@@ -15,7 +14,6 @@ export const ListInfo = ({data}) => {
 	function handleOpenModal(){
 		setOpenModal(true);
 	}
-  console.log(group);
 
 	return (
 		<View style={styles.container}>
@@ -42,9 +40,6 @@ export const ListInfo = ({data}) => {
 					</RectButton>
 				)}
 			</View>
-			{/* <MyModal visible={openModal}>
-				<Text>oi</Text>
-			</MyModal> */}
 		</View>
 	);
 };

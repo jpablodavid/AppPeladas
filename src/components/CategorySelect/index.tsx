@@ -11,7 +11,7 @@ type Props = {
 	data: typeof categoriesGroup;
 	categorySelected: string;
 	setCategory: (categotyId: string) => void;
-  disable: boolean;
+  disable?: boolean;
 };
 
 export const CategorySelect = ({

@@ -13,3 +13,4 @@ export const categoriesGroup = [
 	{ id: "5", title: "Galeria", icon: GaleriaSvg },
 	{ id: "6", title: "Calendário", icon: CalendarioSvg },
 ];
+

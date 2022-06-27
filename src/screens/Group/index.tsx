@@ -71,12 +71,6 @@ export const Group = () => {
           />
         </View>
       </CategoriesBackground>
-     {/*  <ModalNoGroup
-        visible={openModal}
-        setOpenModal={handleCloseModal}
-        goToEntrar={handleJoinGroup}
-        goToCriar={handleCreateGroup}
-      /> */}
     </View>
   );
 };

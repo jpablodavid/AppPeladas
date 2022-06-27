@@ -14,7 +14,6 @@ import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 import { Background } from "../../components/Background";
 import { useAuth } from "../../hooks/auth";
-import { ButtonDisable } from "../../components/ButtonDisable";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const { primary100, secondary } = theme.colors;

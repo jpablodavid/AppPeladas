@@ -49,10 +49,6 @@ export const SignIn = () => {
     }
   }
 
-  async function handleLoginFacebook() {
-
-  }
-
   function handleforgotPassword() {
     if (email) {
       forgotPassword(email);

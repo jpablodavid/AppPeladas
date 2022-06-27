@@ -22,7 +22,6 @@ import { ButtonText } from "../../components/ButtonText";
 import { ButtonDisable } from "../../components/ButtonDisable";
 import { InputSelect } from "../../components/InputSelect";
 import { Background } from "../../components/Background";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native";
 
 export const CreateAccount = () => {

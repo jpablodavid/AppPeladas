@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Alert,
   View,
   Text,
   Platform,
@@ -12,9 +11,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 import { useAuth } from "../../hooks/auth";
-
-import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
 
 import { theme } from "../../global/styles/theme";
 

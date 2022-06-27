@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { View, Text} from "react-native";
+import { View } from "react-native";
 
 import { Header } from "../../components/Header";
 import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { CategorySelect } from "../../components/CategorySelect";
 import { categoriesGroup } from "../../utils/categoriesGroup";
 
-import { styles } from "./styles";
 import { ListStaff } from "../../components/ListStaff";
 import { ListAthletes } from "../../components/ListAthletes";
 import { ListInfo } from "../../components/ListInfo";
@@ -14,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/auth";
 import { Map } from "../../components/Map";
 
+import { styles } from "./styles";
 
 export const AcessGroup = () => {
 
