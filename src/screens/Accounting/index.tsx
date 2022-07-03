@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/auth";
 
 import { Header } from "../../components/Header";
 import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { CategorySelect } from "../../components/CategorySelect";
 import { categoriesAccounting } from "../../utils/categoriesAccounting";
-
-import { ListInfo } from "../../components/ListInfo";
-import { useNavigation } from "@react-navigation/native";
-import { useAuth } from "../../hooks/auth";
-import { Map } from "../../components/Map";
 import { AccountingGroup } from "../../components/AccountingGroup";
+import { ListAthletesPayment } from "../../components/ListAthletesPayment";
+import { Values } from "../../components/Values";
 
 import { styles } from "./styles";
 
@@ -50,9 +49,9 @@ export const Accounting = () => {
           {
             category === "1" ? <AccountingGroup data={meses} />
             :
-              category === "2" ? <ListInfo data={group} />
+              category === "2" ? <ListAthletesPayment data={group}/>
             :
-              (category === "3") && <Map data={group}/>
+              (category === "3") && <Values data={group}/>
           }
 				</View>
 			</CategoriesBackground>

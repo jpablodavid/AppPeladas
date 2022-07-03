@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
-import { Group, useAuth } from "../../hooks/auth";
-//import { MyModal } from "../ModalNoGroup";
+import { useAuth } from "../../hooks/auth";
 import { AntDesign } from '@expo/vector-icons';
 
 import { styles } from "./styles";
 
 export const AccountingGroup = ({data}) => {
 
-  const { group, user } = useAuth();
+  const { group } = useAuth();
 
 	const [openModal, setOpenModal] = useState(false);
 
@@ -32,7 +31,7 @@ export const AccountingGroup = ({data}) => {
           contentContainerStyle={{ paddingRight: 40 }}
         >
           {data.map((item) => (
-				    <View style={styles.mes}>
+          <View style={styles.mes}>
               <Text style={styles.label}>{item}</Text>
               <Text style={styles.infoText}>Arrecadação</Text>
               <Text style={styles.infoText}>R$ 1000,00</Text>

@@ -5,10 +5,8 @@ export const styles = StyleSheet.create({
 		flex: 1,
 	},
   map: {
-    width: '100%',
-    height: '100%'
-
-    /* width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height, */
+    marginTop: 16,
+    width: Dimensions.get('window').width - 32,
+    height: Dimensions.get('window').height - 500,
   }
 });

@@ -42,7 +42,8 @@ export const Card = ({data} : Props) => {
           <Text style={styles.position}>{siglaPosition(data.position)}</Text>
           <Image
             style={styles.bandeira}
-            source={require(`../../assets/${data.team}.png`)}
+            source={require(`../../assets/Flamengo.png`)}
+            //source={require(`../../assets/${data.team}.png`)}
           />
         </LinearGradient>
         <Image

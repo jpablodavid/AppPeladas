@@ -37,6 +37,7 @@ export const Map = () => {
           //image={{uri: 'custom_pin'}}
         />
       </MapView>
+
 		</View>
 	);
 };
