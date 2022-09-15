@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 
-import { Header } from "../../components/Header";
 import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { CategorySelect } from "../../components/CategorySelect";
 import { categoriesAccounting } from "../../utils/categoriesAccounting";
@@ -30,7 +29,6 @@ export const AccountGroup = ({ title }: Props) => {
 
 	return (
 		<CategoriesBackground>
-			<Header goBack={handleGoBack} title={title} />
 			<CategorySelect
 				data={categoriesAccounting}
 				categorySelected={category}

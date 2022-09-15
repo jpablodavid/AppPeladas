@@ -18,9 +18,9 @@ export const AuthRoutes = () => {
       initialRouteName='SignIn'
       screenOptions={{
         headerShown: false,
-        cardStyle: {
+        /* cardStyle: {
           backgroundColor: theme.colors.background10,
-        },
+        }, */
       }}
     >
       <Screen name="SignIn" component={SignIn} />

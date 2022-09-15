@@ -30,7 +30,7 @@ export const CategorySelect = ({
 				<Category
 					key={item.id}
 					title={item.title}
-					//icon={item.icon}
+					icon={item.icon}
 					checked={item.id === categorySelected}
 					onPress={() => setCategory(item.id)}
           />

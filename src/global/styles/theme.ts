@@ -1,7 +1,8 @@
 export const theme = {
 	colors: {
-		background10: "#EDE7CF",
-		background100: "#767367",
+		background: "#e9eef4",
+    backgroundDark: "#222",
+
 
 		textButton: "#ffff",
 
@@ -9,15 +10,10 @@ export const theme = {
 
 		facebook: "#3b5998",
 
-		primary100: "#0B5980",
-		primary75: "#0B598073",
-		primary25: "#0B598025",
-		primary50: "#006EA9",
-		primary10: "#1976D2",
+		primary100: "#326789",
+		primary10: "#78a6cb",
 
-		secondary: "#DA272A",
-		secondary75: "#DA272A75",
-		secondary25: "#DA272A25",
+		secondary: "#e65c4f",
 
 		disable10: "#ECECEC",
 		disable100: "#C1C1C1",

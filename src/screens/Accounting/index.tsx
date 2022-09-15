@@ -3,7 +3,6 @@ import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/auth";
 
-import { Header } from "../../components/Header";
 import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { CategorySelect } from "../../components/CategorySelect";
 import { categoriesAccounting } from "../../utils/categoriesAccounting";
@@ -36,7 +35,6 @@ export const Accounting = () => {
 
 	return (
 		<View style={styles.container}>
-			<Header goBack={handleGoBack} title={group.name} />
 			<CategoriesBackground>
 				<View style={{ height: 16 }}></View>
 				<CategorySelect

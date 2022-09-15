@@ -7,16 +7,11 @@ import { styles } from "./styles";
 
 type Props = TouchableOpacityProps & {
 	title: string;
-	//icon?: React.FC<SvgProps>;
+	icon?: React.FC<SvgProps>;
 	checked?: boolean;
 };
 
-export const Category = ({
-	title,
-	//icon: Icon,
-	checked = false,
-	...rest
-}: Props) => {
+export const Category = ({title, icon: Icon, checked = false, ...rest }: Props) => {
 	return (
 		<TouchableOpacity {...rest} disabled={checked} style={styles.container}>
 			<View style={[styles.content, { opacity: checked ? 0.4 : 1 }]}>

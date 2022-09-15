@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 
-import { Header } from "../../components/Header";
 import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { CategorySelect } from "../../components/CategorySelect";
 import { categoriesGroup } from "../../utils/categoriesGroup";
@@ -34,7 +33,6 @@ export const AcessGroup = () => {
 
 	return (
 		<View style={styles.container}>
-			<Header goBack={handleGoBack} title={group.name} />
 			<CategoriesBackground>
 				<View style={{ height: 16 }}></View>
 				<CategorySelect

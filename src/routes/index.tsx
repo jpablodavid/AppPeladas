@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { AuthRoutes } from "./auth.routes";
 import { useAuth } from "../hooks/auth";
-import { DrawerRoutes } from "./app.routes";
+import { TabRoutes } from "./app.routes";
 import { Group } from "../screens/Group";
 
 export const Routes = () => {
@@ -14,7 +14,7 @@ export const Routes = () => {
     <NavigationContainer>
       {
         user.name ?
-        <DrawerRoutes />
+        <TabRoutes />
         :
         <AuthRoutes />
       }

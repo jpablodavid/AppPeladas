@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
 	},
 	content: {
 		height: 420,
-		backgroundColor: theme.colors.background10,
+		backgroundColor: theme.colors.background,
 		borderTopLeftRadius: 25,
 		paddingHorizontal: 16,
 		paddingTop: 4,

@@ -7,6 +7,11 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	},
+  containerHome: {
+    flex: 1,
+		marginVertical: -20,
+		justifyContent: "space-between",
+  },
 	avatar: {
 		flex: 1,
 		flexDirection: "row",

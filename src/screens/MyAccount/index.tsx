@@ -16,7 +16,6 @@ import { Input } from "../../components/Input";
 import { InputSelect } from "../../components/InputSelect";
 import { Background } from "../../components/Background";
 import { useNavigation } from "@react-navigation/native";
-import { Header } from "../../components/Header";
 
 
 export const MyAccount = () => {
@@ -40,7 +39,6 @@ export const MyAccount = () => {
 
 	return (
 		<Background>
-      <Header goBack={handleGoback} title={user.nickName} />
       <KeyboardAvoidingView style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={styles.informationText}>

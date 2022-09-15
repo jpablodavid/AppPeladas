@@ -11,7 +11,6 @@ import GroupSvg from "../../assets/duel.svg";
 import PerfilSvg from "../../assets/fun.svg";
 
 import { Scout } from "../../components/Scout";
-import { Header } from "../../components/Header";
 import { Avatar } from "../../components/Avatar";
 import { ButtonAccess } from "../../components/ButtonAccess";
 import { CategoriesBackground } from "../../components/CategoriesBackground";
@@ -28,10 +27,6 @@ export const Home = () => {
   const { user } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
-
-  function handleOpenDrawer() {
-    navigation.openDrawer();
-  }
 
   function handleCloseModal() {
     setOpenModal(false);
@@ -57,8 +52,7 @@ export const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Header menu openMenu={handleOpenDrawer} title={user.nickName} />
-      <CategoriesBackground>
+      <View style={styles.containerHome}>
         <View style={styles.avatar}>
           <Avatar urlImage={user.avatar} />
           <View style={styles.infoBody}>
@@ -83,13 +77,13 @@ export const Home = () => {
             text={
               "Forme seu grupo, inicie uma partida, cadastre jogadores e der suas notas"
             }
-            //icon={GroupSvg}
+            icon={GroupSvg}
             onPress={handleAcessGroup}
           />
           <ButtonAccess
             title={"Perfil"}
             text={"Veja suas conquistas, gols, score, partidas"}
-            //icon={PerfilSvg}
+            icon={PerfilSvg}
             onPress={handleAcessProfile}
           />
           <View style={styles.jogoContainer}>
@@ -100,13 +94,13 @@ export const Home = () => {
             )}
           </View>
         </View>
-      </CategoriesBackground>
-      <ModalNoGroup
+      </View>
+    {/*  <ModalNoGroup
         visible={openModal}
         setOpenModal={handleCloseModal}
         goToEntrar={handleJoinGroup}
         goToCriar={handleCreateGroup}
-      />
+      /> */}
     </View>
   );
 };
