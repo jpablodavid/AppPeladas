@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
 		shadowColor: shadow,
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.2,
-		elevation: 4,
 	},
 	text: {
 		fontSize: 18,

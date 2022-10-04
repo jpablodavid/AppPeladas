@@ -28,9 +28,9 @@ export const TabRoutes = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          elevation: 0,
-          borderColor: '#000',
-          borderTopWidth: 2,
+          elevation: 4,
+          borderTopLeftRadius: 15,
+          borderTopRightRadius:15,
           backgroundColor: theme.colors.background,
           height: 90,
         }
