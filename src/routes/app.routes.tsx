@@ -25,13 +25,13 @@ export const TabRoutes = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          elevation: 4,
           borderTopLeftRadius: 15,
           borderTopRightRadius:15,
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.colors.TabColor,
           height: 90,
         }
       }}
