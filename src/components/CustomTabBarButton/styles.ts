@@ -5,7 +5,6 @@ const { background, backgroundDark} = theme.colors;
 
 export const styles = StyleSheet.create({
 	container: {
-		top: -30,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#7f5df0',

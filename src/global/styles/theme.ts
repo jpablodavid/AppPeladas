@@ -1,10 +1,11 @@
 export const theme = {
 	colors: {
-		//background: "#e9eef4",
+
     background: "#1d3557",
     backgroundDark: "#222",
 
-    TabColor: "#b8e7e8",
+    tabColor: "#b8e7e8",
+    tabColorFocused: '#73a3aa',
 
 		textButton: "#ffff",
 

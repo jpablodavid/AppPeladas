@@ -8,8 +8,7 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		paddingHorizontal: 40,
-		paddingTop: "20%",
-    backgroundColor: theme.colors.background10,
+		paddingTop: "20%"
 	},
 	textContainer: {
 		alignItems: "flex-start",
@@ -18,6 +17,7 @@ export const styles = StyleSheet.create({
 	title: {
 		fontSize: 24,
 		fontFamily: title700,
+    color: theme.colors.background
 	},
 	text: {
 		fontSize: 16,

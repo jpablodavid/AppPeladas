@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: 40,
 		paddingTop: "20%",
-    backgroundColor: theme.colors.background10,
 	},
 	textContainer: {
 		alignItems: "flex-start",
@@ -19,6 +18,7 @@ export const styles = StyleSheet.create({
 	title: {
 		fontSize: 24,
 		fontFamily: title700,
+    color: theme.colors.background
 	},
 	inputContainer: {
 		marginBottom: 16,

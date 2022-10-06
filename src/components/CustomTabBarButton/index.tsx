@@ -1,5 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity, TouchableOpacityProps, Image} from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { styles } from "./styles";
 
 type Props = TouchableOpacityProps & {};
@@ -10,23 +11,9 @@ export const CustomTabBarButton = ({...rest }: Props) => {
       style={styles.container}
       {...rest}
     >
-      <View style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 50,
-        height: 50,
-        borderRadius: 50,
-        }}
-      >
-        <Image
-            source={require('../../assets/play.png')}
-            resizeMode="contain"
-            style={{
-              width: 130,
-              height: 130,
-            }}
-          />
-      </View>
+    <View style={{alignItems: "center"}}>
+            <MaterialCommunityIcons name="plus-circle-outline" size={60} color='white'/>
+          </View>
     </TouchableOpacity>
   )
 };

@@ -6,6 +6,7 @@ const { title700, title500 } = theme.fonts;
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+    marginTop: -50
 	},
 	avatar: {
 		flex: 1,
