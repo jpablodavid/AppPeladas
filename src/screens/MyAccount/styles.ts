@@ -1,36 +1,19 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
-const { primary100, line, shadow, background10 } = theme.colors;
-const { text500, text900,title700, title500} = theme.fonts;
+const { title700 } = theme.fonts;
 
 export const styles = StyleSheet.create({
-  goBack: {
-		marginLeft: 24,
-		marginTop: 24,
-	},
 	container: {
 		flex: 1,
-		marginHorizontal: 40,
-		marginTop: 8,
-	},
-	textContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		marginTop: 32,
-	},
-	text: {
-		fontFamily: title500,
-		fontSize: 18,
-	},
-	title: {
-		fontSize: 20,
-		fontFamily: title700,
+		marginHorizontal: 24,
 	},
 	informationText: {
-		fontSize: 18,
+    marginTop: 60,
+    marginBottom: 16,
+		fontSize: 24,
 		fontFamily: title700,
-		marginVertical: 16,
+		color: 'white'
 	},
 	inputContainer: {
 		marginBottom: 16,

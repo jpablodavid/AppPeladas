@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 
 export const TabRoutes = () => {
 
-  const { user } = useAuth();
+  const { user, group } = useAuth();
 
   return (
     <Tab.Navigator
@@ -26,35 +26,41 @@ export const TabRoutes = () => {
         headerShown: true,
         headerStyle:{
           backgroundColor:theme.colors.tabColor,
-          borderBottomLeftRadius: 40,
-          padding: 20
+          borderBottomLeftRadius: 36,
+        },
+        headerTitleStyle:{
+          marginLeft: 16,
+          fontSize: 36,
+          fontFamily: theme.fonts.title700
         },
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          borderRadius: 25,
-          margin: 15,
+          borderRadius: 24,
+          margin: 16,
           backgroundColor: theme.colors.tabColor,
           height: 80,
         }
       }}
     >
-      <Tab.Screen name="Home" component={Home} options ={{
+      <Tab.Screen name="Home" component={Home}
+      options ={{ title: user.nickName,
         tabBarIcon: ({focused}) => (
-          <View style={{alignItems: "center"}}>
-            <MaterialCommunityIcons name="stadium" size={30} color= {focused ? "black" : "white"}/>
-            <Text style={{ color: focused ? 'black' : 'white', fontSize: 12}}>
+          <View style={{alignItems: "center", padding: 8,borderRadius: 15,backgroundColor: focused ?  theme.colors.tabColorFocused : theme.colors.tabColor}}>
+            <MaterialCommunityIcons name="stadium" size={30} color={theme.colors.tabIcon}/>
+            <Text style={{ color: theme.colors.tabIcon, fontSize: 14}}>
               HOME
             </Text>
           </View>
         )
       }}/>
 
-      <Tab.Screen name="Group" component={Group}  options ={{
+      <Tab.Screen name="Group" component={Group}
+      options ={{ title: group ? group.name : 'Grupo',
         tabBarIcon: ({focused}) => (
-          <View style={{alignItems: "center"}}>
-            <MaterialCommunityIcons name="account-group" size={30} color= {focused ? "black" : "white"}/>
-            <Text style={{ color: focused ? 'black' : 'white', fontSize: 12}}>
+          <View style={{alignItems: "center", padding: 8,borderRadius: 15,backgroundColor: focused ?  theme.colors.tabColorFocused : theme.colors.tabColor}}>
+            <MaterialCommunityIcons name="account-group" size={30} color={theme.colors.tabIcon} />
+            <Text style={{ color: theme.colors.tabIcon, fontSize: 14}}>
               GRUPO
             </Text>
           </View>
@@ -70,11 +76,12 @@ export const TabRoutes = () => {
           )
         }}/>
 
-      <Tab.Screen name="Profile" component={Profile}  options ={{
+      <Tab.Screen name="Profile" component={Profile}
+      options ={{ title: user.name,
         tabBarIcon: ({focused}) => (
-          <View style={{ alignItems: 'center'}}>
-            <MaterialCommunityIcons name="account-reactivate" size={30} color={focused ? "black" : "white"} />
-            <Text style={{ color: focused ? 'black' : 'white', fontSize: 12}}>
+          <View style={{alignItems: "center", padding: 8,borderRadius: 15,backgroundColor: focused ?  theme.colors.tabColorFocused : theme.colors.tabColor}}>
+            <MaterialCommunityIcons name="account-reactivate" size={30} color={theme.colors.tabIcon} />
+            <Text style={{ color: theme.colors.tabIcon, fontSize: 14}}>
               PERFIL
             </Text>
           </View>
@@ -82,11 +89,11 @@ export const TabRoutes = () => {
       }}/>
 
       <Tab.Screen name="MyAccount" component={MyAccount}
-      options ={{
+      options ={{ title: 'Minha Conta',
         tabBarIcon: ({focused}) => (
-          <View style={{alignItems: "center",borderLeftWidth: 3, borderColor: theme.colors.disable10, paddingLeft: 15, marginRight: 10}}>
-            <MaterialCommunityIcons name="cog" size={30} color={focused ? "black" : "white"} />
-            <Text style={{ color: focused ? 'black' : 'white', fontSize: 12}}>
+          <View style={{alignItems: "center",borderLeftWidth: 3, borderColor: focused ?  theme.colors.background : theme.colors.disable10, paddingLeft: 15, marginRight: 10}}>
+            <MaterialCommunityIcons name="cog" size={30} color={focused ?  theme.colors.background : theme.colors.tabIcon} />
+            <Text style={{ color: focused ?  theme.colors.background : theme.colors.tabIcon , fontSize: 14}}>
               CONTA
             </Text>
           </View>

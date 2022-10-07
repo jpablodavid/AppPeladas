@@ -35,12 +35,12 @@ export default function App() {
   }
 
   return (
-    <Background>
+    <>
       <StatusBar style="auto" backgroundColor="transparent" translucent />
 
       <AuthProvider>
         <Routes />
       </AuthProvider>
-    </Background>
+    </>
   );
 }

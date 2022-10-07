@@ -5,7 +5,8 @@ export const theme = {
     backgroundDark: "#222",
 
     tabColor: "#b8e7e8",
-    tabColorFocused: '#73a3aa',
+    tabColorFocused: '#73a9aa',
+    tabIcon: "#0B5980AA",
 
 		textButton: "#ffff",
 
@@ -19,7 +20,7 @@ export const theme = {
 		secondary: "#e65c4f",
 
 		disable10: "#ECECEC",
-		disable100: "#C1C1C1",
+		disable100: "#EBEBEB",
 
 		line: "#C4C4C4",
 		input: "#C4C4C4",

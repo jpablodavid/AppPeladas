@@ -11,18 +11,15 @@ import GroupSvg from "../../assets/duel.svg";
 import PerfilSvg from "../../assets/fun.svg";
 
 import { Scout } from "../../components/Scout";
-import { Avatar } from "../../components/Avatar";
 import { ButtonAccess } from "../../components/ButtonAccess";
-import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { ProgressBar } from "../../components/ProgressBar";
-import { ModalNoGroup } from "../../components/ModalNoGroup";
+
 //função importada
 import { nivelUser } from "../../global/Data/itens";
+import { Background } from "../../components/Background";
 
 export const Home = () => {
   const navigation = useNavigation();
-
-  let temJogo = false;
 
   const { user } = useAuth();
 
@@ -51,16 +48,15 @@ export const Home = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <Background>
       <View style={styles.containerHome}>
         <View style={styles.avatar}>
-          <Avatar urlImage={user.avatar} />
           <View style={styles.infoBody}>
             <View style={styles.info}>
               <Text style={styles.textPosition}>{user.position}</Text>
               <View style={styles.camisa}>
-                <FontAwesome5 name="tshirt" size={50} color="black" />
-                <Text style={styles.textCamisa}>{user.camisa}</Text>
+                <FontAwesome5 name="tshirt" size={90} color="black" />
+                <Text style={styles.textCamisa}>{"10"}</Text>
               </View>
             </View>
             <View style={styles.scout}>
@@ -86,21 +82,8 @@ export const Home = () => {
             icon={PerfilSvg}
             onPress={handleAcessProfile}
           />
-          <View style={styles.jogoContainer}>
-            {temJogo ? (
-              <Text> Tem jogo</Text>
-            ) : (
-              <Text style={styles.textJogo}>Sem Partidas no momento</Text>
-            )}
-          </View>
         </View>
       </View>
-    {/*  <ModalNoGroup
-        visible={openModal}
-        setOpenModal={handleCloseModal}
-        goToEntrar={handleJoinGroup}
-        goToCriar={handleCreateGroup}
-      /> */}
-    </View>
+    </Background>
   );
 };

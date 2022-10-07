@@ -7,5 +7,6 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: background,
+    marginTop: -35
 	},
 });

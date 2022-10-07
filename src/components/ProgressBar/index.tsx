@@ -19,30 +19,30 @@ export const ProgressBar = ({ text, number, inPerfil }: Props) => {
 				style={[
 					styles.text,
 					{
-						fontSize: inPerfil ? 20 : 14,
-						color: inPerfil ? theme.colors.background10 : theme.colors.line,
+						fontSize: inPerfil ? 20 : 22,
+						color: inPerfil ? theme.colors.tabColor : theme.colors.line,
 					},
 				]}
 			>
 				{text}
 			</Text>
 			<AnimatedCircularProgress
-				size={inPerfil ? 100 : 68}
-				width={inPerfil ? 8 : 4}
+				size={100}
+				width={inPerfil ? 8 : 12}
 				fill={number / 8}
-				tintColor={inPerfil ? theme.colors.primary50 : theme.colors.circuloXp}
+				tintColor={inPerfil ? theme.colors.tabColor : theme.colors.circuloXp}
 				backgroundColor={
-					inPerfil ? theme.colors.circuloXp : theme.colors.primary50
+					inPerfil ? theme.colors.circuloXp : theme.colors.tabColor
 				}
-				backgroundWidth={inPerfil ? 3 : 2}
+				backgroundWidth={inPerfil ? 3 : 6}
 				lineCap="round"
 			>
 				{(fill) => (
 					<View style={styles.value}>
-						<Text style={[styles.number, { fontSize: inPerfil ? 32 : 20 }]}>
+						<Text style={[styles.number, { fontSize: inPerfil ? 32 : 32 }]}>
 							{number}
 						</Text>
-						<Text style={[styles.xp, { fontSize: inPerfil ? 12 : 10 }]}>
+						<Text style={[styles.xp, { fontSize: inPerfil ? 12 : 18 }]}>
 							Xp
 						</Text>
 					</View>

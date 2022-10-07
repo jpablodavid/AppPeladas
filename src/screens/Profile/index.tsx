@@ -1,14 +1,13 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Entypo } from "@expo/vector-icons";
+import { View } from "react-native";
 
-import { styles } from "./styles";
-import { ButtonText } from "../../components/ButtonText";
 import { Background } from "../../components/Background";
-import { useAuth } from "../../hooks/auth";
-
 import { Card } from "../../components/Card";
 
+import { useAuth } from "../../hooks/auth";
+
+import { styles } from "./styles";
 
 export const Profile = () => {
 
@@ -21,11 +20,10 @@ export const Profile = () => {
 	}
 
 	return (
-		<Background>
-			<ButtonText style={styles.goBack} onPress={handleGoback}>
-				<Entypo name="chevron-left" size={24} color="black" />
-			</ButtonText>
-      <Card data={user}/>
-		</Background>
+    <Background>
+      <View style={styles.container}>
+        <Card data={user}/>
+      </View>
+    </Background>
 	);
 };
