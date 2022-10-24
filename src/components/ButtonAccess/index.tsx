@@ -1,24 +1,23 @@
 import React from "react";
 import { View, Text ,TouchableOpacity, TouchableOpacityProps} from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { styles } from "./styles";
-import { SvgProps } from "react-native-svg";
+import { theme } from "../../global/styles/theme";
 
 type Props = TouchableOpacityProps & {
 	title: string;
-	text: string;
-	icon?: React.FC<SvgProps>;
+  icon?: string;
 };
 
-export const ButtonAccess = ({ title, text, icon: Icon, ...rest }: Props) => {
+export const ButtonAccess = ({ title, icon, ...rest }: Props) => {
 	return (
 		<TouchableOpacity activeOpacity={0.6} {...rest} style={styles.container}>
-			<View style={styles.textsContainer}>
+      <View style={styles.textsContainer}>
 				<Text style={styles.title}>{title}</Text>
-				<Text style={styles.text}>{text}</Text>
 			</View>
-			<View style={styles.icon}>
-				{/* <Icon width={48} height={48} /> */}
+      <View style={styles.icon}>
+        <MaterialCommunityIcons name={icon} size={34} color={theme.colors.tabColor}/>
 			</View>
 		</TouchableOpacity>
 	);

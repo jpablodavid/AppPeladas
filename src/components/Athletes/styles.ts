@@ -4,10 +4,10 @@ import { theme } from "../../global/styles/theme";
 export const styles = StyleSheet.create({
   container: {
 		flex: 1,
-		height: 80,
+		height: 60,
 		flexDirection: "row",
 		alignItems: "center",
-		borderRadius: 8,
+		borderRadius: 20,
 		marginBottom: 8,
 		overflow: "hidden",
 	},
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
 		marginRight: 1,
 	},
 	textNumber: {
-		fontSize: 26,
+		fontSize: 24,
 		fontFamily: theme.fonts.text900,
 		color: theme.colors.primary100,
 	},
@@ -59,4 +59,14 @@ export const styles = StyleSheet.create({
 		fontSize: 20,
 		fontFamily: theme.fonts.title700,
 	},
+  modal:{
+    flex: 1,
+    margin: 64,
+		padding: 16,
+		backgroundColor: theme.colors.background,
+		borderRadius: 25
+  },
+  contentModal:{
+
+  }
 });

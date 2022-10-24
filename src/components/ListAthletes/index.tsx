@@ -7,9 +7,10 @@ import { styles } from "./styles";
 
 type Props = {
 	data: Group;
+  perfil: boolean;
 };
 
-export const ListAthletes = ({data}: Props) => {
+export const ListAthletes = ({data, perfil}: Props) => {
 
   const { loadAthletes, excludeAthletes } = useAuth();
 
@@ -34,7 +35,7 @@ export const ListAthletes = ({data}: Props) => {
 			data={athletes}
 			keyExtractor={item => item.id}
 			renderItem={({item}) => (
-				<Athletes data={item} exclude={excluir}/>
+				<Athletes data={item} exclude={excluir} perfil={perfil}/>
 			)}
 		/>
 	);

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { View, Text } from "react-native";
+
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
-import { View } from "react-native";
+import { Button } from "../Button";
 import { Group } from "../../hooks/auth";
 
 import { styles } from "./styles";
@@ -11,7 +13,7 @@ type Props = {
 	data: Group;
 };
 
-export const Map = () => {
+export const Map = ({data}: Props) => {
 
   const[local, setLocal]  = useState({
     latitude: 0,
@@ -37,7 +39,12 @@ export const Map = () => {
           //image={{uri: 'custom_pin'}}
         />
       </MapView>
-
+      <Text style={styles.adress}>
+          Estrada do sapê, 468 - Bento Ribeiro - RJ
+        </Text>
+      <View style={styles.buttonsContainer}>
+        <Button color={'red'} text={"Como chegar"}></Button>
+      </View>
 		</View>
 	);
 };

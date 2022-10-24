@@ -1,31 +1,24 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
-const { shadow, textButton } = theme.colors;
+const { shadow, background, backgroundDark } = theme.colors;
 
 export const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		borderRadius: 16,
-		flexDirection: "row",
+    width: 160,
+		borderRadius: 24,
 		marginBottom: 16,
-		justifyContent: "space-around",
-		backgroundColor: theme.colors.listName,
-		paddingTop: 8,
-		shadowColor: shadow,
-		shadowOffset: { width: 0, height: 1 },
-		shadowOpacity: 0.8,
-		shadowRadius: 2,
-		elevation: 5,
-		borderWidth: 1,
-		borderColor: textButton,
+		paddingHorizontal: 8,
+    paddingVertical: 8,
+		borderWidth: 4,
+		borderColor: background,
 	},
 	textsContainer: {
-		width: "70%",
+    marginLeft: 8,
 	},
 	title: {
-		fontSize: 30,
-		color: textButton,
+		fontSize: 20,
+		color: backgroundDark,
 		fontFamily: theme.fonts.title700,
 		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
@@ -33,11 +26,12 @@ export const styles = StyleSheet.create({
 		letterSpacing: 1,
 	},
 	text: {
-		fontSize: 16,
-		fontFamily: theme.fonts.text500,
+		fontSize: 14,
+		fontFamily: theme.fonts.title700,
+    color: 'black',
 	},
-	icon: {
-		alignItems: "center",
-		justifyContent: "center",
-	},
+  icon: {
+    paddingRight: 8,
+    alignItems:"flex-end",
+  }
 });

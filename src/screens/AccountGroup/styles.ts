@@ -3,8 +3,10 @@ import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
 	content: {
-		height: 360,
-		backgroundColor: theme.colors.background10,
-		borderTopLeftRadius: 25,
+    flex: 1,
+		backgroundColor: theme.colors.tabIcon,
+		borderTopRightRadius: 36,
+		paddingHorizontal: 16,
+		paddingVertical: 4,
 	},
 });

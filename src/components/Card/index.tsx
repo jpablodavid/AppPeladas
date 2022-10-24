@@ -30,8 +30,7 @@ export const Card = ({data} : Props) => {
         style={styles.perfil}
         colors={[
           theme.colors.primary100,
-          theme.colors.primary75,
-          theme.colors.primary100,
+          theme.colors.background,
         ]}
       >
         <LinearGradient
@@ -56,8 +55,7 @@ export const Card = ({data} : Props) => {
         style={styles.scout}
         colors={[
           theme.colors.secondary,
-          theme.colors.secondary75,
-          theme.colors.secondary,
+          theme.colors.tabIcon,
         ]}
       >
         <View style={styles.name}>
@@ -80,7 +78,7 @@ export const Card = ({data} : Props) => {
       <Entypo
         style={{ marginHorizontal: 18, marginBottom: 16 }}
         name="attachment"
-        size={52}
+        size={40}
         color="black"
       />
     </ButtonText>
@@ -88,7 +86,7 @@ export const Card = ({data} : Props) => {
       <Entypo
         style={{ marginHorizontal: 18 }}
         name="awareness-ribbon"
-        size={52}
+        size={40}
         color="black"
       />
     </ButtonText>
@@ -96,7 +94,7 @@ export const Card = ({data} : Props) => {
       <Entypo
         style={{ marginHorizontal: 18 }}
         name="battery"
-        size={50}
+        size={40}
         color="black"
       />
     </ButtonText>
@@ -104,7 +102,7 @@ export const Card = ({data} : Props) => {
       <Entypo
         style={{ marginHorizontal: 18 }}
         name="briefcase"
-        size={52}
+        size={40}
         color="black"
       />
     </ButtonText>
@@ -112,7 +110,7 @@ export const Card = ({data} : Props) => {
       <Entypo
         style={{ marginHorizontal: 18 }}
         name="bucket"
-        size={52}
+        size={40}
         color="black"
       />
     </ButtonText>
@@ -120,7 +118,23 @@ export const Card = ({data} : Props) => {
       <Entypo
         style={{ marginHorizontal: 12 }}
         name="bug"
-        size={52}
+        size={40}
+        color="black"
+      />
+    </ButtonText>
+    <ButtonText>
+      <Entypo
+        style={{ marginHorizontal: 12 }}
+        name="bug"
+        size={40}
+        color="black"
+      />
+    </ButtonText>
+    <ButtonText>
+      <Entypo
+        style={{ marginHorizontal: 12 }}
+        name="bug"
+        size={40}
         color="black"
       />
     </ButtonText>

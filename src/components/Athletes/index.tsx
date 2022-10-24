@@ -1,22 +1,29 @@
 import React, { useState }  from "react";
-import { View, Text } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+	ModalProps,
+  TouchableWithoutFeedback,
+  } from "react-native";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 import { useAuth, User } from "../../hooks/auth";
-import { ModalPerfil } from "../ModalPerfil";
+import { ButtonText } from "../ButtonText";
+import { Card } from "../Card";
 
 import { styles } from "./styles";
 
-type Props = RectButtonProps & {
+type Props = RectButtonProps & ModalProps & {
 	data: User;
+  perfil: boolean;
   exclude: (idGroup: string, idathletes: string) => Promise<void>;
 };
 
-export const Athletes = ({ data, exclude }: Props) => {
+export const Athletes = ({ data, perfil, exclude }: Props) => {
 
   const { user } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
-
 
   function handleCloseModal() {
     setOpenModal(false);
@@ -26,7 +33,7 @@ export const Athletes = ({ data, exclude }: Props) => {
     setOpenModal(true);
   }
 
-	function handlerExcluir() {
+  function handlerExcluir() {
     exclude("xFMvKV2P2P3kcrl8NFzC", data.id);
 		alert("Excluir");
 	}
@@ -52,11 +59,22 @@ export const Athletes = ({ data, exclude }: Props) => {
           </RectButton>
         </View>
 			)}
-      <ModalPerfil
-        data={data}
-        visible={openModal}
-        setOpenModal={handleCloseModal}
-      />
+      <Modal
+        transparent
+        animationType="slide"
+        statusBarTranslucent
+        visible={openModal}>
+        <TouchableWithoutFeedback
+					onPress={handleCloseModal}
+				>
+          <View style={styles.modal}>
+            <ButtonText style={{ width: 20 }} onPress={handleCloseModal}>
+              <Text>X</Text>
+            </ButtonText>
+              {!perfil ?  <Card data={data}/> : <Text>oi</Text> }
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
 		</View>
 	);
 };

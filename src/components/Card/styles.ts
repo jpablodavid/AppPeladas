@@ -5,14 +5,9 @@ const { primary100, line, shadow, background10 } = theme.colors;
 const { text500, text900,title700} = theme.fonts;
 
 export const styles = StyleSheet.create({
-	goBack: {
-		margin: 16,
-		marginTop: 32,
-	},
 	card: {
 		flex: 1,
-		marginHorizontal: 32,
-		marginBottom: 16,
+		margin: 24,
 		borderRadius: 25,
 		overflow: "hidden",
 	},
@@ -103,8 +98,8 @@ export const styles = StyleSheet.create({
 	icons:{
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		marginHorizontal: 32,
-		justifyContent: 'space-between',
-		marginBottom: 16,
+		marginHorizontal: 16,
+		justifyContent: 'space-around',
+		marginBottom: 48,
 	}
 });

@@ -33,18 +33,19 @@ export const Home = () => {
     navigation.navigate("Profile");
   }
 
-  function handleAcessGroup() {
-    user.grupo_id ? navigation.navigate("Group") : setOpenModal(true);
+  function handleAccounting() {
+    //user.grupo_id ? navigation.navigate("Accounting") : setOpenModal(true);
+    navigation.navigate("Accounting");
+  }
+
+  function handleAccountGroup() {
+    //user.grupo_id ? navigation.navigate("Accounting") : setOpenModal(true);
+    navigation.navigate("AccountGroup");
   }
 
   function handleJoinGroup() {
     setOpenModal(false);
     navigation.navigate("JoinGroup");
-  }
-
-  function handleCreateGroup() {
-    setOpenModal(false);
-    navigation.navigate("CreateGroup");
   }
 
   return (
@@ -68,20 +69,30 @@ export const Home = () => {
         </View>
 
         <View style={styles.content}>
-          <ButtonAccess
-            title={"Grupo"}
-            text={
-              "Forme seu grupo, inicie uma partida, cadastre jogadores e der suas notas"
-            }
-            icon={GroupSvg}
-            onPress={handleAcessGroup}
-          />
-          <ButtonAccess
-            title={"Perfil"}
-            text={"Veja suas conquistas, gols, score, partidas"}
-            icon={PerfilSvg}
-            onPress={handleAcessProfile}
-          />
+          <View style={styles.buttonsContainer}>
+            <ButtonAccess
+              title={"Pagamentos"}
+              icon={"stadium"}
+              onPress={handleAccounting}
+            />
+            <ButtonAccess
+              title={"Mensagem"}
+              icon={"stadium"}
+              onPress={handleAcessProfile}
+            />
+          </View>
+          <View style={styles.buttonsContainer}>
+            <ButtonAccess
+              title={"Contabil"}
+              icon={"stadium"}
+              onPress={handleAccountGroup}
+            />
+            <ButtonAccess
+              title={"Perfil"}
+              icon={"stadium"}
+              onPress={handleAcessProfile}
+            />
+          </View>
         </View>
       </View>
     </Background>

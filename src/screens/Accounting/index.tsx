@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/auth";
 
-import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { CategorySelect } from "../../components/CategorySelect";
 import { categoriesAccounting } from "../../utils/categoriesAccounting";
 import { AccountingGroup } from "../../components/AccountingGroup";
@@ -11,6 +10,11 @@ import { ListAthletesPayment } from "../../components/ListAthletesPayment";
 import { Values } from "../../components/Values";
 
 import { styles } from "./styles";
+import { Background } from "../../components/Background";
+import { theme } from "../../global/styles/theme";
+import { ListStaff } from "../../components/ListStaff";
+import { ListInfo } from "../../components/ListInfo";
+import { Calendar } from "../../components/Calendar";
 
 const meses = [
   'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho'
@@ -22,10 +26,6 @@ export const Accounting = () => {
 
 	const navigation = useNavigation();
 
-	function handleGoBack() {
-		navigation.navigate("Group");
-	}
-
 	const [category, setCategory] = useState("");
   const [disable, setDisable] = useState(false);
 
@@ -34,25 +34,25 @@ export const Accounting = () => {
 	}
 
 	return (
-		<View style={styles.container}>
-			<CategoriesBackground>
-				<View style={{ height: 16 }}></View>
+			<Background>
 				<CategorySelect
 					data={categoriesAccounting}
 					categorySelected={category}
 					setCategory={handleCategorySelect}
           disable={disable}
 				/>
-				<View style={styles.content}>
+				<ScrollView style={styles.content}>
           {
-            category === "1" ? <AccountingGroup data={meses} />
+            category === "1" ? <ListStaff data={group} />
             :
-              category === "2" ? <ListAthletesPayment data={group}/>
+              category === "2" ? <ListInfo data={group} />
             :
-              (category === "3") && <Values data={group}/>
+              (category === "6") && <Calendar data={group}/>
           }
-				</View>
-			</CategoriesBackground>
-		</View>
+				</ScrollView>
+        <View style={{height: 82, backgroundColor: theme.colors.tabIcon}}>
+
+        </View>
+			</Background>
 	);
 };

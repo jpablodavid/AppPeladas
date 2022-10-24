@@ -7,20 +7,20 @@ export const styles = StyleSheet.create({
 		marginVertical: 8,
 	},
 	label: {
-		fontSize: 20,
+		fontSize: 18,
 		fontFamily: theme.fonts.title700,
-		marginVertical: 4,
 		marginRight: 8,
+    marginVertical: 2,
 	},
 	infoText:{
-		fontSize: 18,
+		fontSize: 16,
 		fontFamily: theme.fonts.text900,
 		color: theme.colors.secondary,
 		paddingBottom: 2,
 	},
 	money: {
 		flexDirection: "row",
-		alignItems: 'center',	
+		alignItems: 'center',
 	},
 	button:{
 		width: 150,

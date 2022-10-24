@@ -10,9 +10,10 @@ export const styles = StyleSheet.create({
 	avatar: {
 		flex: 1,
 		flexDirection: "row",
-		alignItems: "flex-end",
+		alignItems: "center",
 		justifyContent: "space-evenly",
-		marginVertical: 16,
+    paddingVertical: 32,
+    marginTop: 32
 	},
 	infoBody: {},
 	info: {
@@ -47,11 +48,17 @@ export const styles = StyleSheet.create({
     alignItems: "flex-end",
 	},
 	content: {
-		height: 400,
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
 		backgroundColor: theme.colors.tabIcon,
-		borderTopLeftRadius: 25,
-		paddingHorizontal: 16,
-		justifyContent: "space-around",
-		paddingVertical: 16,
+		borderTopEndRadius: 36,
+		paddingHorizontal: 8,
+		paddingTop: 16,
+    paddingBottom: 80,
 	},
+  buttonsContainer: {
+    alignItems: "flex-start",
+    justifyContent: "space-around",
+  }
 });

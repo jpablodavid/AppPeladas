@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
-import { CategoriesBackground } from "../../components/CategoriesBackground";
 import { CategorySelect } from "../../components/CategorySelect";
 import { categoriesGroup } from "../../utils/categoriesGroup";
 
@@ -13,16 +12,16 @@ import { useAuth } from "../../hooks/auth";
 import { Map } from "../../components/Map";
 
 import { styles } from "./styles";
+import { Background } from "../../components/Background";
+import { theme } from "../../global/styles/theme";
+import { Gallery } from "../../components/Gallery";
+import { Calendar } from "../../components/Calendar";
 
 export const AcessGroup = () => {
 
   const { group } = useAuth();
 
 	const navigation = useNavigation();
-
-	function handleGoBack() {
-		navigation.navigate("Group");
-	}
 
 	const [category, setCategory] = useState("");
   const [disable, setDisable] = useState(false);
@@ -32,16 +31,14 @@ export const AcessGroup = () => {
 	}
 
 	return (
-		<View style={styles.container}>
-			<CategoriesBackground>
-				<View style={{ height: 16 }}></View>
+			<Background>
 				<CategorySelect
 					data={categoriesGroup}
 					categorySelected={category}
 					setCategory={handleCategorySelect}
           disable={disable}
 				/>
-				<View style={styles.content}>
+				<ScrollView style={styles.content}>
           {
             category === "1" ? <ListStaff data={group} />
             :
@@ -49,12 +46,16 @@ export const AcessGroup = () => {
             :
               category === "3" ? <Map data={group}/>
             :
-              category === "4" ? <ListAthletes data={group}/>
+              category === "4" ? <ListAthletes data={group} perfil={true}/>
             :
-              (category === "5") && <ListAthletes data={group}/>
+              category === "5" ? <Gallery data={group}/>
+            :
+              (category === "6") && <Calendar data={group}/>
           }
-				</View>
-			</CategoriesBackground>
-		</View>
+				</ScrollView>
+        <View style={{height: 82, backgroundColor: theme.colors.tabIcon}}>
+
+        </View>
+			</Background>
 	);
 };
