@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
-const { primary100, line, shadow, background10 } = theme.colors;
+const { primary100, line, shadow, tabColor, circuloXp } = theme.colors;
 const { text500, text900,title700} = theme.fonts;
 
 export const styles = StyleSheet.create({
 	card: {
 		flex: 1,
-		margin: 24,
+		marginHorizontal: 16,
 		borderRadius: 25,
 		overflow: "hidden",
 	},
@@ -66,11 +66,11 @@ export const styles = StyleSheet.create({
 		marginBottom: 12,
 	},
 	textName: {
-		fontSize: 40,
+		fontSize: 36,
 		fontFamily: title700,
 		textTransform: "uppercase",
 		textAlign: "center",
-		color: background10,
+		color:'#000',
 		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
@@ -85,12 +85,20 @@ export const styles = StyleSheet.create({
 	},
 	data: {
 		flex: 1,
-		paddingLeft: 16,
 	},
+  containerText:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  scoutData:{
+    fontSize: 28,
+		fontFamily: title700,
+		color: '#000',
+  },
 	textData: {
 		fontSize: 24,
 		fontFamily: text500,
-		color: background10,
+		color: tabColor,
 		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
@@ -101,5 +109,6 @@ export const styles = StyleSheet.create({
 		marginHorizontal: 16,
 		justifyContent: 'space-around',
 		marginBottom: 48,
+    marginTop: 16,
 	}
 });

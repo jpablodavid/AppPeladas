@@ -59,9 +59,16 @@ export const styles = StyleSheet.create({
 		fontSize: 20,
 		fontFamily: theme.fonts.title700,
 	},
+  close:{
+
+  },
   modal:{
     flex: 1,
-    margin: 64,
+    marginTop: 120,
+    marginHorizontal: 8,
+    marginBottom: 82,
+    borderWidth: 2,
+    borderColor: theme.colors.tabColor,
 		padding: 16,
 		backgroundColor: theme.colors.background,
 		borderRadius: 25

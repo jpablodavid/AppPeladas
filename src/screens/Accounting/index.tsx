@@ -5,8 +5,6 @@ import { useAuth } from "../../hooks/auth";
 
 import { CategorySelect } from "../../components/CategorySelect";
 import { categoriesAccounting } from "../../utils/categoriesAccounting";
-import { AccountingGroup } from "../../components/AccountingGroup";
-import { ListAthletesPayment } from "../../components/ListAthletesPayment";
 import { Values } from "../../components/Values";
 
 import { styles } from "./styles";

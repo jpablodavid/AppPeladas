@@ -1,24 +1,25 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { CustomTabBarButton } from "../components/CustomTabBarButton";
 import { Text, View } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { HomeRoutes } from "../routes/home.routes";
 import { JoinGroup } from "../screens/JoinGroup";
-import { Profile } from "../screens/Profile";
 import { MyAccount } from "../screens/MyAccount";
-import { AcessGroup } from '../screens/AcessGroup';
+import { GroupRoutes } from "./group.routes";
+import { CreateGroup } from "../screens/CreateGroup";
 
 import { useAuth } from "../hooks/auth";
-import { CustomTabBarButton } from "../components/CustomTabBarButton";
 
 import { theme } from "../global/styles/theme";
+
 
 const Tab = createBottomTabNavigator();
 
 export const AppRoutes = () => {
 
-  const { user, group } = useAuth();
+  const { user } = useAuth();
 
   return (
     <Tab.Navigator
@@ -44,7 +45,7 @@ export const AppRoutes = () => {
       }}
     >
       <Tab.Screen name="HomeRoutes" component={HomeRoutes}
-        options ={{ title: user.nickName, headerShown: false,
+        options ={{ headerShown: false,
           tabBarIcon: ({focused}) => (
             <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  theme.colors.tabColorFocused : theme.colors.tabColor}}>
               <MaterialCommunityIcons name="stadium" size={24} color={theme.colors.tabIcon}/>
@@ -56,8 +57,8 @@ export const AppRoutes = () => {
         }}
 			/>
 
-      <Tab.Screen name="AcessGroup" component={AcessGroup}
-      options ={{ title: group ? group.name : 'Grupo',
+      <Tab.Screen name="GroupRoutes" component={GroupRoutes}
+      options ={{ headerShown: false,
         tabBarIcon: ({focused}) => (
           <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  theme.colors.tabColorFocused : theme.colors.tabColor}}>
             <MaterialCommunityIcons name="account-group" size={24} color={theme.colors.tabIcon} />
@@ -77,13 +78,13 @@ export const AppRoutes = () => {
           )
         }}/>
 
-      <Tab.Screen name="Profile" component={Profile}
+      <Tab.Screen name="CreateGroup" component={CreateGroup}
       options ={{ title: user.name,
         tabBarIcon: ({focused}) => (
           <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  theme.colors.tabColorFocused : theme.colors.tabColor}}>
-            <MaterialCommunityIcons name="account-reactivate" size={24} color={theme.colors.tabIcon} />
+            <MaterialCommunityIcons name="android-messages" size={24} color={theme.colors.tabIcon} />
             <Text style={{ color: theme.colors.tabIcon, fontSize: 12, fontWeight: "bold"}}>
-              PERFIL
+              MSG
             </Text>
           </View>
         )

@@ -1,71 +1,61 @@
 import React, { useState } from "react";
-import { View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { ScrollView, View } from "react-native";
 
 import { useAuth } from "../../hooks/auth";
 
-import { styles } from "./styles";
-
-import GroupSvg from "../../assets/duel.svg";
-import PerfilSvg from "../../assets/fun.svg";
-
-import { Avatar } from "../../components/Avatar";
-import { ButtonAccess } from "../../components/ButtonAccess";
-
-//função importada
-import { Button } from "../../components/Button";
-import { theme } from "../../global/styles/theme";
+import { CategorySelect } from "../../components/CategorySelect";
 import { Background } from "../../components/Background";
+import { ListStaff } from "../../components/ListStaff";
+import { ListAthletes } from "../../components/ListAthletes";
+import { ListInfo } from "../../components/ListInfo";
+import { Map } from "../../components/Map";
+import { Gallery } from "../../components/Gallery";
+import { Calendar } from "../../components/Calendar";
+import { categoriesGroup } from "../../utils/categoriesGroup";
 
-const { primary100 } = theme.colors;
+import { theme } from "../../global/styles/theme";
+
+import { styles } from "./styles";
+import { Teste } from "../Teste";
 
 export const Group = () => {
-  const navigation = useNavigation();
 
-  const { user, group } = useAuth();
+  const { group } = useAuth();
 
-  const [openModal, setOpenModal] = useState(false);
 
-  function handleCloseModal() {
-    setOpenModal(false);
-  }
+	const [category, setCategory] = useState("");
+  const [disable, setDisable] = useState(false);
 
-  function handleGoback() {
-    navigation.goBack();
+	function handleCategorySelect(categoryId: string) {
+		categoryId === category ? setDisable(true) : (setCategory(categoryId), setDisable(false));
 	}
 
-  function handleAcessAccounting() {
-    navigation.navigate("Accounting");
-  }
-
-  function handleAcessGroup() {
-    navigation.navigate("AcessGroup")
-  }
-
-  return (
-    <Background>
-      <View style={styles.avatar}>
-        <Avatar urlImage={user.avatar} />
-      </View>
-      <View style={styles.button}>
-        <Button color={primary100} text={'Iniciar Pelada'}/>
-      </View>
-      <View style={styles.content}>
-        <ButtonAccess
-          title={"Acessar"}
-          text={
-            "Visualize as informações do grupo"
+	return (
+			<Background>
+				<CategorySelect
+					data={categoriesGroup}
+					categorySelected={category}
+					setCategory={handleCategorySelect}
+          disable={disable}
+				/>
+				<ScrollView style={styles.content}>
+          {
+            !category || category === "1" ? <ListInfo data={group} />
+            :
+              category === "2" ? <ListStaff data={group} />
+            :
+              category === "3" ? <Map data={group}/>
+            :
+              category === "4" ? <ListAthletes data={group} perfil={true}/>
+            :
+              category === "5" ? <Gallery data={group}/>
+            :
+              (category === "6") && <Calendar data={group}/>
           }
-          icon={GroupSvg}
-          onPress={handleAcessGroup}
-        />
-        <ButtonAccess
-          title={"Contabilidade"}
-          text={"Saiba tudo sobre as finanças do grupo"}
-          icon={PerfilSvg}
-          onPress={handleAcessAccounting}
-        />
-      </View>
-    </Background>
-  );
+				</ScrollView>
+        <View style={{height: 82, backgroundColor: theme.colors.tabIcon}}>
+
+        </View>
+			</Background>
+	);
 };

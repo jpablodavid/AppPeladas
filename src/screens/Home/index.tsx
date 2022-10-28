@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import { useAuth } from "../../hooks/auth";
 
-import { styles } from "./styles";
-
-import { FontAwesome5 } from "@expo/vector-icons";
-import GroupSvg from "../../assets/duel.svg";
-import PerfilSvg from "../../assets/fun.svg";
-
-import { Scout } from "../../components/Scout";
 import { ButtonAccess } from "../../components/ButtonAccess";
 import { ProgressBar } from "../../components/ProgressBar";
-
 //função importada
 import { nivelUser } from "../../global/Data/itens";
 import { Background } from "../../components/Background";
+
+import { styles } from "./styles";
 
 export const Home = () => {
   const navigation = useNavigation();
@@ -50,51 +45,37 @@ export const Home = () => {
 
   return (
     <Background>
-      <View style={styles.containerHome}>
-        <View style={styles.avatar}>
-          <View style={styles.infoBody}>
-            <View style={styles.info}>
-              <Text style={styles.textPosition}>{user.position}</Text>
-              <View style={styles.camisa}>
-                <FontAwesome5 name="tshirt" size={90} color="black" />
-                <Text style={styles.textCamisa}>{"10"}</Text>
-              </View>
+      <View style={styles.container}>
+          <View style={styles.left}>
+            <Text style={styles.textPosition}>{user.position}</Text>
+            <ProgressBar number={Number(user.xp)} inPerfil={false} />
+            <Text style={styles.nivel}>{nivelUser(user.xp)}</Text>
+          </View>
+          <View style={styles.right} >
+            <View style={styles.camisa}>
+              <FontAwesome5 name="tshirt" size={110} color="black" />
+              <Text style={styles.textCamisa}>{"10"}</Text>
             </View>
-            <View style={styles.scout}>
-              <ProgressBar text={nivelUser(user.xp)} number={Number(user.xp)} inPerfil={false} />
-              <Scout text={"Partidas"} number={user.partidas} />
-              <Scout text={"Gols"} number={user.gols} />
+            <View>
+              <Text style={styles.scout}>{user.gols}</Text>
+              <Text style={styles.scoutText}>Gols</Text>
+              <Text style={styles.scout}>{user.partidas}</Text>
+              <Text style={styles.scoutText}>Partidas</Text>
             </View>
           </View>
-        </View>
-
-        <View style={styles.content}>
-          <View style={styles.buttonsContainer}>
-            <ButtonAccess
-              title={"Pagamentos"}
-              icon={"stadium"}
-              onPress={handleAccounting}
-            />
-            <ButtonAccess
-              title={"Mensagem"}
-              icon={"stadium"}
-              onPress={handleAcessProfile}
-            />
-          </View>
-          <View style={styles.buttonsContainer}>
-            <ButtonAccess
-              title={"Contabil"}
-              icon={"stadium"}
-              onPress={handleAccountGroup}
-            />
-            <ButtonAccess
-              title={"Perfil"}
-              icon={"stadium"}
-              onPress={handleAcessProfile}
-            />
-          </View>
-        </View>
       </View>
+      <View style={styles.buttonsContainer}>
+          <ButtonAccess
+            title={"Contabilidade"}
+            icon={"cash"}
+            onPress={handleAccountGroup}
+          />
+          <ButtonAccess
+            title={"Perfil"}
+            icon={"account-reactivate"}
+            onPress={handleAcessProfile}
+          />
+        </View>
     </Background>
   );
 };

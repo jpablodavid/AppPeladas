@@ -1,23 +1,21 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { useAuth } from "../hooks/auth";
+import { Group } from "../screens/Group";
 
-import { Home } from "../screens/Home";
-import { Profile } from "../screens/Profile";
-import { AccountGroup } from "../screens/AccountGroup";
+import { useAuth } from "../hooks/auth";
 
 import { theme } from "../global/styles/theme";
 
 const { Navigator, Screen } = createStackNavigator();
 
-export const  HomeRoutes = () => {
+export const  GroupRoutes = () => {
 
-  const { user } = useAuth();
+  const { group } = useAuth();
 
   return (
     <Navigator
-      initialRouteName='AppRoutes'
+      initialRouteName='Group'
       screenOptions={{
         headerStyle:{
           backgroundColor:theme.colors.tabColor,
@@ -30,11 +28,7 @@ export const  HomeRoutes = () => {
         },
       }}
     >
-      <Screen name="Home" component={Home} options ={{ title: user.nickName }}/>
-
-      <Screen name="AccountGroup" component={AccountGroup} />
-
-      <Screen name="Profile" component={Profile} />
+      <Screen name="Group" component={Group} options ={{ title: group ? group.name : 'Grupo' }}/>
 
     </Navigator>
   );

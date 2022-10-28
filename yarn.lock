@@ -2495,7 +2495,15 @@
   resolved "https://registry.npmjs.org/@types/qs/-/qs-6.9.7.tgz"
   integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
 
-"@types/react-native@~0.69.1":
+"@types/react-native-snap-carousel@^3.8.5":
+  version "3.8.5"
+  resolved "https://registry.npmjs.org/@types/react-native-snap-carousel/-/react-native-snap-carousel-3.8.5.tgz"
+  integrity sha512-EMBwQo/om2HZM/J6u8Bvz7i0BEO/v6frrpmlvUQ579CMsgYQPlYzQ1ne4KDdRq08+yDSG8/8AwIi1R+185ROsg==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-native@*", "@types/react-native@~0.69.1":
   version "0.69.13"
   resolved "https://registry.npmjs.org/@types/react-native/-/react-native-0.69.13.tgz"
   integrity sha512-jEKIkqKjmYI7NeRssLrn/zRtFeI6S1FNe5p45OKbBxrQArXpF2lJelztFTEZKIv1PSfYKcAk5x6+1sdZFEFAkA==
@@ -7239,6 +7247,11 @@ react-native-maps@0.31.1:
   dependencies:
     "@types/geojson" "^7946.0.7"
     deprecated-react-native-prop-types "^2.3.0"
+
+react-native-reanimated-carousel@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated-carousel/-/react-native-reanimated-carousel-3.1.1.tgz#f43c9bd5d94beff414c414bb6e0fd884c7088bb4"
+  integrity sha512-MmtomuAmHfAII4ovP7dB81mAuwMsLMJ6boioOh3wows0LQCnd0OoaYJF5gmNhAmXVU1WeFw5UVaklOH2e1oGpw==
 
 react-native-reanimated@~2.9.1:
   version "2.9.1"

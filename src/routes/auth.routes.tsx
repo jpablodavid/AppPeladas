@@ -7,7 +7,6 @@ import { SignIn } from "../screens/SignIn";
 import { SignUp } from "../screens/SignUp";
 import { CreateAccount } from "../screens/CreateAccount";
 
-import { useAuth } from "../hooks/auth";
 
 const { Navigator, Screen } = createStackNavigator();
 

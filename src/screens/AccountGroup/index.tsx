@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 
-import { Background } from "../../components/Background";
-import { CategorySelect } from "../../components/CategorySelect";
-import { categoriesAccounting } from "../../utils/categoriesAccounting";
-
 import { useAuth } from "../../hooks/auth";
 
-import { styles } from "./styles";
-
-import { theme } from "../../global/styles/theme";
-import { ListInfo } from "../../components/ListInfo";
+import { Background } from "../../components/Background";
+import { CategorySelect } from "../../components/CategorySelect";
 import { ListStaff } from "../../components/ListStaff";
 import { Calendar } from "../../components/Calendar";
 import { ListAthletes } from "../../components/ListAthletes";
-import { ListAthletesPayment } from "../../components/ListAthletesPayment";
+import { categoriesAccounting } from "../../utils/categoriesAccounting";
+
+import { theme } from "../../global/styles/theme";
+
+import { styles } from "./styles";
+import { CollectionGroup } from "../../components/CollectionGroup";
+
 
 type Props = {
 	title: string;
@@ -28,7 +28,8 @@ export const AccountGroup = ({ title }: Props) => {
   const [disable, setDisable] = useState(false);
 
 	function handleCategorySelect(categoryId: string) {
-		categoryId === category ? setCategory("") : setCategory(categoryId);
+		/* categoryId === category ? setCategory("") : setCategory(categoryId); */
+    categoryId === category ? setDisable(true) : (setCategory(categoryId), setDisable(false))
 	}
 
 	return (
@@ -41,11 +42,11 @@ export const AccountGroup = ({ title }: Props) => {
       />
       <ScrollView style={styles.content}>
         {
-          category === "1" ? <ListStaff data={group} />
+          !category || category === "1"? <ListStaff data={group} />
           :
             category === "2" ? <ListAthletes data={group} perfil={false}/>
           :
-            (category === "3") && <Calendar data={group}/>
+            (category === "3") && <CollectionGroup data={group}/>
         }
       </ScrollView>
       <View style={{height: 82, backgroundColor: theme.colors.tabIcon}}>

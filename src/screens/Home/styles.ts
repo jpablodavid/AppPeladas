@@ -4,29 +4,27 @@ import { theme } from "../../global/styles/theme";
 const { title700, text900 } = theme.fonts;
 
 export const styles = StyleSheet.create({
-  containerHome: {
-    flex: 1,
-  },
-	avatar: {
-		flex: 1,
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-evenly",
-    paddingVertical: 32,
-    marginTop: 32
+	container: {
+		flex: 0.9,
+    marginTop: 32,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
 	},
-	infoBody: {},
-	info: {
-		flexDirection: "row",
+	right: {
+    justifyContent: "space-around",
+  },
+	left: {
+    justifyContent: "space-around"
 	},
 	camisa: {
 		alignItems: "center",
 		justifyContent: "center",
+    //marginBottom: -16,
 	},
 	textCamisa: {
 		position: "absolute",
 		color: theme.colors.textButton,
-		fontSize: 36,
+		fontSize: 44,
 		fontFamily: title700,
 		textShadowColor: theme.colors.primary10,
 		textShadowOffset: { width: 1, height: -1 },
@@ -36,29 +34,44 @@ export const styles = StyleSheet.create({
 		fontSize: 32,
 		fontFamily: text900,
 		color: theme.colors.textButton,
-		marginRight: 38,
-		marginLeft: -10,
-		paddingTop: 6,
 		textShadowColor: theme.colors.shadow,
 		textShadowOffset: { width: 1, height: -1 },
 		textShadowRadius: 1,
 	},
+  nivel :{
+    alignSelf: 'center',
+    marginBottom: 16,
+    fontSize: 28,
+    fontFamily: theme.fonts.title700,
+		color: theme.colors.line,
+		textShadowColor: theme.colors.shadow,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
+  },
 	scout: {
-		flexDirection: "row",
-    alignItems: "flex-end",
+    alignSelf: 'center',
+    fontSize: 32,
+    fontFamily: theme.fonts.title700,
+		color: theme.colors.circuloXp,
+		marginRight: 4,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
 	},
-	content: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-		backgroundColor: theme.colors.tabIcon,
-		borderTopEndRadius: 36,
-		paddingHorizontal: 8,
-		paddingTop: 16,
-    paddingBottom: 80,
-	},
+  scoutText: {
+    alignSelf: 'center',
+    marginBottom: 16,
+    fontSize: 28,
+    fontFamily: theme.fonts.title700,
+		color: theme.colors.line,
+		textShadowColor: theme.colors.shadow,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
+  },
   buttonsContainer: {
-    alignItems: "flex-start",
+    flex: 0.2,
+    flexDirection: 'row',
     justifyContent: "space-around",
+    marginHorizontal: 16,
+    marginBottom: 106
   }
 });

@@ -1,37 +1,29 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 
-const { shadow, background, backgroundDark } = theme.colors;
+const { shadow, background, backgroundDark, tabColor, tabIcon } = theme.colors;
 
 export const styles = StyleSheet.create({
 	container: {
-    width: 160,
+    flex: 1,
+    justifyContent: 'center',
 		borderRadius: 24,
-		marginBottom: 16,
-		paddingHorizontal: 8,
-    paddingVertical: 8,
+    marginHorizontal: 4,
+		padding: 8,
 		borderWidth: 4,
-		borderColor: background,
-	},
-	textsContainer: {
-    marginLeft: 8,
+    backgroundColor: tabIcon,
+		borderColor: tabColor,
 	},
 	title: {
 		fontSize: 20,
-		color: backgroundDark,
+		color: 'white',
 		fontFamily: theme.fonts.title700,
 		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
 		letterSpacing: 1,
 	},
-	text: {
-		fontSize: 14,
-		fontFamily: theme.fonts.title700,
-    color: 'black',
-	},
   icon: {
-    paddingRight: 8,
     alignItems:"flex-end",
   }
 });
