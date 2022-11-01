@@ -1,9 +1,15 @@
 export const Months = [
-	{ id: "1", title: "Informações", icon: "information"},
-	{ id: "2", title: "Diretoria", icon: "account-supervisor-circle"},
-	{ id: "3", title: "Localização", icon: "map-marker-radius" },
-	{ id: "4", title: "Atletas", icon:"account-group-outline" },
-	{ id: "5", title: "Galeria", icon: "folder-multiple-image" },
-	{ id: "6", title: "Calendário", icon: "calendar-month" },
+	{ mes: 'janeiro', arrecadações: '1000,00', custos: '200'},
+	{ mes: 'Fevereiro', arrecadações: '900,00', custos: '200'},
+	{ mes: 'Março', arrecadações: '1500,00', custos: '200'},
+	{ mes: 'Abril', arrecadações: '1100,00', custos: '200'},
+	{ mes: 'Maio', arrecadações: '1600,00', custos: '200'},
+	{ mes: 'junho', arrecadações: '800,00', custos: '200'},
+  { mes: 'julho', arrecadações: '700,00', custos: '200'},
+  { mes: 'Agosto', arrecadações: '2000,00', custos: '200'},
+  { mes: 'Setembro', arrecadações: '500,00', custos: '200'},
+  { mes: 'Outubro', arrecadações: '1900,00', custos: '200'},
+  { mes: 'Novembro', arrecadações: '1100,00', custos: '200'},
+  { mes: 'Dezembro', arrecadações: '1020,00', custos: '200'},
 ];
 

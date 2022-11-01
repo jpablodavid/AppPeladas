@@ -71,10 +71,13 @@ export const styles = StyleSheet.create({
 	},
   modal:{
     flex: 1,
-    marginVertical: 64,
-    marginHorizontal: 24,
+    marginTop: 120,
+    marginHorizontal: 8,
+    marginBottom: 82,
+    borderWidth: 2,
+    borderColor: theme.colors.tabColor,
 		padding: 16,
-		backgroundColor: theme.colors.background10,
+		backgroundColor: theme.colors.background,
 		borderRadius: 25
   },
   labelModal: {

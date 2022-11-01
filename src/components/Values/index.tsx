@@ -90,10 +90,10 @@ export const Values = ({data}) => {
               <Text style={styles.label}>Mensalidades:</Text>
               <View style={styles.money}>
                 <Text style={styles.label}>Número do Atleta:</Text>
-                <Text style={styles.infoText}>50,00</Text>
+                <Text style={styles.infoText}>10</Text>
               </View>
               <View style={styles.mostrar}>
-                <Text style={styles.mostrarContent}>oiieuyr</Text>
+                <Text style={styles.mostrarContent}>nome do atleta</Text>
               </View>
               <View style={styles.money}>
                 <Text style={styles.label}>Mês a Pagar:</Text>
@@ -105,13 +105,13 @@ export const Values = ({data}) => {
               <Text style={styles.labelAdd}>Convidados:</Text>
               <View style={styles.money}>
                 <Text style={styles.label}>Número de Convidados:</Text>
-                <Text style={styles.infoText}>50,00</Text>
+                <Text style={styles.infoText}>4</Text>
               </View>
               <View style={styles.money}>
                 <Text style={styles.label}>Total:</Text>
                 <View style={styles.valores}>
                   <Text style={styles.infoText}> R$</Text>
-                  <Text style={styles.infoText}>20,00</Text>
+                  <Text style={styles.infoText}>{4 * 20},00</Text>
                 </View>
               </View>
               <View style={styles.buttonModal}>

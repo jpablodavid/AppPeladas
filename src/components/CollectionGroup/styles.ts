@@ -9,23 +9,42 @@ export const styles = StyleSheet.create({
   title:{
     fontSize: 24,
 		fontFamily: theme.fonts.title700,
-    marginVertical: 8,
+    marginVertical: 4,
     textAlign: "center"
   },
   carrossel:{
-
+    width: 360,
+    marginRight: 8,
   },
   containerItem:{
+    flexDirection: 'row',
     borderWidth: 3,
     borderColor: theme.colors.tabColor,
-    alignItems: 'center',
-    borderRadius: 24
+    borderRadius: 24,
+    padding: 16,
+    justifyContent: 'space-evenly'
   },
   label: {
 		fontSize: 18,
 		fontFamily: theme.fonts.title700,
 		marginRight: 8,
     marginVertical: 8,
+	},
+  labelCarousel: {
+		fontSize: 18,
+		fontFamily: theme.fonts.title700,
+	},
+  textCustos: {
+		fontSize: 24,
+		fontFamily: theme.fonts.title700,
+    color: 'red',
+    marginVertical: 4
+	},
+  textArrecadacao: {
+		fontSize: 24,
+		fontFamily: theme.fonts.title700,
+    color: 'green',
+    marginVertical: 4,
 	},
   info:{
     width: "40%",
@@ -46,5 +65,7 @@ export const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: 'center',
 	},
-
+  test:{
+    alignItems: 'flex-start',
+  }
 });

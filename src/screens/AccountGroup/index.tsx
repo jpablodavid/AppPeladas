@@ -6,7 +6,6 @@ import { useAuth } from "../../hooks/auth";
 import { Background } from "../../components/Background";
 import { CategorySelect } from "../../components/CategorySelect";
 import { ListStaff } from "../../components/ListStaff";
-import { Calendar } from "../../components/Calendar";
 import { ListAthletes } from "../../components/ListAthletes";
 import { categoriesAccounting } from "../../utils/categoriesAccounting";
 
@@ -14,6 +13,8 @@ import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 import { CollectionGroup } from "../../components/CollectionGroup";
+import { Months } from "../../utils/collectionMonths";
+import { Values } from "../../components/Values";
 
 
 type Props = {
@@ -42,11 +43,11 @@ export const AccountGroup = ({ title }: Props) => {
       />
       <ScrollView style={styles.content}>
         {
-          !category || category === "1"? <ListStaff data={group} />
+          !category || category === "1"? <CollectionGroup data={Months} />
           :
             category === "2" ? <ListAthletes data={group} perfil={false}/>
           :
-            (category === "3") && <CollectionGroup data={group}/>
+            (category === "3") && <Values data={group} />
         }
       </ScrollView>
       <View style={{height: 82, backgroundColor: theme.colors.tabIcon}}>
