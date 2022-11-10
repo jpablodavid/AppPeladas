@@ -28,6 +28,7 @@ export const  GroupRoutes = () => {
         },
       }}
     >
+
       <Screen name="Group" component={Group} options ={{ title: group ? group.name : 'Grupo' }}/>
 
     </Navigator>

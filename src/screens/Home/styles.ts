@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
 	},
 	right: {
     justifyContent: "space-around",
+    marginTop: 24
   },
 	left: {
     justifyContent: "space-around"
@@ -19,7 +20,6 @@ export const styles = StyleSheet.create({
 	camisa: {
 		alignItems: "center",
 		justifyContent: "center",
-    //marginBottom: -16,
 	},
 	textCamisa: {
 		position: "absolute",
@@ -48,6 +48,11 @@ export const styles = StyleSheet.create({
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
   },
+  image: {
+    width: 60,
+    height: 50,
+    marginTop: -50,
+  },
 	scout: {
     alignSelf: 'center',
     fontSize: 32,
@@ -59,7 +64,7 @@ export const styles = StyleSheet.create({
 	},
   scoutText: {
     alignSelf: 'center',
-    marginBottom: 16,
+    marginBottom: 24,
     fontSize: 28,
     fontFamily: theme.fonts.title700,
 		color: theme.colors.line,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image} from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -49,7 +49,10 @@ export const Home = () => {
           <View style={styles.left}>
             <Text style={styles.textPosition}>{user.position}</Text>
             <ProgressBar number={Number(user.xp)} inPerfil={false} />
-            <Text style={styles.nivel}>{nivelUser(user.xp)}</Text>
+            <View>
+              <Image style={styles.image} source={require("../../assets/person.png")} />
+              <Text style={styles.nivel}>{nivelUser(user.xp)}</Text>
+            </View>
           </View>
           <View style={styles.right} >
             <View style={styles.camisa}>
