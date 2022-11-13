@@ -12,7 +12,7 @@ import { Background } from "../../components/Background";
 import { theme } from "../../global/styles/theme";
 import { ListStaff } from "../../components/ListStaff";
 import { ListInfo } from "../../components/ListInfo";
-import { Calendar } from "../../components/Calendar";
+import { Calendar } from "../../components/Calendario";
 
 const meses = [
   'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho'

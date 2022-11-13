@@ -10,13 +10,12 @@ import { ListAthletes } from "../../components/ListAthletes";
 import { ListInfo } from "../../components/ListInfo";
 import { Map } from "../../components/Map";
 import { Gallery } from "../../components/Gallery";
-import { Calendar } from "../../components/Calendar";
+import { Calendario } from "../../components/Calendario";
 import { categoriesGroup } from "../../utils/categoriesGroup";
 
 import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
-import { Teste } from "../Teste";
 
 export const Group = () => {
 
@@ -50,7 +49,7 @@ export const Group = () => {
             :
               category === "5" ? <Gallery data={group}/>
             :
-              (category === "6") && <Calendar data={group}/>
+              (category === "6") && <Calendario data={group}/>
           }
 				</ScrollView>
         <View style={{height: 82, backgroundColor: theme.colors.tabIcon}}>
