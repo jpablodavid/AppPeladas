@@ -7,6 +7,7 @@ export const theme = {
     tabColor: "#b8e7e8",
     tabColorFocused: '#73a9aa',
     tabIcon: "#0B5980AA",
+    modal: "#0B5980",
 
 		textButton: "#ffff",
 

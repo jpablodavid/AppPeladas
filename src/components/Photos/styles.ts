@@ -1,15 +1,16 @@
 import { Dimensions, StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 const width = Dimensions.get('window').width;
 
 export const styles = StyleSheet.create({
   photo:{
-    width: 106,
-    height: 110,
+    width: width / 3.63,
+    height: 100,
   },
   button:{
-    margin: 4,
+    margin: 2,
   },
   modal:{
     flex: 1,
@@ -27,7 +28,7 @@ export const styles = StyleSheet.create({
   text:{
     margin: 8,
     fontFamily: theme.fonts.text500,
-    fontSize: 16,
+    fontSize: RFValue(16),
     color: "#fff"
   }
 });

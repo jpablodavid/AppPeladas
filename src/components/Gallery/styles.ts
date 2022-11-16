@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
     flex: 1,
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-    backgroundColor: '#000',
     margin: 8,
     marginRight: 10,
 	},

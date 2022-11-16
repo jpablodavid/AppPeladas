@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { primary100 } = theme.colors;
+const { primary100, background} = theme.colors;
 const { title700, title500 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -16,9 +17,9 @@ export const styles = StyleSheet.create({
 		marginBottom: 32,
 	},
 	title: {
-		fontSize: 24,
+		fontSize: RFValue(24),
 		fontFamily: title700,
-    color: theme.colors.background
+    color: background
 	},
 	inputContainer: {
 		marginBottom: 16,
@@ -34,7 +35,7 @@ export const styles = StyleSheet.create({
 	},
 	or: {
 		textAlign: "center",
-		fontSize: 12,
+		fontSize: RFValue(12),
 		fontFamily: title700,
 		color: primary100,
 		marginVertical: 8,
@@ -51,14 +52,14 @@ export const styles = StyleSheet.create({
 		marginVertical: 32,
 	},
 	loginText: {
-		fontSize: 15,
+		fontSize: RFValue(15),
 		fontFamily: title500,
 		color: primary100,
 	},
 	buttonText: {
-		fontSize: 18,
-		color: theme.colors.primary100,
-		fontFamily: theme.fonts.title700,
+		fontSize: RFValue(18),
+		color: primary100,
+		fontFamily: title700,
 		marginLeft: 3,
 	},
 });

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
@@ -10,7 +11,7 @@ export const styles = StyleSheet.create({
 	input: {
 		width: '100%',
 		marginLeft: 8,
-    fontSize: 16,
+    fontSize: RFValue(16),
 		color: theme.colors.primary100,
 		fontFamily: theme.fonts.text500,
 	},

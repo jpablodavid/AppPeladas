@@ -3,6 +3,10 @@ import { TextInput, TextInputProps } from "react-native";
 
 import { styles } from "./styles";
 
-export const InputArea = ({ ...rest }: TextInputProps) => {
-	return <TextInput style={styles.container} {...rest} />;
+type Props = TextInputProps &{
+	size: string
+};
+
+export const InputArea = ({size, ...rest }: Props) => {
+	return <TextInput style={[styles.container, { height: size}]} {...rest} />;
 };

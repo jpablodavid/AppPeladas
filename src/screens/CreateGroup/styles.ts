@@ -1,21 +1,19 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { title700, title500 } = theme.fonts;
+const { title700, text500, text900} = theme.fonts;
 
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginHorizontal: 40,
-	},
-	goBack: {
-		margin: 24,
-		marginTop: 32,
+    marginTop: "20%"
 	},
 	imageContainer: {
-		width: 92,
-		height: 92,
-		borderRadius: 46,
+		width: 100,
+		height: 100,
+		borderRadius: 50,
 		alignItems: "center",
 		justifyContent: "center",
 		marginBottom: 8,
@@ -24,7 +22,7 @@ export const styles = StyleSheet.create({
 		width: 86,
 		height: 86,
 		borderRadius: 43,
-		backgroundColor: theme.colors.background10,
+		backgroundColor: theme.colors.background,
 		alignItems: "center",
 		justifyContent: "center",
 	},
@@ -33,11 +31,11 @@ export const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	textInner: {
-		fontSize: 24,
-		fontFamily: theme.fonts.text500,
+		fontSize: RFValue(40),
+		fontFamily: text500,
 	},
 	textAdd: {
-		fontSize: 16,
+		fontSize: RFValue(24),
 		fontFamily: title700,
 	},
 	textContainer: {
@@ -46,12 +44,12 @@ export const styles = StyleSheet.create({
 		marginVertical: 16,
 	},
 	text: {
-		fontFamily: title500,
-		fontSize: 16,
+		fontFamily: title700,
+		fontSize: RFValue(18),
 	},
 	title: {
-		fontSize: 18,
-		fontFamily: title700,
+		fontSize: RFValue(18),
+		fontFamily: text900,
 	},
 	inputContainer: {
 		marginBottom: 16,

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 const { primary100, line, shadow, tabColor, circuloXp } = theme.colors;
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
 		paddingTop: 8,
 	},
 	camisa: {
-		fontSize: 40,
+		fontSize: RFValue(40),
 		fontFamily: text900,
 		color: line,
 		textShadowColor: shadow,
@@ -31,7 +32,7 @@ export const styles = StyleSheet.create({
 		textShadowRadius: 10,
 	},
 	position: {
-		fontSize: 28,
+		fontSize: RFValue(28),
 		fontFamily: text500,
 		color: line,
 		textShadowColor: shadow,
@@ -66,7 +67,7 @@ export const styles = StyleSheet.create({
 		marginBottom: 12,
 	},
 	textName: {
-		fontSize: 36,
+		fontSize: RFValue(36),
 		fontFamily: title700,
 		textTransform: "uppercase",
 		textAlign: "center",
@@ -91,12 +92,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   scoutData:{
-    fontSize: 28,
+    fontSize: RFValue(28),
 		fontFamily: title700,
 		color: '#000',
   },
 	textData: {
-		fontSize: 24,
+		fontSize: RFValue(24),
 		fontFamily: text500,
 		color: tabColor,
 		textShadowColor: shadow,

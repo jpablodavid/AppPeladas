@@ -1,35 +1,31 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { title500 } = theme.fonts;
+const { title700, text500 } = theme.fonts;
+const { disable100, disable10, background, primary100, tabColor} = theme.colors;
 
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-	},
-	goBack: {
-		margin: 24,
-		marginTop: 32,
+    marginHorizontal: 40,
+    marginTop: "20%"
 	},
 	textContainer: {
 		alignItems: "center",
-		marginBottom: 16,
+    marginBottom: 16,
 	},
 	text: {
-		fontFamily: title500,
-    textAlign: "center",
-		fontSize: 18,
-		marginVertical: 8,
-    marginHorizontal: 16,
+		fontFamily: text500,
+		fontSize: RFValue(20),
 	},
 	inputContainer: {
 		flexDirection: "row",
 		alignItems: "center",
 		height: 45,
 		borderRadius: 8,
-		backgroundColor: theme.colors.disable100,
-		marginHorizontal: 24,
-		borderColor: theme.colors.disable10,
+		backgroundColor: disable100,
+		borderColor: disable10,
 		borderWidth: 1,
 	},
 	input: {
@@ -37,25 +33,22 @@ export const styles = StyleSheet.create({
 		height: 45,
 		padding: 8,
 		borderRightWidth: 1,
-		borderRightColor: theme.colors.background10,
+		borderRightColor: background,
 	},
+  lupa:{
+    padding: 8,
+  },
 	list: {
-		flex: 1,
-		borderWidth: 1,
-		borderColor: "#000",
-		margin: 24,
+		flex: .7,
 	},
   buttonList:{
-    backgroundColor: theme.colors.primary25,
+    backgroundColor: primary100,
     padding: 4,
     marginBottom: 8,
   },
   textList:{
-    fontSize: 24,
-    fontFamily: theme.fonts.title700,
+    fontSize: RFValue(20),
+    fontFamily: title700,
     textTransform: "uppercase"
   },
-	button: {
-		margin: 24,
-	},
 });

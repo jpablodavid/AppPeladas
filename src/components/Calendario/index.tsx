@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { View, Text ,FlatList, TouchableOpacity, Dimensions } from "react-native";
+import { View, Text ,TouchableOpacity, Dimensions, Modal } from "react-native";
 import { useAuth } from "../../hooks/auth";
 import { AntDesign } from '@expo/vector-icons';
 
-import { styles } from "./styles";
 import Carousel from "react-native-reanimated-carousel";
+import { ButtonText } from "../ButtonText";
+import { InputArea } from "../InputArea";
+
+import { styles } from "./styles";
+import { theme } from "../../global/styles/theme";
+import { Button } from "../Button";
 
 const width = Dimensions.get('window').width;
 
@@ -14,9 +19,25 @@ export const Calendario = ({data}) => {
 
 	const [openModal, setOpenModal] = useState(false);
 
-  function handleOpenModal(){
-		setOpenModal(true);
-	}
+  const [date, setDate] = useState();
+
+  const [event, setEvent] = useState('');
+
+  function handleCloseModal() {
+    setOpenModal(false);
+  }
+
+  function handlerOpenModal() {
+    setOpenModal(true);
+  }
+
+  function agendar() {
+    setOpenModal(false);
+  }
+
+  /* function handleDateChange(value: string) {
+    setDate(value);
+  } */
 
   const month = [
     "January",
@@ -45,17 +66,17 @@ export const Calendario = ({data}) => {
 		<View style={styles.container}>
         <Carousel
             loop={false}
-            width={357}
-            height={width/1.4}
+            width={width}
+            height={width/1.5}
             autoPlay={false}
             data={month}
-            scrollAnimationDuration={1000}
+            scrollAnimationDuration={500}
             renderItem={({ item, index }) => (
               <View style={styles.calendar}>
                 <View style={styles.header}>
                   { index > 0 ?
                       <TouchableOpacity>
-                        <AntDesign name="caretleft" size={24} color="black" />
+                        <AntDesign name="caretleft" size={20} color="black" />
                       </TouchableOpacity>
                     :
                       <View></View>
@@ -63,34 +84,30 @@ export const Calendario = ({data}) => {
                   <Text style={styles.title}>{item} / 2022</Text>
                   { index < 11 ?
                       <TouchableOpacity>
-                        <AntDesign name="caretright" size={24} color="black" />
+                        <AntDesign name="caretright" size={20} color="black" />
                       </TouchableOpacity>
                     :
                       <View></View>
                   }
                 </View>
-
-                <View style={styles.content}>
-                  <View style={styles.weeks}>
-                    {
-                      week.map((value, index) => (
-                        <View style={styles.containerWeekItem}>
-                          <Text style={styles.weekItem} key={index}>{value}</Text>
-                        </View>
-                      ))
-                    }
-                  </View>
-                  <View style={styles.days}>
-                    {
-                      day.map((value, index) => (
-                        <View style={styles.containerWeekDay}>
-                          <Text style={styles.dayItem} key={index}>{value}</Text>
-                        </View>
-                      ))
-                    }
-                  </View>
+                <View style={styles.weeks}>
+                  {
+                    week.map((value, index) => (
+                      <View style={styles.containerWeekItem}>
+                        <Text style={styles.weekItem} key={index}>{value}</Text>
+                      </View>
+                    ))
+                  }
                 </View>
-
+                <View style={styles.days}>
+                  {
+                    day.map((value, index) => (
+                      <TouchableOpacity style={[styles.containerWeekDay, { backgroundColor: event ? theme.colors.tabColor : "#fff"}]} onPress={handlerOpenModal}>
+                        <Text style={styles.dayItem} key={index}>{value}</Text>
+                      </TouchableOpacity>
+                    ))
+                  }
+                </View>
               </View>
             )}
         />
@@ -99,6 +116,27 @@ export const Calendario = ({data}) => {
             teste essa festa de aniversario do mês
           </Text>
         </View>
+        <Modal
+        transparent
+        animationType="slide"
+        statusBarTranslucent
+        visible={openModal}>
+        <View style={styles.modal}>
+          <ButtonText style={{ width: 60 }} onPress={handleCloseModal}>
+            <Text style={{ fontSize: 26, fontWeight: 'bold', margin: 8}}>X</Text>
+          </ButtonText>
+          <View style={styles.input}>
+            <InputArea
+              placeholderTextColor={"#555"}
+              placeholder={"descreva o evento nesta data"}
+              value={event}
+            />
+            <View style={{width: "60%"}}>
+              <Button color={"red"} text={"Agendar"} onPress={agendar} />
+            </View>
+          </View>
+        </View>
+      </Modal>
 		</View>
 	);
 };

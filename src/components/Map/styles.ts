@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
   },
   adress:{
     fontFamily: theme.fonts.text500,
-    fontSize: 18,
+    fontSize: RFValue(18),
     marginVertical: 4,
   },
   buttonsContainer:{

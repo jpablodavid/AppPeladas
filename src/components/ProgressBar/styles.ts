@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
 		textShadowRadius: 10,
 	},
 	xp: {
-		fontSize: 10,
+		fontSize: RFValue(10),
 		fontFamily: theme.fonts.text900,
 	},
 });

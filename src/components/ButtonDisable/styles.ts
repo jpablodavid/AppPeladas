@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 const { primary100, shadow, textButton } = theme.colors;
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
 		shadowOpacity: 0.2,
 	},
 	text: {
-		fontSize: 18,
+		fontSize: RFValue(18),
 		letterSpacing: 1,
 		color: primary100,
 		fontFamily: theme.fonts.title700,

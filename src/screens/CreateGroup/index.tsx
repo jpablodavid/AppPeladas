@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, KeyboardAvoidingView, ScrollView, ActivityIndicator, Keyboard } from "react-native";
+import { View, Text, KeyboardAvoidingView, ScrollView, ActivityIndicator, Keyboard, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Entypo } from "@expo/vector-icons";
 
@@ -50,9 +50,6 @@ export const CreateGroup = ({navigation}) => {
 
   return (
     <Background>
-      <ButtonText style={styles.goBack} onPress={handleGoback}>
-        <Entypo name="chevron-left" size={24} color="black" />
-      </ButtonText>
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <KeyboardAvoidingView enabled>
@@ -62,9 +59,9 @@ export const CreateGroup = ({navigation}) => {
                   style={styles.imageContainer}
                   colors={[primary100, secondary]}
                 >
-                  <View style={styles.image}>
+                  <TouchableOpacity style={styles.image}>
                     <Text style={styles.textInner}>+</Text>
-                  </View>
+                  </TouchableOpacity>
                 </LinearGradient>
 
                 <Text style={styles.textAdd}>Adicionar imagem</Text>

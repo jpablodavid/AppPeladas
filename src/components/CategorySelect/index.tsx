@@ -1,5 +1,6 @@
 import React from "react";
 import { ScrollView } from "react-native";
+import { useAuth } from "../../hooks/auth";
 
 import { categoriesGroup } from "../../utils/categoriesGroup";
 
@@ -19,6 +20,9 @@ export const CategorySelect = ({
 	categorySelected,
 	setCategory,
 }: Props) => {
+
+  const { group } = useAuth();
+
 	return (
 		<ScrollView
 			horizontal
@@ -31,7 +35,8 @@ export const CategorySelect = ({
 					key={item.id}
 					title={item.title}
 					icon={item.icon}
-					checked={item.id === categorySelected}
+          //se não tiver um grupo criado ou participando de um, ele deixa o button apagado
+					checked={group ? item.id === categorySelected : true}
 					onPress={() => setCategory(item.id)}
           />
 			))}

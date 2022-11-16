@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
@@ -19,7 +20,6 @@ export const styles = StyleSheet.create({
 	title: {
 		fontFamily: theme.fonts.title700,
 		color: theme.colors.secondary,
-		fontSize: 16,
-		//marginTop: 15,
+		fontSize: RFValue(16),
 	},
 });

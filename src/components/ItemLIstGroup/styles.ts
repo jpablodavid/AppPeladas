@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
 	container: {
-		backgroundColor: theme.colors.primary25,
+		backgroundColor: theme.colors.primary100,
     padding: 4,
     marginBottom: 8,
 	},
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
 		paddingVertical: 8,
 	},
 	title: {
-    fontSize: 24,
+    fontSize: RFValue(24),
     fontFamily: theme.fonts.title700,
     textTransform: "uppercase"
 	},

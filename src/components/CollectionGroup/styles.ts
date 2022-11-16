@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
@@ -7,13 +8,13 @@ export const styles = StyleSheet.create({
 		marginVertical: 8,
 	},
   title:{
-    fontSize: 24,
+    fontSize: RFValue(24),
 		fontFamily: theme.fonts.title700,
     marginVertical: 4,
     textAlign: "center"
   },
   carrossel:{
-    width: 360,
+    width: "90%",
     marginRight: 8,
   },
   containerItem:{
@@ -25,23 +26,23 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-evenly'
   },
   label: {
-		fontSize: 18,
+		fontSize: RFValue(18),
 		fontFamily: theme.fonts.title700,
 		marginRight: 8,
     marginVertical: 8,
 	},
   labelCarousel: {
-		fontSize: 18,
+		fontSize: RFValue(18),
 		fontFamily: theme.fonts.title700,
 	},
   textCustos: {
-		fontSize: 24,
+		fontSize: RFValue(24),
 		fontFamily: theme.fonts.title700,
     color: 'red',
     marginVertical: 4
 	},
   textArrecadacao: {
-		fontSize: 24,
+		fontSize: RFValue(24),
 		fontFamily: theme.fonts.title700,
     color: 'green',
     marginVertical: 4,
@@ -56,7 +57,7 @@ export const styles = StyleSheet.create({
     paddingEnd: 16,
   },
 	infoText:{
-		fontSize: 16,
+		fontSize: RFValue(16),
 		fontFamily: theme.fonts.text900,
 		color: theme.colors.secondary,
     textAlign: "right",

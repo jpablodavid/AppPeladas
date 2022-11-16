@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { primary100 } = theme.colors;
+const { primary100, background } = theme.colors;
 const { title700, title500 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -15,12 +16,12 @@ export const styles = StyleSheet.create({
 		marginVertical: 36,
 	},
 	title: {
-		fontSize: 24,
+		fontSize: RFValue(24),
 		fontFamily: title700,
-    color: theme.colors.background
+    color: background
 	},
 	text: {
-		fontSize: 16,
+		fontSize: RFValue(16),
 		lineHeight: 16,
 		textAlign: "justify",
 		fontFamily: title500,
@@ -34,7 +35,7 @@ export const styles = StyleSheet.create({
 	forgetText: {
 		textAlign: "right",
 		color: primary100,
-		fontSize: 14,
+		fontSize: RFValue(14),
 		fontFamily: title700,
 		textDecorationLine: "underline",
 	},
@@ -46,7 +47,7 @@ export const styles = StyleSheet.create({
 	},
 	or: {
 		textAlign: "center",
-		fontSize: 12,
+		fontSize: RFValue(12),
 		fontFamily: title700,
 		color: primary100,
 		marginVertical: 8,
@@ -63,12 +64,12 @@ export const styles = StyleSheet.create({
 		marginVertical: 32,
 	},
 	cadastrarText: {
-		fontSize: 15,
+		fontSize: RFValue(15),
 		fontFamily: title500,
 		color: primary100,
 	},
 	buttonText: {
-		fontSize: 18,
+		fontSize: RFValue(18),
 		color: primary100,
 		fontFamily: title700,
 		marginLeft: 3,

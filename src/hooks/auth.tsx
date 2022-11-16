@@ -31,9 +31,15 @@ export type User = {
   stars: string;
 };
 
+export type athletes  = {
+  id: string,
+  name: string,
+  number: string
+}
+
 export type Group = {
   name: string;
-  athletes: Array<string>;
+  athletes: Array<athletes>;
   dateCreation: string;
   location: string;
   day: string;
@@ -47,6 +53,18 @@ export type Group = {
   diretorEventos: StaffProps;
   adm: string;
 };
+
+export type ItemCustos ={
+  date: string,
+  valor: string;
+  desc: string;
+}
+
+export type Custos = {
+  name: string,
+  custos: Array<ItemCustos>,
+  arrecadacoes: Array<ItemCustos>,
+}
 
 export type userGroup = string[];
 
@@ -234,16 +252,51 @@ function AuthProvider({ children }: AuthProviderProps) {
           avatar_url: '',
           occupation: '',
         },
+        account:{
+          valorMensal: '',
+          valorConvidado: '',
+          mensalidadeCampo: '',
+        },
         adm: id,
       } as unknown as Group;
 
-      const group = await addDoc(collection(db, 'groups'),{...groupWrite})
-      await updateDoc(doc(db, "users", id), {grupo_id : group.id, adm: true})
+      const group = await addDoc(collection(db, 'groups'),{...groupWrite});
+      await updateDoc(doc(db, "users", id), {grupo_id : group.id, adm: true});
+
+      const custoWrite = {
+        name: nameGrupo,
+        custos:[],
+        arrecadacoes:[]
+      } as unknown as Custos;
+
+      await addDoc(collection(db, 'custos', group.id),{...custoWrite});
 
       setGroup(groupWrite);
     } catch (error) {
       console.log(error)
       throw new Error('Não foi possível criar Grupo');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  async function addCusto(grupoId: string, date: string , valor: string, desc: string, tipo: string) {
+    setLoading(true);
+    try {
+      const item = {
+        date: date,
+        valor: valor,
+        desc: desc
+      }
+      if (tipo === 'custos') {
+        await updateDoc(doc(db, "custos", grupoId), {custos: {...item}});
+      }else if (tipo === 'arrecadacoes') {
+        await updateDoc(doc(db, "custos", grupoId), {arrecadacoes: {...item}});
+      }
+
+    } catch (error) {
+      console.log(error)
+      throw new Error('Não foi possível lançar os valores');
     } finally {
       setLoading(false);
     }

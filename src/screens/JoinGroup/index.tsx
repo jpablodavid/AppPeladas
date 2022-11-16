@@ -102,38 +102,37 @@ export const JoinGroup = () => {
 
   return (
     <Background>
-      <ButtonText style={styles.goBack} onPress={handleGoBack}>
-        <Entypo name="chevron-left" size={24} color="black" />
-      </ButtonText>
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>
-          Digite o nome do grupo ao qual você deseja entrar
-        </Text>
-      </View>
+      <View style={styles.container}>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>
+            Digite o nome do grupo ao qual você deseja entrar
+          </Text>
+        </View>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          onChangeText={setNameGroup}
-          value={nameGroup}
-        />
-        <TouchableOpacity style={{ padding: 8 }} onPress={handleSearch}>
-          <Ionicons name="md-search-sharp" size={24} color={theme.colors.primary100} />
-        </TouchableOpacity>
-      </View>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
-      >
-        <ListGroup
-					data={list}
-					categorySelected={idGroup}
-					setCategory={handleCategorySelect}
-          disable={disable}
-				/>
-      </KeyboardAvoidingView>
-      <View style={styles.button}>
-        <Button text={"Entrar no grupo"} onPress={handleConnectGroup} />
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setNameGroup}
+            value={nameGroup}
+          />
+          <TouchableOpacity style={styles.lupa} onPress={handleSearch}>
+            <Ionicons name="md-search-sharp" size={26} color={theme.colors.background} />
+          </TouchableOpacity>
+        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.list}
+        >
+          <ListGroup
+            data={list}
+            categorySelected={idGroup}
+            setCategory={handleCategorySelect}
+            disable={disable}
+          />
+        </KeyboardAvoidingView>
+        <View>
+          <Button text={"Entrar no grupo"} onPress={handleConnectGroup} />
+        </View>
       </View>
     </Background>
   );

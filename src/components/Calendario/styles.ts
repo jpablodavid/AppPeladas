@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-    marginVertical: 16,
+    marginTop: '3%'
 	},
   calendar:{
     borderColor: theme.colors.background,
@@ -13,31 +14,29 @@ export const styles = StyleSheet.create({
   header:{
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 8,
-    paddingHorizontal: 16,
-    marginBottom: 8
+    padding: 4,
+    marginBottom: 4,
   },
   title:{
+    width: '47%',
+    textAlign: 'center',
+    marginHorizontal: "15%",
     fontFamily: theme.fonts.text900,
-    fontSize: 18,
-  },
-  content:{
-    width: 357,
+    fontSize: RFValue(18)
   },
   weeks:{
     flexDirection: 'row',
+    height: '12%',
+    backgroundColor: theme.colors.tabIcon
   },
   containerWeekItem:{
-    width: 51,
-    height: 44,
+    width: '13%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: theme.colors.tabIcon
   },
   weekItem:{
     fontFamily: theme.fonts.title700,
-    fontSize: 16,
+    fontSize: RFValue(16),
     color: theme.colors.tabColor
   },
   days:{
@@ -47,29 +46,37 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   containerWeekDay:{
-    width: 51,
-    height: 36,
+    width: "13%",
+    height: "20%",
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: theme.colors.background,
+    borderRadius: 50,
   },
   dayItem:{
     fontFamily: theme.fonts.title500,
-    fontSize: 16,
+    fontSize: RFValue(16),
   },
   info:{
-    marginTop: 8,
-    backgroundColor: "#fff",
-    height: 80,
-    borderWidth: 2,
-    borderColor: theme.colors.background,
     borderBottomEndRadius: 20,
     borderBottomStartRadius: 20,
   },
   textInfo:{
     fontFamily: theme.fonts.title700,
-    fontSize: 16,
+    fontSize: RFValue(16),
     padding: 8,
-    color: "red"
+    color: "#fff"
+  },
+  modal:{
+    flex:1,
+    marginHorizontal: "10%",
+    marginVertical: "60%",
+    borderWidth: 2,
+    borderColor: theme.colors.tabColor,
+		backgroundColor: theme.colors.background,
+  },
+  input:{
+    flex: 1,
+    alignItems: "center",
+    justifyContent: 'space-around',
   }
 });

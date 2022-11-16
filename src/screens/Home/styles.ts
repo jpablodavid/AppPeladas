@@ -1,7 +1,9 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 const { title700, text900 } = theme.fonts;
+const { circuloXp, textButton, primary10, shadow, line} = theme.colors;
 
 export const styles = StyleSheet.create({
 	container: {
@@ -23,41 +25,41 @@ export const styles = StyleSheet.create({
 	},
 	textCamisa: {
 		position: "absolute",
-		color: theme.colors.textButton,
-		fontSize: 44,
+		color: textButton,
+		fontSize: RFValue(44),
 		fontFamily: title700,
-		textShadowColor: theme.colors.primary10,
+		textShadowColor: primary10,
 		textShadowOffset: { width: 1, height: -1 },
 		textShadowRadius: 1,
 	},
 	textPosition: {
-		fontSize: 32,
+		fontSize: RFValue(32),
 		fontFamily: text900,
-		color: theme.colors.textButton,
-		textShadowColor: theme.colors.shadow,
+		color: textButton,
+		textShadowColor: shadow,
 		textShadowOffset: { width: 1, height: -1 },
 		textShadowRadius: 1,
 	},
   nivel :{
     alignSelf: 'center',
     marginBottom: 16,
-    fontSize: 28,
-    fontFamily: theme.fonts.title700,
-		color: theme.colors.line,
-		textShadowColor: theme.colors.shadow,
+    fontSize: RFValue(28),
+    fontFamily: title700,
+		color: line,
+		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
   },
   image: {
     width: 60,
     height: 50,
-    marginTop: -50,
+    marginTop: -30,
   },
 	scout: {
     alignSelf: 'center',
     fontSize: 32,
-    fontFamily: theme.fonts.title700,
-		color: theme.colors.circuloXp,
+    fontFamily: title700,
+		color: circuloXp,
 		marginRight: 4,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
@@ -66,9 +68,9 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 24,
     fontSize: 28,
-    fontFamily: theme.fonts.title700,
-		color: theme.colors.line,
-		textShadowColor: theme.colors.shadow,
+    fontFamily: title700,
+		color: line,
+		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
   },

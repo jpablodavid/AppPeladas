@@ -1,22 +1,34 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { shadow, textButton } = theme.colors;
+const { disable100, tabColor, modal } = theme.colors;
+const { text500, text900, title700 } = theme.fonts;
 
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginVertical: 8,
 	},
-  scroll:{
-    flex: 1,
+  content: {
+    flex: 1
+  },
+  title:{
+    fontSize: RFValue(20),
+		fontFamily: text900,
+  },
+  containerLabel:{
+    alignItems: "flex-end",
   },
 	label: {
-		fontSize: 20,
-		fontFamily: theme.fonts.title700,
+		fontSize: RFValue(18),
+		fontFamily: text500,
 		marginVertical: 4,
-		textAlign: "center",
 	},
+  values:{
+    width: '42%',
+    alignItems: 'flex-end',
+  },
   calendario: {
     flexDirection: "row",
     alignItems: 'stretch',
@@ -25,30 +37,11 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  mes: {
-    width: 280,
-    height: 160,
-		borderRadius: 16,
-		marginBottom: 16,
-    marginHorizontal: 8,
-    alignItems: 'center',
-    justifyContent: "space-between",
-		backgroundColor: theme.colors.listName,
-		paddingTop: 16,
-		shadowColor: shadow,
-		shadowOffset: { width: 0, height: 1 },
-		shadowOpacity: 0.8,
-		shadowRadius: 2,
-		elevation: 5,
-		borderWidth: 1,
-		borderColor: textButton,
-  },
 	infoText:{
-		fontSize: 18,
-		fontFamily: theme.fonts.text900,
-		color: theme.colors.secondary,
+		fontSize: RFValue(18),
+		fontFamily: title700,
+		color: tabColor,
 		paddingBottom: 2,
-    marginLeft: 16
 	},
 	money: {
     marginHorizontal: 16,
@@ -59,50 +52,64 @@ export const styles = StyleSheet.create({
   valores: {
     flexDirection: "row",
 		alignItems: 'center',
+    justifyContent: "space-evenly"
   },
   labelAdd: {
-		fontSize: 22,
-		fontFamily: theme.fonts.title700,
-		marginVertical: 4,
+		fontSize: RFValue(20),
+		fontFamily: text900,
+		marginTop: 16,
+    marginBottom: 8,
 		textAlign: "center",
-    borderTopColor: theme.colors.disable100,
+    borderTopColor: disable100,
     borderTopWidth: 2,
-    paddingTop: 16,
+    paddingTop: 8,
 	},
+  button:{
+    width: '40%',
+    paddingTop: 8,
+  },
   modal:{
     flex: 1,
-    marginTop: 120,
+    marginTop: 140,
     marginHorizontal: 8,
-    marginBottom: 82,
+    marginBottom: 120,
     borderWidth: 2,
-    borderColor: theme.colors.tabColor,
+    borderColor: tabColor,
 		padding: 16,
-		backgroundColor: theme.colors.background,
+		backgroundColor: modal,
 		borderRadius: 25
   },
+  close:{
+    marginBottom: 8,
+    fontSize: RFValue(20),
+    fontWeight: 'bold',
+  },
   labelModal: {
-		fontSize: 22,
-		fontFamily: theme.fonts.title700,
-		marginVertical: 4,
+		fontSize: RFValue(22),
+		fontFamily: text900,
+		marginVertical: 8,
 		textAlign: "center",
-    borderColor: theme.colors.disable100,
+    borderColor: disable100,
     borderTopWidth: 2,
     borderBottomWidth: 2,
     paddingVertical: 8,
 	},
+  input:{
+    backgroundColor: "#fff",
+    textAlign: "center",
+  },
   mostrar:{
     height: 32,
     alignItems: "center",
     marginVertical: 16,
     marginHorizontal: 8,
-    backgroundColor: theme.colors.shadow,
     borderRadius: 10,
     padding: 2,
   },
   mostrarContent: {
-    color: theme.colors.textButton,
-    fontSize: 20,
-    fontFamily: theme.fonts.text900
+    color: tabColor,
+    fontSize: RFValue(20),
+    fontFamily: text500
   },
   buttonModal:{
     margin: 16,
@@ -116,7 +123,7 @@ export const styles = StyleSheet.create({
     padding: 2,
   },
   descricaoContent: {
-    fontSize: 20,
-    fontFamily: theme.fonts.text500
+    fontSize: RFValue(20),
+    fontFamily: text500
   },
 });
