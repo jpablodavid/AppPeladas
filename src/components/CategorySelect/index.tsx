@@ -3,7 +3,6 @@ import { ScrollView } from "react-native";
 import { useAuth } from "../../hooks/auth";
 
 import { categoriesGroup } from "../../utils/categoriesGroup";
-
 import { Category } from "../Category";
 
 import { styles } from "./styles";

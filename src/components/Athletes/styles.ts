@@ -2,13 +2,16 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 
+const {listName, primary100, secondary, tabColor, background} = theme.colors;
+const {text900, title700, } = theme.fonts;
+
 export const styles = StyleSheet.create({
   container: {
 		flex: 1,
 		height: 60,
 		flexDirection: "row",
 		alignItems: "center",
-		borderRadius: 20,
+		borderRadius: 10,
 		marginBottom: 8,
 		overflow: "hidden",
 	},
@@ -17,19 +20,19 @@ export const styles = StyleSheet.create({
 		height: 80,
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: theme.colors.listName,
+		backgroundColor: listName,
 		marginRight: 1,
 	},
 	textNumber: {
 		fontSize: RFValue(24),
-		fontFamily: theme.fonts.text900,
-		color: theme.colors.primary100,
+		fontFamily:text900,
+		color: primary100,
 	},
 	name: {
 		flex: 1,
 		height: 80,
 		flexDirection: "row",
-		backgroundColor: theme.colors.listName,
+		backgroundColor: listName,
 		alignItems: "center",
 		justifyContent: "space-between",
 		padding: 16,
@@ -37,7 +40,7 @@ export const styles = StyleSheet.create({
   exclude: {
 		height: 80,
 		flexDirection: "row",
-		backgroundColor: theme.colors.listName,
+		backgroundColor: listName,
 		alignItems: "center",
 		justifyContent: "space-between",
 		padding: 16,
@@ -46,7 +49,7 @@ export const styles = StyleSheet.create({
   },
 	textName: {
 		fontSize: RFValue(22),
-		fontFamily: theme.fonts.title700,
+		fontFamily:title700,
 	},
 	excludesButton: {
 		width: 30,
@@ -54,11 +57,11 @@ export const styles = StyleSheet.create({
 		borderRadius: 15,
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: theme.colors.secondary,
+		backgroundColor: secondary,
 	},
 	textButton: {
 		fontSize: 20,
-		fontFamily: theme.fonts.title700,
+		fontFamily:title700,
 	},
   modal:{
     flex: 1,
@@ -66,9 +69,8 @@ export const styles = StyleSheet.create({
     marginHorizontal: 8,
     marginBottom: 82,
     borderWidth: 2,
-    borderColor: theme.colors.tabColor,
+    borderColor: tabColor,
 		padding: 16,
-		backgroundColor: theme.colors.background,
-		borderRadius: 25
+		backgroundColor: background,
   },
 });

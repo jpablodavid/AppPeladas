@@ -47,12 +47,12 @@ export const styles = StyleSheet.create({
 		zIndex: 1,
 	},
 	avatar:{
-    margin: 16,
+    margin: 30,
 		width: 200,
 		height: 200,
-		position: "relative",
-		top: 0,
-		left: 0,
+		//position: "relative",
+		//top: 0,
+		//left: 0,
 	},
 	scout: {
 		flex: 1,

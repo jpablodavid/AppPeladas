@@ -23,7 +23,7 @@ type Props = RectButtonProps & {
 };
 
 export const Staff = ({ data }: Props) => {
-	const { primary100, secondary } = theme.colors;
+	const { primary100, secondary, tabIcon, tabColor} = theme.colors;
 
   const { addStaff, user} = useAuth()
 
@@ -38,7 +38,7 @@ export const Staff = ({ data }: Props) => {
 	return (
 		<View>
 			<Text style={styles.title}>{data.occupation}</Text>
-			<LinearGradient start={[ 0.0, 0.0]} end={[1,0]} style={styles.container} colors={[primary100, secondary]}>
+			<LinearGradient start={[ 0.0, 0.0]} end={[1,0]} style={styles.container} colors={[tabIcon, tabColor]}>
 				<Image style={styles.avatar} source={{ uri: data.avatar_url }} />
 				<View style={styles.content}>
 					<TextInput

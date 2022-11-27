@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	View,
 	Text,
@@ -15,13 +15,26 @@ import { ProgressBar } from "../../components/ProgressBar";
 import { User } from '../../hooks/auth'
 
 //funçoes importada
-import { nivelUser } from "../../global/Data/itens";
 import { siglaPosition } from "../../global/Data/itens";
 
 type Props = {
 	data: User;
 };
+
 export const Card = ({data} : Props) => {
+
+  const [color, setColor] = useState("black");
+
+  function chanceColor(start: string) {
+    if (start === '3') {
+      setColor(theme.colors.tabColor)
+    }
+  }
+
+  useEffect(() => {
+    chanceColor(data.stars);
+  }, []);
+
 
 	return (
     <>
@@ -45,10 +58,12 @@ export const Card = ({data} : Props) => {
               //source={require(`../../assets/${data.team}.png`)}
             />
           </LinearGradient>
+          <View style={{justifyContent: 'center'}}>
           <Image
             style={styles.avatar}
             source={{uri: `${data.avatar}`}}
           />
+          </View>
         </LinearGradient>
 
         <LinearGradient
@@ -104,7 +119,7 @@ export const Card = ({data} : Props) => {
           style={{ marginHorizontal: 18 }}
           name="battery"
           size={40}
-          color="black"
+          color={color}
         />
       </ButtonText>
       <ButtonText>

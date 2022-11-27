@@ -3,12 +3,13 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 const { title700, text500, text900} = theme.fonts;
+const { tabColor } = theme.colors;
 
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginHorizontal: 40,
-    marginTop: "20%"
+    marginTop: "15%"
 	},
 	imageContainer: {
 		width: 100,
@@ -37,6 +38,7 @@ export const styles = StyleSheet.create({
 	textAdd: {
 		fontSize: RFValue(24),
 		fontFamily: title700,
+    color: tabColor
 	},
 	textContainer: {
 		flexDirection: "row",
@@ -46,10 +48,12 @@ export const styles = StyleSheet.create({
 	text: {
 		fontFamily: title700,
 		fontSize: RFValue(18),
+    color: tabColor
 	},
 	title: {
 		fontSize: RFValue(18),
 		fontFamily: text900,
+    color: tabColor
 	},
 	inputContainer: {
 		marginBottom: 16,

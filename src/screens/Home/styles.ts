@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
     marginTop: 24
   },
 	left: {
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    alignItems: 'center',
 	},
 	camisa: {
 		alignItems: "center",
@@ -40,8 +41,12 @@ export const styles = StyleSheet.create({
 		textShadowOffset: { width: 1, height: -1 },
 		textShadowRadius: 1,
 	},
+  image: {
+    width: 60,
+    height: 50,
+    marginTop: -30,
+  },
   nivel :{
-    alignSelf: 'center',
     marginBottom: 16,
     fontSize: RFValue(28),
     fontFamily: title700,
@@ -49,11 +54,6 @@ export const styles = StyleSheet.create({
 		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
-  },
-  image: {
-    width: 60,
-    height: 50,
-    marginTop: -30,
   },
 	scout: {
     alignSelf: 'center',

@@ -5,6 +5,9 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   ActivityIndicator,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
   } from "react-native";
 import { useAuth } from "../../hooks/auth";
 
@@ -22,11 +25,9 @@ import { ButtonText } from "../../components/ButtonText";
 import { ButtonDisable } from "../../components/ButtonDisable";
 import { InputSelect } from "../../components/InputSelect";
 import { Background } from "../../components/Background";
-import { useNavigation } from "@react-navigation/native";
 
-export const CreateAccount = () => {
 
-  const navigation = useNavigation();
+export const CreateAccount = ({navigation}) => {
 
   const { primary100 } = theme.colors;
 
@@ -55,12 +56,15 @@ export const CreateAccount = () => {
   }
 
   return (
-    <Background>
+    <View style={styles.container}>
       <ButtonText style={styles.goBack} onPress={handleGoBack}>
-        <Ionicons name="md-close" size={24} color="black" />
+        <Ionicons name="arrow-back-sharp" size={28} color="black" />
       </ButtonText>
-
-        <KeyboardAvoidingView style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            enabled
+          >
           <ScrollView showsVerticalScrollIndicator={false}>
             <Logo />
             <View style={styles.textContainer}>
@@ -131,11 +135,12 @@ export const CreateAccount = () => {
                     ?
                     <ButtonDisable text={"Criar Conta"} />
                     :
-                    <Button text={"Criar Conta"}  onPress={handleCreateAccount} />
+                    <Button text={"Criar Conta"} color={theme.colors.background} onPress={handleCreateAccount} />
               }
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
-    </Background>
+      </TouchableWithoutFeedback>
+    </View>
   );
 };

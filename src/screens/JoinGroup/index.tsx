@@ -7,14 +7,10 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
 import { db } from "../../configs/firebaseConfig";
 import { collection, getDocs, getDoc , updateDoc, doc } from "@firebase/firestore";
-
-import { ButtonText } from "../../components/ButtonText";
 
 import { styles } from "./styles";
 import { Button } from "../../components/Button";
@@ -29,9 +25,8 @@ export type List={
   id: string;
 }
 
-export const JoinGroup = () => {
 
-  const navigation = useNavigation();
+export const JoinGroup = ({navigation}) => {
 
   const { id } = useAuth();
 

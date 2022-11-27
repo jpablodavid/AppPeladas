@@ -3,14 +3,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CustomTabBarButton } from "../components/CustomTabBarButton";
 import { Text, View } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useAuth } from "../hooks/auth";
 
 import { HomeRoutes } from "../routes/home.routes";
 import { JoinGroup } from "../screens/JoinGroup";
 import { MyAccount } from "../screens/MyAccount";
 import { GroupRoutes } from "./group.routes";
 import { CreateGroup } from "../screens/CreateGroup";
-
-import { useAuth } from "../hooks/auth";
 
 import { theme } from "../global/styles/theme";
 

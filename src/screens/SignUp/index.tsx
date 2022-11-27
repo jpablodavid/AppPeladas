@@ -8,13 +8,8 @@ import {
   ActivityIndicator,
   Keyboard,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useAuth } from "../../hooks/auth";
-
-import { theme } from "../../global/styles/theme";
-
-import { styles } from "./styles";
 
 import { Button } from "../../components/Button";
 import { ButtonDisable } from "../../components/ButtonDisable";
@@ -22,12 +17,13 @@ import { ButtonFacebook } from "../../components/ButtonFacebook";
 import { ButtonText } from "../../components/ButtonText";
 import { Input } from "../../components/Input";
 import { Logo } from "../../components/Logo";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+
+import { theme } from "../../global/styles/theme";
+
+import { styles } from "./styles";
 
 
-export const SignUp = () => {
-
-  const navigation = useNavigation();
+export const SignUp = ({navigation}) => {
 
   const {
     loading,

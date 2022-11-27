@@ -22,4 +22,7 @@ export const styles = StyleSheet.create({
 	inputLastContainer: {
 		marginBottom: 32,
 	},
+  buton:{
+    width: '70%',
+  }
 });

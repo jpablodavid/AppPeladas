@@ -17,7 +17,7 @@ export const ProgressBar = ({  number, inPerfil }: Props) => {
 			<AnimatedCircularProgress
 				size={inPerfil ? 100 : 160}
 				width={inPerfil ? 8 : 16}
-				fill={500 / 8}
+				fill={number / 8}
 				tintColor={theme.colors.tabColor}
 				backgroundColor={'#fff'}
 				backgroundWidth={inPerfil ? 3 : 5}
@@ -26,7 +26,7 @@ export const ProgressBar = ({  number, inPerfil }: Props) => {
 				{(fill) => (
 					<View style={styles.value}>
 						<Text style={[styles.number, { fontSize: inPerfil ? 24 : 32 }]}>
-							{500}
+							{number}
 						</Text>
 						<Text style={[styles.xp, { fontSize: inPerfil ? 12 : 18 }]}>
 							Xp

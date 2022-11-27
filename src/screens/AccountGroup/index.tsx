@@ -5,21 +5,20 @@ import { useAuth } from "../../hooks/auth";
 
 import { Background } from "../../components/Background";
 import { CategorySelect } from "../../components/CategorySelect";
-import { ListStaff } from "../../components/ListStaff";
 import { ListAthletes } from "../../components/ListAthletes";
 import { categoriesAccounting } from "../../utils/categoriesAccounting";
-
-import { theme } from "../../global/styles/theme";
-
-import { styles } from "./styles";
 import { CollectionGroup } from "../../components/CollectionGroup";
 import { Months } from "../../utils/collectionMonths";
 import { Values } from "../../components/Values";
 
+import { theme } from "../../global/styles/theme";
+
+import { styles } from "./styles";
 
 type Props = {
 	title: string;
 };
+
 
 export const AccountGroup = ({ title }: Props) => {
 

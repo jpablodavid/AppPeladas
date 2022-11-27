@@ -1,14 +1,12 @@
 import React from "react";
-import { View, Text, KeyboardAvoidingView, ScrollView, ActivityIndicator, Keyboard, TouchableOpacity } from "react-native";
+import { View, Text, KeyboardAvoidingView, ScrollView, ActivityIndicator, Keyboard, TouchableOpacity, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Entypo } from "@expo/vector-icons";
 
 import { Button } from "../../components/Button";
 import { InputControl } from "../../components/InputControl";
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ButtonText } from "../../components/ButtonText";
 
 import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
@@ -41,7 +39,7 @@ export const CreateGroup = ({navigation}) => {
 
   function handleCreateGroup(data: FormData) {
     createGroup(data.name, data.date, data.location, data.day, data.time)
-    navigation.navigate('AcessGroup');
+    navigation.navigate('AccountGroup');
   }
 
   function handleGoback() {
@@ -52,28 +50,27 @@ export const CreateGroup = ({navigation}) => {
     <Background>
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <KeyboardAvoidingView enabled>
+          <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+            enabled>
+            <View style={styles.imgGrupo}>
+              <LinearGradient
+                style={styles.imageContainer}
+                colors={[primary100, secondary]}
+              >
+                <TouchableOpacity style={styles.image}>
+                  <Text style={styles.textInner}>+</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+
+              <Text style={styles.textAdd}>Adicionar imagem</Text>
+            </View>
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>
+                Preencha as Informações para criar seu
+                <Text style={styles.title}> Grupo de Peladas.</Text>
+              </Text>
+            </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-              <View style={styles.imgGrupo}>
-                <LinearGradient
-                  style={styles.imageContainer}
-                  colors={[primary100, secondary]}
-                >
-                  <TouchableOpacity style={styles.image}>
-                    <Text style={styles.textInner}>+</Text>
-                  </TouchableOpacity>
-                </LinearGradient>
-
-                <Text style={styles.textAdd}>Adicionar imagem</Text>
-              </View>
-
-              <View style={styles.textContainer}>
-                <Text style={styles.text}>
-                  Preencha as Informações para criar seu
-                  <Text style={styles.title}> Grupo de Peladas.</Text>
-                </Text>
-              </View>
-
               <View style={styles.inputContainer}>
                 <InputControl
                   name='name'
@@ -113,7 +110,7 @@ export const CreateGroup = ({navigation}) => {
                   error={errors.name}
                 />
               </View>
-              <View style={styles.inputLastContainer}>
+              <View style={styles.inputContainer}>
                 <InputControl
                   name="time"
                   icon="heart"
@@ -122,18 +119,37 @@ export const CreateGroup = ({navigation}) => {
                   error={errors.name}
                 />
               </View>
-              <View style={{ marginBottom: 16 }}>
-                {
-                  loading ?
-                    (<ActivityIndicator size={36} color={theme.colors.primary10} />)
-                    :
-                    <Button text={"Criar Grupo"} /* onPress={handleSubmit(handleCreateGroup)} */ onPress={navigation.navigate('AcessGroup')} />
-                }
+              <View style={styles.inputContainer}>
+                <InputControl
+                  name="time"
+                  icon="heart"
+                  placeholder={"Mensalidade"}
+                  control={control}
+                  error={errors.name}
+                />
+              </View>
+              <View style={styles.inputLastContainer}>
+                <InputControl
+                  name="time"
+                  icon="heart"
+                  placeholder={"Valor Convidado"}
+                  control={control}
+                  error={errors.name}
+                />
+              </View>
+              <View style={{marginBottom: 16}}>
+              {
+                loading ?
+                  (<ActivityIndicator size={36} color={theme.colors.primary10} />)
+                  :
+                  <Button text={"Criar Grupo"} /* onPress={handleSubmit(handleCreateGroup)} *//>
+              }
               </View>
             </ScrollView>
           </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
       </View>
+      <View style={{height: 80 }}/>
     </Background >
   );
 };

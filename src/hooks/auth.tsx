@@ -75,7 +75,7 @@ type AuthContextData = {
   id: string | undefined;
   email: string;
   excludeAthletes: (idGroup: string, idAthletes?: string) => Promise<void>;
-  loadAthletes: (athletes: string[]) => Promise<User[]>;
+  loadAthletes: (athletes: athletes[]) => Promise<User[]>;
   addStaff: (name: string, occupation: string, idGroup: string) => Promise<void>;
   loadGroup: (uid: string) => Promise<void>;
   logIn: (email: string, password: string) => Promise<void>;
@@ -386,7 +386,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   };
 
   // fazer o load dos atletas do grupo
-  async function loadAthletes(athletes: string[]){
+  async function loadAthletes(athletes: athletes[]){
     let userGroup = [];
     try{
       const querySnapshot = await getDocs(collection(db, "users"));

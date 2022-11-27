@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, View, Text, TouchableOpacity} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { ScrollView, View, Text, TouchableOpacity, Image} from "react-native";
 
 import { useAuth } from "../../hooks/auth";
 
@@ -18,9 +17,7 @@ import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 
-export const Group = () => {
-
-  const navigation = useNavigation();
+export const Group = ({navigation}) => {
 
   const { group } = useAuth();
 
@@ -48,7 +45,7 @@ export const Group = () => {
           disable={disable}
 				/>
         {
-          !group ?
+          group ?
           (
             <ScrollView style={styles.content}>
               {
@@ -69,32 +66,26 @@ export const Group = () => {
           :
           (
             <View style={styles.content}>
-              <Text style={{flex: 0.3}}>
-                Parece que é a sua primeira vez por aqui, então deixa eu te ajudar,
+              <Text style={styles.text}>
+                Parece que é a sua primeira vez por aqui, então deixa eu te ajudar.
                 para começar a usar o App Peladas você precisa estar em um grupo de peladas.
-                Aqui você pode escolher entre entrar para um grupo ou criar um grupo
-                e chamar os amigos para participar.
+                Selecione uma das opções.
               </Text>
-              <View style={{flex: 0.7, flexDirection: 'row'}}>
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                  <TouchableOpacity style={{flex: 1, backgroundColor: "#fff", margin: 16}} onPress={handleJoinGroup}>
-                    <Text>conectar a um grupo</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={{flex: 1, flexDirection: 'row', margin: 16}} >
-                  <TouchableOpacity style={{flex: 1,backgroundColor: "#fff"}} onPress={handleCreateGroup}>
-                    <Text>Criar um grupo</Text>
-                  </TouchableOpacity>
-                </View>
+              <View style={styles.containerButton}>
+                <TouchableOpacity style={styles.button} onPress={handleCreateGroup}>
+                  <Image style={styles.image} source={require("../../assets/3d.png")} />
+                  <Text style={styles.title}>Criar Grupo</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={handleJoinGroup}>
+                  <Image style={styles.image} source={require("../../assets/3d.png")} />
+                  <Text style={styles.title}>Entrar No Grupo</Text>
+                </TouchableOpacity>
               </View>
             </View>
           )
 
         }
-
-        <View style={{height: 80, backgroundColor: theme.colors.tabIcon}}>
-
-        </View>
+        <View style={{height: 80, backgroundColor: theme.colors.tabIcon}}/>
 			</Background>
 	);
 };

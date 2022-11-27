@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image} from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
 import { useAuth } from "../../hooks/auth";
 
@@ -13,8 +12,8 @@ import { Background } from "../../components/Background";
 
 import { styles } from "./styles";
 
-export const Home = () => {
-  const navigation = useNavigation();
+
+export const Home = ({navigation}) => {
 
   const { user } = useAuth();
 

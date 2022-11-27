@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
     marginHorizontal: 40,
-    marginTop: "20%"
+    marginTop: "17%"
 	},
 	textContainer: {
 		alignItems: "center",
@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
 	text: {
 		fontFamily: text500,
 		fontSize: RFValue(20),
+    color: tabColor
 	},
 	inputContainer: {
 		flexDirection: "row",

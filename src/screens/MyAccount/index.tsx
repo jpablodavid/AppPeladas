@@ -6,29 +6,32 @@ import {
   ScrollView,
   } from "react-native";
 import { useAuth } from "../../hooks/auth";
-
 import { FontAwesome5 } from "@expo/vector-icons";
-import { theme } from "../../global/styles/theme";
-import { styles } from "./styles";
-import { positions, teams } from "../../global/Data/itens";
 
 import { Input } from "../../components/Input";
 import { InputSelect } from "../../components/InputSelect";
 import { Background } from "../../components/Background";
-import { useNavigation } from "@react-navigation/native";
+import { Button } from "../../components/Button";
 
+import { positions, teams } from "../../global/Data/itens";
 
-export const MyAccount = () => {
+import { theme } from "../../global/styles/theme";
 
-	const navigation = useNavigation();
+import { styles } from "./styles";
+
+export const MyAccount = ({navigation}) => {
 
   const { primary100 } = theme.colors;
 
-  const { user, loading, createUser, email } = useAuth();
+  const { user, loading, createUser, email, logOut } = useAuth();
 
 	function handleGoback() {
     navigation.goBack();
 	}
+
+  function handleDisconnect() {
+    logOut();
+  }
 
   const [name, setName] = useState(user.name);
   const [birthday, setBirthday] = useState(user.birthday);
@@ -94,8 +97,7 @@ export const MyAccount = () => {
                 onValueChange={(itemValue) => setTeam(String(itemValue))}
               />
             </View>
-            <View style={{ marginBottom: 32 }}>
-            </View>
+            <Button color={theme.colors.tabIcon} text={"Fechar Sessão"} onPress={handleDisconnect} />
           </ScrollView>
         </KeyboardAvoidingView>
 		</Background>

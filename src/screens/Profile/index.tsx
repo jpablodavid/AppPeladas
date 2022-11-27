@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
 
 import { Background } from "../../components/Background";
@@ -9,9 +8,7 @@ import { useAuth } from "../../hooks/auth";
 
 import { styles } from "./styles";
 
-export const Profile = () => {
-
-	const navigation = useNavigation();
+export const Profile = ({navigation}) => {
 
   const { user } = useAuth();
 

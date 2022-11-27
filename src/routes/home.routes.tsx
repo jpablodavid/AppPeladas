@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import { useAuth } from "../hooks/auth";
 
 import { Home } from "../screens/Home";
@@ -10,6 +9,7 @@ import { AccountGroup } from "../screens/AccountGroup";
 import { theme } from "../global/styles/theme";
 
 const { Navigator, Screen } = createStackNavigator();
+
 
 export const  HomeRoutes = () => {
 
