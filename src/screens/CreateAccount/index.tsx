@@ -24,7 +24,6 @@ import { Logo } from "../../components/Logo";
 import { ButtonText } from "../../components/ButtonText";
 import { ButtonDisable } from "../../components/ButtonDisable";
 import { InputSelect } from "../../components/InputSelect";
-import { Background } from "../../components/Background";
 
 
 export const CreateAccount = ({navigation}) => {

@@ -29,6 +29,7 @@ export type User = {
   team: string;
   adm: boolean;
   stars: string;
+  payments: Array<string>;
 };
 
 export type athletes  = {
@@ -198,6 +199,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       team: team,
       grupo_Id: '',
       adm: false,
+      payments:[]
     }as unknown as User;
     setUser(userWrite);
     try {
@@ -380,6 +382,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         team: docSnap.data()?.team,
         stars: docSnap.data()?.stars,
         adm: docSnap.data()?.adm,
+        payments: docSnap.data()?.payments,
       } as User;
       setUser(userLoaded);
     setLoading(false);

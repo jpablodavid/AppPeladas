@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Carousel from 'react-native-reanimated-carousel';
 import { View, Text, Dimensions } from "react-native";
-import { useAuth } from "../../hooks/auth";
 
 import { styles } from "./styles";
 import { Months } from "../../utils/collectionMonths";
@@ -12,9 +11,20 @@ type Props = {
   data: typeof Months;
 };
 
-export const CollectionGroup = ({data}: Props) => {
+function totalArrecadacoes(list: typeof Months){
+  let total = 0
+  list.forEach((item) => total = total + parseFloat(item.arrecadações))
+  return total.toFixed(2);
+}
 
-  const { group } = useAuth();
+function totalCustos(list: typeof Months){
+  let total = 0
+  list.forEach((item) => total = total + parseFloat(item.custos))
+  return total.toFixed(2);
+}
+
+
+export const CollectionGroup = ({data}: Props) => {
 
 	return (
 		<View style={styles.container}>
@@ -46,21 +56,21 @@ export const CollectionGroup = ({data}: Props) => {
         <View style={styles.money}>
           <Text style={styles.label}> R$</Text>
           <View style={styles.info}>
-            <Text style={styles.infoText}>250,00</Text>
+            <Text style={styles.infoText}>{totalArrecadacoes(Months)}</Text>
           </View>
         </View>
         <Text style={styles.label}>Custos:</Text>
         <View style={styles.money}>
           <Text style={styles.label}> R$</Text>
           <View style={styles.info}>
-            <Text style={styles.infoText}>250,00</Text>
+            <Text style={styles.infoText}>{totalCustos(Months)}</Text>
           </View>
         </View>
         <Text style={styles.label}>Rendimentos:</Text>
         <View style={styles.money}>
           <Text style={styles.label}> R$</Text>
           <View style={styles.info}>
-            <Text style={styles.infoText}>250,00</Text>
+            <Text style={styles.infoText}>{totalArrecadacoes(Months) - totalCustos(Months)}</Text>
           </View>
         </View>
 		</View>

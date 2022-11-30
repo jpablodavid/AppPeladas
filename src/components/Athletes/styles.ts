@@ -60,17 +60,17 @@ export const styles = StyleSheet.create({
 		backgroundColor: secondary,
 	},
 	textButton: {
-		fontSize: 20,
+		fontSize: RFValue(26),
 		fontFamily:title700,
 	},
   modal:{
     flex: 1,
     marginTop: 120,
     marginHorizontal: 8,
-    marginBottom: 82,
+    marginBottom: 90,
     borderWidth: 2,
     borderColor: tabColor,
-		padding: 16,
+		padding: 8,
 		backgroundColor: background,
   },
 });

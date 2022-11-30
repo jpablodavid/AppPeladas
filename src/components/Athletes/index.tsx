@@ -14,6 +14,7 @@ import { Card } from "../Card";
 import { styles } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
+import { Payment } from "../Payment";
 
 type Props = RectButtonProps & ModalProps & {
 	data: User;
@@ -22,8 +23,6 @@ type Props = RectButtonProps & ModalProps & {
 };
 
 export const Athletes = ({ data, perfil, exclude }: Props) => {
-
-  const navigation = useNavigation();
 
   const { user } = useAuth();
 
@@ -72,10 +71,10 @@ export const Athletes = ({ data, perfil, exclude }: Props) => {
 					onPress={handleCloseModal}
 				>
           <View style={styles.modal}>
-            <ButtonText style={{ width: 40 }} onPress={handleCloseModal}>
-              <Text >X</Text>
+            <ButtonText onPress={handleCloseModal}>
+              <Text style={styles.textButton}>X</Text>
             </ButtonText>
-              {perfil ? <Card data={data}/> : <Text>oi</Text> }
+              {perfil ? <Card data={data}/> : <Payment data={data.payments}/>}
           </View>
         </TouchableWithoutFeedback>
       </Modal>
