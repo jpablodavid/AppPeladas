@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { shadow, background, backgroundDark, tabColor, tabIcon } = theme.colors;
+const { shadow, tabColor, tabIcon } = theme.colors;
+const { title700 } = theme.fonts;
 
 export const styles = StyleSheet.create({
 	container: {
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
 	title: {
 		fontSize: RFValue(20),
 		color: 'white',
-		fontFamily: theme.fonts.title700,
+		fontFamily: title700,
 		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,

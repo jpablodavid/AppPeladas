@@ -19,6 +19,8 @@ import { styles } from "./styles";
 
 export const Group = ({navigation}) => {
 
+  const { tabIcon } = theme.colors;
+
   const { group } = useAuth();
 
 	const [category, setCategory] = useState("");
@@ -85,7 +87,7 @@ export const Group = ({navigation}) => {
           )
 
         }
-        <View style={{height: 80, backgroundColor: theme.colors.tabIcon}}/>
+        <View style={{height: 80, backgroundColor: tabIcon}}/>
 			</Background>
 	);
 };

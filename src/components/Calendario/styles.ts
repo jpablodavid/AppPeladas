@@ -2,13 +2,16 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
+const { background, tabIcon, tabColor } = theme.colors;
+const { title500, title700, text900 } = theme.fonts;
+
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
     marginTop: '3%'
 	},
   calendar:{
-    borderColor: theme.colors.background,
+    borderColor: background,
     borderTopRadius: 20
   },
   header:{
@@ -21,13 +24,13 @@ export const styles = StyleSheet.create({
     width: '47%',
     textAlign: 'center',
     marginHorizontal: "15%",
-    fontFamily: theme.fonts.text900,
+    fontFamily: text900,
     fontSize: RFValue(18)
   },
   weeks:{
     flexDirection: 'row',
     height: '12%',
-    backgroundColor: theme.colors.tabIcon
+    backgroundColor: tabIcon
   },
   containerWeekItem:{
     width: '13%',
@@ -35,9 +38,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   weekItem:{
-    fontFamily: theme.fonts.title700,
+    fontFamily: title700,
     fontSize: RFValue(16),
-    color: theme.colors.tabColor
+    color: tabColor
   },
   days:{
     flexDirection: 'row',
@@ -53,7 +56,7 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
   },
   dayItem:{
-    fontFamily: theme.fonts.title500,
+    fontFamily: title500,
     fontSize: RFValue(16),
   },
   info:{
@@ -61,7 +64,7 @@ export const styles = StyleSheet.create({
     borderBottomStartRadius: 20,
   },
   textInfo:{
-    fontFamily: theme.fonts.title700,
+    fontFamily: title700,
     fontSize: RFValue(16),
     padding: 8,
     color: "#fff"
@@ -71,8 +74,8 @@ export const styles = StyleSheet.create({
     marginHorizontal: "10%",
     marginVertical: "60%",
     borderWidth: 2,
-    borderColor: theme.colors.tabColor,
-		backgroundColor: theme.colors.background,
+    borderColor: tabColor,
+		backgroundColor: background,
   },
   input:{
     flex: 1,

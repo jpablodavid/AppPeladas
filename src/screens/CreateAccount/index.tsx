@@ -14,8 +14,6 @@ import { useAuth } from "../../hooks/auth";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
-import { theme } from "../../global/styles/theme";
-import { styles } from "./styles";
 import { positions, teams } from "../../global/Data/itens";
 
 import { Button } from "../../components/Button";
@@ -25,10 +23,13 @@ import { ButtonText } from "../../components/ButtonText";
 import { ButtonDisable } from "../../components/ButtonDisable";
 import { InputSelect } from "../../components/InputSelect";
 
+import { theme } from "../../global/styles/theme";
+import { styles } from "./styles";
+
 
 export const CreateAccount = ({navigation}) => {
 
-  const { primary100 } = theme.colors;
+  const { primary100, primary10 } = theme.colors;
 
   const { user, loading, createUser, email } = useAuth();
 
@@ -128,7 +129,7 @@ export const CreateAccount = ({navigation}) => {
             <View style={{ marginBottom: 32 }}>
               {
                 loading ?
-                  (<ActivityIndicator size={36} color={theme.colors.primary10} />)
+                  (<ActivityIndicator size={36} color={primary10} />)
                   :
                   (name === undefined || birthday === undefined || nickName === undefined || phone === undefined)
                     ?

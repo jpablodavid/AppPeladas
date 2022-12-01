@@ -22,6 +22,8 @@ type Props = {
 
 export const AccountGroup = ({ title }: Props) => {
 
+  const {tabIcon} = theme.colors;
+
   const { group } = useAuth();
 
 	const [category, setCategory] = useState("");
@@ -49,7 +51,7 @@ export const AccountGroup = ({ title }: Props) => {
             (category === "3") && <Values data={group} />
         }
       </ScrollView>
-      <View style={{height: 82, backgroundColor: theme.colors.tabIcon}}>
+      <View style={{height: 82, backgroundColor: tabIcon}}>
 
       </View>
     </Background>

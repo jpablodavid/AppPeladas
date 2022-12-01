@@ -12,11 +12,14 @@ import { GroupRoutes } from "./group.routes";
 import { CreateGroup } from "../screens/CreateGroup";
 
 import { theme } from "../global/styles/theme";
-
+import { RFValue } from "react-native-responsive-fontsize";
 
 const Tab = createBottomTabNavigator();
 
 export const AppRoutes = () => {
+
+  const { tabColor, tabIcon, tabColorFocused, background, disable10 } = theme.colors;
+  const { title700 } = theme.fonts;
 
   const { user } = useAuth();
 
@@ -25,20 +28,20 @@ export const AppRoutes = () => {
       screenOptions={{
         headerShown: true,
         headerStyle:{
-          backgroundColor:theme.colors.tabColor,
+          backgroundColor:tabColor,
           borderBottomLeftRadius: 36,
         },
         headerTitleStyle:{
           marginLeft: 8,
-          fontSize: 32,
-          fontFamily: theme.fonts.title700
+          fontSize: RFValue(32),
+          fontFamily: title700
         },
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
           borderRadius: 20,
           margin: 16,
-          backgroundColor: theme.colors.tabColor,
+          backgroundColor: tabColor,
           height: 64,
         }
       }}
@@ -46,9 +49,9 @@ export const AppRoutes = () => {
       <Tab.Screen name="HomeRoutes" component={HomeRoutes}
         options ={{ headerShown: false,
           tabBarIcon: ({focused}) => (
-            <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  theme.colors.tabColorFocused : theme.colors.tabColor}}>
-              <MaterialCommunityIcons name="stadium" size={24} color={theme.colors.tabIcon}/>
-              <Text style={{ color: theme.colors.tabIcon, fontSize: 12, fontWeight: "bold"}}>
+            <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  tabColorFocused : tabColor}}>
+              <MaterialCommunityIcons name="stadium" size={24} color={tabIcon}/>
+              <Text style={{ color: tabIcon, fontSize: RFValue(12), fontWeight: "bold"}}>
                 HOME
               </Text>
             </View>
@@ -59,9 +62,9 @@ export const AppRoutes = () => {
       <Tab.Screen name="GroupRoutes" component={GroupRoutes}
       options ={{ headerShown: false,
         tabBarIcon: ({focused}) => (
-          <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  theme.colors.tabColorFocused : theme.colors.tabColor}}>
-            <MaterialCommunityIcons name="account-group" size={24} color={theme.colors.tabIcon} />
-            <Text style={{ color: theme.colors.tabIcon, fontSize: 12, fontWeight: "bold"}}>
+          <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  tabColorFocused : tabColor}}>
+            <MaterialCommunityIcons name="account-group" size={24} color={tabIcon} />
+            <Text style={{ color: tabIcon, fontSize: RFValue(12), fontWeight: "bold"}}>
               GRUPO
             </Text>
           </View>
@@ -80,9 +83,9 @@ export const AppRoutes = () => {
       <Tab.Screen name="CreateGroup" component={CreateGroup}
       options ={{ title: user.name,
         tabBarIcon: ({focused}) => (
-          <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  theme.colors.tabColorFocused : theme.colors.tabColor}}>
-            <MaterialCommunityIcons name="android-messages" size={24} color={theme.colors.tabIcon} />
-            <Text style={{ color: theme.colors.tabIcon, fontSize: 12, fontWeight: "bold"}}>
+          <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  tabColorFocused : tabColor}}>
+            <MaterialCommunityIcons name="android-messages" size={24} color={tabIcon} />
+            <Text style={{ color: tabIcon, fontSize: RFValue(12), fontWeight: "bold"}}>
               MSG
             </Text>
           </View>
@@ -92,9 +95,9 @@ export const AppRoutes = () => {
       <Tab.Screen name="MyAccount" component={MyAccount}
       options ={{ title: 'Minha Conta',
         tabBarIcon: ({focused}) => (
-          <View style={{alignItems: "center",borderLeftWidth: 3, borderColor: focused ?  theme.colors.background : theme.colors.disable10, paddingLeft: 10, marginRight: 10}}>
-            <MaterialCommunityIcons name="cog" size={24} color={focused ?  theme.colors.background : theme.colors.tabIcon} />
-            <Text style={{ color: focused ?  theme.colors.background : theme.colors.tabIcon , fontSize: 12, fontWeight: "bold"}}>
+          <View style={{alignItems: "center",borderLeftWidth: 3, borderColor: focused ?  background : disable10, paddingLeft: 10, marginRight: 10}}>
+            <MaterialCommunityIcons name="cog" size={24} color={focused ?  background : tabIcon} />
+            <Text style={{ color: focused ?  background : tabIcon , fontSize: RFValue(12), fontWeight: "bold"}}>
               CONTA
             </Text>
           </View>

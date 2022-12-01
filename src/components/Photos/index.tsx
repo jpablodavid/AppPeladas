@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Image, ModalProps, Modal} from "react-native";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
-import { Group, useAuth } from "../../hooks/auth";
 import { ButtonText } from "../ButtonText";
 
 import { styles } from "./styles";

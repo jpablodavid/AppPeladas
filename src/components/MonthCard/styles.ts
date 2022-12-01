@@ -2,13 +2,12 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
+const { background, tabIcon, tabColor } = theme.colors;
+const { title700, text900 } = theme.fonts;
+
 export const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-    marginTop: '3%'
-	},
   calendar:{
-    borderColor: theme.colors.background,
+    borderColor: background,
     borderTopRadius: 20
   },
   header:{
@@ -21,13 +20,13 @@ export const styles = StyleSheet.create({
     width: '47%',
     textAlign: 'center',
     marginHorizontal: "15%",
-    fontFamily: theme.fonts.text900,
+    fontFamily: text900,
     fontSize: RFValue(18)
   },
   weeks:{
     flexDirection: 'row',
-    height: '25%',
-    backgroundColor: theme.colors.tabIcon
+    height: 50,
+    backgroundColor: tabIcon
   },
   containerWeekItem:{
     width: '13%',
@@ -35,9 +34,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   weekItem:{
-    fontFamily: theme.fonts.title700,
+    fontFamily: title700,
     fontSize: RFValue(16),
-    color: theme.colors.tabColor
+    color: tabColor
   },
   days:{
     flexDirection: 'row',
@@ -45,37 +44,15 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   containerWeekDay:{
-    width: 50,
-    heigth: 50,
+    width: 52,
+    heigth: 60,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: "red"
   },
   dayItem:{
-    fontFamily: theme.fonts.title500,
-    fontSize: RFValue(16),
+    fontFamily: title700,
+    fontSize: RFValue(18),
+    marginBottom: 4
   },
-  info:{
-    borderBottomEndRadius: 20,
-    borderBottomStartRadius: 20,
-  },
-  textInfo:{
-    fontFamily: theme.fonts.title700,
-    fontSize: RFValue(16),
-    padding: 8,
-    color: "#fff"
-  },
-  modal:{
-    flex:1,
-    marginHorizontal: "10%",
-    marginVertical: "60%",
-    borderWidth: 2,
-    borderColor: theme.colors.tabColor,
-		backgroundColor: theme.colors.background,
-  },
-  input:{
-    flex: 1,
-    alignItems: "center",
-    justifyContent: 'space-around',
-  }
 });

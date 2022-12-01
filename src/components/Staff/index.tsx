@@ -23,7 +23,8 @@ type Props = RectButtonProps & {
 };
 
 export const Staff = ({ data }: Props) => {
-	const { primary100, secondary, tabIcon, tabColor} = theme.colors;
+
+	const { tabIcon, tabColor} = theme.colors;
 
   const { addStaff, user} = useAuth()
 

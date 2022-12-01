@@ -8,12 +8,15 @@ import { Button } from "../Button";
 import { Group } from "../../hooks/auth";
 
 import { styles } from "./styles";
+import { theme } from "../../global/styles/theme";
 
 type Props = {
 	data: Group;
 };
 
 export const Map = ({data}: Props) => {
+
+  const {secondary} = theme.colors;
 
   const[local, setLocal]  = useState({
     latitude: 0,
@@ -43,7 +46,7 @@ export const Map = ({data}: Props) => {
           Estrada do sapê, 468 - Bento Ribeiro - RJ
         </Text>
       <View style={styles.buttonsContainer}>
-        <Button color={'red'} text={"Como chegar"}></Button>
+        <Button color={secondary} text={"Como chegar"}></Button>
       </View>
 		</View>
 	);

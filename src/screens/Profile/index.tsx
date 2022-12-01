@@ -1,12 +1,12 @@
 import React from "react";
+import { useAuth } from "../../hooks/auth";
 import { View } from "react-native";
 
 import { Background } from "../../components/Background";
 import { Card } from "../../components/Card";
 
-import { useAuth } from "../../hooks/auth";
-
 import { styles } from "./styles";
+
 
 export const Profile = ({navigation}) => {
 

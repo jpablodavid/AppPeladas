@@ -3,8 +3,6 @@ import { Control, Controller, FieldError } from 'react-hook-form'
 import { Text } from "react-native-svg";
 import { Input, InputProps } from "../Input";
 
-import { styles } from "./styles";
-
 type Props = InputProps & {
   control: Control<any>;
   name: string;
@@ -26,7 +24,7 @@ export const InputControl = ({ error, control, name, ...rest }: Props) => {
         )}
       />
       {
-        error && <Text >{error.message}</Text>
+        error && <Text>{error.message}</Text>
       }
     </>
   );

@@ -3,7 +3,7 @@ import { theme } from "../../global/styles/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 
 const {listName, primary100, secondary, tabColor, background} = theme.colors;
-const {text900, title700, } = theme.fonts;
+const {text900, title700 } = theme.fonts;
 
 export const styles = StyleSheet.create({
   container: {

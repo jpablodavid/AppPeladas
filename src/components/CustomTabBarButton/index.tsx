@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity, TouchableOpacityProps, Image} from "react-native";
+import { View, TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { styles } from "./styles";
 

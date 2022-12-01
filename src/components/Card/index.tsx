@@ -23,6 +23,8 @@ type Props = {
 
 export const Card = ({data} : Props) => {
 
+  const { black, black000 } = theme.colors;
+
   const [color, setColor] = useState("black");
 
   function chanceColor(start: string) {
@@ -48,7 +50,7 @@ export const Card = ({data} : Props) => {
         >
           <LinearGradient
             style={styles.range}
-            colors={["#00000085", "#00000000"]}
+            colors={[black, black000]}
           >
             <Text style={styles.camisa}>{10}</Text>
             <Text style={styles.position}>{siglaPosition(data.position)}</Text>

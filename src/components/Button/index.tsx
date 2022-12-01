@@ -10,7 +10,9 @@ type Props = TouchableOpacityProps & {
 };
 
 export const Button = ({ color , text, ...rest }: Props) => {
+
 	const { secondary } = theme.colors;
+
 	return (
 		<TouchableOpacity
 			activeOpacity={0.6}

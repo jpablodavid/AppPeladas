@@ -2,6 +2,9 @@ import { Dimensions, StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
+const { background, tabColor, white } = theme.colors;
+const { text500 } = theme.fonts;
+
 const width = Dimensions.get('window').width;
 
 export const styles = StyleSheet.create({
@@ -17,8 +20,8 @@ export const styles = StyleSheet.create({
     marginTop: 150,
     marginBottom: 100,
     borderWidth: 2,
-    borderColor: theme.colors.tabColor,
-		backgroundColor: theme.colors.background,
+    borderColor: tabColor,
+		backgroundColor: background,
   },
   photoCarrosel:{
     width: width - 8,
@@ -27,8 +30,8 @@ export const styles = StyleSheet.create({
   },
   text:{
     margin: 8,
-    fontFamily: theme.fonts.text500,
+    fontFamily: text500,
     fontSize: RFValue(16),
-    color: "#fff"
+    color: white
   }
 });

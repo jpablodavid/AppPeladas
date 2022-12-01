@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import { Group, useAuth, User } from "../../hooks/auth";
+
 import { Athletes } from "../Athletes";
 
 import { styles } from "./styles";

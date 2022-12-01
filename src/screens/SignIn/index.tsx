@@ -26,6 +26,8 @@ import { styles } from "./styles";
 
 export const SignIn = ({navigation}) => {
 
+  const { primary10 } = theme.colors;
+
   const { logIn, loading, forgotPassword } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -113,7 +115,7 @@ export const SignIn = ({navigation}) => {
               </View>
 
                 {loading ? (
-                  <ActivityIndicator size={36} color={theme.colors.primary10} />
+                  <ActivityIndicator size={36} color={primary10} />
                 ) : (
                   <>
                     <ButtonFacebook

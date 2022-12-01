@@ -8,9 +8,9 @@ import { ButtonText } from "../ButtonText";
 
 import { styles } from "./styles";
 
-const { primary100 } = theme.colors;
-
 export const Values = ({data}) => {
+
+  const { primary100, line } = theme.colors;
 
   const { group } = useAuth();
 
@@ -143,7 +143,7 @@ export const Values = ({data}) => {
                   <Text style={styles.label}>Número do Atleta:</Text>
                   <TextInput
                     style={[{width: '20%'},styles.input]}
-                    placeholderTextColor={"#555"}
+                    placeholderTextColor={line}
                     keyboardType={"number-pad"}
                     value={numberAtleta}
                     onChangeText={setNumberAtleta}
@@ -156,7 +156,7 @@ export const Values = ({data}) => {
                   <Text style={styles.label}>Mês a Pagar:</Text>
                   <TextInput
                     style={[{width: '40%'},styles.input]}
-                    placeholderTextColor={"#555"}
+                    placeholderTextColor={line}
                     value={month}
                     onChangeText={setMonth}
                   />
@@ -169,7 +169,7 @@ export const Values = ({data}) => {
                   <Text style={styles.label}>Número de Convidados:</Text>
                   <TextInput
                     style={[{width: '20%'},styles.input]}
-                    placeholderTextColor={"#555"}
+                    placeholderTextColor={line}
                     onChangeText={setConvidados}
                     keyboardType={"number-pad"}
                   />

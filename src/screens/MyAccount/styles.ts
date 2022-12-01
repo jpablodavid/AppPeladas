@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
+const { white } = theme.colors;
 const { title700 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
 		fontSize: RFValue(24),
 		fontFamily: title700,
-		color: 'white'
+		color: white
 	},
 	inputContainer: {
 		marginBottom: 16,

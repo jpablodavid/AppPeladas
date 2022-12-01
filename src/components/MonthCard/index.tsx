@@ -15,6 +15,8 @@ type Props = {
 
 export const MonthCard = ({month, index, currentYear, event}: Props) => {
 
+  const { line, black, white, tabColor } = theme.colors;
+
   const [value, setValue] = useState(
     moment().locale("pt").month(month).year(currentYear)
   );
@@ -28,10 +30,16 @@ export const MonthCard = ({month, index, currentYear, event}: Props) => {
     'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'
   ];
 
-   // primeiro dia do mes
+   // primeiro dia no calendario mensal
   const startDay = value.clone().startOf("month").startOf('week');
-   // ultimo dia do mes
+   // ultimo dia no calendario mensal
   const endDay = value.clone().endOf("month").endOf('week');
+
+  // primeiro dia do mes
+  const firstday = value.clone().startOf('month');
+
+  // ultimo dia do mes
+  const lastDay = value.clone().endOf('month');
 
    // dia controle
   const day = startDay.clone().subtract(1, 'day');
@@ -51,7 +59,7 @@ export const MonthCard = ({month, index, currentYear, event}: Props) => {
   return (
     <View style={styles.calendar}>
       <View style={styles.header}>
-        { !index ?
+        { index > 0 ?
             <TouchableOpacity>
               <AntDesign name="caretleft" size={20} color="black" />
             </TouchableOpacity>
@@ -80,8 +88,8 @@ export const MonthCard = ({month, index, currentYear, event}: Props) => {
         {
           calendar.map((week) => (
             week.map((day: any) => (
-            <TouchableOpacity style={[styles.containerWeekDay, { backgroundColor: eventDay === day ? theme.colors.tabColor : "#fff"}]}>
-              <Text style={styles.dayItem} key={day._d.getTime() + day.month}>{day.format('DD')}</Text>
+            <TouchableOpacity style={[styles.containerWeekDay, { backgroundColor: eventDay === day ? tabColor : white}]}>
+              <Text style={[styles.dayItem, {color: day < firstday || day > lastDay ? line : black} ]} key={day._d.getTime() + day.month}>{day.format('DD')}</Text>
             </TouchableOpacity>
             ))
           ))

@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
+const { tabColor, background } = theme.colors;
 const { title700, text500, text900} = theme.fonts;
-const { tabColor } = theme.colors;
 
 export const styles = StyleSheet.create({
 	container: {
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
 		width: 86,
 		height: 86,
 		borderRadius: 43,
-		backgroundColor: theme.colors.background,
+		backgroundColor: background,
 		alignItems: "center",
 		justifyContent: "center",
 	},

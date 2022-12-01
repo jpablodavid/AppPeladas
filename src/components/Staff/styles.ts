@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const {secondary} = theme.colors;
+const { secondary, white } = theme.colors;
 const { title700, text500 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
 	},
 	input: {
 		height: 24,
-		backgroundColor: "#fff",
+		backgroundColor: white,
 		borderRadius: 5,
 		paddingHorizontal: 8,
 		marginBottom: 4,

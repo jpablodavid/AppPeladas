@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { shadow, textButton } = theme.colors;
+const { shadow, white } = theme.colors;
+const { title700 } = theme.fonts;
 
 export const styles = StyleSheet.create({
 	button: {
@@ -18,9 +19,9 @@ export const styles = StyleSheet.create({
 	text: {
 		fontSize: RFValue(18),
 		letterSpacing: 1,
-		color: textButton,
-		fontFamily: theme.fonts.title700,
-		textShadowColor: theme.colors.shadow,
+		color: white,
+		fontFamily: title700,
+		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
 	},

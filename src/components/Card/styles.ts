@@ -2,8 +2,8 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { primary100, line, shadow, tabColor, circuloXp } = theme.colors;
-const { text500, text900,title700} = theme.fonts;
+const { primary100, line, shadow, tabColor, black } = theme.colors;
+const { text500, text900, title700} = theme.fonts;
 
 export const styles = StyleSheet.create({
 	card: {
@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
 		fontFamily: title700,
 		textTransform: "uppercase",
 		textAlign: "center",
-		color:'#000',
+		color:black,
 		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
@@ -94,7 +94,7 @@ export const styles = StyleSheet.create({
   scoutData:{
     fontSize: RFValue(28),
 		fontFamily: title700,
-		color: '#000',
+		color: black,
   },
 	textData: {
 		fontSize: RFValue(24),

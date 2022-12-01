@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { RFValue } from "react-native-responsive-fontsize";
 import { useAuth } from "../hooks/auth";
 
 import { Group } from "../screens/Group";
@@ -13,6 +14,9 @@ const { Navigator, Screen } = createStackNavigator();
 
 export const  GroupRoutes = () => {
 
+  const { tabColor } = theme.colors;
+  const { title700 } = theme.fonts;
+
   const { group } = useAuth();
 
   return (
@@ -20,13 +24,13 @@ export const  GroupRoutes = () => {
       initialRouteName= "Group"
       screenOptions={{
         headerStyle:{
-          backgroundColor:theme.colors.tabColor,
+          backgroundColor: tabColor,
           borderBottomLeftRadius: 36,
         },
         headerTitleStyle:{
           marginLeft: 8,
-          fontSize: 32,
-          fontFamily: theme.fonts.title700
+          fontSize: RFValue(32),
+          fontFamily: title700
         },
       }}
     >

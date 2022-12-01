@@ -13,6 +13,8 @@ export type InputProps = TextInputProps & {
 
 export const Input = ({ icon, value, ...rest }: InputProps) => {
 
+  const { iconInput, primary100 } = theme.colors;
+
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
@@ -26,17 +28,17 @@ export const Input = ({ icon, value, ...rest }: InputProps) => {
   }
 
   return (
-    <View style={[styles.container, { borderBottomColor: isFocused ? "#DC1637" : theme.colors.primary100 }]}>
+    <View style={[styles.container, { borderBottomColor: isFocused ? iconInput : primary100 }]}>
       <View>
         <Feather
           name={icon}
           size={24}
-          color={(isFocused || isFilled) ? '#DC1637' :  theme.colors.primary100}
+          color={(isFocused || isFilled) ? iconInput : primary100}
         />
       </View>
       <TextInput
         style={styles.input}
-        placeholderTextColor={theme.colors.primary100}
+        placeholderTextColor={primary100}
         inlineImageLeft="search_icon"
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}

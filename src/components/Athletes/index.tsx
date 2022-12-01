@@ -10,11 +10,10 @@ import { RectButton, RectButtonProps } from "react-native-gesture-handler";
 import { useAuth, User } from "../../hooks/auth";
 import { ButtonText } from "../ButtonText";
 import { Card } from "../Card";
+import { Payment } from "../Payment";
 
 import { styles } from "./styles";
 
-import { useNavigation } from "@react-navigation/native";
-import { Payment } from "../Payment";
 
 type Props = RectButtonProps & ModalProps & {
 	data: User;

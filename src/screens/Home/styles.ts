@@ -3,7 +3,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
 const { title700, text900 } = theme.fonts;
-const { circuloXp, textButton, primary10, shadow, line} = theme.colors;
+const { circuloXp, white, primary10, shadow, line} = theme.colors;
 
 export const styles = StyleSheet.create({
 	container: {
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
 	},
 	textCamisa: {
 		position: "absolute",
-		color: textButton,
+		color: white,
 		fontSize: RFValue(44),
 		fontFamily: title700,
 		textShadowColor: primary10,
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
 	textPosition: {
 		fontSize: RFValue(32),
 		fontFamily: text900,
-		color: textButton,
+		color: white,
 		textShadowColor: shadow,
 		textShadowOffset: { width: 1, height: -1 },
 		textShadowRadius: 1,

@@ -1,5 +1,8 @@
 export const theme = {
 	colors: {
+    white: "#fff",
+    black: '#000',
+    black000: '"#00000000"',
 
     background: "#1d3557",
     backgroundDark: "#222",
@@ -8,8 +11,6 @@ export const theme = {
     tabColorFocused: '#73a9aa',
     tabIcon: "#0B5980AA",
     modal: "#0B5980",
-
-		textButton: "#ffff",
 
 		textCard: "#EDE7CF",
 
@@ -29,6 +30,7 @@ export const theme = {
 		shadow: "rgba(0, 0, 0, 0.5)",
 
 		textInput: "#0B598025",
+    iconInput: "#DC1637",
 
 		listName: "#DED9C6",
 		listOrdem: "#EDE7CF", // 50%

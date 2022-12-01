@@ -8,13 +8,12 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { theme } from "../../global/styles/theme";
-import { styles } from "./styles";
 import { Background } from "../../components/Background";
 import { useAuth } from "../../hooks/auth";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
-const { primary100, secondary } = theme.colors;
+import { theme } from "../../global/styles/theme";
+import { styles } from "./styles";
 
 type FormData = {
   name: string,
@@ -30,6 +29,8 @@ const schema = yup.object({
 })
 
 export const CreateGroup = ({navigation}) => {
+
+  const { primary10, primary100, secondary } = theme.colors;
 
   const { loading, createGroup } = useAuth();
 
@@ -140,7 +141,7 @@ export const CreateGroup = ({navigation}) => {
               <View style={{marginBottom: 16}}>
               {
                 loading ?
-                  (<ActivityIndicator size={36} color={theme.colors.primary10} />)
+                  (<ActivityIndicator size={36} color={primary10} />)
                   :
                   <Button text={"Criar Grupo"} /* onPress={handleSubmit(handleCreateGroup)} *//>
               }

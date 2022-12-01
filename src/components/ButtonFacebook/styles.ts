@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { facebook, shadow, textButton } = theme.colors;
+const { facebook, shadow, white} = theme.colors;
+const { title700 } = theme.fonts;
 
 export const styles = StyleSheet.create({
 	button: {
@@ -24,9 +25,9 @@ export const styles = StyleSheet.create({
 	text: {
 		textAlign: "center",
 		fontSize: RFValue(16),
-		color: textButton,
-		fontFamily: theme.fonts.title700,
-		textShadowColor: theme.colors.shadow,
+		color: white,
+		fontFamily: title700,
+		textShadowColor: shadow,
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 10,
 		letterSpacing: 1,

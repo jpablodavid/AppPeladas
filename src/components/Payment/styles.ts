@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { theme } from "../../global/styles/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 
-const {listName, primary100, secondary, tabColor, background} = theme.colors;
+const { white } = theme.colors;
 const {text900, title700, } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
   title:{
-    fontFamily: theme.fonts.text900,
+    fontFamily: text900,
     fontSize: RFValue(24)
   },
   months:{
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
   },
   itemMonth:{
-    fontFamily: theme.fonts.title700,
+    fontFamily: title700,
     fontSize: RFValue(19),
     margin: 8
   },
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
   },
   text:{
     fontSize: RFValue(16),
-    color: "#fff",
+    color: white,
     marginHorizontal: 16
   }
 });

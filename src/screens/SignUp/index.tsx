@@ -8,8 +8,8 @@ import {
   ActivityIndicator,
   Keyboard,
 } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useAuth } from "../../hooks/auth";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 import { Button } from "../../components/Button";
 import { ButtonDisable } from "../../components/ButtonDisable";
@@ -24,6 +24,8 @@ import { styles } from "./styles";
 
 
 export const SignUp = ({navigation}) => {
+
+  const { primary10 } = theme.colors;
 
   const {
     loading,
@@ -101,7 +103,7 @@ export const SignUp = ({navigation}) => {
               <View style={styles.line} />
             </View>
             {loading ? (
-              <ActivityIndicator size={36} color={theme.colors.primary10} />
+              <ActivityIndicator size={36} color={primary10} />
             ) : (
               <>
                 <ButtonFacebook

@@ -14,13 +14,13 @@ type Props = {
 function totalArrecadacoes(list: typeof Months){
   let total = 0
   list.forEach((item) => total = total + parseFloat(item.arrecadações))
-  return total.toFixed(2);
+  return total;
 }
 
 function totalCustos(list: typeof Months){
   let total = 0
   list.forEach((item) => total = total + parseFloat(item.custos))
-  return total.toFixed(2);
+  return total;
 }
 
 
@@ -44,8 +44,8 @@ export const CollectionGroup = ({data}: Props) => {
                   <Text style={styles.title}>Custos</Text>
                 </View>
                 <View style={styles.test}>
-                  <Text style={styles.textArrecadacao}>R$ {item.arrecadações}</Text>
-                  <Text style={styles.textCustos}>R$ {item.custos}</Text>
+                  <Text style={styles.textArrecadacao}>R$ {parseFloat(item.arrecadações).toFixed(2)}</Text>
+                  <Text style={styles.textCustos}>R$ {parseFloat(item.custos).toFixed(2)}</Text>
                 </View>
               </View>
               </View>
@@ -56,21 +56,21 @@ export const CollectionGroup = ({data}: Props) => {
         <View style={styles.money}>
           <Text style={styles.label}> R$</Text>
           <View style={styles.info}>
-            <Text style={styles.infoText}>{totalArrecadacoes(Months)}</Text>
+            <Text style={styles.infoText}>{totalArrecadacoes(Months).toFixed(2)}</Text>
           </View>
         </View>
         <Text style={styles.label}>Custos:</Text>
         <View style={styles.money}>
           <Text style={styles.label}> R$</Text>
           <View style={styles.info}>
-            <Text style={styles.infoText}>{totalCustos(Months)}</Text>
+            <Text style={styles.infoText}>{totalCustos(Months).toFixed(2)}</Text>
           </View>
         </View>
         <Text style={styles.label}>Rendimentos:</Text>
         <View style={styles.money}>
           <Text style={styles.label}> R$</Text>
           <View style={styles.info}>
-            <Text style={styles.infoText}>{totalArrecadacoes(Months) - totalCustos(Months)}</Text>
+            <Text style={styles.infoText}>{(totalArrecadacoes(Months) - totalCustos(Months)).toFixed(2)}</Text>
           </View>
         </View>
 		</View>

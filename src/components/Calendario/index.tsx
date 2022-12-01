@@ -9,6 +9,8 @@ import { InputArea } from "../InputArea";
 import { Button } from "../Button";
 import { MonthCard } from "../MonthCard";
 
+import { theme } from "../../global/styles/theme";
+
 import { styles } from "./styles";
 
 const width = Dimensions.get('window').width;
@@ -16,7 +18,9 @@ const width = Dimensions.get('window').width;
 
 export const Calendario = ({data}) => {
 
-  const { group, user } = useAuth();
+  const { line } = theme.colors;
+
+  const { group } = useAuth();
 
 	const [openModal, setOpenModal] = useState(false);
 
@@ -35,6 +39,10 @@ export const Calendario = ({data}) => {
   // trabalhan com as datas
   const [currentYear, setCurrentYear] = useState(2022);
   const [dateSelected, setDateSelected] = useState([]);
+
+  const [date, setDate] = useState(new Date());
+
+  const [event, setEvent] = useState('');
 
   const month = [
     "January",
@@ -66,16 +74,6 @@ export const Calendario = ({data}) => {
       "Dezembro",
     ],
   });
-
-  const [date, setDate] = useState(new Date());
-
-  const [event, setEvent] = useState('');
-
-  const week = [
-    'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'
-  ];
-
-  const days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
 	return (
 		<View style={styles.container}>
@@ -112,7 +110,7 @@ export const Calendario = ({data}) => {
           </ButtonText>
           <View style={styles.input}>
             <InputArea
-              placeholderTextColor={"#555"}
+              placeholderTextColor={line}
               placeholder={"descreva o evento nesta data"}
               value={event} size={""}            />
             <View style={{width: "60%"}}>

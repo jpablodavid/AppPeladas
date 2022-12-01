@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 
@@ -10,6 +11,8 @@ type Props = TouchableOpacityProps & {
 
 export const ButtonDrawer = ({ text, disable, ...rest }: Props) => {
 
+  const { black, line} = theme.colors;
+
   const [color, setColor] = useState('');
 
 	return (
@@ -18,7 +21,7 @@ export const ButtonDrawer = ({ text, disable, ...rest }: Props) => {
     onFocus={() => setColor("")}
     {...rest}
 		>
-			<Text style={[styles.text, { color: disable ? 'gray' : "black" }]}>{text}</Text>
+			<Text style={[styles.text, { color: disable ? line : black }]}>{text}</Text>
 		</TouchableOpacity>
 	);
 };

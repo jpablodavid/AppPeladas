@@ -7,18 +7,18 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { useAuth } from "../../hooks/auth";
 import { Ionicons } from "@expo/vector-icons";
 
 import { db } from "../../configs/firebaseConfig";
 import { collection, getDocs, getDoc , updateDoc, doc } from "@firebase/firestore";
 
-import { styles } from "./styles";
 import { Button } from "../../components/Button";
-import { theme } from "../../global/styles/theme";
 import { Background } from "../../components/Background";
-
-import { useAuth } from "../../hooks/auth";
 import { ListGroup } from "../../components/ListGroup";
+
+import { theme } from "../../global/styles/theme";
+import { styles } from "./styles";
 
 export type List={
   name: string;
@@ -27,6 +27,8 @@ export type List={
 
 
 export const JoinGroup = ({navigation}) => {
+
+  const { background } = theme.colors;
 
   const { id } = useAuth();
 
@@ -111,7 +113,7 @@ export const JoinGroup = ({navigation}) => {
             value={nameGroup}
           />
           <TouchableOpacity style={styles.lupa} onPress={handleSearch}>
-            <Ionicons name="md-search-sharp" size={26} color={theme.colors.background} />
+            <Ionicons name="md-search-sharp" size={26} color={background} />
           </TouchableOpacity>
         </View>
         <KeyboardAvoidingView
