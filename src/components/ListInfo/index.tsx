@@ -25,12 +25,12 @@ export const ListInfo = ({data}) => {
 			<Text style={styles.label}>Valor Mensalidade:</Text>
 			<View style={styles.money}>
 				<Text style={styles.label}>R$</Text>
-				<Text style={styles.infoText}>{group.valorMensal}</Text>
+				<Text style={styles.infoText}>{parseFloat(group.valorMensal).toFixed(2)}</Text>
 			</View>
 			<Text style={styles.label}>Valor Convidados:</Text>
 			<View style={styles.money}>
 				<Text style={styles.label}>R$</Text>
-				<Text style={styles.infoText}>{group.valorConvidado}</Text>
+				<Text style={styles.infoText}>{parseFloat(group.valorConvidado).toFixed(2)}</Text>
 			</View>
 			<Text style={styles.label}>Contatos:</Text>
 			<Text style={styles.infoText}>redes sociais e telefones</Text>

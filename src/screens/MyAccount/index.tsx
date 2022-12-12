@@ -19,15 +19,11 @@ import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 
-export const MyAccount = ({navigation}) => {
+export const MyAccount = () => {
 
   const { primary100 } = theme.colors;
 
   const { user, loading, createUser, email, logOut } = useAuth();
-
-	function handleGoback() {
-    navigation.goBack();
-	}
 
   function handleDisconnect() {
     logOut();

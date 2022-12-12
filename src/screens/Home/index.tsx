@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Image} from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
@@ -17,29 +17,12 @@ export const Home = ({navigation}) => {
 
   const { user } = useAuth();
 
-  const [openModal, setOpenModal] = useState(false);
-
-  function handleCloseModal() {
-    setOpenModal(false);
-  }
-
   function handleAcessProfile() {
     navigation.navigate("Profile");
   }
 
-  function handleAccounting() {
-    //user.grupo_id ? navigation.navigate("Accounting") : setOpenModal(true);
-    navigation.navigate("Accounting");
-  }
-
   function handleAccountGroup() {
-    //user.grupo_id ? navigation.navigate("Accounting") : setOpenModal(true);
     navigation.navigate("AccountGroup");
-  }
-
-  function handleJoinGroup() {
-    setOpenModal(false);
-    navigation.navigate("JoinGroup");
   }
 
   return (

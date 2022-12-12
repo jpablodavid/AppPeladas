@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Modal, ScrollView, TextInput, } from "react-native";
-import { useAuth } from "../../hooks/auth";
 
 import { Button } from "../Button";
 import { theme } from "../../global/styles/theme";
 import { ButtonText } from "../ButtonText";
 
 import { styles } from "./styles";
+import { ButtonDisable } from "../ButtonDisable";
 
 export const Values = ({data}) => {
 
   const { primary100, line } = theme.colors;
-
-  const { group } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -24,13 +22,14 @@ export const Values = ({data}) => {
 
   const [convidados, setConvidados] = useState("0");
 
-  const [totalConvidados, setTotalConvidados] = useState('0');
+  const [totalConvidados, setTotalConvidados] = useState("0");
 
-  const [name, setName] = useState("Nome do Atleta");
+  const [name, setName] = useState("");
 
-  const mensal = group.valorMensal;
+  const [idAtleta, setIdAtleta] = useState("");
 
-  const valorConvidado = group.valorConvidado;
+  //teste para ser usado no usuario que é adm
+  const adm = true;
 
 	function handlerCloseModal() {
     setOpenModal(false);
@@ -52,15 +51,19 @@ export const Values = ({data}) => {
   }
 
   function printNameAtleta(value: string) {
-    const athlete = group.athletes.find(item => item.number === value);
-    athlete  ? setName(athlete.name) : setName("Numero errado");
+    const athlete = data.athletes.find(item => item.number === value);
+    athlete ? (setName(athlete.name), setIdAtleta(athlete.id)) : setName("Numero errado");
   }
 
   function printValorConvidados(value: string) {
     const valor =  parseFloat(value);
-    const convidado = parseFloat(valorConvidado)
+    const convidado = parseFloat(data.valorConvidado)
     const total =  valor * convidado;
-    setTotalConvidados(total.toString());
+    setTotalConvidados(total.toFixed(2));
+  }
+
+  function handlerAddMensalidade(id: string, mes: string) {
+    // criar e exportar uma função para editar o user no firebase, para escrever o nome do mês no payment do user
   }
 
   useEffect(() => {
@@ -77,7 +80,7 @@ export const Values = ({data}) => {
           <View style={styles.valores}>
             <Text style={styles.label}>R$</Text>
             <View style={styles.values}>
-              <Text style={styles.infoText}>350,00</Text>
+              <Text style={styles.infoText}>{parseFloat("350").toFixed(2)}</Text>
             </View>
           </View>
         </View>
@@ -86,7 +89,7 @@ export const Values = ({data}) => {
           <View style={styles.valores}>
             <Text style={styles.label}>R$</Text>
             <View style={styles.values}>
-              <Text style={styles.infoText}>5000,00</Text>
+              <Text style={styles.infoText}>{parseFloat("5000").toFixed(2)}</Text>
             </View>
           </View>
         </View>
@@ -96,7 +99,7 @@ export const Values = ({data}) => {
           <View style={styles.valores}>
             <Text style={styles.label}>R$</Text>
             <View style={styles.values}>
-              <Text style={styles.infoText}>{mensal}</Text>
+              <Text style={styles.infoText}>{parseFloat(data.valorMensal).toFixed(2)}</Text>
             </View>
           </View>
         </View>
@@ -105,7 +108,7 @@ export const Values = ({data}) => {
           <View style={styles.valores}>
             <Text style={styles.label}>R$</Text>
             <View style={styles.values}>
-              <Text style={styles.infoText}>{valorConvidado}</Text>
+              <Text style={styles.infoText}>{parseFloat(data.valorConvidado).toFixed(2)}</Text>
             </View>
           </View>
         </View>
@@ -115,13 +118,21 @@ export const Values = ({data}) => {
         <View style={styles.money}>
           <Text style={styles.label}>Arrecadação:</Text>
           <View style={styles.button}>
-            <Button text={'Adicionar'} onPress={handlerOpenModalArrecadacoes}/>
+            { adm ?
+              <Button text={'Adicionar'} onPress={handlerOpenModalArrecadacoes}/>
+              :
+              <ButtonDisable text={'Adicionar'} />
+            }
           </View>
         </View>
         <View style={[styles.money, {marginTop: 16}]}>
           <Text style={styles.label}>Custos:</Text>
           <View style={styles.button}>
-            <Button text={'Adicionar'} color={primary100} onPress={handlerOpenModalCustos}/>
+            { adm ?
+              <Button text={'Adicionar'} color={primary100} onPress={handlerOpenModalCustos}/>
+              :
+              <ButtonDisable text={'Adicionar'} />
+            }
           </View>
         </View>
       </View>
@@ -182,7 +193,7 @@ export const Values = ({data}) => {
                   </View>
                 </View>
                 <View style={styles.buttonModal}>
-                  <Button text={'adicionar'} onPress={handlerOpenModal}/>
+                  <Button text={'Adicionar'} onPress={handlerOpenModal}/>
                 </View>
               </ScrollView>
             )

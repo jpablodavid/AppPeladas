@@ -14,9 +14,9 @@ type Props = {
 	data: Group;
 };
 
-export const Map = ({data}: Props) => {
+export const Map = ({ data }: Props) => {
 
-  const {secondary} = theme.colors;
+  const { secondary } = theme.colors;
 
   const[local, setLocal]  = useState({
     latitude: 0,
@@ -39,11 +39,10 @@ export const Map = ({data}: Props) => {
       >
         <Marker
           coordinate={{ latitude : -22.85667719396673, longitude : -43.352891249282195  }}
-          //image={{uri: 'custom_pin'}}
         />
       </MapView>
-      <Text style={styles.adress}>
-          Estrada do sapê, 468 - Bento Ribeiro - RJ
+      <Text style={styles.address}>
+          {data.location}
         </Text>
       <View style={styles.buttonsContainer}>
         <Button color={secondary} text={"Como chegar"}></Button>

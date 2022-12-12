@@ -2,7 +2,8 @@ import { StyleSheet, Dimensions } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { text500} = theme.fonts;
+const { white } = theme.colors;
+const { text500 } = theme.fonts;
 
 export const styles = StyleSheet.create({
 	container: {
@@ -13,10 +14,11 @@ export const styles = StyleSheet.create({
     width: Dimensions.get('window').width - 32,
     height: Dimensions.get('window').height - 460,
   },
-  adress:{
+  address:{
     fontFamily: text500,
     fontSize: RFValue(18),
     marginVertical: 4,
+    color: white
   },
   buttonsContainer:{
     width: 160,

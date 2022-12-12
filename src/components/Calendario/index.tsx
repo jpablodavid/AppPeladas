@@ -40,10 +40,6 @@ export const Calendario = ({data}) => {
   const [currentYear, setCurrentYear] = useState(2022);
   const [dateSelected, setDateSelected] = useState([]);
 
-  const [date, setDate] = useState(new Date());
-
-  const [event, setEvent] = useState('');
-
   const month = [
     "January",
     "February",
@@ -90,7 +86,6 @@ export const Calendario = ({data}) => {
               index={index}
               month={item}
               currentYear={currentYear}
-              event={new Date()}
             />
           )}
         />
@@ -112,7 +107,8 @@ export const Calendario = ({data}) => {
             <InputArea
               placeholderTextColor={line}
               placeholder={"descreva o evento nesta data"}
-              value={event} size={""}            />
+              value={"event"} size={""}
+            />
             <View style={{width: "60%"}}>
               <Button color={"red"} text={"Agendar"} onPress={agendar} />
             </View>

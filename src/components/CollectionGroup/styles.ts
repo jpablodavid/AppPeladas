@@ -28,8 +28,11 @@ export const styles = StyleSheet.create({
     padding: 16,
     justifyContent: 'space-evenly'
   },
+  content:{
+    alignItems: 'flex-start',
+  },
   label: {
-		fontSize: RFValue(18),
+		fontSize: RFValue(20),
 		fontFamily: title700,
 		marginRight: 8,
     marginVertical: 8,
@@ -52,9 +55,9 @@ export const styles = StyleSheet.create({
     marginVertical: 4,
 	},
   info:{
-    width: "40%",
+    width: "55%",
     backgroundColor: white,
-    borderRadius: 20,
+    borderRadius: 12,
     borderWidth: 1,
     borderColor: black,
     padding: 4,
@@ -65,11 +68,14 @@ export const styles = StyleSheet.create({
 		fontFamily: text900,
     textAlign: "right",
 	},
-	money: {
+	demo: {
 		flexDirection: "row",
-		alignItems: 'center',
+    justifyContent: 'space-between',
+    margin: 8
 	},
-  test:{
-    alignItems: 'flex-start',
+  money:{
+    flexDirection: "row",
+		alignItems: 'center',
+    justifyContent: 'flex-end'
   }
 });

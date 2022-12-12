@@ -39,55 +39,55 @@ export const Group = ({navigation}) => {
   }
 
 	return (
-			<Background>
-				<CategorySelect
-					data={categoriesGroup}
-					categorySelected={category}
-					setCategory={handleCategorySelect}
-          disable={disable}
-				/>
-        {
-          group ?
-          (
-            <ScrollView style={styles.content}>
-              {
-                !category || category === "1" ? <ListInfo data={group} />
-                :
-                  category === "2" ? <ListStaff data={group} />
-                :
-                  category === "3" ? <Map data={group}/>
-                :
-                  category === "4" ? <ListAthletes data={group} perfil={true}/>
-                :
-                  category === "5" ? <Gallery data={group}/>
-                :
-                  (category === "6") && <Calendario data={group}/>
-              }
-            </ScrollView>
-          )
-          :
-          (
-            <View style={styles.content}>
-              <Text style={styles.text}>
-                Parece que é a sua primeira vez por aqui, então deixa eu te ajudar.
-                para começar a usar o App Peladas você precisa estar em um grupo de peladas.
-                Selecione uma das opções.
-              </Text>
-              <View style={styles.containerButton}>
-                <TouchableOpacity style={styles.button} onPress={handleCreateGroup}>
-                  <Image style={styles.image} source={require("../../assets/3d.png")} />
-                  <Text style={styles.title}>Criar Grupo</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={handleJoinGroup}>
-                  <Image style={styles.image} source={require("../../assets/3d.png")} />
-                  <Text style={styles.title}>Entrar No Grupo</Text>
-                </TouchableOpacity>
-              </View>
+    <Background>
+      <CategorySelect
+        data={categoriesGroup}
+        categorySelected={category}
+        setCategory={handleCategorySelect}
+        disable={disable}
+      />
+      {
+        group ?
+        (
+          <ScrollView style={styles.content}>
+            {
+              !category || category === "1" ? <ListInfo data={group} />
+              :
+                category === "2" ? <ListStaff data={group} />
+              :
+                category === "3" ? <Map data={group}/>
+              :
+                category === "4" ? <ListAthletes data={group} perfil={true}/>
+              :
+                category === "5" ? <Gallery data={group}/>
+              :
+                (category === "6") && <Calendario data={group}/>
+            }
+          </ScrollView>
+        )
+        :
+        (
+          <View style={styles.content}>
+            <Text style={styles.text}>
+              Parece que é a sua primeira vez por aqui, então deixa eu te ajudar.
+              para começar a usar o App Peladas você precisa estar em um grupo de peladas.
+              Selecione uma das opções.
+            </Text>
+            <View style={styles.containerButton}>
+              <TouchableOpacity style={styles.button} onPress={handleCreateGroup}>
+                <Image style={styles.image} source={require("../../assets/3d.png")} />
+                <Text style={styles.title}>Criar Grupo</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={handleJoinGroup}>
+                <Image style={styles.image} source={require("../../assets/3d.png")} />
+                <Text style={styles.title}>Entrar No Grupo</Text>
+              </TouchableOpacity>
             </View>
-          )
+          </View>
+        )
 
-        }
-        <View style={{height: 80, backgroundColor: tabIcon}}/>
-			</Background>
+      }
+      <View style={{height: 80, backgroundColor: tabIcon}}/>
+    </Background>
 	);
 };

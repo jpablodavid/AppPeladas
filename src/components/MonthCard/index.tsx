@@ -10,10 +10,9 @@ type Props = {
 	month: string | number;
   index: number;
   currentYear: number;
-  event: Date;
 };
 
-export const MonthCard = ({month, index, currentYear, event}: Props) => {
+export const MonthCard = ({month, index, currentYear}: Props) => {
 
   const { line, black, white, tabColor } = theme.colors;
 
@@ -24,16 +23,11 @@ export const MonthCard = ({month, index, currentYear, event}: Props) => {
   const [calendar, setCalendar] = useState([]);
 
   // data de um evente toDo
-  const [eventDay, setEventDay ] = useState(event.getDay());
+  const [eventDay, setEventDay ] = useState();
 
   const weekDays = [
     'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'
   ];
-
-   // primeiro dia no calendario mensal
-  const startDay = value.clone().startOf("month").startOf('week');
-   // ultimo dia no calendario mensal
-  const endDay = value.clone().endOf("month").endOf('week');
 
   // primeiro dia do mes
   const firstday = value.clone().startOf('month');
@@ -41,20 +35,31 @@ export const MonthCard = ({month, index, currentYear, event}: Props) => {
   // ultimo dia do mes
   const lastDay = value.clone().endOf('month');
 
-   // dia controle
-  const day = startDay.clone().subtract(1, 'day');
+  function CalendarBuild(value: moment.Moment){
+    // primeiro dia no calendario mensal
+    const startDay = value.clone().startOf("month").startOf('week');
+    // ultimo dia no calendario mensal
+    const endDay = value.clone().endOf("month").endOf('week');
+    // dia controle
+    const day = startDay.clone().subtract(1, 'day');
 
-  while(day.isBefore(endDay, 'day')){
-    calendar.push(
-      Array(7)
-        .fill(0)
-        .map(() => day.add(1, 'day').clone())
-    )
-  }
+    const calendar = [];
+
+    while(day.isBefore(endDay, 'day')){
+      calendar.push(
+        Array(7)
+          .fill(0)
+          .map(() => day.add(1, 'day').clone())
+      )
+    }
+
+    return calendar
+  };
+
 
   useEffect(() => {
-
-  }, [value]);
+    setCalendar(CalendarBuild(value));
+  }, []);
 
   return (
     <View style={styles.calendar}>
@@ -88,9 +93,9 @@ export const MonthCard = ({month, index, currentYear, event}: Props) => {
         {
           calendar.map((week) => (
             week.map((day: any) => (
-            <TouchableOpacity style={[styles.containerWeekDay, { backgroundColor: eventDay === day ? tabColor : white}]}>
-              <Text style={[styles.dayItem, {color: day < firstday || day > lastDay ? line : black} ]} key={day._d.getTime() + day.month}>{day.format('DD')}</Text>
-            </TouchableOpacity>
+              <TouchableOpacity style={[styles.containerWeekDay, { backgroundColor: eventDay === day ? tabColor : white}]}>
+                <Text style={[styles.dayItem, {color: day < firstday || day > lastDay ? line : black} ]} key={day._d.getTime() + day.month}>{day.format('DD')}</Text>
+              </TouchableOpacity>
             ))
           ))
         }

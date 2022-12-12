@@ -55,16 +55,16 @@ export type Group = {
   adm: string;
 };
 
-export type ItemCustos ={
+export type ItemAccount = {
   date: string,
   valor: string;
   desc: string;
 }
 
-export type Custos = {
+export type Account = {
   name: string,
-  custos: Array<ItemCustos>,
-  arrecadacoes: Array<ItemCustos>,
+  custos: Array<ItemAccount>,
+  arrecadacoes: Array<ItemAccount>,
 }
 
 export type userGroup = string[];
@@ -72,6 +72,7 @@ export type userGroup = string[];
 type AuthContextData = {
   user: User;
   group: Group;
+  accounting: Account;
   loading: boolean;
   id: string | undefined;
   email: string;
@@ -83,7 +84,7 @@ type AuthContextData = {
   signUpWithEmailAndPassword: (email: string, password: string) => Promise<void>;
   logOut: () => void;
   createUser: (name: string, email: string, nickName: string, birthday: string, phone: string, position: string, team: string) => Promise<void>;
-  createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string) => Promise<void>;
+  createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string) => Promise<void>;
   forgotPassword: (emailUser: string) => Promise<void>;
 };
 
@@ -109,6 +110,8 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   const [group, setGroup] = useState<Group>({} as Group);
 
+  const [accounting, setAccounting] = useState<Account>({} as Account);
+
   const [id, setId] = useState<string>();
 
   const [email, setEmail] = useState<string>();
@@ -124,7 +127,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       if (currentUser) {
         setId(currentUser.uid);
         loadUser(currentUser.uid);
-        loadGroup("xFMvKV2P2P3kcrl8NFzC");
+        loadGroup("OdUKGdrZYGywMZyNoR9o");
+        //loadAccounting(grupoid)
       }
     });
   }
@@ -212,7 +216,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  async function createGroup(nameGrupo: string, date: string, location: string, day: string, time: string) {
+  async function createGroup(nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string) {
     setLoading(true);
     try {
       const groupWrite = {
@@ -222,8 +226,8 @@ function AuthProvider({ children }: AuthProviderProps) {
         location: location,
         day: day,
         time: time,
-        valorMensal: "",
-        valorConvidado: "",
+        valorMensal: mensal,
+        valorConvidado: convidado,
         presidente: {
           id: '',
           userName: '',
@@ -254,51 +258,25 @@ function AuthProvider({ children }: AuthProviderProps) {
           avatar_url: '',
           occupation: '',
         },
-        account:{
-          valorMensal: '',
-          valorConvidado: '',
-          mensalidadeCampo: '',
-        },
-        adm: id,
+        adm: idAdm,
       } as unknown as Group;
 
       const group = await addDoc(collection(db, 'groups'),{...groupWrite});
-      await updateDoc(doc(db, "users", id), {grupo_id : group.id, adm: true});
+      await updateDoc(doc(db, "users", idAdm), {grupo_id : group.id, adm: true});
 
-      const custoWrite = {
+      const accountingWrite = {
         name: nameGrupo,
-        custos:[],
-        arrecadacoes:[]
-      } as unknown as Custos;
+        custos : [],
+        arrecadacoes: []
+      } as unknown as Account;
 
-      await addDoc(collection(db, 'custos', group.id),{...custoWrite});
+      await setDoc(doc(db, 'accounting', group.id),{...accountingWrite});
 
       setGroup(groupWrite);
+      setAccounting(accountingWrite);
     } catch (error) {
       console.log(error)
       throw new Error('Não foi possível criar Grupo');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  async function addCusto(grupoId: string, date: string , valor: string, desc: string, tipo: string) {
-    setLoading(true);
-    try {
-      const item = {
-        date: date,
-        valor: valor,
-        desc: desc
-      }
-      if (tipo === 'custos') {
-        await updateDoc(doc(db, "custos", grupoId), {custos: {...item}});
-      }else if (tipo === 'arrecadacoes') {
-        await updateDoc(doc(db, "custos", grupoId), {arrecadacoes: {...item}});
-      }
-
-    } catch (error) {
-      console.log(error)
-      throw new Error('Não foi possível lançar os valores');
     } finally {
       setLoading(false);
     }
@@ -325,6 +303,19 @@ function AuthProvider({ children }: AuthProviderProps) {
         adm: docSnap.data()?.adm,
       } as Group;
     setGroup(groupLoaded);
+    setLoading(false);
+  }
+
+  async function loadAccounting(groupUid: string){
+    setLoading(true);
+    const docRef = doc(db, 'accounting', groupUid);
+    const docSnap = await getDoc(docRef);
+      const accountingLoaded = {
+        name: docSnap.data()?.name,
+        custos: docSnap.data()?.custos,
+        arrecadacoes: docSnap.data()?.arrecadacoes,
+      } as Account;
+    setAccounting(accountingLoaded);
     setLoading(false);
   }
 
@@ -394,7 +385,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     try{
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
-        if(athletes.includes(doc.id)){
+        if(athletes.includes(doc.data().id)){
           userGroup.push(doc.data())
         }
       });
@@ -437,6 +428,47 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  //função pra adicionar o pagamento da mensalidade no userGroup
+  async function addPayment(id: string, mes: string){
+    let paymentsWhrite = [];
+    let idWhrite: string;
+    try{
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        if(doc.data().id === id){
+          paymentsWhrite = doc.data().payments;
+          idWhrite = doc.data().id;
+        }
+      })
+      updateDoc(doc(db, "users", idWhrite), {payments : {...paymentsWhrite, mes}});
+    }catch(error){
+        console.log(error);
+    }
+  }
+
+   // função para adicionar custos e arrecadações
+  async function addValues(grupoId: string, date: string , valor: string, desc: string, tipo: string) {
+    setLoading(true);
+    try {
+      const item = {
+        date: date,
+        valor: valor,
+        desc: desc
+      }
+      if (tipo === 'custos') {
+        await updateDoc(doc(db, "accounting", grupoId), {custos: {...item}});
+      }else if (tipo === 'arrecadacoes') {
+        await updateDoc(doc(db, "accounting", grupoId), {arrecadacoes: {...item}});
+      }
+
+    } catch (error) {
+      console.log(error)
+      throw new Error('Não foi possível lançar os valores');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   //função para desconectar do firebase
   async function logOut() {
     await signOut(auth);
@@ -454,6 +486,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         loadAthletes,
         excludeAthletes,
         group,
+        accounting,
         loading,
         loadGroup,
         logIn,

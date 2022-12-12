@@ -42,7 +42,7 @@ export const AccountGroup = ({ title }: Props) => {
         setCategory={handleCategorySelect}
         disable={disable}
       />
-      <ScrollView style={styles.content}>
+      <View style={styles.content}>
         {
           !category || category === "1"? <CollectionGroup data={Months} />
           :
@@ -50,9 +50,8 @@ export const AccountGroup = ({ title }: Props) => {
           :
             (category === "3") && <Values data={group} />
         }
-      </ScrollView>
+      </View>
       <View style={{height: 82, backgroundColor: tabIcon}}>
-
       </View>
     </Background>
 	);

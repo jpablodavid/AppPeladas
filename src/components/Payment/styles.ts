@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   legend:{
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 8,
+    marginVertical: 4,
   },
   boxColor:{
     width: 50,

@@ -59,81 +59,81 @@ export const SignIn = ({navigation}) => {
   };
 
   return (
-      <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            enabled
-          >
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <Logo />
-              <View style={styles.textContainer}>
-                <Text style={styles.title}>Bem-Vindo ao PeladasApp</Text>
+    <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          enabled
+        >
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Logo />
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>Bem-Vindo ao PeladasApp</Text>
 
-                <Text style={styles.text}>
-                  Quer organizar suas peladas, participar como jogador, saber seu
-                  scout e de seus amigos? Você veio ao lugar certo.
-                </Text>
-              </View>
+              <Text style={styles.text}>
+                Quer organizar suas peladas, participar como jogador, saber seu
+                scout e de seus amigos? Você veio ao lugar certo.
+              </Text>
+            </View>
 
-              <View style={styles.inputContainer}>
-                <Input
-                  icon="mail"
-                  placeholder={"email@email.com"}
-                  keyboardType="email-address"
-                  autoCapitalize='none'
-                  onChangeText={setEmail}
-                  value={email}
-                />
-              </View>
+            <View style={styles.inputContainer}>
+              <Input
+                icon="mail"
+                placeholder={"email@email.com"}
+                keyboardType="email-address"
+                autoCapitalize='none'
+                onChangeText={setEmail}
+                value={email}
+              />
+            </View>
 
-              <View style={styles.inputContainer}>
-                <Input
-                  icon="lock"
-                  placeholder="senha"
-                  secureTextEntry
-                  onChangeText={setPassword}
-                  value={password}
-                />
-              </View>
+            <View style={styles.inputContainer}>
+              <Input
+                icon="lock"
+                placeholder="senha"
+                secureTextEntry
+                onChangeText={setPassword}
+                value={password}
+              />
+            </View>
 
-              <View style={styles.forgetContainer}>
-                <ButtonText onPress={handleforgotPassword}>
-                  <Text style={styles.forgetText}>Esqueceu sua Senha?</Text>
-                </ButtonText>
-              </View>
-                {
-                  (email === '' && password === '') || loading ? (<ButtonDisable text={"Login"} />)
-                    : (<Button text={"Login"} onPress={handleSignIn} />)
-                }
-              <View style={styles.lineOrContainer}>
-                <View style={styles.line} />
+            <View style={styles.forgetContainer}>
+              <ButtonText onPress={handleforgotPassword}>
+                <Text style={styles.forgetText}>Esqueceu sua Senha?</Text>
+              </ButtonText>
+            </View>
+              {
+                (email === '' && password === '') || loading ? (<ButtonDisable text={"Login"} />)
+                  : (<Button text={"Login"} onPress={handleSignIn} />)
+              }
+            <View style={styles.lineOrContainer}>
+              <View style={styles.line} />
 
-                <Text style={styles.or}>OU</Text>
+              <Text style={styles.or}>OU</Text>
 
-                <View style={styles.line} />
-              </View>
+              <View style={styles.line} />
+            </View>
 
-                {loading ? (
-                  <ActivityIndicator size={36} color={primary10} />
-                ) : (
-                  <>
-                    <ButtonFacebook
-                      onPress={() => alert("login facebook")}
-                      text={"fazer login com Facebook"}
-                    />
-                    <View style={styles.cadastrarContainer}>
-                      <Text style={styles.cadastrarText}>Ainda não possui uma conta?</Text>
+              {loading ? (
+                <ActivityIndicator size={36} color={primary10} />
+              ) : (
+                <>
+                  <ButtonFacebook
+                    onPress={() => alert("login facebook")}
+                    text={"fazer login com Facebook"}
+                  />
+                  <View style={styles.cadastrarContainer}>
+                    <Text style={styles.cadastrarText}>Ainda não possui uma conta?</Text>
 
-                      <ButtonText onPress={handleSignUp}>
-                        <Text style={styles.buttonText}>Cadastrar-se</Text>
-                      </ButtonText>
-                    </View>
-                  </>
-                )}
-            </ScrollView>
-          </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
-      </View>
+                    <ButtonText onPress={handleSignUp}>
+                      <Text style={styles.buttonText}>Cadastrar-se</Text>
+                    </ButtonText>
+                  </View>
+                </>
+              )}
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </View>
   );
 };

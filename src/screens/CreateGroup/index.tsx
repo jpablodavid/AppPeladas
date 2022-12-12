@@ -21,6 +21,8 @@ type FormData = {
   day: string,
   time: string,
   location: string,
+  mensal: number,
+  convidado: number,
 };
 
 const schema = yup.object({
@@ -32,14 +34,14 @@ export const CreateGroup = ({navigation}) => {
 
   const { primary10, primary100, secondary } = theme.colors;
 
-  const { loading, createGroup } = useAuth();
+  const { user, loading, createGroup } = useAuth();
 
   const {control, handleSubmit, formState: { errors }} = useForm<FormData>({
     resolver: yupResolver(schema)
   });
 
   function handleCreateGroup(data: FormData) {
-    createGroup(data.name, data.date, data.location, data.day, data.time)
+    createGroup(data.name, data.date, data.location, data.day, data.time,data.mensal, data.convidado, user.id)
     navigation.navigate('AccountGroup');
   }
 
@@ -122,7 +124,7 @@ export const CreateGroup = ({navigation}) => {
               </View>
               <View style={styles.inputContainer}>
                 <InputControl
-                  name="time"
+                  name="mensal"
                   icon="heart"
                   placeholder={"Mensalidade"}
                   control={control}
@@ -131,7 +133,7 @@ export const CreateGroup = ({navigation}) => {
               </View>
               <View style={styles.inputLastContainer}>
                 <InputControl
-                  name="time"
+                  name="convidado"
                   icon="heart"
                   placeholder={"Valor Convidado"}
                   control={control}
@@ -143,7 +145,7 @@ export const CreateGroup = ({navigation}) => {
                 loading ?
                   (<ActivityIndicator size={36} color={primary10} />)
                   :
-                  <Button text={"Criar Grupo"} /* onPress={handleSubmit(handleCreateGroup)} *//>
+                  <Button text={"Criar Grupo"} onPress={handleSubmit(handleCreateGroup)}/>
               }
               </View>
             </ScrollView>

@@ -31,8 +31,8 @@ export const Gallery = ({data}: Props) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.galeria}>
-        {galeria.map((item) => (
-          <Photo data={item}/>
+        {galeria.map((item, index) => (
+          <Photo key={index} data={item}/>
         ))}
       </View>
 		</View>
