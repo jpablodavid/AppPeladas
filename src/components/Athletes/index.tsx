@@ -23,7 +23,7 @@ type Props = RectButtonProps & ModalProps & {
 
 export const Athletes = ({ data, perfil, exclude }: Props) => {
 
-  const { user } = useAuth();
+  const { user, accounting } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -35,13 +35,10 @@ export const Athletes = ({ data, perfil, exclude }: Props) => {
     setOpenModal(true);
   }
 
+  // usando accounting.id pois é o id do grupo
   function handlerExcluir() {
-    exclude("xFMvKV2P2P3kcrl8NFzC", data.id);
+    exclude(accounting.id, data.id);
 		alert("Excluir");
-	}
-
-	function handlerDetailsAthletes() {
-		alert(data.adm);
 	}
 
 	return (
@@ -54,7 +51,7 @@ export const Athletes = ({ data, perfil, exclude }: Props) => {
 					<Text style={styles.textName}>{data.name}</Text>
 				</View>
 			</RectButton>
-      {user.adm && perfil &&(
+      {user.adm &&(
         <View style={styles.exclude}>
           <RectButton style={styles.excludesButton} onPress={handlerExcluir}>
             <Text style={styles.textButton}>X</Text>

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { disable100, tabColor, modal } = theme.colors;
+const { tabIcon, disable100, secondary, tabColor, modal, white, shadow } = theme.colors;
 const { text500, text900, title700 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -94,9 +94,41 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 2,
     paddingVertical: 8,
 	},
+  edit: {
+    width: "20%",
+    alignSelf: "flex-end",
+    alignItems: "center",
+    backgroundColor: secondary,
+    borderRadius: 6,
+    marginEnd: 36
+	},
+  editText: {
+    fontSize: RFValue(14),
+		letterSpacing: 1,
+		color: white,
+		fontFamily: title700,
+		textShadowColor: shadow,
+		textShadowOffset: { width: -1, height: 1 },
+		textShadowRadius: 10,
+  },
   input:{
-    backgroundColor: "#fff",
-    textAlign: "center",
+    backgroundColor: tabIcon,
+    fontSize: RFValue(18),
+		fontFamily: title700,
+		color: tabColor,
+		padding: 2,
+    borderRadius: 8
+  },
+  inputArea:{
+    height: 100,
+    textAlignVertical: "top",
+    marginVertical: 16,
+    marginHorizontal: 8,
+    backgroundColor: white,
+    borderRadius: 10,
+    padding: 8,
+    fontSize: RFValue(16),
+    fontFamily: text500
   },
   mostrar:{
     height: 32,
@@ -113,14 +145,6 @@ export const styles = StyleSheet.create({
   },
   buttonModal:{
     margin: 16,
-  },
-  descricao: {
-    height: 100,
-    marginVertical: 16,
-    marginHorizontal: 8,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 2,
   },
   descricaoContent: {
     fontSize: RFValue(20),

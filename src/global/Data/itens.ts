@@ -43,3 +43,15 @@ export function siglaPosition ( position: string ) {
     return "LAT"
   }
 }
+
+export function bandeira ( team: string ) {
+  if (team == "Fluminense"){
+    return require("../../assets/Fluminense.png")
+  }else if(team == "Flamengo"){
+    return require("../../assets/Flamengo.png")
+  }else if(team == "Botafogo"){
+    return require("../../assets/Botafogo.png")
+  }else{
+    return require("../../assets/Vasco.png")
+  }
+}

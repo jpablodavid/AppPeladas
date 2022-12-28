@@ -15,7 +15,7 @@ import { ProgressBar } from "../../components/ProgressBar";
 import { User } from '../../hooks/auth'
 
 //funçoes importada
-import { siglaPosition } from "../../global/Data/itens";
+import { bandeira, siglaPosition } from "../../global/Data/itens";
 
 type Props = {
 	data: User;
@@ -33,10 +33,10 @@ export const Card = ({data} : Props) => {
     }
   }
 
+
   useEffect(() => {
     chanceColor(data.stars);
   }, []);
-
 
 	return (
     <>
@@ -56,8 +56,7 @@ export const Card = ({data} : Props) => {
             <Text style={styles.position}>{siglaPosition(data.position)}</Text>
             <Image
               style={styles.bandeira}
-              source={require(`../../assets/Flamengo.png`)}
-              //source={require(`../../assets/${data.team}.png`)}
+              source={bandeira(data.team)}
             />
           </LinearGradient>
           <View style={{justifyContent: 'center'}}>

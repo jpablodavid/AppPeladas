@@ -35,7 +35,7 @@ export const Payment = ({data}: Props) => {
       <View style={styles.months}>
           {
             months.map((value, index) => (
-              <View style={[styles.containerItemMonth, {backgroundColor: data.includes(value) ?  paid : notPaid }]}>
+              <View key={index} style={[styles.containerItemMonth, {backgroundColor: data.includes(value) ?  paid : notPaid }]}>
                 <Text style={styles.itemMonth} key={index}>{value}</Text>
               </View>
             ))

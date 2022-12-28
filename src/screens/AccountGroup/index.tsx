@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 
 import { useAuth } from "../../hooks/auth";
 
@@ -8,7 +8,6 @@ import { CategorySelect } from "../../components/CategorySelect";
 import { ListAthletes } from "../../components/ListAthletes";
 import { categoriesAccounting } from "../../utils/categoriesAccounting";
 import { CollectionGroup } from "../../components/CollectionGroup";
-import { Months } from "../../utils/collectionMonths";
 import { Values } from "../../components/Values";
 
 import { theme } from "../../global/styles/theme";
@@ -22,7 +21,7 @@ type Props = {
 
 export const AccountGroup = ({ title }: Props) => {
 
-  const {tabIcon} = theme.colors;
+  const { tabIcon } = theme.colors;
 
   const { group } = useAuth();
 
@@ -30,7 +29,6 @@ export const AccountGroup = ({ title }: Props) => {
   const [disable, setDisable] = useState(false);
 
 	function handleCategorySelect(categoryId: string) {
-		/* categoryId === category ? setCategory("") : setCategory(categoryId); */
     categoryId === category ? setDisable(true) : (setCategory(categoryId), setDisable(false))
 	}
 
@@ -44,7 +42,7 @@ export const AccountGroup = ({ title }: Props) => {
       />
       <View style={styles.content}>
         {
-          !category || category === "1"? <CollectionGroup data={Months} />
+          !category || category === "1"? <CollectionGroup/>
           :
             category === "2" ? <ListAthletes data={group} perfil={false}/>
           :

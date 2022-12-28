@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useContext, useState, useEffect } from
 import { Alert } from 'react-native';
 
 import { db, auth } from "../configs/firebaseConfig";
-import { doc, setDoc, collection, getDoc, getDocs, addDoc, updateDoc,deleteField } from "@firebase/firestore";
+import { doc, setDoc, collection, getDoc, getDocs, addDoc, updateDoc, Timestamp } from "@firebase/firestore";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
 
 import { nivel } from '../global/Data/itens';
@@ -45,8 +45,8 @@ export type Group = {
   location: string;
   day: string;
   time: string;
-  valorMensal: string;
-  valorConvidado: string;
+  valorMensal: number;
+  valorConvidado: number;
   presidente: StaffProps;
   vicePresidente: StaffProps;
   diretorEsportivo: StaffProps;
@@ -56,13 +56,16 @@ export type Group = {
 };
 
 export type ItemAccount = {
-  date: string,
-  valor: string;
+  date: Date,
+  valor: number;
   desc: string;
 }
 
 export type Account = {
+  id: string,
   name: string,
+  valorCampo: string,
+  valorFesta: string,
   custos: Array<ItemAccount>,
   arrecadacoes: Array<ItemAccount>,
 }
@@ -85,6 +88,8 @@ type AuthContextData = {
   logOut: () => void;
   createUser: (name: string, email: string, nickName: string, birthday: string, phone: string, position: string, team: string) => Promise<void>;
   createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string) => Promise<void>;
+  addPayment: (id: string, mes: string) => Promise<void>;
+  addValues: (grupoId: string, date: Date, desc: string, tipo: string, valor?: number, campo?: string, festa?: string) => Promise<void>;
   forgotPassword: (emailUser: string) => Promise<void>;
 };
 
@@ -128,7 +133,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         setId(currentUser.uid);
         loadUser(currentUser.uid);
         loadGroup("OdUKGdrZYGywMZyNoR9o");
-        //loadAccounting(grupoid)
+        loadAccounting("OdUKGdrZYGywMZyNoR9o");
       }
     });
   }
@@ -265,7 +270,10 @@ function AuthProvider({ children }: AuthProviderProps) {
       await updateDoc(doc(db, "users", idAdm), {grupo_id : group.id, adm: true});
 
       const accountingWrite = {
+        id: group.id,
         name: nameGrupo,
+        valorCampo: "",
+        valorFesta: "",
         custos : [],
         arrecadacoes: []
       } as unknown as Account;
@@ -273,7 +281,6 @@ function AuthProvider({ children }: AuthProviderProps) {
       await setDoc(doc(db, 'accounting', group.id),{...accountingWrite});
 
       setGroup(groupWrite);
-      setAccounting(accountingWrite);
     } catch (error) {
       console.log(error)
       throw new Error('Não foi possível criar Grupo');
@@ -306,12 +313,16 @@ function AuthProvider({ children }: AuthProviderProps) {
     setLoading(false);
   }
 
+  // load das informações de contabilidade, custos e arrecadações
   async function loadAccounting(groupUid: string){
     setLoading(true);
     const docRef = doc(db, 'accounting', groupUid);
     const docSnap = await getDoc(docRef);
       const accountingLoaded = {
+        id: docSnap.data()?.id,
         name: docSnap.data()?.name,
+        valorCampo: docSnap.data()?.valorCampo,
+        valorFesta: docSnap.data()?.valorFesta,
         custos: docSnap.data()?.custos,
         arrecadacoes: docSnap.data()?.arrecadacoes,
       } as Account;
@@ -379,22 +390,25 @@ function AuthProvider({ children }: AuthProviderProps) {
     setLoading(false);
   };
 
-  // fazer o load dos atletas do grupo
+  // fazer o load dos atletas no grupo
   async function loadAthletes(athletes: athletes[]){
     let userGroup = [];
     try{
       const querySnapshot = await getDocs(collection(db, "users"));
-      querySnapshot.forEach((doc) => {
-        if(athletes.includes(doc.data().id)){
-          userGroup.push(doc.data())
-        }
-      });
+        querySnapshot.forEach((doc) => {
+          athletes.forEach((item) => {
+            if(item.id === doc.data().id){
+              userGroup.push(doc.data())
+            }
+        });
+      })
+
     }catch(error){
       console.log(error);
     }
     // ordenar o array pelo numero da camisa
     userGroup.sort((a , b) => {
-      return parseInt(a.camisa) - parseInt(b.camisa)
+      return parseInt(a.number) - parseInt(b.number)
     });
 
     return userGroup;
@@ -440,18 +454,19 @@ function AuthProvider({ children }: AuthProviderProps) {
           idWhrite = doc.data().id;
         }
       })
-      updateDoc(doc(db, "users", idWhrite), {payments : {...paymentsWhrite, mes}});
+      paymentsWhrite.push(mes);
+      updateDoc(doc(db, "users", idWhrite), {payments : {...paymentsWhrite}});
     }catch(error){
         console.log(error);
     }
   }
 
    // função para adicionar custos e arrecadações
-  async function addValues(grupoId: string, date: string , valor: string, desc: string, tipo: string) {
+  async function addValues(grupoId: string, date: Date, desc: string, tipo: string, valor?: number, campo?: string, festa?: string) {
     setLoading(true);
     try {
       const item = {
-        date: date,
+        date: Timestamp.fromDate(date),
         valor: valor,
         desc: desc
       }
@@ -459,11 +474,13 @@ function AuthProvider({ children }: AuthProviderProps) {
         await updateDoc(doc(db, "accounting", grupoId), {custos: {...item}});
       }else if (tipo === 'arrecadacoes') {
         await updateDoc(doc(db, "accounting", grupoId), {arrecadacoes: {...item}});
+      }else {
+        await updateDoc(doc(db, "accounting", grupoId), {valorCampo: campo, valorFesta: festa});
       }
 
     } catch (error) {
       console.log(error)
-      throw new Error('Não foi possível lançar os valores');
+      //throw new Error('Não foi possível lançar os valores');
     } finally {
       setLoading(false);
     }
@@ -493,6 +510,8 @@ function AuthProvider({ children }: AuthProviderProps) {
         logOut,
         signUpWithEmailAndPassword,
         addStaff,
+        addPayment,
+        addValues,
         createUser,
         createGroup,
         forgotPassword

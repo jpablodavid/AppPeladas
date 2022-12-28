@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: black,
     padding: 4,
-    paddingEnd: 16,
+    paddingEnd: 8,
   },
 	infoText:{
 		fontSize: RFValue(16),

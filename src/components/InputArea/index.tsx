@@ -4,7 +4,7 @@ import { TextInput, TextInputProps } from "react-native";
 import { styles } from "./styles";
 
 type Props = TextInputProps &{
-	size: string
+	size?: string
 };
 
 export const InputArea = ({size, ...rest }: Props) => {

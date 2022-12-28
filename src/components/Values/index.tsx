@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Modal, ScrollView, TextInput, } from "react-native";
 
+import { useAuth } from "../../hooks/auth";
+
 import { Button } from "../Button";
-import { theme } from "../../global/styles/theme";
 import { ButtonText } from "../ButtonText";
+import { ButtonDisable } from "../ButtonDisable";
+import { InputArea } from "../InputArea";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
+import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
-import { ButtonDisable } from "../ButtonDisable";
 
 export const Values = ({data}) => {
 
   const { primary100, line } = theme.colors;
+
+  const today = new Date();
+
+  const { user, accounting, addValues, addPayment } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -18,11 +27,19 @@ export const Values = ({data}) => {
 
   const [numberAtleta, setNumberAtleta] = useState("");
 
+  const [valueCampo, setValueCampo] = useState(accounting.valorCampo);
+
+  const [valueFesta, setValueFesta] = useState(accounting.valorFesta);
+
   const [month, setMonth] = useState("");
+
+  const [descricao, setDescricao] = useState("");
 
   const [convidados, setConvidados] = useState("0");
 
-  const [totalConvidados, setTotalConvidados] = useState("0");
+  const [totalConvidados, setTotalConvidados] = useState(0);
+
+  const [custo, setCusto] = useState("");
 
   const [name, setName] = useState("");
 
@@ -51,19 +68,34 @@ export const Values = ({data}) => {
   }
 
   function printNameAtleta(value: string) {
-    const athlete = data.athletes.find(item => item.number === value);
-    athlete ? (setName(athlete.name), setIdAtleta(athlete.id)) : setName("Numero errado");
+    const athlete = data.athletes.find((item: any) => item.number === value);
+    athlete ? (setName(athlete.name), setIdAtleta(athlete.id)) : setName("Digite o Número");
   }
 
   function printValorConvidados(value: string) {
-    const valor =  parseFloat(value);
-    const convidado = parseFloat(data.valorConvidado)
+    const valor =  parseInt(value);
+    const convidado = data.valorConvidado;
     const total =  valor * convidado;
-    setTotalConvidados(total.toFixed(2));
+    setTotalConvidados(total);
   }
 
-  function handlerAddMensalidade(id: string, mes: string) {
-    // criar e exportar uma função para editar o user no firebase, para escrever o nome do mês no payment do user
+  function handlerAddMensalidade() {
+    addPayment(idAtleta, month);
+    setOpenModal(false);
+  }
+
+  function handlerAddConvidados(){
+    addValues(accounting.id, today, 'Pagamento Dos convidados do dia','arrecadacoes', totalConvidados,);
+    setOpenModal(false);
+  }
+
+  function handlerAddCustos(){
+    addValues(accounting.id, today, descricao, 'custos', parseFloat(custo));
+    setOpenModal(false);
+  }
+
+  function handlerAddValues(){
+    addValues(accounting.id, today, descricao, '', 0, valueCampo, valueFesta);
   }
 
   useEffect(() => {
@@ -80,7 +112,16 @@ export const Values = ({data}) => {
           <View style={styles.valores}>
             <Text style={styles.label}>R$</Text>
             <View style={styles.values}>
-              <Text style={styles.infoText}>{parseFloat("350").toFixed(2)}</Text>
+              { user.adm ?
+                <TextInput
+                  style={styles.input}
+                  placeholderTextColor={primary100}
+                  value={parseFloat(valueCampo).toFixed(2)}
+                  onChangeText={(text) => setValueCampo(text)}
+                />
+                :
+                <Text style={styles.infoText}>{parseFloat(valueCampo).toFixed(2)}</Text>
+              }
             </View>
           </View>
         </View>
@@ -89,10 +130,26 @@ export const Values = ({data}) => {
           <View style={styles.valores}>
             <Text style={styles.label}>R$</Text>
             <View style={styles.values}>
-              <Text style={styles.infoText}>{parseFloat("5000").toFixed(2)}</Text>
+              { adm ?
+                <TextInput
+                  style={styles.input}
+                  placeholderTextColor={primary100}
+                  value={parseFloat(valueFesta).toFixed(2)}
+                  onChangeText={(text) => setValueFesta(text)}
+                />
+                :
+                <Text style={styles.infoText}>{parseFloat(valueFesta).toFixed(2)}</Text>
+              }
             </View>
           </View>
         </View>
+        { adm ?
+          <TouchableOpacity style={styles.edit} onPress={handlerAddValues}>
+            <Text style={styles.editText}>Editar</Text>
+          </TouchableOpacity>
+          :
+          <View/>
+        }
         <Text style={styles.title}>Arrecadações Fixas:</Text>
         <View style={styles.money}>
           <Text style={styles.label}>Mensalidade:</Text>
@@ -173,7 +230,7 @@ export const Values = ({data}) => {
                   />
                 </View>
                 <View style={styles.buttonModal}>
-                  <Button text={'Adicionar'} onPress={handlerOpenModal}/>
+                  <Button text={'Adicionar'} onPress={handlerAddMensalidade}/>
                 </View>
                 <Text style={styles.labelAdd}>Convidados:</Text>
                 <View style={styles.money}>
@@ -189,11 +246,11 @@ export const Values = ({data}) => {
                   <Text style={styles.label}>Total:</Text>
                   <View style={styles.valores}>
                     <Text style={styles.infoText}>R$ </Text>
-                    <Text style={styles.infoText}>{totalConvidados}</Text>
+                    <Text style={styles.infoText}>{totalConvidados.toFixed(2)}</Text>
                   </View>
                 </View>
                 <View style={styles.buttonModal}>
-                  <Button text={'Adicionar'} onPress={handlerOpenModal}/>
+                  <Button text={'Adicionar'} onPress={handlerAddConvidados}/>
                 </View>
               </ScrollView>
             )
@@ -202,18 +259,26 @@ export const Values = ({data}) => {
               <View>
                 <Text style={styles.labelModal}>Adicionar Gastos</Text>
                 <Text style={styles.label}>Descrição do Gasto:</Text>
-                <View style={styles.descricao}>
-                  <Text style={styles.descricaoContent}>descrição dos gastos</Text>
-                </View>
+                <InputArea
+                  style={styles.inputArea}
+                  placeholderTextColor={'Descrição dos Gastos'}
+                  onChangeText={setDescricao}
+                />
                 <View style={styles.money}>
                 <Text style={styles.label}>Valor:</Text>
                 <View style={styles.valores}>
-                  <Text style={styles.infoText}>R$</Text>
-                  <Text style={styles.infoText}>20,00</Text>
+                  <Text style={styles.infoText}>R$ </Text>
+                  <TextInput
+                    style={[{width: '60%'},styles.input]}
+                    placeholderTextColor={line}
+                    placeholder={"0.00"}
+                    onChangeText={setCusto}
+                    keyboardType={"number-pad"}
+                  />
                 </View>
                 </View>
                 <View style={styles.buttonModal}>
-                  <Button text={'adicionar'} onPress={handlerOpenModal}/>
+                  <Button text={'adicionar'} onPress={handlerAddCustos}/>
                 </View>
               </View>
             )
@@ -223,3 +288,4 @@ export const Values = ({data}) => {
 		</View>
 	);
 };
+
