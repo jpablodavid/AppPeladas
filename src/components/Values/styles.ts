@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { tabIcon, disable100, secondary, tabColor, modal, white, shadow } = theme.colors;
+const { tabIcon, disable100, secondary, tabColor, modal, white, shadow, invisible } = theme.colors;
 const { text500, text900, title700 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
 		marginVertical: 8,
 	},
   content: {
-    flex: 1
+    flex: 1,
   },
   title:{
     fontSize: RFValue(20),
@@ -57,7 +57,7 @@ export const styles = StyleSheet.create({
   labelAdd: {
 		fontSize: RFValue(20),
 		fontFamily: text900,
-		marginTop: 16,
+		marginTop: 24,
     marginBottom: 8,
 		textAlign: "center",
     borderTopColor: disable100,
@@ -112,11 +112,17 @@ export const styles = StyleSheet.create({
 		textShadowRadius: 10,
   },
   input:{
-    backgroundColor: tabIcon,
+    backgroundColor: white,
+    textAlign: "center",
     fontSize: RFValue(18),
 		fontFamily: title700,
-		color: tabColor,
-		padding: 2,
+    borderRadius: 8
+  },
+  inputEdit:{
+    backgroundColor: invisible,
+    fontSize: RFValue(18),
+    color: tabColor,
+		fontFamily: title700,
     borderRadius: 8
   },
   inputArea:{

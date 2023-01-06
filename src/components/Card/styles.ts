@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { primary100, line, shadow, tabColor, black } = theme.colors;
+const { background, line, shadow, tabColor, black } = theme.colors;
 const { text500, text900, title700} = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -56,8 +56,6 @@ export const styles = StyleSheet.create({
 	},
 	scout: {
 		flex: 1,
-		borderWidth: 1,
-		borderColor: primary100,
 		alignItems: "center",
 	},
 	name: {
@@ -111,5 +109,22 @@ export const styles = StyleSheet.create({
 		justifyContent: 'space-around',
 		marginBottom: 48,
     marginTop: 16,
-	}
+	},
+  textButton: {
+		fontSize: RFValue(26),
+		fontFamily:title700,
+	},
+  modal:{
+    flex: 1,
+    marginTop: 320,
+    marginHorizontal: 8,
+    marginBottom: 210,
+    borderWidth: 2,
+    borderColor: tabColor,
+		padding: 16,
+		backgroundColor: background,
+  },
+  contentModal:{
+
+  }
 });

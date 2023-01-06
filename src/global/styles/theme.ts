@@ -29,6 +29,8 @@ export const theme = {
 
 		shadow: "rgba(0, 0, 0, 0.5)",
 
+    invisible: "#0000",
+
 		textInput: "#0B598025",
     iconInput: "#DC1637",
 

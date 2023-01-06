@@ -15,7 +15,7 @@ import { styles } from "./styles";
 
 export const Values = ({data}) => {
 
-  const { primary100, line } = theme.colors;
+  const { primary100, line, invisible } = theme.colors;
 
   const today = new Date();
 
@@ -114,7 +114,7 @@ export const Values = ({data}) => {
             <View style={styles.values}>
               { user.adm ?
                 <TextInput
-                  style={styles.input}
+                  style={styles.inputEdit}
                   placeholderTextColor={primary100}
                   value={parseFloat(valueCampo).toFixed(2)}
                   onChangeText={(text) => setValueCampo(text)}
@@ -132,7 +132,7 @@ export const Values = ({data}) => {
             <View style={styles.values}>
               { adm ?
                 <TextInput
-                  style={styles.input}
+                  style={styles.inputEdit}
                   placeholderTextColor={primary100}
                   value={parseFloat(valueFesta).toFixed(2)}
                   onChangeText={(text) => setValueFesta(text)}
@@ -199,7 +199,7 @@ export const Values = ({data}) => {
         statusBarTranslucent
         visible={openModal}>
         <View style={styles.modal}>
-          <ButtonText style={{ width: 20 }} onPress={handlerCloseModal}>
+          <ButtonText style={{ width: 20, backgroundColor: invisible }}onPress={handlerCloseModal}>
             <Text style={styles.close}>X</Text>
           </ButtonText>
           { add ?

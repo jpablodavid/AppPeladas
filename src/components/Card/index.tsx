@@ -3,36 +3,50 @@ import {
 	View,
 	Text,
 	Image,
+  Modal,
+	ModalProps,
+  TouchableWithoutFeedback
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
-import { styles } from "./styles";
+import { ProgressBar } from "../../components/ProgressBar";
 import { ButtonText } from "../../components/ButtonText";
 import { LinearGradient } from "expo-linear-gradient";
+
 import { theme } from "../../global/styles/theme";
-import { ProgressBar } from "../../components/ProgressBar";
+
+import { styles } from "./styles";
 
 import { User } from '../../hooks/auth'
 
 //funçoes importada
 import { bandeira, siglaPosition } from "../../global/Data/itens";
 
-type Props = {
+type Props = ModalProps & {
 	data: User;
 };
 
 export const Card = ({data} : Props) => {
 
-  const { black, black000 } = theme.colors;
+  const { black, disable10, secondary, tabIcon, shadow } = theme.colors;
 
   const [color, setColor] = useState("black");
+
+  const [openModal, setOpenModal] = useState(false);
+
+  function handleCloseModal() {
+    setOpenModal(false);
+  }
+
+  function handlerOpenModal() {
+    setOpenModal(true);
+  }
 
   function chanceColor(start: string) {
     if (start === '3') {
       setColor(theme.colors.tabColor)
     }
   }
-
 
   useEffect(() => {
     chanceColor(data.stars);
@@ -50,7 +64,7 @@ export const Card = ({data} : Props) => {
         >
           <LinearGradient
             style={styles.range}
-            colors={[black, black000]}
+            colors={[black, shadow, disable10]}
           >
             <Text style={styles.camisa}>{10}</Text>
             <Text style={styles.position}>{siglaPosition(data.position)}</Text>
@@ -70,8 +84,8 @@ export const Card = ({data} : Props) => {
         <LinearGradient
           style={styles.scout}
           colors={[
-            theme.colors.secondary,
-            theme.colors.tabIcon,
+            secondary,
+            tabIcon,
           ]}
         >
           <View style={styles.name}>
@@ -99,7 +113,7 @@ export const Card = ({data} : Props) => {
         </LinearGradient>
       </View>
       <View style={styles.icons}>
-      <ButtonText>
+      <ButtonText onPress={handlerOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18, marginBottom: 16 }}
           name="attachment"
@@ -107,7 +121,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText>
+      <ButtonText onPress={handlerOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="awareness-ribbon"
@@ -115,7 +129,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText>
+      <ButtonText onPress={handlerOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="battery"
@@ -123,7 +137,7 @@ export const Card = ({data} : Props) => {
           color={color}
         />
       </ButtonText>
-      <ButtonText>
+      <ButtonText onPress={handlerOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="briefcase"
@@ -131,7 +145,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText>
+      <ButtonText onPress={handlerOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="bucket"
@@ -139,7 +153,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText>
+      <ButtonText onPress={handlerOpenModal}>
         <Entypo
           style={{ marginHorizontal: 12 }}
           name="bug"
@@ -147,7 +161,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText>
+      <ButtonText onPress={handlerOpenModal}>
         <Entypo
           style={{ marginHorizontal: 12 }}
           name="bug"
@@ -155,7 +169,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText>
+      <ButtonText onPress={handlerOpenModal}>
         <Entypo
           style={{ marginHorizontal: 12 }}
           name="bug"
@@ -163,6 +177,26 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
+      <Modal
+        transparent
+        animationType="slide"
+        statusBarTranslucent
+        visible={openModal}>
+        <TouchableWithoutFeedback
+					onPress={handleCloseModal}
+				>
+          <View style={styles.modal}>
+            <ButtonText onPress={handleCloseModal}>
+              <Text style={styles.textButton}>X</Text>
+            </ButtonText>
+            <View style={styles.contentModal}>
+              <Text>
+                explica o que é esse icone, quantos pontos vc tem e quantos faltam para alcançar o objetivo
+              </Text>
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </View>
   </>
 	);

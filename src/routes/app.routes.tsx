@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CustomTabBarButton } from "../components/CustomTabBarButton";
-import { Text, View } from 'react-native';
+import { Linking, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useAuth } from "../hooks/auth";
 
@@ -13,6 +13,7 @@ import { CreateGroup } from "../screens/CreateGroup";
 
 import { theme } from "../global/styles/theme";
 import { RFValue } from "react-native-responsive-fontsize";
+import { Msg } from "../screens/Msg";
 
 const Tab = createBottomTabNavigator();
 
@@ -80,8 +81,8 @@ export const AppRoutes = () => {
           )
         }}/>
 
-      <Tab.Screen name="CreateGroup" component={CreateGroup}
-      options ={{ title: user.name,
+      <Tab.Screen name="Msg" component={Msg}
+      options ={{ title: "Mensagens",
         tabBarIcon: ({focused}) => (
           <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  tabColorFocused : tabColor}}>
             <MaterialCommunityIcons name="android-messages" size={24} color={tabIcon} />
