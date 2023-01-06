@@ -32,17 +32,23 @@ export type User = {
   payments: Array<string>;
 };
 
-export type athletes  = {
+export type athletes = {
   id: string,
   name: string,
   number: string
+}
+
+export type location = {
+  adress: string,
+  latitude: number,
+  longitude: number,
 }
 
 export type Group = {
   name: string;
   athletes: Array<athletes>;
   dateCreation: string;
-  location: string;
+  location: location;
   day: string;
   time: string;
   valorMensal: number;
@@ -82,12 +88,13 @@ type AuthContextData = {
   excludeAthletes: (idGroup: string, idAthletes?: string) => Promise<void>;
   loadAthletes: (athletes: athletes[]) => Promise<User[]>;
   addStaff: (name: string, occupation: string, idGroup: string) => Promise<void>;
-  loadGroup: (uid: string) => Promise<void>;
   logIn: (email: string, password: string) => Promise<void>;
   signUpWithEmailAndPassword: (email: string, password: string) => Promise<void>;
   logOut: () => void;
   createUser: (name: string, email: string, nickName: string, birthday: string, phone: string, position: string, team: string) => Promise<void>;
   createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string) => Promise<void>;
+  loadGroup: (uid: string) => Promise<void>;
+  addLocation: (adress: string, latitude: number, longitude: number, idGroup: string) => Promise<void>;
   addPayment: (id: string, mes: string) => Promise<void>;
   addValues: (grupoId: string, date: Date, desc: string, tipo: string, valor?: number, campo?: string, festa?: string) => Promise<void>;
   forgotPassword: (emailUser: string) => Promise<void>;
@@ -228,7 +235,11 @@ function AuthProvider({ children }: AuthProviderProps) {
         name: nameGrupo,
         athletes: [],
         dateCreation: date,
-        location: location,
+        location: {
+          adress: location,
+          latitude: 0,
+          longitude: 0,
+        },
         day: day,
         time: time,
         valorMensal: mensal,
@@ -311,6 +322,20 @@ function AuthProvider({ children }: AuthProviderProps) {
       } as Group;
     setGroup(groupLoaded);
     setLoading(false);
+  }
+
+  // Adcionar ou atualizar localização
+  async function addLocation(adress: string, latitude: number, longitude: number, idGroup: string){
+    try{
+      await updateDoc(doc(db, "groups", idGroup),
+      {location: {
+        adress: adress,
+        latitude: latitude,
+        longitude: longitude
+      }});
+    }catch(error){
+      console.log(error);
+    }
   }
 
   // load das informações de contabilidade, custos e arrecadações
@@ -514,6 +539,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         addValues,
         createUser,
         createGroup,
+        addLocation,
         forgotPassword
     }}>
       {children}

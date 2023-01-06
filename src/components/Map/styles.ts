@@ -23,5 +23,8 @@ export const styles = StyleSheet.create({
   buttonsContainer:{
     width: 160,
     alignSelf: 'flex-end',
+  },
+  search:{
+    marginTop: 16,
   }
 });

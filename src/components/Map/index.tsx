@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { View, Text, Platform, Linking } from "react-native";
 
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import MapView, { Marker } from 'react-native-maps';
 
 import { Button } from "../Button";
-import { Group } from "../../hooks/auth";
+
+import { Group, useAuth } from "../../hooks/auth";
 
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
+import { KEY } from "../../configs/googleConfig";
 
 type Props = {
 	data: Group;
@@ -17,15 +20,17 @@ export const Map = ({ data }: Props) => {
 
   const { secondary } = theme.colors;
 
+  const { addLocation } = useAuth();
+
   const[local, setLocal]  = useState({
-    latitude: -22.85667719396673,
-    longitude: -43.352891249282195
+    latitude: 0,
+    longitude: 0
   })
 
   function comoChegar(){
     let text: string;
     if(Platform.OS === "ios"){
-      text = "http://maps.apple.com/?ll=" + local.latitude + "," + local.longitude;
+      text = "http://maps.apple.com/?ll=" + data.location.latitude + "," + data.location.longitude;
     }else{
       //text = "geo: " + local.latitude + "," + local.longitude;
       text = "geo:-22.85667719396673,-43.352891249282195";
@@ -33,13 +38,17 @@ export const Map = ({ data }: Props) => {
     Linking.openURL(text);
   }
 
+  function getLocation(){
+
+  }
+
 	return (
 		<View style={styles.container}>
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude:  local.latitude,
-          longitude:  local.longitude,
+          latitude:  data.location.latitude,
+          longitude:  data.location.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -53,12 +62,36 @@ export const Map = ({ data }: Props) => {
           title={data.name}
         />
       </MapView>
-      <Text style={styles.address}>
-          {data.location}
-        </Text>
-      <View style={styles.buttonsContainer}>
-        <Button color={secondary} text={"Como chegar"} onPress={comoChegar}></Button>
-      </View>
+      { data.location.latitude ?
+        <View>
+          <Text style={styles.address}>
+            {data.location.adress}
+          </Text>
+          <View style={styles.buttonsContainer}>
+            <Button color={secondary} text={"Como chegar"} onPress={comoChegar}></Button>
+          </View>
+        </View>
+        :
+        <View style={styles.search}>
+          <GooglePlacesAutocomplete
+            placeholder='Procurar Endereço'
+            onPress={(data, details = null) => {
+              setLocal({
+                latitude: details.geometry.location.lat,
+                longitude: details.geometry.location.lng
+              });
+              addLocation(data.description, local.latitude, local.longitude, data.id);
+              console.log(local);
+            }}
+            query={{
+              key: {KEY},
+              language: 'pt-br',
+            }}
+            fetchDetails={true}
+            styles={{listView:{ heigth: 100}}}
+          />
+        </View>
+      }
 		</View>
 	);
 };
