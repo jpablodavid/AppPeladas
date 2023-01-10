@@ -1,14 +1,14 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Group } from "../../hooks/auth";
 import { Photo } from "../Photos";
 
 import { styles } from "./styles";
 
-
 type Props = {
 	data: Group;
 };
+
 
 export const Gallery = ({data}: Props) => {
 
@@ -29,12 +29,15 @@ export const Gallery = ({data}: Props) => {
   ]
 
 	return (
-		<View style={styles.container}>
+		<ScrollView
+    style={styles.container}
+    showsVerticalScrollIndicator={false}
+    >
 			<View style={styles.galeria}>
         {galeria.map((item, index) => (
           <Photo key={index} data={item}/>
         ))}
       </View>
-		</View>
+		</ScrollView>
 	);
 };

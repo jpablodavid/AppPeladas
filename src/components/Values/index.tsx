@@ -45,9 +45,6 @@ export const Values = ({data}) => {
 
   const [idAtleta, setIdAtleta] = useState("");
 
-  //teste para ser usado no usuario que é adm
-  const adm = true;
-
 	function handlerCloseModal() {
     setOpenModal(false);
     setAdd(true);
@@ -117,7 +114,7 @@ export const Values = ({data}) => {
                   style={styles.inputEdit}
                   placeholderTextColor={primary100}
                   value={parseFloat(valueCampo).toFixed(2)}
-                  onChangeText={(text) => setValueCampo(text)}
+                  onChangeText={setValueCampo}
                 />
                 :
                 <Text style={styles.infoText}>{parseFloat(valueCampo).toFixed(2)}</Text>
@@ -130,12 +127,12 @@ export const Values = ({data}) => {
           <View style={styles.valores}>
             <Text style={styles.label}>R$</Text>
             <View style={styles.values}>
-              { adm ?
+              { user.adm ?
                 <TextInput
                   style={styles.inputEdit}
                   placeholderTextColor={primary100}
                   value={parseFloat(valueFesta).toFixed(2)}
-                  onChangeText={(text) => setValueFesta(text)}
+                  onChangeText={setValueFesta}
                 />
                 :
                 <Text style={styles.infoText}>{parseFloat(valueFesta).toFixed(2)}</Text>
@@ -143,7 +140,7 @@ export const Values = ({data}) => {
             </View>
           </View>
         </View>
-        { adm ?
+        { user.adm ?
           <TouchableOpacity style={styles.edit} onPress={handlerAddValues}>
             <Text style={styles.editText}>Editar</Text>
           </TouchableOpacity>
@@ -175,7 +172,7 @@ export const Values = ({data}) => {
         <View style={styles.money}>
           <Text style={styles.label}>Arrecadação:</Text>
           <View style={styles.button}>
-            { adm ?
+            { user.adm ?
               <Button text={'Adicionar'} onPress={handlerOpenModalArrecadacoes}/>
               :
               <ButtonDisable text={'Adicionar'} />
@@ -185,7 +182,7 @@ export const Values = ({data}) => {
         <View style={[styles.money, {marginTop: 16}]}>
           <Text style={styles.label}>Custos:</Text>
           <View style={styles.button}>
-            { adm ?
+            { user.adm ?
               <Button text={'Adicionar'} color={primary100} onPress={handlerOpenModalCustos}/>
               :
               <ButtonDisable text={'Adicionar'} />

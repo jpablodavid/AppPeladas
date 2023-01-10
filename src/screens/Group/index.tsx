@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, View, Text, TouchableOpacity, Image} from "react-native";
+import { View, Text, TouchableOpacity, Image, KeyboardAvoidingView, Platform} from "react-native";
 
 import { useAuth } from "../../hooks/auth";
 
@@ -49,7 +49,7 @@ export const Group = ({navigation}) => {
       {
         group ?
         (
-          <ScrollView style={styles.content}>
+          <View style={styles.content}>
             {
               !category || category === "1" ? <ListInfo data={group} />
               :
@@ -63,7 +63,7 @@ export const Group = ({navigation}) => {
               :
                 (category === "6") && <Calendario data={group}/>
             }
-          </ScrollView>
+          </View>
         )
         :
         (

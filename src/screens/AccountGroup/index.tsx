@@ -14,12 +14,8 @@ import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 
-type Props = {
-	title: string;
-};
 
-
-export const AccountGroup = ({ title }: Props) => {
+export const AccountGroup = () => {
 
   const { tabIcon } = theme.colors;
 

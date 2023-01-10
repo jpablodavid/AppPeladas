@@ -22,5 +22,9 @@ export const styles = StyleSheet.create({
     fontFamily: title700,
 		color: white,
 		fontSize: RFValue(18),
+  },
+  button:{
+    width: "50%",
+    marginTop: 32,
   }
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Group } from "../../hooks/auth";
 import { Staff } from "../Staff";
 
@@ -12,11 +12,14 @@ type Props = {
 export const ListStaff = ({data}: Props) => {
 
 	return (
-		<View style={styles.container}>
+		<ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
 			<Staff data={data.presidente} />
 			<Staff data={data.vicePresidente} />
 			<Staff data={data.diretorFinanceiro} />
 			<Staff data={data.diretorEventos} />
-		</View>
+		</ScrollView>
 	);
 };

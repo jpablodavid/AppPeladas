@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { tabColor, white } = theme.colors;
+const { tabColor, white,  invisible } = theme.colors;
 const { title700, text900 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -40,5 +40,12 @@ export const styles = StyleSheet.create({
 		fontSize: RFValue(22),
 		fontFamily: title700,
 		color: white
-	}
+	},
+  inputEdit:{
+    backgroundColor: invisible,
+    fontSize: RFValue(18),
+		fontFamily: text900,
+		color: tabColor,
+		paddingBottom: 2,
+  },
 });

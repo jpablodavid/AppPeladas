@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import { Image, View, Text } from "react-native";
+import { Image, View, Text, TextInput, TouchableOpacity} from "react-native";
 import { theme } from "../../global/styles/theme";
-import {
-	RectButton,
-	RectButtonProps,
-	TextInput,
-} from "react-native-gesture-handler";
 
 import { styles } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -18,7 +13,7 @@ export type StaffProps = {
 	occupation: string;
 };
 
-type Props = RectButtonProps & {
+type Props = {
 	data: StaffProps;
 };
 
@@ -34,6 +29,7 @@ export const Staff = ({ data }: Props) => {
 
 	function handlerEdit() {
 		addStaff(textInput, data.occupation, user.grupo_id);
+    alert("ok");
 	}
 
 	return (
@@ -44,13 +40,13 @@ export const Staff = ({ data }: Props) => {
 				<View style={styles.content}>
 					<TextInput
 						style={styles.input}
-						onChangeText={setTextInput}
 						value={textInput}
-					></TextInput>
+            onChangeText={setTextInput}
+          />
 					{isAdm && (
-						<RectButton style={styles.editButton} onPress={handlerEdit} >
+						<TouchableOpacity style={styles.editButton} onPress={handlerEdit} >
 							<Text style={styles.textButton}>Editar</Text>
-						</RectButton>
+						</TouchableOpacity>
 					)}
 				</View>
 			</LinearGradient>

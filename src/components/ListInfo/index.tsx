@@ -1,42 +1,90 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TextInput } from "react-native";
 
 import { useAuth } from "../../hooks/auth";
 import { Button } from "../Button";
 
 import { styles } from "./styles";
 
-export const ListInfo = ({data}) => {
+import { theme } from "../../global/styles/theme";
 
-  const { group, user } = useAuth();
+const { primary100 } = theme.colors;
 
-	const [openModal, setOpenModal] = useState(false);
 
-	function handleOpenModal(){
-		setOpenModal(true);
+export const ListInfo = ({ data }) => {
+
+  const { updateGroup, user, group } = useAuth();
+
+  const [dayGame, setDayGame] = useState(data.day);
+
+  const [time, setTime] = useState(data.time);
+
+  const [valorMensal, setValorMensal] = useState(data.valorMensal);
+
+  const [valorConvidado, setValorConvidado] = useState(data.valorConvidado);
+
+	function handleAtualizarDados(){
+    updateGroup(dayGame, time, valorMensal, valorConvidado, data.id);
+    alert("Dados atualizados");
 	}
 
 	return (
 		<View style={styles.container}>
 			<Text style={styles.label}>Dia Dos Jogos:</Text>
-			<Text style={styles.infoText}>{group.day}</Text>
+      { user.adm ?
+        <TextInput
+          style={styles.inputEdit}
+          placeholderTextColor={primary100}
+          value={dayGame}
+          onChangeText={setDayGame}
+        />
+        :
+        <Text style={styles.infoText}>{dayGame}</Text>
+      }
 			<Text style={styles.label}>Horario:</Text>
-			<Text style={styles.infoText}>{group.time}</Text>
+      { user.adm ?
+        <TextInput
+          style={styles.inputEdit}
+          placeholderTextColor={primary100}
+          value={time}
+          onChangeText={setTime}
+        />
+        :
+        <Text style={styles.infoText}>{time}</Text>
+      }
 			<Text style={styles.label}>Valor Mensalidade:</Text>
 			<View style={styles.money}>
 				<Text style={styles.label}>R$</Text>
-				<Text style={styles.infoText}>{parseFloat(group.valorMensal).toFixed(2)}</Text>
+        { user.adm ?
+          <TextInput
+            style={styles.inputEdit}
+            placeholderTextColor={primary100}
+            value={valorMensal}
+            onChangeText={setValorMensal}
+          />
+          :
+          <Text style={styles.infoText}>{valorMensal}</Text>
+        }
 			</View>
 			<Text style={styles.label}>Valor Convidados:</Text>
 			<View style={styles.money}>
 				<Text style={styles.label}>R$</Text>
-				<Text style={styles.infoText}>{parseFloat(group.valorConvidado).toFixed(2)}</Text>
+        { user.adm ?
+          <TextInput
+            style={styles.inputEdit}
+            placeholderTextColor={primary100}
+            value={valorConvidado}
+            onChangeText={setValorConvidado}
+          />
+          :
+          <Text style={styles.infoText}>{valorConvidado}</Text>
+        }
 			</View>
 			<Text style={styles.label}>Contatos:</Text>
 			<Text style={styles.infoText}>redes sociais e telefones</Text>
 			<View style={{ marginTop: 16}}>
 				{user.adm && (
-					<Button text={"Editar"} onPress={handleOpenModal}/>
+					<Button text={"Editar"} onPress={handleAtualizarDados}/>
 				)}
 			</View>
 		</View>

@@ -19,22 +19,22 @@ export const  HomeRoutes = () => {
 
   const { user } = useAuth();
 
+
   return (
     <Navigator
-      initialRouteName='AppRoutes'
       screenOptions={{
         headerStyle:{
           backgroundColor: tabColor,
           borderBottomLeftRadius: 36,
         },
         headerTitleStyle:{
-          marginLeft: 8,
+          marginLeft: 16,
           fontSize: RFValue(32),
           fontFamily: title700
-        },
+        }
       }}
     >
-      <Screen name="Home" component={Home} options ={{ title: user.nickName }}/>
+      <Screen name="Home" component={Home} options ={{ title: user.nickName}}/>
 
       <Screen name="AccountGroup" component={AccountGroup} />
 

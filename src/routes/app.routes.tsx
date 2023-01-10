@@ -1,39 +1,43 @@
 import React from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CustomTabBarButton } from "../components/CustomTabBarButton";
-import { Linking, Text, View } from 'react-native';
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useAuth } from "../hooks/auth";
+import { Text, View } from 'react-native';
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 
 import { HomeRoutes } from "../routes/home.routes";
 import { JoinGroup } from "../screens/JoinGroup";
 import { MyAccount } from "../screens/MyAccount";
 import { GroupRoutes } from "./group.routes";
-import { CreateGroup } from "../screens/CreateGroup";
 
 import { theme } from "../global/styles/theme";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Msg } from "../screens/Msg";
+import { useAuth } from "../hooks/auth";
+import { ButtonText } from "../components/ButtonText";
 
 const Tab = createBottomTabNavigator();
+
 
 export const AppRoutes = () => {
 
   const { tabColor, tabIcon, tabColorFocused, background, disable10 } = theme.colors;
   const { title700 } = theme.fonts;
 
-  const { user } = useAuth();
+  const { logOut } = useAuth();
+
+  function handleDisconnect() {
+    logOut();
+  }
 
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: true,
         headerStyle:{
           backgroundColor:tabColor,
           borderBottomLeftRadius: 36,
         },
         headerTitleStyle:{
-          marginLeft: 8,
+          marginLeft: 16,
           fontSize: RFValue(32),
           fontFamily: title700
         },
@@ -102,7 +106,16 @@ export const AppRoutes = () => {
               CONTA
             </Text>
           </View>
-        )
+        ),
+        headerRight: () => (
+          <ButtonText
+          style={{marginRight: 16, alignItems: "center"}}
+            onPress={handleDisconnect}
+          >
+            <FontAwesome5 name="sign-out-alt" size={24} color={"black"} />
+            <Text style={{fontSize: RFValue(12)}}>Sair da conta</Text>
+          </ButtonText>
+        ),
       }}/>
 
     </Tab.Navigator>

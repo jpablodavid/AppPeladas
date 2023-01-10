@@ -8,6 +8,7 @@ import { JoinGroup } from "../screens/JoinGroup";
 import { CreateGroup } from "../screens/CreateGroup";
 
 import { theme } from "../global/styles/theme";
+import { Button } from "../components/Button";
 
 
 const { Navigator, Screen } = createStackNavigator();
@@ -21,7 +22,6 @@ export const  GroupRoutes = () => {
 
   return (
     <Navigator
-      initialRouteName= "Group"
       screenOptions={{
         headerStyle:{
           backgroundColor: tabColor,
@@ -35,9 +35,9 @@ export const  GroupRoutes = () => {
       }}
     >
 
-      <Screen name="Group" component={Group} options={{ title: group ? group.name : 'Grupo' }}/>
+      <Screen name="Group" component={Group} options={{ title: group ? group.name : 'Grupo'}} />
 
-      <Screen name="JoinGroup" component={JoinGroup} options={{ title: 'Procurar Grupo' }}/>
+      <Screen name="JoinGroup" component={JoinGroup} options={{ title: 'Procurar Grupo' }} />
 
       <Screen name="CreateGroup" component={CreateGroup} options={{ title: "Criar Grupo"}}/>
 

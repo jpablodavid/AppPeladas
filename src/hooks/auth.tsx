@@ -45,6 +45,7 @@ export type location = {
 }
 
 export type Group = {
+  id: string;
   name: string;
   athletes: Array<athletes>;
   dateCreation: string;
@@ -59,6 +60,7 @@ export type Group = {
   diretorFinanceiro: StaffProps;
   diretorEventos: StaffProps;
   adm: string;
+  grupoWhatsapp: string;
 };
 
 export type ItemAccount = {
@@ -92,8 +94,11 @@ type AuthContextData = {
   signUpWithEmailAndPassword: (email: string, password: string) => Promise<void>;
   logOut: () => void;
   createUser: (name: string, email: string, nickName: string, birthday: string, phone: string, position: string, team: string) => Promise<void>;
-  createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string) => Promise<void>;
+  updateUser: (name: string, nickName: string, birthday: string, phone: string, position: string, team: string) => Promise<void>;
+  createPictureAvatar: (photo: string) => Promise<void>;
+  createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string, grupoWhatsapp?: string) => Promise<void>;
   loadGroup: (uid: string) => Promise<void>;
+  updateGroup: (day: string, time: string, mensal: number, convidado: number, idGroup: string) => Promise<void>;
   addLocation: (adress: string, latitude: number, longitude: number, idGroup: string) => Promise<void>;
   addPayment: (id: string, mes: string) => Promise<void>;
   addValues: (grupoId: string, date: Date, desc: string, tipo: string, valor?: number, campo?: string, festa?: string) => Promise<void>;
@@ -228,10 +233,65 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  async function createGroup(nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string) {
+  async function loadUser(uid: string) {
+    setLoading(true);
+    const docRef = doc(db, 'users', uid);
+    const docSnap = await getDoc(docRef);
+      const userLoaded = {
+        id: docSnap.data()?.id,
+        name: docSnap.data()?.name,
+        nickName: docSnap.data()?.nickName,
+        email: docSnap.data()?.email,
+        birthday: docSnap.data()?.birthday,
+        phone: docSnap.data()?.phone,
+        avatar: docSnap.data()?.avatar,
+        position: docSnap.data()?.position,
+        camisa: docSnap.data()?.camisa,
+        nivel: docSnap.data()?.nivel,
+        xp: docSnap.data()?.xp,
+        partidas: docSnap.data()?.partidas,
+        gols: docSnap.data()?.gols,
+        hattrick: docSnap.data()?.hattrick,
+        grupo_id: docSnap.data()?.grupo_Id,
+        team: docSnap.data()?.team,
+        stars: docSnap.data()?.stars,
+        adm: docSnap.data()?.adm,
+        payments: docSnap.data()?.payments,
+      } as User;
+      setUser(userLoaded);
+    setLoading(false);
+  };
+
+  // Atualizar Dados do User
+  async function updateUser(name: string, nickName: string, birthday: string, phone: string, position: string, team: string){
+    try{
+      await updateDoc(doc(db, "users", id),
+      { name: name,
+        nickName: nickName,
+        birthday: birthday,
+        phone: phone,
+        position: position,
+        team: team,
+      });
+    }catch(error){
+      console.log(error);
+    }
+  }
+
+  //Atualizar Photo do avatar do user
+  async function createPictureAvatar(photo: string){
+    try{
+      await updateDoc(doc(db, "users", id),{ avatar: photo});
+    }catch(error){
+      console.log(error);
+    }
+  }
+
+  async function createGroup(nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string, grupoWhatsapp: string) {
     setLoading(true);
     try {
       const groupWrite = {
+        id: '',
         name: nameGrupo,
         athletes: [],
         dateCreation: date,
@@ -275,9 +335,14 @@ function AuthProvider({ children }: AuthProviderProps) {
           occupation: '',
         },
         adm: idAdm,
+        grupoWhatsapp: grupoWhatsapp,
       } as unknown as Group;
 
+      // cria o grupo no firebase
       const group = await addDoc(collection(db, 'groups'),{...groupWrite});
+      // atualiza o grupo para colocar um novo campo com id do grupo criado
+      await updateDoc(doc(db, "groups", group.id), {id: group.id});
+      // atualiza o usuario colocando o usuario como administrador do grupo
       await updateDoc(doc(db, "users", idAdm), {grupo_id : group.id, adm: true});
 
       const accountingWrite = {
@@ -289,6 +354,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         arrecadacoes: []
       } as unknown as Account;
 
+      // criar uma coleção accounting ligada ao grupo
       await setDoc(doc(db, 'accounting', group.id),{...accountingWrite});
 
       setGroup(groupWrite);
@@ -305,6 +371,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     const docRef = doc(db, 'groups', groupUid);
     const docSnap = await getDoc(docRef);
       const groupLoaded = {
+        id: docSnap.data()?.id,
         name: docSnap.data()?.name,
         athletes: docSnap.data()?.athletes,
         dateCreation: docSnap.data()?.dateCreation,
@@ -324,7 +391,22 @@ function AuthProvider({ children }: AuthProviderProps) {
     setLoading(false);
   }
 
-  // Adcionar ou atualizar localização
+  // atualizar dados do grupo, valor mensalidade, valor convidado , dia e hora do jogo
+  async function updateGroup(day: string, time: string, mensal: number, convidado: number, idGroup: string){
+    try{
+      await updateDoc(doc(db, "groups", idGroup),
+      {
+        day: day,
+        time: time,
+        mensal: mensal,
+        convidado: convidado,
+      });
+    }catch(error){
+      console.log(error);
+    }
+  }
+
+  // Adcionar ou atualizar localização do campo
   async function addLocation(adress: string, latitude: number, longitude: number, idGroup: string){
     try{
       await updateDoc(doc(db, "groups", idGroup),
@@ -385,35 +467,6 @@ function AuthProvider({ children }: AuthProviderProps) {
       console.log(error);
     }
   }
-
-  async function loadUser(uid: string) {
-    setLoading(true);
-    const docRef = doc(db, 'users', uid);
-    const docSnap = await getDoc(docRef);
-      const userLoaded = {
-        id: docSnap.data()?.id,
-        name: docSnap.data()?.name,
-        nickName: docSnap.data()?.nickName,
-        email: docSnap.data()?.email,
-        birthday: docSnap.data()?.birthday,
-        phone: docSnap.data()?.phone,
-        avatar: docSnap.data()?.avatar,
-        position: docSnap.data()?.position,
-        camisa: docSnap.data()?.camisa,
-        nivel: docSnap.data()?.nivel,
-        xp: docSnap.data()?.xp,
-        partidas: docSnap.data()?.partidas,
-        gols: docSnap.data()?.gols,
-        hattrick: docSnap.data()?.hattrick,
-        grupo_id: docSnap.data()?.grupo_Id,
-        team: docSnap.data()?.team,
-        stars: docSnap.data()?.stars,
-        adm: docSnap.data()?.adm,
-        payments: docSnap.data()?.payments,
-      } as User;
-      setUser(userLoaded);
-    setLoading(false);
-  };
 
   // fazer o load dos atletas no grupo
   async function loadAthletes(athletes: athletes[]){
@@ -538,7 +591,10 @@ function AuthProvider({ children }: AuthProviderProps) {
         addPayment,
         addValues,
         createUser,
+        updateUser,
+        createPictureAvatar,
         createGroup,
+        updateGroup,
         addLocation,
         forgotPassword
     }}>

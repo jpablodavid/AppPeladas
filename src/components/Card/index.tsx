@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
 	View,
 	Text,
@@ -7,6 +7,7 @@ import {
 	ModalProps,
   TouchableWithoutFeedback
 } from "react-native";
+import {Camera, CameraType} from 'expo-camera';
 import { Entypo } from "@expo/vector-icons";
 
 import { ProgressBar } from "../../components/ProgressBar";
@@ -17,10 +18,11 @@ import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 
-import { User } from '../../hooks/auth'
+import { useAuth, User } from '../../hooks/auth'
 
 //funçoes importada
 import { bandeira, siglaPosition } from "../../global/Data/itens";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 type Props = ModalProps & {
 	data: User;
@@ -28,17 +30,23 @@ type Props = ModalProps & {
 
 export const Card = ({data} : Props) => {
 
+  const { createPictureAvatar } = useAuth();
+
   const { black, disable10, secondary, tabIcon, shadow } = theme.colors;
 
   const [color, setColor] = useState("black");
 
+  const [photo, setPhoto] = useState<null | string>(null);
+
   const [openModal, setOpenModal] = useState(false);
+
+  const [hasCameraPermission, setHasCameraPermission] = useState(false);
 
   function handleCloseModal() {
     setOpenModal(false);
   }
 
-  function handlerOpenModal() {
+  function handleOpenModal() {
     setOpenModal(true);
   }
 
@@ -48,8 +56,18 @@ export const Card = ({data} : Props) => {
     }
   }
 
+  const cameraRef = useRef<Camera>(null);
+
+  async function handleTakePicture() {
+    const photo = await cameraRef.current.takePictureAsync();
+    setPhoto(photo.uri);
+    createPictureAvatar(photo.uri);
+  }
+
   useEffect(() => {
     chanceColor(data.stars);
+    Camera.requestCameraPermissionsAsync()
+    .then(response => setHasCameraPermission(response.granted));
   }, []);
 
 	return (
@@ -74,10 +92,28 @@ export const Card = ({data} : Props) => {
             />
           </LinearGradient>
           <View style={{justifyContent: 'center'}}>
-          <Image
-            style={styles.avatar}
-            source={{uri: `${data.avatar}`}}
-          />
+            { data.avatar || photo ?
+              <Image
+                style={styles.avatar}
+                source={{uri: `${data.avatar || photo}`}}
+              />
+              :
+              <TouchableOpacity onPress={handleTakePicture} disabled={hasCameraPermission}>
+                {
+                  hasCameraPermission ?
+                  <Camera
+                    ref={cameraRef}
+                    style={styles.camera}
+                    type={CameraType.front}
+                  />
+                  :
+                  <View style={styles.camera}>
+                    <Text>Sem autorização do uso da camera</Text>
+                  </View>
+                }
+
+              </TouchableOpacity>
+            }
           </View>
         </LinearGradient>
 
@@ -113,7 +149,7 @@ export const Card = ({data} : Props) => {
         </LinearGradient>
       </View>
       <View style={styles.icons}>
-      <ButtonText onPress={handlerOpenModal}>
+      <ButtonText onPress={handleOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18, marginBottom: 16 }}
           name="attachment"
@@ -121,7 +157,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handlerOpenModal}>
+      <ButtonText onPress={handleOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="awareness-ribbon"
@@ -129,7 +165,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handlerOpenModal}>
+      <ButtonText onPress={handleOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="battery"
@@ -137,7 +173,7 @@ export const Card = ({data} : Props) => {
           color={color}
         />
       </ButtonText>
-      <ButtonText onPress={handlerOpenModal}>
+      <ButtonText onPress={handleOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="briefcase"
@@ -145,7 +181,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handlerOpenModal}>
+      <ButtonText onPress={handleOpenModal}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="bucket"
@@ -153,7 +189,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handlerOpenModal}>
+      <ButtonText onPress={handleOpenModal}>
         <Entypo
           style={{ marginHorizontal: 12 }}
           name="bug"
@@ -161,7 +197,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handlerOpenModal}>
+      <ButtonText onPress={handleOpenModal}>
         <Entypo
           style={{ marginHorizontal: 12 }}
           name="bug"
@@ -169,7 +205,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handlerOpenModal}>
+      <ButtonText onPress={handleOpenModal}>
         <Entypo
           style={{ marginHorizontal: 12 }}
           name="bug"

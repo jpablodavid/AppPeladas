@@ -41,7 +41,7 @@ export const CreateGroup = ({navigation}) => {
   });
 
   function handleCreateGroup(data: FormData) {
-    createGroup(data.name, data.date, data.location, data.day, data.time,data.mensal, data.convidado, user.id)
+    createGroup(data.name, data.date, data.location, data.day, data.time, data.mensal, data.convidado, user.id)
     navigation.navigate('AccountGroup');
   }
 

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
@@ -47,13 +47,18 @@ export const styles = StyleSheet.create({
 		zIndex: 1,
 	},
 	avatar:{
-    margin: 30,
-		width: 200,
-		height: 200,
+    //margin: 30,
+		width: 252,
+		height: 240,
 		//position: "relative",
 		//top: 0,
 		//left: 0,
 	},
+  camera: {
+    //margin: 30,
+    width: 252/* Dimensions.get("screen").width -58 */,
+		height: 240,
+  },
 	scout: {
 		flex: 1,
 		alignItems: "center",

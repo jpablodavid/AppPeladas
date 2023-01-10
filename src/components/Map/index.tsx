@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { View, Text, Platform, Linking } from "react-native";
+import { View, Text, Platform, Linking} from "react-native";
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import MapView, { Marker } from 'react-native-maps';
 
 import { Button } from "../Button";
+import { KEY } from "../../configs/googleConfig";
 
 import { Group, useAuth } from "../../hooks/auth";
 
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
-import { KEY } from "../../configs/googleConfig";
 
 type Props = {
 	data: Group;
 };
+
 
 export const Map = ({ data }: Props) => {
 
@@ -81,7 +82,7 @@ export const Map = ({ data }: Props) => {
                 longitude: details.geometry.location.lng
               });
               addLocation(data.description, local.latitude, local.longitude, data.id);
-              console.log(local);
+              console.log(data);
             }}
             query={{
               key: {KEY},
