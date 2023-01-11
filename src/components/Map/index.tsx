@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, Platform, Linking} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, Platform, Linking, Keyboard} from "react-native";
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import MapView, { Marker } from 'react-native-maps';
@@ -43,26 +43,45 @@ export const Map = ({ data }: Props) => {
 
   }
 
+  const [keyboardStatus, setKeyboardStatus] = useState(false);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+      setKeyboardStatus(true);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardStatus(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, [keyboardStatus]);
+
 	return (
 		<View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude:  data.location.latitude,
-          longitude:  data.location.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        showsUserLocation={true}
-        zoomEnabled={true}
-        loadingEnabled={true}
-        provider={"google"}
-      >
-        <Marker
-          coordinate={{ latitude : local.latitude, longitude : local.longitude  }}
-          title={data.name}
-        />
-      </MapView>
+      {
+        !keyboardStatus &&
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude:  data.location.latitude,
+            longitude:  data.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          showsUserLocation={true}
+          zoomEnabled={true}
+          loadingEnabled={true}
+          provider={"google"}
+        >
+          <Marker
+            coordinate={{ latitude : local.latitude, longitude : local.longitude  }}
+            title={data.name}
+          />
+        </MapView>
+      }
       { data.location.latitude ?
         <View>
           <Text style={styles.address}>
@@ -82,17 +101,18 @@ export const Map = ({ data }: Props) => {
                 longitude: details.geometry.location.lng
               });
               addLocation(data.description, local.latitude, local.longitude, data.id);
-              console.log(data);
+              console.log("oi");
             }}
             query={{
               key: {KEY},
               language: 'pt-br',
             }}
             fetchDetails={true}
-            styles={{listView:{ heigth: 100}}}
+            styles={{listView:{ heigth: 300}}}
           />
         </View>
       }
+
 		</View>
 	);
 };

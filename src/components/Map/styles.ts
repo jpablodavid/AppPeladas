@@ -24,6 +24,11 @@ export const styles = StyleSheet.create({
     width: 160,
     alignSelf: 'flex-end',
   },
+  buttonSearch:{
+    width: 180,
+    alignSelf: 'center',
+    marginTop: 16,
+  },
   search:{
     marginTop: 16,
   }

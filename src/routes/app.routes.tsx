@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CustomTabBarButton } from "../components/CustomTabBarButton";
-import { Text, View } from 'react-native';
+import { Text, View, Keyboard} from 'react-native';
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 
 import { HomeRoutes } from "../routes/home.routes";
@@ -25,6 +25,18 @@ export const AppRoutes = () => {
 
   const { logOut } = useAuth();
 
+  const [keyboardStatus, setKeyboardStatus] = useState(null);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+      setKeyboardStatus("Keyboard Shown");
+    });
+
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardStatus(null);
+    });
+  }, [keyboardStatus]);
+
   function handleDisconnect() {
     logOut();
   }
@@ -42,10 +54,12 @@ export const AppRoutes = () => {
           fontFamily: title700
         },
         tabBarShowLabel: false,
+        tabBarHideOnKeyboard: true,
         tabBarStyle: {
           position: 'absolute',
           borderRadius: 20,
           margin: 16,
+          marginBottom : keyboardStatus ? 0 : 16,
           backgroundColor: tabColor,
           height: 64,
         }
@@ -87,6 +101,7 @@ export const AppRoutes = () => {
 
       <Tab.Screen name="Msg" component={Msg}
       options ={{ title: "Mensagens",
+      tabBarShowLabel: false,
         tabBarIcon: ({focused}) => (
           <View style={{alignItems: "center", padding: 8,borderRadius: 20,backgroundColor: focused ?  tabColorFocused : tabColor}}>
             <MaterialCommunityIcons name="android-messages" size={24} color={tabIcon} />
@@ -117,7 +132,6 @@ export const AppRoutes = () => {
           </ButtonText>
         ),
       }}/>
-
     </Tab.Navigator>
   );
 };

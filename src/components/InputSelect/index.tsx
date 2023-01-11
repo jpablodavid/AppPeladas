@@ -24,8 +24,8 @@ export const InputSelect = ({ icon, placeholder ,itens, ...rest }: Props) => {
       >
         <Picker.Item style={styles.placeholder} label={placeholder} value="Unknown"/>
         {
-          itens.map((item) => {
-            return <Picker.Item style={styles.item} label={item} value={item} />
+          itens.map((item, key) => {
+            return <Picker.Item style={styles.item} label={item} value={item} key={key} />
           })
         }
       </Picker>
