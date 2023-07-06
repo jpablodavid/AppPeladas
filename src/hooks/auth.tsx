@@ -308,31 +308,26 @@ function AuthProvider({ children }: AuthProviderProps) {
           id: '',
           userName: '',
           avatar_url: '',
-          occupation: '',
         },
         vicePresidente: {
           id: '',
           userName: '',
           avatar_url: '',
-          occupation: '',
         },
         diretorEsportivo: {
           id: '',
           userName: '',
           avatar_url: '',
-          occupation: '',
         },
         diretorFinanceiro: {
           id: '',
           userName: '',
           avatar_url: '',
-          occupation: '',
         },
         diretorEventos: {
           id: '',
           userName: '',
           avatar_url: '',
-          occupation: '',
         },
         adm: idAdm,
         grupoWhatsapp: grupoWhatsapp,
@@ -381,10 +376,10 @@ function AuthProvider({ children }: AuthProviderProps) {
         valorMensal: docSnap.data()?.valorMensal,
         valorConvidado: docSnap.data()?.valorConvidado,
         presidente: docSnap.data()?.presidente,
-        vicePresidente: docSnap.data()?.presidente,
-        diretorEsportivo: docSnap.data()?.presidente,
-        diretorFinanceiro: docSnap.data()?.presidente,
-        diretorEventos: docSnap.data()?.presidente,
+        vicePresidente: docSnap.data()?.vicePresidente,
+        diretorEsportivo: docSnap.data()?.diretorEsportivo,
+        diretorFinanceiro: docSnap.data()?.diretorFinanceiro,
+        diretorEventos: docSnap.data()?.diretorEventos,
         adm: docSnap.data()?.adm,
       } as Group;
     setGroup(groupLoaded);
@@ -448,7 +443,6 @@ function AuthProvider({ children }: AuthProviderProps) {
             id: doc.data()?.id,
             userName: doc.data()?.name,
             avatar_url: doc.data()?.avatar,
-            occupation: occupation
           } as StaffProps;
         }
       });

@@ -9,6 +9,7 @@ type Props = {
 	data: Group;
 };
 
+
 export const ListStaff = ({data}: Props) => {
 
 	return (
@@ -16,10 +17,11 @@ export const ListStaff = ({data}: Props) => {
       style={styles.container}
       showsVerticalScrollIndicator={false}
     >
-			<Staff data={data.presidente} />
-			<Staff data={data.vicePresidente} />
-			<Staff data={data.diretorFinanceiro} />
-			<Staff data={data.diretorEventos} />
+			<Staff data={data.presidente} occupation={"Presidente"}/>
+      <Staff data={data.vicePresidente} occupation={"Vice-Presidente"}/>
+			<Staff data={data.diretorEsportivo} occupation={"Diretor Esportivo"}/>
+			<Staff data={data.diretorFinanceiro} occupation={"Diretor Financeiro"}/>
+			<Staff data={data.diretorEventos} occupation={"Diretor de Eventos"}/>
 		</ScrollView>
 	);
 };

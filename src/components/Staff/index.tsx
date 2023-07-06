@@ -10,14 +10,14 @@ export type StaffProps = {
 	id: string;
 	userName: string;
 	avatar_url: string;
-	occupation: string;
 };
 
 type Props = {
 	data: StaffProps;
+  occupation : string;
 };
 
-export const Staff = ({ data }: Props) => {
+export const Staff = ({ data, occupation }: Props) => {
 
 	const { tabIcon, tabColor} = theme.colors;
 
@@ -25,29 +25,36 @@ export const Staff = ({ data }: Props) => {
 
 	const [textInput, setTextInput] = useState(data.userName);
 
-	const isAdm = true;
 
 	function handlerEdit() {
-		addStaff(textInput, data.occupation, user.grupo_id);
+		addStaff(textInput, occupation, user.grupo_id);
     alert("ok");
 	}
 
 	return (
 		<View>
-			<Text style={styles.title}>{data.occupation}</Text>
+			<Text style={styles.title}>{occupation}</Text>
 			<LinearGradient start={[ 0.0, 0.0]} end={[1,0]} style={styles.container} colors={[tabIcon, tabColor]}>
 				<Image style={styles.avatar} source={{ uri: data.avatar_url }} />
 				<View style={styles.content}>
-					<TextInput
-						style={styles.input}
-						value={textInput}
-            onChangeText={setTextInput}
-          />
-					{isAdm && (
-						<TouchableOpacity style={styles.editButton} onPress={handlerEdit} >
-							<Text style={styles.textButton}>Editar</Text>
-						</TouchableOpacity>
-					)}
+        {user.adm ?
+          <View>
+            <TextInput
+              style={styles.input}
+              value={textInput}
+              onChangeText={setTextInput}
+            />
+            <TouchableOpacity style={styles.editButton} onPress={handlerEdit} >
+              <Text style={styles.textButton}>Editar</Text>
+            </TouchableOpacity>
+          </View>
+          :
+          <View style={styles.input}>
+            <Text style={styles.text}>
+              {textInput}
+            </Text>
+          </View>
+					}
 				</View>
 			</LinearGradient>
 		</View>

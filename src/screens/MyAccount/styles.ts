@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginHorizontal: 24,
+    marginBottom: 8
 	},
 	informationText: {
     marginTop: 60,

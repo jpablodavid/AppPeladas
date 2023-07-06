@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { secondary, white } = theme.colors;
+const { secondary, white, tabColor } = theme.colors;
 const { title700, text500 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
 		borderRadius: 8,
 	},
 	title: {
+    color: tabColor,
 		fontSize: RFValue(20),
 		fontFamily: title700,
 		marginVertical: 4,
@@ -32,11 +33,13 @@ export const styles = StyleSheet.create({
 		backgroundColor: white,
 		borderRadius: 5,
 		paddingHorizontal: 8,
-		marginBottom: 4,
+		marginVertical: 4,
+    fontFamily: text500,
+    fontSize: RFValue(14),
 	},
 	editButton: {
 		width: "20%",
-		height: "30%",
+		height: "35%",
 		borderRadius: 5,
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -47,4 +50,8 @@ export const styles = StyleSheet.create({
 		fontSize: RFValue(12),
 		fontFamily: text500,
 	},
+  text:{
+    fontFamily: text500,
+    fontSize: RFValue(14),
+  }
 });

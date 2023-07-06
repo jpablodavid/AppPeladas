@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Image, KeyboardAvoidingView, Platform} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, Image, Keyboard} from "react-native";
 
 import { useAuth } from "../../hooks/auth";
 
@@ -22,9 +22,11 @@ export const Group = ({navigation}) => {
   const { tabIcon } = theme.colors;
 
   const { group } = useAuth();
-
+  const pad =true;
 	const [category, setCategory] = useState("");
   const [disable, setDisable] = useState(false);
+
+  const [keyboardStatus, setKeyboardStatus] = useState(false);
 
 	function handleCategorySelect(categoryId: string) {
 		categoryId === category ? setDisable(true) : (setCategory(categoryId), setDisable(false));
@@ -37,6 +39,16 @@ export const Group = ({navigation}) => {
   function handleJoinGroup(){
     navigation.navigate('JoinGroup');
   }
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+      setKeyboardStatus(true);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardStatus(false);
+    });
+
+  }, [keyboardStatus]);
 
 	return (
     <Background>
@@ -85,9 +97,8 @@ export const Group = ({navigation}) => {
             </View>
           </View>
         )
-
       }
-      <View style={{height: 80, backgroundColor: tabIcon}}/>
+      {!keyboardStatus && <View style={{height: 80, backgroundColor: tabIcon}}/>}
     </Background>
 	);
 };

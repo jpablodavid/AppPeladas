@@ -53,10 +53,6 @@ export const Map = ({ data }: Props) => {
       setKeyboardStatus(false);
     });
 
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
   }, [keyboardStatus]);
 
 	return (
