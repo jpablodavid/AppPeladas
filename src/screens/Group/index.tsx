@@ -69,7 +69,7 @@ export const Group = ({navigation}) => {
               :
                 category === "3" ? <Map data={group}/>
               :
-                category === "4" ? <ListAthletes data={group} perfil={true}/>
+                category === "4" ? <ListAthletes data={group} perfil={true} account={false}/>
               :
                 category === "5" ? <Gallery data={group}/>
               :

@@ -23,7 +23,7 @@ export const Values = ({data}) => {
 
   const [openModal, setOpenModal] = useState(false);
 
-  const [add, setAdd] = useState(false);
+  const [modalType, setModalType] = useState('');
 
   const [numberAtleta, setNumberAtleta] = useState("");
 
@@ -47,21 +47,22 @@ export const Values = ({data}) => {
 
 	function handlerCloseModal() {
     setOpenModal(false);
-    setAdd(true);
+    setModalType('');
   }
 
   function handlerOpenModalCustos() {
     setOpenModal(true);
-    setAdd(false);
+    setModalType('custos');
   }
 
   function handlerOpenModalArrecadacoes() {
     setOpenModal(true);
-    setAdd(true);
+    setModalType('add');
   }
 
-  function handlerOpenModal() {
+  function handlerOpenModalEdit() {
     setOpenModal(true);
+    setModalType('edit');
   }
 
   function printNameAtleta(value: string) {
@@ -93,6 +94,7 @@ export const Values = ({data}) => {
 
   function handlerAddValues(){
     addValues(accounting.id, today, descricao, '', 0, valueCampo, valueFesta);
+    setOpenModal(false);
   }
 
   useEffect(() => {
@@ -109,16 +111,7 @@ export const Values = ({data}) => {
           <View style={styles.valores}>
             <Text style={styles.label}>R$</Text>
             <View style={styles.values}>
-              { user.adm ?
-                <TextInput
-                  style={styles.inputEdit}
-                  placeholderTextColor={primary100}
-                  value={parseFloat(valueCampo).toFixed(2)}
-                  onChangeText={setValueCampo}
-                />
-                :
-                <Text style={styles.infoText}>{parseFloat(valueCampo).toFixed(2)}</Text>
-              }
+              <Text style={styles.infoText}>{parseFloat(valueCampo).toFixed(2)}</Text>
             </View>
           </View>
         </View>
@@ -127,21 +120,12 @@ export const Values = ({data}) => {
           <View style={styles.valores}>
             <Text style={styles.label}>R$</Text>
             <View style={styles.values}>
-              { user.adm ?
-                <TextInput
-                  style={styles.inputEdit}
-                  placeholderTextColor={primary100}
-                  value={parseFloat(valueFesta).toFixed(2)}
-                  onChangeText={setValueFesta}
-                />
-                :
-                <Text style={styles.infoText}>{parseFloat(valueFesta).toFixed(2)}</Text>
-              }
+              <Text style={styles.infoText}>{parseFloat(valueFesta).toFixed(2)}</Text>
             </View>
           </View>
         </View>
         { user.adm ?
-          <TouchableOpacity style={styles.edit} onPress={handlerAddValues}>
+          <TouchableOpacity style={styles.edit} onPress={handlerOpenModalEdit}>
             <Text style={styles.editText}>Editar</Text>
           </TouchableOpacity>
           :
@@ -196,10 +180,10 @@ export const Values = ({data}) => {
         statusBarTranslucent
         visible={openModal}>
         <View style={styles.modal}>
-          <ButtonText style={{ width: 20, backgroundColor: invisible }}onPress={handlerCloseModal}>
+          <ButtonText style={{ width: 20, backgroundColor: invisible }} onPress={handlerCloseModal}>
             <Text style={styles.close}>X</Text>
           </ButtonText>
-          { add ?
+          { modalType === 'add' ?
             (
               <ScrollView>
                 <Text style={styles.labelModal}>Adicionar Pagamento</Text>
@@ -251,7 +235,7 @@ export const Values = ({data}) => {
                 </View>
               </ScrollView>
             )
-            :
+            : modalType === 'custos' ?
             (
               <View>
                 <Text style={styles.labelModal}>Adicionar Gastos</Text>
@@ -276,6 +260,42 @@ export const Values = ({data}) => {
                 </View>
                 <View style={styles.buttonModal}>
                   <Button text={'adicionar'} onPress={handlerAddCustos}/>
+                </View>
+              </View>
+            )
+            : (modalType === "edit") &&
+            (
+              <View>
+                <Text style={styles.labelModal}>Custos fixos</Text>
+                <Text style={styles.label}></Text>
+                <View style={styles.money}>
+                <Text style={styles.label}>Campo:</Text>
+                <View style={styles.valores}>
+                  <Text style={styles.infoText}>R$ </Text>
+                  <TextInput
+                    style={[{width: '60%'},styles.input]}
+                    placeholderTextColor={line}
+                    placeholder={"0.00"}
+                    onChangeText={setValueCampo}
+                    keyboardType={"number-pad"}
+                  />
+                </View>
+                </View>
+                <View style={styles.money}>
+                <Text style={styles.label}>Festa :</Text>
+                <View style={styles.valores}>
+                  <Text style={styles.infoText}>R$ </Text>
+                  <TextInput
+                    style={[{width: '60%'},styles.input]}
+                    placeholderTextColor={line}
+                    placeholder={"0.00"}
+                    onChangeText={setValueFesta}
+                    keyboardType={"number-pad"}
+                  />
+                </View>
+                </View>
+                <View style={styles.buttonModal}>
+                  <Button text={'Editar Valores'} onPress={handlerAddValues}/>
                 </View>
               </View>
             )

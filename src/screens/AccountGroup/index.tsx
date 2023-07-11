@@ -40,7 +40,7 @@ export const AccountGroup = () => {
         {
           !category || category === "1"? <CollectionGroup/>
           :
-            category === "2" ? <ListAthletes data={group} perfil={false}/>
+            category === "2" ? <ListAthletes data={group} perfil={false} account={true}/>
           :
             (category === "3") && <Values data={group} />
         }

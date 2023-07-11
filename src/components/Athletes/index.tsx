@@ -19,9 +19,10 @@ type Props = RectButtonProps & ModalProps & {
 	data: User;
   perfil: boolean;
   exclude: (idGroup: string, idathletes: string) => Promise<void>;
+  account: boolean;
 };
 
-export const Athletes = ({ data, perfil, exclude }: Props) => {
+export const Athletes = ({ data, perfil, exclude, account }: Props) => {
 
   const { user, accounting } = useAuth();
 
@@ -51,7 +52,7 @@ export const Athletes = ({ data, perfil, exclude }: Props) => {
 					<Text style={styles.textName}>{data.name}</Text>
 				</View>
 			</RectButton>
-      {user.adm &&(
+      {user.adm && !account &&(
         <View style={styles.exclude}>
           <RectButton style={styles.excludesButton} onPress={handlerExcluir}>
             <Text style={styles.textButton}>X</Text>

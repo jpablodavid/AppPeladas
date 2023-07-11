@@ -19,6 +19,16 @@ export const nivel = [
   "Craque"
 ]
 
+export const weekday = [
+  "SEGUNDA",
+  "TERÇA",
+  "QUARTA",
+  "QUINTA",
+  "SEXTA",
+  "SABADO",
+  "DOMINGO"
+]
+
 export function nivelUser(xp: string){
   let pontos = Number(xp);
   if (pontos <= 250){

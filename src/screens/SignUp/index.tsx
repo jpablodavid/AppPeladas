@@ -7,6 +7,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Keyboard,
+  Alert,
 } from "react-native";
 import { useAuth } from "../../hooks/auth";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
