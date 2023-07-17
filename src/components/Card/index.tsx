@@ -36,6 +36,8 @@ export const Card = ({data} : Props) => {
 
   const [color, setColor] = useState("black");
 
+  const [badges, setBadges] = useState("Explicar como funciona o badges");
+
   const [photo, setPhoto] = useState<null | string>(null);
 
   const [openModal, setOpenModal] = useState(false);
@@ -46,8 +48,9 @@ export const Card = ({data} : Props) => {
     setOpenModal(false);
   }
 
-  function handleOpenModal() {
+  function handleOpenModal(badge: string) {
     setOpenModal(true);
+    setBadges(badge);
   }
 
   function chanceColor(start: string) {
@@ -149,7 +152,7 @@ export const Card = ({data} : Props) => {
         </LinearGradient>
       </View>
       <View style={styles.icons}>
-      <ButtonText onPress={handleOpenModal}>
+      <ButtonText onPress={()=> handleOpenModal("grampo")}>
         <Entypo
           style={{ marginHorizontal: 18, marginBottom: 16 }}
           name="attachment"
@@ -157,7 +160,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handleOpenModal}>
+      <ButtonText onPress={()=> handleOpenModal("fita")}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="awareness-ribbon"
@@ -165,7 +168,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handleOpenModal}>
+      <ButtonText onPress={()=> handleOpenModal("pilha")}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="battery"
@@ -173,7 +176,7 @@ export const Card = ({data} : Props) => {
           color={color}
         />
       </ButtonText>
-      <ButtonText onPress={handleOpenModal}>
+      <ButtonText onPress={()=> handleOpenModal("mala")}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="briefcase"
@@ -181,7 +184,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handleOpenModal}>
+      <ButtonText onPress={()=> handleOpenModal("balde")}>
         <Entypo
           style={{ marginHorizontal: 18 }}
           name="bucket"
@@ -189,7 +192,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handleOpenModal}>
+      <ButtonText onPress={()=> handleOpenModal("barata")}>
         <Entypo
           style={{ marginHorizontal: 12 }}
           name="bug"
@@ -197,7 +200,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handleOpenModal}>
+      <ButtonText onPress={()=> handleOpenModal("barata2")}>
         <Entypo
           style={{ marginHorizontal: 12 }}
           name="bug"
@@ -205,7 +208,7 @@ export const Card = ({data} : Props) => {
           color="black"
         />
       </ButtonText>
-      <ButtonText onPress={handleOpenModal}>
+      <ButtonText onPress={()=> handleOpenModal("barata3")}>
         <Entypo
           style={{ marginHorizontal: 12 }}
           name="bug"
@@ -226,8 +229,8 @@ export const Card = ({data} : Props) => {
               <Text style={styles.textButton}>X</Text>
             </ButtonText>
             <View style={styles.contentModal}>
-              <Text>
-                explica o que é esse icone, quantos pontos vc tem e quantos faltam para alcançar o objetivo
+              <Text style={styles.contentText}>
+                {badges}
               </Text>
             </View>
           </View>

@@ -19,7 +19,7 @@ export const AccountGroup = () => {
 
   const { tabIcon } = theme.colors;
 
-  const { group } = useAuth();
+  const { group, accounting } = useAuth();
 
 	const [category, setCategory] = useState("");
   const [disable, setDisable] = useState(false);
@@ -38,7 +38,7 @@ export const AccountGroup = () => {
       />
       <View style={styles.content}>
         {
-          !category || category === "1"? <CollectionGroup/>
+          !category || category === "1"? <CollectionGroup data={accounting}/>
           :
             category === "2" ? <ListAthletes data={group} perfil={false} account={true}/>
           :

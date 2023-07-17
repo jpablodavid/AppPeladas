@@ -11,7 +11,7 @@ import { useAuth } from "../../hooks/auth";
 import { Ionicons } from "@expo/vector-icons";
 
 import { db } from "../../configs/firebaseConfig";
-import { collection, getDocs, getDoc , updateDoc, doc } from "@firebase/firestore";
+import { collection, getDocs } from "@firebase/firestore";
 
 import { Button } from "../../components/Button";
 import { Background } from "../../components/Background";
@@ -30,7 +30,7 @@ export const JoinGroup = ({navigation}) => {
 
   const { background } = theme.colors;
 
-  const { id } = useAuth();
+  const { user, connectGroup } = useAuth();
 
   const [nameGroup, setNameGroup] = useState("");
 
@@ -71,24 +71,8 @@ export const JoinGroup = ({navigation}) => {
 
   async function handleConnectGroup() {
     try{
-      const docRef = doc(db, 'groups', idGroup);
-      const docSnap = await getDoc(docRef);
-      const athletes = docSnap.data().athletes;
-
-      if(athletes.includes(id)){
-        alert('Você já é membro deste Grupo')
-        return
-      }else{
-        athletes.push(id);
-
-        await updateDoc(docRef, {
-          athletes: athletes
-        });
-
-        await updateDoc(doc(db, "users", id), {grupo_id : idGroup})
-      }
-      alert("Você está no Grupo, Agora é so bater aquela pelada");
-      navigation.navigate('Home');
+      connectGroup(idGroup, user.id, user.name, user.camisa);
+      navigation.navigate('Group');
     }catch (error){
       console.log(error)
     }finally{
@@ -134,3 +118,4 @@ export const JoinGroup = ({navigation}) => {
     </Background>
   );
 };
+

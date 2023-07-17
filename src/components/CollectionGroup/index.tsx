@@ -22,13 +22,9 @@ const Months = [
   "Dezembro",
 ];
 
-export const CollectionGroup = () => {
-
-  const { accounting } = useAuth();
+export const CollectionGroup = ({data}) => {
 
   const currentDate = new Date().getMonth();
-
-  const [loading, setLoading] = useState(false);
 
   const [month, setMonth] = useState([{mes: currentDate, arrecadacoes: 0 , custos: 0}]);
 
@@ -96,7 +92,7 @@ export const CollectionGroup = () => {
   }
 
   useEffect(() => {
-    totalMeses(accounting, Months);
+    totalMeses(data, Months);
   }, []);
 
 	return (

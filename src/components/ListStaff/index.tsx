@@ -17,11 +17,11 @@ export const ListStaff = ({data}: Props) => {
       style={styles.container}
       showsVerticalScrollIndicator={false}
     >
-			<Staff data={data.presidente} occupation={"Presidente"}/>
-      <Staff data={data.vicePresidente} occupation={"Vice-Presidente"}/>
-			<Staff data={data.diretorEsportivo} occupation={"Diretor Esportivo"}/>
-			<Staff data={data.diretorFinanceiro} occupation={"Diretor Financeiro"}/>
-			<Staff data={data.diretorEventos} occupation={"Diretor de Eventos"}/>
+			<Staff data={data.presidente} occupation={"presidente"}/>
+      <Staff data={data.vicePresidente} occupation={"vicePresidente"}/>
+			<Staff data={data.diretorEsportivo} occupation={"diretorEsportivo"}/>
+			<Staff data={data.diretorFinanceiro} occupation={"diretorFinanceiro"}/>
+			<Staff data={data.diretorEventos} occupation={"diretorEventos"}/>
 		</ScrollView>
 	);
 };

@@ -118,6 +118,7 @@ export const styles = StyleSheet.create({
   textButton: {
 		fontSize: RFValue(26),
 		fontFamily:title700,
+    color: tabColor,
 	},
   modal:{
     flex: 1,
@@ -130,6 +131,13 @@ export const styles = StyleSheet.create({
 		backgroundColor: background,
   },
   contentModal:{
-
+    flex: 1,
+    alignItems: "center",
+    justifyContent: 'center',
+  },
+  contentText:{
+    fontSize: RFValue(26),
+		fontFamily:title700,
+    color: "white",
   }
 });

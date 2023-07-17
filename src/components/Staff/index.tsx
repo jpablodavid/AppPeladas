@@ -21,21 +21,20 @@ export const Staff = ({ data, occupation }: Props) => {
 
 	const { tabIcon, tabColor} = theme.colors;
 
-  const { addStaff, user} = useAuth()
+  const { addStaff, group, user } = useAuth();
 
 	const [textInput, setTextInput] = useState(data.userName);
 
 
 	function handlerEdit() {
-		addStaff(textInput, occupation, user.grupo_id);
-    alert("ok");
+		addStaff(textInput, occupation, group.id);
 	}
 
 	return (
 		<View>
 			<Text style={styles.title}>{occupation}</Text>
 			<LinearGradient start={[ 0.0, 0.0]} end={[1,0]} style={styles.container} colors={[tabIcon, tabColor]}>
-				<Image style={styles.avatar} source={{ uri: data.avatar_url }} />
+				<Image style={styles.avatar} source={ data.avatar_url ? { uri: data.avatar_url } : require('../../assets/staff.png') } />
 				<View style={styles.content}>
         {user.adm ?
           <View>

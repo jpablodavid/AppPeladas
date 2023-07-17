@@ -18,7 +18,7 @@ import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 
-export const MyAccount = () => {
+export const MyAccount = ({navigation}) => {
 
   const { primary100 } = theme.colors;
 
@@ -33,6 +33,7 @@ export const MyAccount = () => {
 
   function handleAtualizar() {
     updateUser(name, nickName, birthday, phone, position, team);
+    alert('Dados atualizados');
   }
 
 	return (

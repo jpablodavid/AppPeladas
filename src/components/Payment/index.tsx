@@ -5,7 +5,7 @@ import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 
 type Props = {
-	data: Array<string>;
+	data: Array<String>;
 };
 
 const months = [
@@ -23,6 +23,7 @@ const months = [
   "dezembro",
 ];
 
+
 export const Payment = ({data}: Props) => {
 
   const { paid, notPaid } = theme.colors;
@@ -30,7 +31,7 @@ export const Payment = ({data}: Props) => {
 	return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>2022</Text>
+        <Text style={styles.title}>2023</Text>
       </View>
       <View style={styles.months}>
           {

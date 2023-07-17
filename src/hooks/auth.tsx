@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useContext, useState, useEffect } from
 import { Alert } from 'react-native';
 
 import { db, auth } from "../configs/firebaseConfig";
-import { doc, setDoc, collection, getDoc, getDocs, addDoc, updateDoc, Timestamp } from "@firebase/firestore";
+import { doc, setDoc, collection, getDoc, getDocs, addDoc, updateDoc, Timestamp, arrayUnion } from "@firebase/firestore";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
 
 import { nivel } from '../global/Data/itens';
@@ -19,7 +19,7 @@ export type User = {
   phone: string;
   avatar: string;
   position: string;
-  camisa: string;
+  camisa: number;
   nivel: string;
   xp: string;
   partidas: string;
@@ -35,7 +35,7 @@ export type User = {
 export type athletes = {
   id: string,
   name: string,
-  number: string
+  number: number,
 }
 
 export type location = {
@@ -98,9 +98,10 @@ type AuthContextData = {
   createPictureAvatar: (photo: string) => Promise<void>;
   createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string, grupoWhatsapp?: string) => Promise<void>;
   loadGroup: (uid: string) => Promise<void>;
+  connectGroup: (idGroup: string, id: string, name: string, number: number) => Promise<void>;
   updateGroup: (day: string, time: string, mensal: number, convidado: number, idGroup: string) => Promise<void>;
   addLocation: (adress: string, latitude: number, longitude: number, idGroup: string) => Promise<void>;
-  addPayment: (id: string, mes: string) => Promise<void>;
+  addPayment: (number: number, mes: string) => Promise<void>;
   addValues: (grupoId: string, date: Date, desc: string, tipo: string, valor?: number, campo?: string, festa?: string) => Promise<void>;
   forgotPassword: (emailUser: string) => Promise<void>;
 };
@@ -208,9 +209,9 @@ function AuthProvider({ children }: AuthProviderProps) {
       birthday: birthday,
       email: email,
       phone: phone,
-      avatar: "",
+      avatar: '',
       position: position,
-      camisa: "",
+      camisa: 0,
       nivel: nivel[0],
       xp: "0",
       partidas: "0",
@@ -218,7 +219,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       hattrick: "0",
       stars: "0",
       team: team,
-      grupo_Id: '',
+      grupo_id: '',
       adm: false,
       payments:[]
     }as unknown as User;
@@ -237,28 +238,28 @@ function AuthProvider({ children }: AuthProviderProps) {
     setLoading(true);
     const docRef = doc(db, 'users', uid);
     const docSnap = await getDoc(docRef);
-      const userLoaded = {
-        id: docSnap.data()?.id,
-        name: docSnap.data()?.name,
-        nickName: docSnap.data()?.nickName,
-        email: docSnap.data()?.email,
-        birthday: docSnap.data()?.birthday,
-        phone: docSnap.data()?.phone,
-        avatar: docSnap.data()?.avatar,
-        position: docSnap.data()?.position,
-        camisa: docSnap.data()?.camisa,
-        nivel: docSnap.data()?.nivel,
-        xp: docSnap.data()?.xp,
-        partidas: docSnap.data()?.partidas,
-        gols: docSnap.data()?.gols,
-        hattrick: docSnap.data()?.hattrick,
-        grupo_id: docSnap.data()?.grupo_Id,
-        team: docSnap.data()?.team,
-        stars: docSnap.data()?.stars,
-        adm: docSnap.data()?.adm,
-        payments: docSnap.data()?.payments,
-      } as User;
-      setUser(userLoaded);
+    const userLoaded = {
+      id: docSnap.data()?.id,
+      name: docSnap.data()?.name,
+      nickName: docSnap.data()?.nickName,
+      email: docSnap.data()?.email,
+      birthday: docSnap.data()?.birthday,
+      phone: docSnap.data()?.phone,
+      avatar: docSnap.data()?.avatar,
+      position: docSnap.data()?.position,
+      camisa: docSnap.data()?.camisa,
+      nivel: docSnap.data()?.nivel,
+      xp: docSnap.data()?.xp,
+      partidas: docSnap.data()?.partidas,
+      gols: docSnap.data()?.gols,
+      hattrick: docSnap.data()?.hattrick,
+      grupo_id: docSnap.data()?.grupo_id,
+      team: docSnap.data()?.team,
+      stars: docSnap.data()?.stars,
+      adm: docSnap.data()?.adm,
+      payments: docSnap.data()?.payments,
+    } as User;
+    setUser(userLoaded);
     setLoading(false);
   };
 
@@ -273,6 +274,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         position: position,
         team: team,
       });
+      isAuth();
     }catch(error){
       console.log(error);
     }
@@ -386,6 +388,42 @@ function AuthProvider({ children }: AuthProviderProps) {
     setLoading(false);
   }
 
+  //conectar um usuario ao grupo
+  async function connectGroup(idGroup: string, id: string, name: string, number: number) {
+    try{
+      const docRef = doc(db, 'groups', idGroup);
+      const docSnap = await getDoc(docRef);
+      const athletes = docSnap.data().athletes;
+
+      let camisa: number;
+      if (athletes.lenth < 1) {
+        camisa = 1;
+      }else {
+        camisa = athletes.length + 1;
+      }
+
+      const athletesWrite = {
+        id: user.id,
+        name: user.name,
+        number: camisa,
+      }
+
+      athletes.push(athletesWrite);
+
+      await updateDoc(docRef, {
+        athletes: athletes
+      });
+
+      await updateDoc(doc(db, "users", id), {grupo_id: idGroup, camisa: camisa});
+
+      loadUser(id);
+
+      alert("Você está no Grupo, Agora é so bater aquela pelada");
+    }catch (error){
+      console.log(error)
+    }
+  }
+
   // atualizar dados do grupo, valor mensalidade, valor convidado , dia e hora do jogo
   async function updateGroup(day: string, time: string, mensal: number, convidado: number, idGroup: string){
     try{
@@ -393,8 +431,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       {
         day: day,
         time: time,
-        mensal: mensal,
-        convidado: convidado,
+        valorMensal: mensal,
+        valorConvidado: convidado,
       });
     }catch(error){
       console.log(error);
@@ -435,6 +473,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   // criar ou adicionar o staff no grupo
   async function addStaff(name: string, occupation: string, idGroup: string){
     let staff = {};
+    let find = false;
     try{
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
@@ -444,18 +483,26 @@ function AuthProvider({ children }: AuthProviderProps) {
             userName: doc.data()?.name,
             avatar_url: doc.data()?.avatar,
           } as StaffProps;
+          find = true;
         }
       });
-      if(occupation === 'presidente'){
-        await updateDoc(doc(db, "groups", idGroup), {presidente: staff});
-      }else if(occupation === 'vicePresidente'){
-        await updateDoc(doc(db, "groups", idGroup), {vicePresidente: staff});
-      }else if(occupation === 'diretorFinanceiro'){
-        await updateDoc(doc(db, "groups", idGroup), {diretorFinanceiro: staff});
-      }else if(occupation === 'diretorEsportivo'){
-        await updateDoc(doc(db, "groups", idGroup), {diretorEsportivo: staff});
+      console.log(querySnapshot);
+      if (!find) {
+        alert("Esse nome de usuario não existe");
+        return
       }else{
-        await updateDoc(doc(db, "groups", idGroup), {diretorEventos: staff});
+        if(occupation === 'presidente'){
+          await updateDoc(doc(db, "groups", idGroup), {presidente: staff});
+        }else if(occupation === 'vicePresidente'){
+          await updateDoc(doc(db, "groups", idGroup), {vicePresidente: staff});
+        }else if(occupation === 'diretorFinanceiro'){
+          await updateDoc(doc(db, "groups", idGroup), {diretorFinanceiro: staff});
+        }else if(occupation === 'diretorEsportivo'){
+          await updateDoc(doc(db, "groups", idGroup), {diretorEsportivo: staff});
+        }else{
+          await updateDoc(doc(db, "groups", idGroup), {diretorEventos: staff});
+        }
+        alert(occupation + " adicionado com sucesso");
       }
     }catch(error){
       console.log(error);
@@ -515,21 +562,18 @@ function AuthProvider({ children }: AuthProviderProps) {
   };
 
   //função pra adicionar o pagamento da mensalidade no userGroup
-  async function addPayment(id: string, mes: string){
-    let paymentsWhrite = [];
+  async function addPayment(number: number, mes: string){
     let idWhrite: string;
     try{
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
-        if(doc.data().id === id){
-          paymentsWhrite = doc.data().payments;
+        if(doc.data().camisa === number){
           idWhrite = doc.data().id;
         }
       })
-      paymentsWhrite.push(mes);
-      updateDoc(doc(db, "users", idWhrite), {payments : {...paymentsWhrite}});
+      await updateDoc(doc(db, "users", idWhrite), {payments : arrayUnion(mes)});
     }catch(error){
-        console.log(error);
+      console.log(error);
     }
   }
 
@@ -543,16 +587,16 @@ function AuthProvider({ children }: AuthProviderProps) {
         desc: desc
       }
       if (tipo === 'custos') {
-        await updateDoc(doc(db, "accounting", grupoId), {custos: {...item}});
+        await updateDoc(doc(db, "accounting", grupoId), {custos: arrayUnion(item)});
       }else if (tipo === 'arrecadacoes') {
-        await updateDoc(doc(db, "accounting", grupoId), {arrecadacoes: {...item}});
+        await updateDoc(doc(db, "accounting", grupoId), {arrecadacoes: arrayUnion(item)});
       }else {
         await updateDoc(doc(db, "accounting", grupoId), {valorCampo: campo, valorFesta: festa});
       }
 
     } catch (error) {
       console.log(error)
-      //throw new Error('Não foi possível lançar os valores');
+      throw new Error('Não foi possível lançar os valores');
     } finally {
       setLoading(false);
     }
@@ -578,6 +622,7 @@ function AuthProvider({ children }: AuthProviderProps) {
         accounting,
         loading,
         loadGroup,
+        connectGroup,
         logIn,
         logOut,
         signUpWithEmailAndPassword,

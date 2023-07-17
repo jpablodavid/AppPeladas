@@ -5,13 +5,13 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { useAuth } from "../../hooks/auth";
 
 import { ButtonAccess } from "../../components/ButtonAccess";
+import { ButtonAccessDisable } from "../../components/ButtonAccessDisable";
 import { ProgressBar } from "../../components/ProgressBar";
 //função importada
 import { nivelUser } from "../../global/Data/itens";
 import { Background } from "../../components/Background";
 
 import { styles } from "./styles";
-
 
 export const Home = ({navigation}) => {
 
@@ -39,7 +39,7 @@ export const Home = ({navigation}) => {
           <View style={styles.right} >
             <View style={styles.camisa}>
               <FontAwesome5 name="tshirt" size={110} color="black" />
-              <Text style={styles.textCamisa}>{"10"}</Text>
+              <Text style={styles.textCamisa}>{String(user.camisa)}</Text>
             </View>
             <View>
               <Text style={styles.scout}>{user.gols}</Text>
@@ -50,17 +50,30 @@ export const Home = ({navigation}) => {
           </View>
       </View>
       <View style={styles.buttonsContainer}>
-          <ButtonAccess
+        {
+          user.grupo_id !== '' ?
+          (<ButtonAccess
             title={"Contabilidade"}
             icon={"cash"}
             onPress={handleAccountGroup}
-          />
-          <ButtonAccess
-            title={"Perfil"}
-            icon={"account-reactivate"}
-            onPress={handleAcessProfile}
-          />
-        </View>
+          />)
+          :
+          (<ButtonAccessDisable
+            title={"Contabilidade"}
+            icon={"alert-box"}
+            onPress={()=> alert("Você precisar estar em um grupo para ter acesso")}
+          />)
+        }
+        <ButtonAccess
+          title={"Perfil"}
+          icon={"account-reactivate"}
+          onPress={handleAcessProfile}
+        />
+      </View>
     </Background>
   );
 };
+function isAuth() {
+  throw new Error("Function not implemented.");
+}
+

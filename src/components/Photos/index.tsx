@@ -33,7 +33,7 @@ export const Photo = ({data}: Props) => {
         visible={openModal}>
         <View style={styles.modal}>
           <ButtonText style={{ width: 60 }} onPress={handleCloseModal}>
-            <Text style={{ fontSize: 26, fontWeight: 'bold', margin: 8}}>X</Text>
+            <Text style={{ fontSize: 26, color: "white", fontWeight: 'bold', margin: 8}}>X</Text>
           </ButtonText>
 
           <Image style={styles.photoCarrosel} source={{uri: `${data}`}} />

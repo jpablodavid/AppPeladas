@@ -65,7 +65,7 @@ export const Values = ({data}) => {
     setModalType('edit');
   }
 
-  function printNameAtleta(value: string) {
+  function printNameAtleta(value: number) {
     const athlete = data.athletes.find((item: any) => item.number === value);
     athlete ? (setName(athlete.name), setIdAtleta(athlete.id)) : setName("Digite o Número");
   }
@@ -78,28 +78,32 @@ export const Values = ({data}) => {
   }
 
   function handlerAddMensalidade() {
-    addPayment(idAtleta, month);
+    addPayment(Number(numberAtleta), month);
+    alert("Adcionado pagamento com sucesso");
     setOpenModal(false);
   }
 
   function handlerAddConvidados(){
     addValues(accounting.id, today, 'Pagamento Dos convidados do dia','arrecadacoes', totalConvidados,);
+    alert("Adcionado pagamento dos convidados com sucesso");
     setOpenModal(false);
   }
 
   function handlerAddCustos(){
     addValues(accounting.id, today, descricao, 'custos', parseFloat(custo));
+    alert("Adcionado custos com sucesso");
     setOpenModal(false);
   }
 
   function handlerAddValues(){
     addValues(accounting.id, today, descricao, '', 0, valueCampo, valueFesta);
+    alert("Adcionado valores com sucesso");
     setOpenModal(false);
   }
 
   useEffect(() => {
     printValorConvidados(convidados);
-    printNameAtleta(numberAtleta);
+    printNameAtleta(Number(numberAtleta));
   }, [convidados, numberAtleta]);
 
 	return (
@@ -227,7 +231,11 @@ export const Values = ({data}) => {
                   <Text style={styles.label}>Total:</Text>
                   <View style={styles.valores}>
                     <Text style={styles.infoText}>R$ </Text>
-                    <Text style={styles.infoText}>{totalConvidados.toFixed(2)}</Text>
+                    {totalConvidados ?
+                      (<Text style={styles.infoText}>{totalConvidados.toFixed(2)}</Text>)
+                      :
+                      (<Text style={styles.infoText}>{parseFloat("0").toFixed(2)}</Text>)
+                    }
                   </View>
                 </View>
                 <View style={styles.buttonModal}>
@@ -242,7 +250,6 @@ export const Values = ({data}) => {
                 <Text style={styles.label}>Descrição do Gasto:</Text>
                 <InputArea
                   style={styles.inputArea}
-                  placeholderTextColor={'Descrição dos Gastos'}
                   onChangeText={setDescricao}
                 />
                 <View style={styles.money}>

@@ -21,7 +21,7 @@ export const Group = ({navigation}) => {
 
   const { tabIcon } = theme.colors;
 
-  const { group } = useAuth();
+  const { group, user } = useAuth();
   const pad =true;
 	const [category, setCategory] = useState("");
   const [disable, setDisable] = useState(false);
@@ -47,7 +47,6 @@ export const Group = ({navigation}) => {
     const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
       setKeyboardStatus(false);
     });
-
   }, [keyboardStatus]);
 
 	return (
@@ -59,7 +58,7 @@ export const Group = ({navigation}) => {
         disable={disable}
       />
       {
-        group ?
+        user.grupo_id !== "" ?
         (
           <View style={styles.content}>
             {
