@@ -18,8 +18,8 @@ export const InputSelect = ({ icon, placeholder ,itens, ...rest }: Props) => {
       <View>{icon}</View>
       <Picker
         style={styles.input}
-        mode='dropdown'
-        dropdownIconColor={theme.colors.primary100}
+        mode="dropdown"
+        dropdownIconColor={theme.colors.black}
         {...rest}
       >
         <Picker.Item style={styles.placeholder} label={placeholder} value="Unknown"/>

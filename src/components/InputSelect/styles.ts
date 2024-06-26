@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { primary100 } = theme.colors;
+const { primary100, black } = theme.colors;
 const { text500, text900 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -19,14 +19,14 @@ export const styles = StyleSheet.create({
     fontSize: RFValue(16),
     margin: -10,
     marginLeft: 5,
-		color: primary100,
+		color: black,
 		fontFamily: text500,
 	},
   placeholder:{
-    fontSize: RFValue(14),
+    fontSize: RFValue(16),
   },
   item:{
-    color: primary100,
+    color: black,
     fontFamily: text900,
   }
 });

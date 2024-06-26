@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { theme } from "../../global/styles/theme";
 
-const { tabColor, white,  invisible, modal, disable100 } = theme.colors;
+const { tabColor,  tabColorFocused, white,  invisible, modal, disable100 } = theme.colors;
 const { title700, text900, text500 } = theme.fonts;
 
 export const styles = StyleSheet.create({
@@ -52,6 +52,15 @@ export const styles = StyleSheet.create({
 		fontFamily: text900,
 		color: tabColor,
 		paddingBottom: 2,
+  },
+  socialMedia:{
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: "space-evenly",
+  },
+  itemSocialMedia:{
+    borderRadius: 8,
+    backgroundColor:  tabColorFocused,
   },
   modal:{
     flex: 1,

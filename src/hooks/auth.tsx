@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useContext, useState, useEffect } from
 import { Alert } from 'react-native';
 
 import { db, auth } from "../configs/firebaseConfig";
-import { doc, setDoc, collection, getDoc, getDocs, addDoc, updateDoc, Timestamp, arrayUnion } from "@firebase/firestore";
+import { doc, setDoc, collection, getDoc, getDocs, addDoc, updateDoc, Timestamp, arrayUnion, arrayRemove } from "@firebase/firestore";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
 
 import { nivel } from '../global/Data/itens';
@@ -60,7 +60,7 @@ export type Group = {
   diretorFinanceiro: StaffProps;
   diretorEventos: StaffProps;
   adm: string;
-  grupoWhatsapp: string;
+  redesSociais: Array<string>;
 };
 
 export type ItemAccount = {
@@ -87,7 +87,7 @@ type AuthContextData = {
   loading: boolean;
   id: string | undefined;
   email: string;
-  excludeAthletes: (idGroup: string, idAthletes?: string) => Promise<void>;
+  excludeAthletes: (idGroup: string, idAthletes: string, name: string, number: number) => Promise<void>;
   loadAthletes: (athletes: athletes[]) => Promise<User[]>;
   addStaff: (name: string, occupation: string, idGroup: string) => Promise<void>;
   logIn: (email: string, password: string) => Promise<void>;
@@ -96,10 +96,10 @@ type AuthContextData = {
   createUser: (name: string, email: string, nickName: string, birthday: string, phone: string, position: string, team: string) => Promise<void>;
   updateUser: (name: string, nickName: string, birthday: string, phone: string, position: string, team: string) => Promise<void>;
   createPictureAvatar: (photo: string) => Promise<void>;
-  createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string, grupoWhatsapp?: string) => Promise<void>;
+  createGroup: (nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string) => Promise<void>;
   loadGroup: (uid: string) => Promise<void>;
-  connectGroup: (idGroup: string, id: string, name: string, number: number) => Promise<void>;
-  updateGroup: (day: string, time: string, mensal: number, convidado: number, idGroup: string) => Promise<void>;
+  connectGroup: (idGroup: string, id: string, name: string) => Promise<void>;
+  updateGroup: (day: string, timeHora: string, timeMin: string, mensal: number, convidado: number, idGroup: string) => Promise<void>;
   addLocation: (adress: string, latitude: number, longitude: number, idGroup: string) => Promise<void>;
   addPayment: (number: number, mes: string) => Promise<void>;
   addValues: (grupoId: string, date: Date, desc: string, tipo: string, valor?: number, campo?: string, festa?: string) => Promise<void>;
@@ -145,8 +145,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       if (currentUser) {
         setId(currentUser.uid);
         loadUser(currentUser.uid);
-        loadGroup("OdUKGdrZYGywMZyNoR9o");
-        loadAccounting("OdUKGdrZYGywMZyNoR9o");
+       //loadGroup("OdUKGdrZYGywMZyNoR9o");
+        //loadAccounting("OdUKGdrZYGywMZyNoR9o");
       }
     });
   }
@@ -259,6 +259,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       adm: docSnap.data()?.adm,
       payments: docSnap.data()?.payments,
     } as User;
+    userLoaded.grupo_id && loadGroup(userLoaded.grupo_id);
     setUser(userLoaded);
     setLoading(false);
   };
@@ -289,7 +290,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  async function createGroup(nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string, grupoWhatsapp: string) {
+  async function createGroup(nameGrupo: string, date: string, location: string, day: string, time: string, mensal: number, convidado: number, idAdm: string) {
     setLoading(true);
     try {
       const groupWrite = {
@@ -332,7 +333,11 @@ function AuthProvider({ children }: AuthProviderProps) {
           avatar_url: '',
         },
         adm: idAdm,
-        grupoWhatsapp: grupoWhatsapp,
+        redesSocias:{
+          facebook: "",
+          instagram: "",
+          whatsapp: ""
+        }
       } as unknown as Group;
 
       // cria o grupo no firebase
@@ -383,13 +388,15 @@ function AuthProvider({ children }: AuthProviderProps) {
         diretorFinanceiro: docSnap.data()?.diretorFinanceiro,
         diretorEventos: docSnap.data()?.diretorEventos,
         adm: docSnap.data()?.adm,
+        redesSociais: docSnap.data()?.redesSociais,
       } as Group;
+    loadAccounting(groupLoaded.id);
     setGroup(groupLoaded);
     setLoading(false);
   }
 
   //conectar um usuario ao grupo
-  async function connectGroup(idGroup: string, id: string, name: string, number: number) {
+  async function connectGroup(idGroup: string, id: string, name: string) {
     try{
       const docRef = doc(db, 'groups', idGroup);
       const docSnap = await getDoc(docRef);
@@ -403,8 +410,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       }
 
       const athletesWrite = {
-        id: user.id,
-        name: user.name,
+        id: id,
+        name: name,
         number: camisa,
       }
 
@@ -425,12 +432,12 @@ function AuthProvider({ children }: AuthProviderProps) {
   }
 
   // atualizar dados do grupo, valor mensalidade, valor convidado , dia e hora do jogo
-  async function updateGroup(day: string, time: string, mensal: number, convidado: number, idGroup: string){
+  async function updateGroup(day: string, timeHora: string, timeMin: string, mensal: number, convidado: number, idGroup: string){
     try{
       await updateDoc(doc(db, "groups", idGroup),
       {
         day: day,
-        time: time,
+        time: timeHora + ":" +timeMin,
         valorMensal: mensal,
         valorConvidado: convidado,
       });
@@ -521,7 +528,6 @@ function AuthProvider({ children }: AuthProviderProps) {
             }
         });
       })
-
     }catch(error){
       console.log(error);
     }
@@ -534,18 +540,23 @@ function AuthProvider({ children }: AuthProviderProps) {
   }
 
   //excluir o atleta do grupo
-  async function excludeAthletes(idGroup: string, idAthletes: string){
+  async function excludeAthletes(idGroup: string, idAthletes: string, name: string, number: number){
     try{
       const docRef = doc(db, 'groups', idGroup);
-      const docSnap = await getDoc(docRef);
-      const athletes = docSnap.data().athletes;
-
-      const newAthletes = athletes.filter((item: string) => item !== idAthletes);
+      const docRefUser = doc(db, 'users', idAthletes);
+      const itemRemove = {
+        id: idAthletes,
+        name: name,
+        number: number
+      } as athletes;
       await updateDoc(docRef, {
-        athletes: newAthletes
+        athletes: arrayRemove(itemRemove)
+      });
+      await updateDoc(docRefUser, {
+        grupo_id: ""
       });
     }catch(error){
-      console.log(error)
+      console.log(error);
     }
   }
 

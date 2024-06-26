@@ -22,7 +22,7 @@ export const Group = ({navigation}) => {
   const { tabIcon } = theme.colors;
 
   const { group, user } = useAuth();
-  const pad =true;
+
 	const [category, setCategory] = useState("");
   const [disable, setDisable] = useState(false);
 

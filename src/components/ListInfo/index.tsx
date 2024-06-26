@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Modal, ScrollView, TextInput } from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { useAuth } from "../../hooks/auth";
 import { Button } from "../Button";
@@ -13,16 +15,18 @@ import { ButtonText } from "../ButtonText";
 import { weekday } from "../../global/Data/itens";
 import { InputSelect } from "../InputSelect";
 
+
 const { invisible, line } = theme.colors;
 
 
 export const ListInfo = ({ data }) => {
 
-  const { updateGroup, user, group } = useAuth();
+  const { updateGroup, user, loadGroup} = useAuth();
 
   const [dayGame, setDayGame] = useState(data.day);
 
-  const [time, setTime] = useState(data.time);
+  const [timeHora, setTimeHora] = useState("Hora");
+  const [timeMin, setTimeMin] = useState("Min");
 
   const [valorMensal, setValorMensal] = useState(data.valorMensal);
 
@@ -39,7 +43,8 @@ export const ListInfo = ({ data }) => {
   }
 
 	function handlerEditInfo(){
-    updateGroup(dayGame, time, valorMensal, valorConvidado, data.id);
+    updateGroup(dayGame, timeHora, timeMin, valorMensal, valorConvidado, data.id);
+    loadGroup(data.id);
     setOpenModal(false);
 	}
 
@@ -48,7 +53,7 @@ export const ListInfo = ({ data }) => {
 			<Text style={styles.label}>Dia Dos Jogos:</Text>
       <Text style={styles.infoText}>{dayGame}</Text>
 			<Text style={styles.label}>Horario:</Text>
-      <Text style={styles.infoText}>{time}</Text>
+      <Text style={styles.infoText}>{data.time}</Text>
 			<Text style={styles.label}>Valor Mensalidade:</Text>
 			<View style={styles.money}>
 				<Text style={styles.label}>R$</Text>
@@ -59,7 +64,29 @@ export const ListInfo = ({ data }) => {
 				<Text style={styles.label}>R$</Text>
         <Text style={styles.infoText}>{parseFloat(valorConvidado).toFixed(2)}</Text>
 			</View>
-			<Text style={styles.infoText}>redes sociais e telefones</Text>
+			<Text style={styles.infoText}>redes sociais:</Text>
+      <View style={styles.socialMedia}>
+        <TouchableOpacity
+          style={styles.itemSocialMedia}
+          activeOpacity={0.6}
+          disabled={data.redesSociais.facebook ? false : true}
+        >
+          <MaterialCommunityIcons name="facebook" size={50} color='blue'/>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.itemSocialMedia}
+          activeOpacity={0.6}
+          disabled={data.redesSociais.instagram ? false : true}
+        >
+          <MaterialCommunityIcons name="instagram" size={50} color='red'/>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.itemSocialMedia}
+          disabled={data.redesSociais.whatsapp ? false : true}
+        >
+          <MaterialCommunityIcons name="whatsapp" size={50} color='green'/>
+        </TouchableOpacity>
+      </View>
 			<View style={{ marginTop: 16}}>
 				{user.adm && (
 					<Button text={"Editar"} onPress={handlerOpenModal}/>
@@ -89,11 +116,18 @@ export const ListInfo = ({ data }) => {
               <Text style={styles.title}>Horaio:</Text>
               <View style={styles.money}>
                   <TextInput
+                    style={[{width: '20%', marginRight: 5},styles.input]}
+                    placeholderTextColor={line}
+                    placeholder="Hora"
+                    keyboardType={"number-pad"}
+                    onChangeText={setTimeHora}
+                  />
+                  <TextInput
                     style={[{width: '20%'},styles.input]}
                     placeholderTextColor={line}
+                    placeholder="Min"
                     keyboardType={"number-pad"}
-                    value={""}
-                    onChangeText={setTime}
+                    onChangeText={setTimeMin}
                   />
               </View>
               <Text style={styles.labelAdd}>Valores:</Text>

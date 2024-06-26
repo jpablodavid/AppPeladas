@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useEffect, useState }  from "react";
 import {
   View,
   Text,
@@ -7,26 +7,37 @@ import {
   TouchableWithoutFeedback,
   } from "react-native";
 import { RectButton, RectButtonProps } from "react-native-gesture-handler";
-import { useAuth, User } from "../../hooks/auth";
+import { User, useAuth } from "../../hooks/auth";
 import { ButtonText } from "../ButtonText";
 import { Card } from "../Card";
 import { Payment } from "../Payment";
 
 import { styles } from "./styles";
+import { Group } from "../../screens/Group";
 
 
 type Props = RectButtonProps & ModalProps & {
 	data: User;
+  setAthletes: any;
   perfil: boolean;
-  exclude: (idGroup: string, idathletes: string) => Promise<void>;
   account: boolean;
 };
 
-export const Athletes = ({ data, perfil, exclude, account }: Props) => {
+export const Athletes = ({ data, perfil, setAthletes, account }: Props) => {
 
-  const { user, accounting } = useAuth();
+  const { user, group, accounting, excludeAthletes, loadAthletes } = useAuth();
 
   const [openModal, setOpenModal] = useState(false);
+
+  const [atualizarPagina, setAtualizarPagina ] = useState(false);
+
+  async function recebe(){
+    setAthletes(await loadAthletes(group.athletes));
+  }
+
+  useEffect(() => {
+    recebe();
+  }, [atualizarPagina]);
 
   function handleCloseModal() {
     setOpenModal(false);
@@ -38,8 +49,9 @@ export const Athletes = ({ data, perfil, exclude, account }: Props) => {
 
   // usando accounting.id pois é o id do grupo
   function handlerExcluir() {
-    exclude(accounting.id, data.id);
-		alert("Excluir");
+    excludeAthletes(accounting.id, data.id, data.name, data.camisa);
+    setAtualizarPagina(true);
+		alert("Atleta foi excluido do grupo");
 	}
 
 	return (

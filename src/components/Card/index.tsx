@@ -87,7 +87,7 @@ export const Card = ({data} : Props) => {
             style={styles.range}
             colors={[black, shadow, disable10]}
           >
-            <Text style={styles.camisa}>{10}</Text>
+            <Text style={styles.camisa}>{data.camisa}</Text>
             <Text style={styles.position}>{siglaPosition(data.position)}</Text>
             <Image
               style={styles.bandeira}

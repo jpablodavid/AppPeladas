@@ -3,7 +3,9 @@ import { View, TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { styles } from "./styles";
 
-type Props = TouchableOpacityProps & {};
+type Props = TouchableOpacityProps & {
+
+};
 
 export const CustomTabBarButton = ({...rest }: Props) => {
   return (

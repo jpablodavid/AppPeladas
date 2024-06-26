@@ -14,16 +14,12 @@ type Props = {
 
 export const ListAthletes = ({data, perfil, account}: Props) => {
 
-  const { loadAthletes, excludeAthletes } = useAuth();
+  const { loadAthletes } = useAuth();
 
   const [athletes, setAthletes ] = useState<User[]>();
 
   async function recebe(){
     setAthletes(await loadAthletes(data.athletes));
-  }
-
-  async function excluir(idGroup: string, idAthletes: string){
-    await excludeAthletes(idGroup , idAthletes);
   }
 
   useEffect(() => {
@@ -37,7 +33,7 @@ export const ListAthletes = ({data, perfil, account}: Props) => {
 			data={athletes}
 			keyExtractor={item => item.id}
 			renderItem={({item}) => (
-				<Athletes data={item} exclude={excluir} perfil={perfil} account={account}/>
+				<Athletes data={item} perfil={perfil} setAthletes={setAthletes} account={account}/>
 			)}
 		/>
 	);
